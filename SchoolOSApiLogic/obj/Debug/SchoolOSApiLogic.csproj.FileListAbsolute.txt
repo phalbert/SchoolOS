@@ -1,0 +1,9 @@
+D:\Work\PegasusSchoolOS\SchoolOS\SchoolOSApiLogic\bin\Debug\SchoolOSApiLogic.dll
+D:\Work\PegasusSchoolOS\SchoolOS\SchoolOSApiLogic\bin\Debug\SchoolOSApiLogic.pdb
+D:\Work\PegasusSchoolOS\SchoolOS\SchoolOSApiLogic\obj\Debug\SchoolOSApiLogic.dll
+D:\Work\PegasusSchoolOS\SchoolOS\SchoolOSApiLogic\obj\Debug\SchoolOSApiLogic.pdb
+D:\Work\PegasusSchoolOS\SchoolOS\SchoolOSApiLogic\bin\Debug\Encryption.dll
+D:\Work\PegasusSchoolOS\SchoolOS\SchoolOSApiLogic\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+D:\Work\PegasusSchoolOS\SchoolOS\SchoolOSApiLogic\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
+D:\Work\PegasusSchoolOS\SchoolOS\SchoolOSApiLogic\bin\Debug\Microsoft.Practices.ObjectBuilder.dll
+D:\Work\PegasusSchoolOS\SchoolOS\SchoolOSApiLogic\obj\Debug\SchoolOSApiLogic.csprojResolveAssemblyReference.cache
