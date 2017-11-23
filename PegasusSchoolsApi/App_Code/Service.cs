@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Web;
 using System.Web.Services;
 
-[WebService(Namespace = "http://tempuri.org/")]
+
+[WebService(Namespace = "http://pegasus.co.ug/")]
 [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
 
 public class Service : System.Web.Services.WebService
@@ -15,8 +16,22 @@ public class Service : System.Web.Services.WebService
     }
 
     [WebMethod]
-    public string HelloWorld() {
-        return "Hello World";
+    public SchoolOSApiLogic.Entities.Result SaveSchool(SchoolOSApiLogic.Entities.School sch)
+    {
+        SchoolOSApiLogic.Entities.Result result = new SchoolOSApiLogic.Entities.Result();
+        try
+        {
+            SchoolOSApiLogic.SchoolsInterfaceApi api = new SchoolOSApiLogic.SchoolsInterfaceApi();
+            result= api.SaveSchool(sch);
+        }
+        catch(Exception ex)
+        {
+            string msg = "EXCEPTION:"+ ex.Message;
+            SchoolOSApiLogic.SchoolsInterfaceApi.LogError(msg, ex.StackTrace, sch.SchoolCode);
+            result.StatusCode = Globals.FAILURE_STATUS_CODE;
+            result.StatusDesc = msg;//"{0} is an {1}",0,1
+        }
+        return result;
     }
     
 }

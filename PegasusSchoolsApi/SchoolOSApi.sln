@@ -6,6 +6,7 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "PegasusSchoolsApi", ".", "{8E367548-EF6C-485A-8C11-2FA89D36B696}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv2.0"
+		ProjectReferences = "{110792d8-2fb9-4d88-bdc2-1bde1f9c86a0}|SchoolOSApiLogic.dll;"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_2509"
 		Debug.AspNetCompiler.PhysicalPath = "..\PegasusSchoolsApi\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_2509\"
@@ -25,6 +26,10 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "PegasusSchoolsApi", ".", "{
 		DefaultWebSiteLanguage = "Visual C#"
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolOSApiLogic", "..\SchoolOSApiLogic\SchoolOSApiLogic.csproj", "{110792D8-2FB9-4D88-BDC2-1BDE1F9C86A0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolOSApiLogicTests", "SchoolOSApiLogicTests\SchoolOSApiLogicTests.csproj", "{4A1CE6D3-2E52-4D26-85D9-F66FCD8433F8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +40,14 @@ Global
 		{8E367548-EF6C-485A-8C11-2FA89D36B696}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E367548-EF6C-485A-8C11-2FA89D36B696}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{8E367548-EF6C-485A-8C11-2FA89D36B696}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{110792D8-2FB9-4D88-BDC2-1BDE1F9C86A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{110792D8-2FB9-4D88-BDC2-1BDE1F9C86A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{110792D8-2FB9-4D88-BDC2-1BDE1F9C86A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{110792D8-2FB9-4D88-BDC2-1BDE1F9C86A0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A1CE6D3-2E52-4D26-85D9-F66FCD8433F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A1CE6D3-2E52-4D26-85D9-F66FCD8433F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A1CE6D3-2E52-4D26-85D9-F66FCD8433F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A1CE6D3-2E52-4D26-85D9-F66FCD8433F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
