@@ -32,6 +32,30 @@ namespace SchoolOSApiLogic
             }
             return result;
         }
+        public Result SaveStudent(Student std)
+        {
+            Result result = new Result();
+            try
+            {
+                if (!std.IsValid())
+                {
+                    result.StatusCode = std.StatusCode;
+                    result.StatusDesc = std.StatusDesc;
+                    return result;
+                }
+
+                Bussinesslogic bll = new Bussinesslogic();
+                result = bll.SaveStudent(std);
+            }
+            catch (Exception ex)
+            {
+                string msg = $"EXCEPTION: {ex.Message}";
+                DatabaseHandler.LogError(msg, ex.StackTrace, std.SchoolCode);
+                result.StatusCode = Globals.FAILURE_STATUS_CODE;
+                result.StatusDesc = msg;//"{0} is an {1}",0,1
+            }
+            return result;
+        }
 
 
         public static void LogError(string message, string stackTrace, string Identifier)

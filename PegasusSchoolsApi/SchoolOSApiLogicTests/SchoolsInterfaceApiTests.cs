@@ -41,5 +41,37 @@ namespace SchoolOSApiLogic.Tests
             Result result = schApi.SaveSchool(sch);
             Assert.AreEqual(result.StatusCode, Globals.FAILURE_STATUS_CODE);
         }
+
+        [TestMethod]
+        public void SaveStudentTest()
+        {
+            SchoolsInterfaceApi stdApi = new SchoolsInterfaceApi();
+
+            Student std = new Student();
+            std.SchoolCode = "TEST_SCHOOL";
+            std.StudentName = "John";
+            std.StudentNumber = "1002";
+            std.ClassCode = "s3";
+            std.StreamCode = "3c";
+            std.DateOfBirth = "1999-10-02";
+            std.StudentCategory = "day";
+            std.PegPayStudentNumber = "s1000";
+            std.VendorCode = "TEST";
+            std.ModifiedBy = "Peter";
+
+            Result result = stdApi.SaveStudent(std);
+            Assert.AreEqual(result.StatusCode, Globals.SUCCESS_STATUS_CODE);
+
+
+        }
+        [TestMethod()]
+        public void SaveStudentTestInvalidData()
+        {
+            SchoolsInterfaceApi stdApi = new SchoolsInterfaceApi();
+            Student std = new Student();
+            Result result = stdApi.SaveStudent(std);
+            Assert.AreEqual(result.StatusCode, Globals.FAILURE_STATUS_CODE);
+        }
+
     }
 }

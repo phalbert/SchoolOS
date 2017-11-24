@@ -11,3 +11,16 @@ D:\Work\PegasusSchoolOS\SchoolOS\PegasusSchoolsApi\SchoolOSApiLogicTests\bin\Deb
 D:\Work\PegasusSchoolOS\SchoolOS\PegasusSchoolsApi\SchoolOSApiLogicTests\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
 D:\Work\PegasusSchoolOS\SchoolOS\PegasusSchoolsApi\SchoolOSApiLogicTests\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
 D:\Work\PegasusSchoolOS\SchoolOS\PegasusSchoolsApi\SchoolOSApiLogicTests\bin\Debug\Microsoft.Practices.ObjectBuilder.dll
+E:\Elijahs\SchoolOS\PegasusSchoolsApi\SchoolOSApiLogicTests\obj\Debug\SchoolOSApiLogicTests.csprojResolveAssemblyReference.cache
+E:\Elijahs\SchoolOS\PegasusSchoolsApi\SchoolOSApiLogicTests\obj\Debug\SchoolOSApiLogicTests.dll
+E:\Elijahs\SchoolOS\PegasusSchoolsApi\SchoolOSApiLogicTests\obj\Debug\SchoolOSApiLogicTests.pdb
+E:\Elijahs\SchoolOS\PegasusSchoolsApi\SchoolOSApiLogicTests\bin\Debug\SchoolOSApiLogicTests.dll.config
+E:\Elijahs\SchoolOS\PegasusSchoolsApi\SchoolOSApiLogicTests\bin\Debug\SchoolOSApiLogicTests.dll
+E:\Elijahs\SchoolOS\PegasusSchoolsApi\SchoolOSApiLogicTests\bin\Debug\SchoolOSApiLogicTests.pdb
+E:\Elijahs\SchoolOS\PegasusSchoolsApi\SchoolOSApiLogicTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+E:\Elijahs\SchoolOS\PegasusSchoolsApi\SchoolOSApiLogicTests\bin\Debug\SchoolOSApiLogic.dll
+E:\Elijahs\SchoolOS\PegasusSchoolsApi\SchoolOSApiLogicTests\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
+E:\Elijahs\SchoolOS\PegasusSchoolsApi\SchoolOSApiLogicTests\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+E:\Elijahs\SchoolOS\PegasusSchoolsApi\SchoolOSApiLogicTests\bin\Debug\Microsoft.Practices.ObjectBuilder.dll
+E:\Elijahs\SchoolOS\PegasusSchoolsApi\SchoolOSApiLogicTests\bin\Debug\SchoolOSApiLogic.pdb
+E:\Elijahs\SchoolOS\PegasusSchoolsApi\SchoolOSApiLogicTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.xml

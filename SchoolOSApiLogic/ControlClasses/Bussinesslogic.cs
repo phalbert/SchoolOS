@@ -29,5 +29,25 @@ namespace SchoolOSApiLogic.ControlClasses
 
             return result;
         }
+
+        public Result SaveStudent(Student std)
+        {
+            Result result = new Result();
+            DataTable dt = dh.ExecuteDataSet("SaveStudent", new string[] { std.SchoolCode,std.StudentNumber,std.PegPayStudentNumber, std.StudentName, std.ClassCode, std.StreamCode, std.DateOfBirth, std.StudentCategory,std.ModifiedBy}).Tables[0];
+
+            if (dt.Rows.Count == 0)
+            {
+                result.StatusCode = Globals.FAILURE_STATUS_CODE;
+                result.StatusDesc = "NO ROWS AFFECTED";
+                return result;
+            }
+
+            result.StatusCode = Globals.SUCCESS_STATUS_CODE;
+            result.StatusDesc = Globals.SUCCESS_STATUS_DESC;
+            result.PegPayID = dt.Rows[0][0].ToString();
+            result.RequestID = std.StudentNumber;
+
+            return result;
+        }
     }
 }
