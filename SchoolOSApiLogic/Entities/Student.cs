@@ -8,15 +8,15 @@ namespace SchoolOSApiLogic.Entities
     {
         public string StudentNumber = "";
         public string PegPayStudentNumber = "";
-        public string SchoolCode = "";
         public string StudentName = "";
         public string DateOfBirth = "";
         public string ClassCode = "";
         public string StreamCode = "";
         public string StudentCategory = "";
-
-
-
+        public string ProfilePic = "";
+        public string Gender = "";
+        public string Email = "";
+        public string PhoneNumber = "";
 
         public override bool IsValid()
         {

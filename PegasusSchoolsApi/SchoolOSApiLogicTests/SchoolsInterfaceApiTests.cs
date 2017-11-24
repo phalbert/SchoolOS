@@ -32,7 +32,6 @@ namespace SchoolOSApiLogic.Tests
             Assert.AreEqual(result.StatusCode,Globals.SUCCESS_STATUS_CODE);
         }
 
-
         [TestMethod()]
         public void SaveSchoolTestInvalidData()
         {
@@ -64,6 +63,7 @@ namespace SchoolOSApiLogic.Tests
 
 
         }
+
         [TestMethod()]
         public void SaveStudentTestInvalidData()
         {
@@ -73,5 +73,103 @@ namespace SchoolOSApiLogic.Tests
             Assert.AreEqual(result.StatusCode, Globals.FAILURE_STATUS_CODE);
         }
 
+        [TestMethod()]
+        public void SaveSubjectTestInvalidData()
+        {
+            SchoolsInterfaceApi stdApi = new SchoolsInterfaceApi();
+            Subject sub = new Subject();
+            Result result = stdApi.SaveSubject(sub);
+            Assert.AreEqual(result.StatusCode, Globals.FAILURE_STATUS_CODE);
+        }
+
+        [TestMethod()]
+        public void SaveSystemUserTestInvalidData()
+        {
+            SchoolsInterfaceApi stdApi = new SchoolsInterfaceApi();
+            SystemUser user = new SystemUser();
+            Result result = stdApi.SaveSystemUser(user);
+            Assert.AreEqual(result.StatusCode, Globals.FAILURE_STATUS_CODE);
+        }
+
+        [TestMethod()]
+        public void SaveClassStreamTestInvalidData()
+        {
+            SchoolsInterfaceApi stdApi = new SchoolsInterfaceApi();
+            ClassStream stream = new ClassStream();
+            Result result = stdApi.SaveClassStream(stream);
+            Assert.AreEqual(result.StatusCode, Globals.FAILURE_STATUS_CODE);
+        }
+
+        [TestMethod()]
+        public void SaveSchoolStaffTestInvalidData()
+        {
+            SchoolsInterfaceApi stdApi = new SchoolsInterfaceApi();
+            SchoolStaff staff = new SchoolStaff();
+            Result result = stdApi.SaveSchoolStaff(staff);
+            Assert.AreEqual(result.StatusCode, Globals.FAILURE_STATUS_CODE);
+        }
+   
+        [TestMethod()]
+        public void SaveSubjectTest()
+        {
+            SchoolsInterfaceApi stdApi = new SchoolsInterfaceApi();
+            Subject sub = new Subject();
+            sub.ModifiedBy = "admin";
+            sub.SchoolCode = "TEST_SCHOOL";
+            sub.SubjectCode = "TEST_SUBJECT";
+            sub.SubjectName = "Test Subject";
+           
+            Result result = stdApi.SaveSubject(sub);
+            Assert.AreEqual(result.StatusCode, Globals.SUCCESS_STATUS_CODE);
+        }
+
+        [TestMethod()]
+        public void SaveSystemUserTest()
+        {
+            SchoolsInterfaceApi stdApi = new SchoolsInterfaceApi();
+            SystemUser user = new SystemUser();
+            user.Username = "nsubugak@yahoo.com";
+            user.UserPassword = "T3rr1613";
+            user.UserType = "ADMIN";
+            user.UserCategory = "ADMIN";
+            
+            Result result = stdApi.SaveSystemUser(user);
+            Assert.AreEqual(result.StatusCode, Globals.SUCCESS_STATUS_CODE);
+        }
+
+        [TestMethod()]
+        public void SaveClassStreamTest()
+        {
+            SchoolsInterfaceApi stdApi = new SchoolsInterfaceApi();
+            ClassStream stream = new ClassStream();
+            stream.ModifiedBy = "admin";
+            stream.SchoolCode = "TEST_SCHOOL";
+            stream.StreamCode = "TEST_STREAM";
+            stream.StreamName = "test stream";
+            stream.ClassCode = "TEST_CLASS";
+            Result result = stdApi.SaveClassStream(stream);
+            Assert.AreEqual(result.StatusCode, Globals.SUCCESS_STATUS_CODE);
+        }
+
+        [TestMethod()]
+        public void SaveSchoolStaffTest()
+        {
+            SchoolsInterfaceApi stdApi = new SchoolsInterfaceApi();
+            SchoolStaff staff = new SchoolStaff();
+            staff.Email = "nsubugak@yahoo.com";
+            staff.FullName = "Test Staff";
+            staff.Gender = "MALE";
+            staff.ModifiedBy = "admin";
+            staff.PegPayStaffIDNumber = "12345";
+            staff.PhoneNumber = "0785975800";
+            staff.ProfilePic = "";
+            staff.SchoolCode = "TEST_SCHOOL";
+            staff.StaffCategory = "TEACHING_STAFF";
+            staff.StaffIDNumber = "12345";
+            staff.StaffType = "FULL_TIME";
+            
+            Result result = stdApi.SaveSchoolStaff(staff);
+            Assert.AreEqual(result.StatusCode, Globals.SUCCESS_STATUS_CODE);
+        }
     }
 }

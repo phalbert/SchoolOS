@@ -4,14 +4,10 @@ using System.Text;
 
 namespace SchoolOSApiLogic.Entities
 {
-    public class School:Request
+    public class Subject : Request
     {
-        public string SchoolID = "";
-        public string SchoolName = "";
-        public string UnebCentreNumber = "";
-        public string SchoolLocation = "";
-        public string SchoolEmail = "";
-        public string SchoolPhone = "";
+        public string SubjectName = "";
+        public string SubjectCode = "";
 
         public override bool IsValid()
         {
@@ -21,12 +17,13 @@ namespace SchoolOSApiLogic.Entities
                 StatusDesc = "PLEASE SUPPLY A SCHOOL CODE";
                 return false;
             }
-            if (string.IsNullOrEmpty(SchoolName))
+            if (string.IsNullOrEmpty(SubjectCode))
             {
                 StatusCode = Globals.FAILURE_STATUS_CODE;
-                StatusDesc = "PLEASE SUPPLY A SCHOOL NAME";
+                StatusDesc = "PLEASE SUPPLY A SUBJECT CODE";
                 return false;
             }
+
             return base.IsValid();
         }
 

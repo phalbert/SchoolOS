@@ -53,12 +53,18 @@
     <Compile Include="ControlClasses\Bussinesslogic.cs" />
     <Compile Include="ControlClasses\DatabaseHandler.cs" />
     <Compile Include="ControlClasses\Globals.cs" />
+    <Compile Include="Entities\ClassStream.cs" />
     <Compile Include="Entities\Entity.cs" />
+    <Compile Include="Entities\Fee.cs" />
     <Compile Include="Entities\Request.cs" />
     <Compile Include="Entities\Result.cs" />
     <Compile Include="Entities\School.cs" />
+    <Compile Include="Entities\SchoolStaff.cs" />
     <Compile Include="Entities\Status.cs" />
     <Compile Include="Entities\Student.cs" />
+    <Compile Include="Entities\Subject.cs" />
+    <Compile Include="Entities\SystemUser.cs" />
+    <Compile Include="Entities\Teacher.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Main\SchoolsInterfaceApi.cs" />
   </ItemGroup>
