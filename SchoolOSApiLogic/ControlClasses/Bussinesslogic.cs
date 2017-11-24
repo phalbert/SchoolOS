@@ -49,5 +49,46 @@ namespace SchoolOSApiLogic.ControlClasses
 
             return result;
         }
+
+        public Result SaveSchoolClass(SchoolClass schcls)
+        {
+            Result result = new Result();
+            DataTable dt = dh.ExecuteDataSet("saveschoolclass", new string[] { schcls.SchoolCode, schcls.ClassCode, schcls.SchoolClassName,schcls.ModifiedBy }).Tables[0];
+
+            if (dt.Rows.Count == 0)
+            {
+                result.StatusCode = Globals.FAILURE_STATUS_CODE;
+                result.StatusDesc = "NO ROWS AFFECTED";
+                return result;
+            }
+
+            result.StatusCode = Globals.SUCCESS_STATUS_CODE;
+            result.StatusDesc = Globals.SUCCESS_STATUS_DESC;
+            result.PegPayID = dt.Rows[0][0].ToString();
+            result.RequestID = schcls.ClassCode;
+
+            return result;
+        }
+
+        public Result SaveSchoolSemester(SchoolSemester sem)
+        {
+            Result result = new Result();
+            DataTable dt = dh.ExecuteDataSet("SaveSchoolSemester", new string[] { sem.SchoolCode, sem.SemesterCode, sem.StartDate,sem.Enddate,sem.ModifiedBy }).Tables[0];
+
+            if (dt.Rows.Count == 0)
+            {
+                result.StatusCode = Globals.FAILURE_STATUS_CODE;
+                result.StatusDesc = "NO ROWS AFFECTED";
+                return result;
+            }
+
+            result.StatusCode = Globals.SUCCESS_STATUS_CODE;
+            result.StatusDesc = Globals.SUCCESS_STATUS_DESC;
+            result.PegPayID = dt.Rows[0][0].ToString();
+            result.RequestID = sem.SemesterCode;
+
+            return result;
+        }
+
     }
 }

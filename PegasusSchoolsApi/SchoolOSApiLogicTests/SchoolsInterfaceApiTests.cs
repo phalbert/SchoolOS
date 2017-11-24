@@ -64,12 +64,69 @@ namespace SchoolOSApiLogic.Tests
 
 
         }
+
+
         [TestMethod()]
         public void SaveStudentTestInvalidData()
         {
             SchoolsInterfaceApi stdApi = new SchoolsInterfaceApi();
             Student std = new Student();
             Result result = stdApi.SaveStudent(std);
+            Assert.AreEqual(result.StatusCode, Globals.FAILURE_STATUS_CODE);
+        }
+
+        [TestMethod]
+        public void SaveSchoolClassTest()
+        {
+           SchoolsInterfaceApi schclsapi = new SchoolsInterfaceApi();
+
+           SchoolClass schcls = new SchoolClass();
+
+            schcls.SchoolCode = "TEST_SCHOOL";
+            schcls.ClassCode = "S4";
+            schcls.SchoolClassName = "senior Four";
+            schcls.ModifiedBy = "Peter";
+
+
+            Result result = schclsapi.SaveSchoolClass(schcls);
+            Assert.AreEqual(result.StatusCode, Globals.SUCCESS_STATUS_CODE);
+
+
+        }
+
+        [TestMethod()]
+        public void SaveSchoolClassTestInvalidData()
+        {
+            SchoolsInterfaceApi schApi = new SchoolsInterfaceApi();
+            SchoolClass cls = new SchoolClass();
+            Result result = schApi.SaveSchoolClass(cls);
+            Assert.AreEqual(result.StatusCode, Globals.FAILURE_STATUS_CODE);
+        }
+        [TestMethod()]
+        public void SaveSchoolSemesterTest()
+        {
+            SchoolsInterfaceApi schclsapi = new SchoolsInterfaceApi();
+
+            SchoolSemester sem = new SchoolSemester();
+
+           sem.SchoolCode = "TEST_SCHOOL";
+            sem.SemesterCode = "2017_Term3";
+            sem.StartDate = "2017-10-08";
+            sem.Enddate = "2017-12-16";
+            sem.ModifiedBy = "Peter.K";
+
+
+            Result result = schclsapi.SaveSchoolSemester(sem);
+            Assert.AreEqual(result.StatusCode, Globals.SUCCESS_STATUS_CODE);
+
+
+        }
+        [TestMethod()]
+        public void SaveSchoolSemesterTestInvalidData()
+        {
+            SchoolsInterfaceApi schApi = new SchoolsInterfaceApi();
+            SchoolSemester schsem = new SchoolSemester();
+            Result result = schApi.SaveSchoolSemester(schsem);
             Assert.AreEqual(result.StatusCode, Globals.FAILURE_STATUS_CODE);
         }
 

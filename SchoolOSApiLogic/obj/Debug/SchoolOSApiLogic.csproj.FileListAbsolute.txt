@@ -11,3 +11,4 @@ E:\Elijahs\SchoolOS\SchoolOSApiLogic\obj\Debug\SchoolOSApiLogic.dll
 E:\Elijahs\SchoolOS\SchoolOSApiLogic\obj\Debug\SchoolOSApiLogic.pdb
 E:\Elijahs\SchoolOS\SchoolOSApiLogic\bin\Debug\SchoolOSApiLogic.dll
 E:\Elijahs\SchoolOS\SchoolOSApiLogic\bin\Debug\SchoolOSApiLogic.pdb
+E:\Elijahs\SchoolOS\SchoolOSApiLogic\obj\Debug\SchoolOSApiLogic.csprojResolveAssemblyReference.cache

@@ -52,4 +52,41 @@ public class Service : System.Web.Services.WebService
         return result;
     }
 
+    [WebMethod]
+    public SchoolOSApiLogic.Entities.Result SaveSchoolClass(SchoolOSApiLogic.Entities.SchoolClass schcls)
+    {
+        SchoolOSApiLogic.Entities.Result result = new SchoolOSApiLogic.Entities.Result();
+        try
+        {
+            SchoolOSApiLogic.SchoolsInterfaceApi api = new SchoolOSApiLogic.SchoolsInterfaceApi();
+            result = api.SaveSchoolClass(schcls);
+        }
+        catch (Exception ex)
+        {
+            string msg = "EXCEPTION:" + ex.Message;
+            SchoolOSApiLogic.SchoolsInterfaceApi.LogError(msg, ex.StackTrace, schcls.ClassCode);
+            result.StatusCode = Globals.FAILURE_STATUS_CODE;
+            result.StatusDesc = msg;//"{0} is an {1}",0,1
+        }
+        return result;
+    }
+    [WebMethod]
+    public SchoolOSApiLogic.Entities.Result SaveSchoolSemester(SchoolOSApiLogic.Entities.SchoolSemester semester)
+    {
+        SchoolOSApiLogic.Entities.Result result = new SchoolOSApiLogic.Entities.Result();
+        try
+        {
+            SchoolOSApiLogic.SchoolsInterfaceApi api = new SchoolOSApiLogic.SchoolsInterfaceApi();
+            result = api.SaveSchoolSemester(semester);
+        }
+        catch (Exception ex)
+        {
+            string msg = "EXCEPTION:" + ex.Message;
+            SchoolOSApiLogic.SchoolsInterfaceApi.LogError(msg, ex.StackTrace, semester.SemesterCode);
+            result.StatusCode = Globals.FAILURE_STATUS_CODE;
+            result.StatusDesc = msg;//"{0} is an {1}",0,1
+        }
+        return result;
+    }
+
 }
