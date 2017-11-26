@@ -88,5 +88,42 @@ public class Service : System.Web.Services.WebService
         }
         return result;
     }
+    [WebMethod]
+    public SchoolOSApiLogic.Entities.Result SaveSchoolExam(SchoolOSApiLogic.Entities.SchoolExams exam)
+    {
+        SchoolOSApiLogic.Entities.Result result = new SchoolOSApiLogic.Entities.Result();
+        try
+        {
+            SchoolOSApiLogic.SchoolsInterfaceApi api = new SchoolOSApiLogic.SchoolsInterfaceApi();
+            result = api.SaveSchoolExam(exam);
+        }
+        catch (Exception ex)
+        {
+            string msg = "EXCEPTION:" + ex.Message;
+            SchoolOSApiLogic.SchoolsInterfaceApi.LogError(msg, ex.StackTrace, exam.ExamCode);
+            result.StatusCode = Globals.FAILURE_STATUS_CODE;
+            result.StatusDesc = msg;//"{0} is an {1}",0,1
+        }
+        return result;
+    }
+
+    [WebMethod]
+    public SchoolOSApiLogic.Entities.Result SaveSchoolResults(SchoolOSApiLogic.Entities.SchoolResults schresults)
+    {
+        SchoolOSApiLogic.Entities.Result result = new SchoolOSApiLogic.Entities.Result();
+        try
+        {
+            SchoolOSApiLogic.SchoolsInterfaceApi api = new SchoolOSApiLogic.SchoolsInterfaceApi();
+            result = api.SaveSchoolResult(schresults);
+        }
+        catch (Exception ex)
+        {
+            string msg = "EXCEPTION:" + ex.Message;
+            SchoolOSApiLogic.SchoolsInterfaceApi.LogError(msg, ex.StackTrace, schresults.ResultCode);
+            result.StatusCode = Globals.FAILURE_STATUS_CODE;
+            result.StatusDesc = msg;//"{0} is an {1}",0,1
+        }
+        return result;
+    }
 
 }

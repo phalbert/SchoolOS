@@ -107,7 +107,55 @@ namespace SchoolOSApiLogic
             return result;
         }
 
+        public Result SaveSchoolExam(SchoolExams exam)
+        {
+            Result result = new Result();
+            try
+            {
+                if (!exam.IsValid())
+                {
+                    result.StatusCode = exam.StatusCode;
+                    result.StatusDesc = exam.StatusDesc;
+                    return result;
+                }
 
+                Bussinesslogic bll = new Bussinesslogic();
+                result = bll.SaveSchoolExam(exam);
+            }
+            catch (Exception ex)
+            {
+                string msg = $"EXCEPTION: {ex.Message}";
+                DatabaseHandler.LogError(msg, ex.StackTrace, exam.ExamCode);
+                result.StatusCode = Globals.FAILURE_STATUS_CODE;
+                result.StatusDesc = msg;//"{0} is an {1}",0,1
+            }
+            return result;
+        }
+
+        public Result SaveSchoolResult(SchoolResults schresult)
+        {
+            Result result = new Result();
+            try
+            {
+                if (!schresult.IsValid())
+                {
+                    result.StatusCode = schresult.StatusCode;
+                    result.StatusDesc = schresult.StatusDesc;
+                    return result;
+                }
+
+                Bussinesslogic bll = new Bussinesslogic();
+                result = bll.SaveSchoolResult(schresult);
+            }
+            catch (Exception ex)
+            {
+                string msg = $"EXCEPTION: {ex.Message}";
+                DatabaseHandler.LogError(msg, ex.StackTrace, schresult.ExamCode);
+                result.StatusCode = Globals.FAILURE_STATUS_CODE;
+                result.StatusDesc = msg;//"{0} is an {1}",0,1
+            }
+            return result;
+        }
         public static void LogError(string message, string stackTrace, string Identifier)
         {
             DatabaseHandler.LogError(message, stackTrace, Identifier);

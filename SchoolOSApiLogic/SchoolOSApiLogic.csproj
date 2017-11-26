@@ -58,6 +58,8 @@
     <Compile Include="Entities\Result.cs" />
     <Compile Include="Entities\School.cs" />
     <Compile Include="Entities\SchoolClass.cs" />
+    <Compile Include="Entities\SchoolExams.cs" />
+    <Compile Include="Entities\SchoolResults.cs" />
     <Compile Include="Entities\SchoolSemester.cs" />
     <Compile Include="Entities\Status.cs" />
     <Compile Include="Entities\Student.cs" />

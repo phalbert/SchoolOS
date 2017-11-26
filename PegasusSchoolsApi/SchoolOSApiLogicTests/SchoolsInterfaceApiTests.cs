@@ -130,5 +130,66 @@ namespace SchoolOSApiLogic.Tests
             Assert.AreEqual(result.StatusCode, Globals.FAILURE_STATUS_CODE);
         }
 
+        [TestMethod()]
+        public void SaveSchoolExamTest()
+        {
+            SchoolsInterfaceApi schclsapi = new SchoolsInterfaceApi();
+
+            SchoolExams exams = new SchoolExams();
+
+            exams.SchoolCode = "TEST_SCHOOL";
+            exams.SemesterCode = "2017_Term3";
+            exams.ClassCode = "s41";
+            exams.ExamCode = "2017EOT3";
+            exams.ExamName = "End of Term2";
+            exams.ExamDate = "2017-12-16";
+            exams.ModifiedBy = "Pe.K";
+
+
+            Result result = schclsapi.SaveSchoolExam(exams);
+            Assert.AreEqual(result.StatusCode, Globals.SUCCESS_STATUS_CODE);
+
+
+        }
+        [TestMethod()]
+        public void SaveSchoolExamTestInvalidData()
+        {
+            SchoolsInterfaceApi schApi = new SchoolsInterfaceApi();
+            SchoolExams exams = new SchoolExams();
+            Result result = schApi.SaveSchoolExam(exams);
+            Assert.AreEqual(result.StatusCode, Globals.FAILURE_STATUS_CODE);
+        }
+
+        [TestMethod()]
+        public void SaveSchoolResultsTest()
+        {
+            SchoolsInterfaceApi schclsapi = new SchoolsInterfaceApi();
+
+            SchoolResults schresults = new SchoolResults();
+
+            schresults.SchoolCode = "TEST_SCHOOL";
+            schresults.SemesterCode = "2017_Term3";
+            schresults.ClassCode = "s41";
+            schresults.ExamCode = "2017EOT3";
+            schresults.SubjectCode = "ENG10023";
+            schresults.ResultCode = "End of Term2";
+            schresults.ResultName = "2017-12-16";
+            schresults.ModifiedBy = "Pe.K";
+
+
+            Result result = schclsapi.SaveSchoolResult(schresults);
+            Assert.AreEqual(result.StatusCode, Globals.SUCCESS_STATUS_CODE);
+
+
+        }
+
+        [TestMethod()]
+        public void SaveSchoolResultsTestInvalidData()
+        {
+            SchoolsInterfaceApi schApi = new SchoolsInterfaceApi();
+            SchoolResults schresults = new SchoolResults();
+            Result result = schApi.SaveSchoolResult(schresults);
+            Assert.AreEqual(result.StatusCode, Globals.FAILURE_STATUS_CODE);
+        }
     }
 }

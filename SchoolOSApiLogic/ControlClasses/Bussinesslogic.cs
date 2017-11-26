@@ -89,6 +89,44 @@ namespace SchoolOSApiLogic.ControlClasses
 
             return result;
         }
+        public Result SaveSchoolExam(SchoolExams Exam)
+        {
+            Result result = new Result();
+            DataTable dt = dh.ExecuteDataSet("SaveSchoolExam", new string[] { Exam.SchoolCode,Exam.SemesterCode, Exam.ClassCode,Exam.ExamCode, Exam.ExamName, Exam.ExamDate, Exam.ModifiedBy }).Tables[0];
+
+            if (dt.Rows.Count == 0)
+            {
+                result.StatusCode = Globals.FAILURE_STATUS_CODE;
+                result.StatusDesc = "NO ROWS AFFECTED";
+                return result;
+            }
+
+            result.StatusCode = Globals.SUCCESS_STATUS_CODE;
+            result.StatusDesc = Globals.SUCCESS_STATUS_DESC;
+            result.PegPayID = dt.Rows[0][0].ToString();
+            result.RequestID = Exam.ExamCode;
+
+            return result;
+        }
+        public Result SaveSchoolResult(SchoolResults schresults)
+        {
+            Result result = new Result();
+            DataTable dt = dh.ExecuteDataSet("SaveSchoolResults", new string[] { schresults.SchoolCode, schresults.SemesterCode, schresults.ClassCode,schresults.SubjectCode, schresults.ExamCode, schresults.ResultCode, schresults.ResultName, schresults.ModifiedBy }).Tables[0];
+
+            if (dt.Rows.Count == 0)
+            {
+                result.StatusCode = Globals.FAILURE_STATUS_CODE;
+                result.StatusDesc = "NO ROWS AFFECTED";
+                return result;
+            }
+
+            result.StatusCode = Globals.SUCCESS_STATUS_CODE;
+            result.StatusDesc = Globals.SUCCESS_STATUS_DESC;
+            result.PegPayID = dt.Rows[0][0].ToString();
+            result.RequestID = schresults.ResultCode;
+
+            return result;
+        }
 
     }
 }
