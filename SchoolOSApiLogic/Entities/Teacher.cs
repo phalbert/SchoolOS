@@ -4,11 +4,7 @@ using System.Text;
 
 namespace SchoolOSApiLogic.Entities
 {
-    public class Entity
+    public class Teacher:SchoolStaff
     {
-        public virtual bool IsValid()
-        {
-            return true;
-        }
     }
 }

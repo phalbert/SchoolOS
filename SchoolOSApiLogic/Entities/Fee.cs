@@ -4,14 +4,15 @@ using System.Text;
 
 namespace SchoolOSApiLogic.Entities
 {
-    public class School:Request
+    public class Fee : Request
     {
-        public string SchoolID = "";
-        public string SchoolName = "";
-        public string UnebCentreNumber = "";
-        public string SchoolLocation = "";
-        public string SchoolEmail = "";
-        public string SchoolPhone = "";
+        public string FeeName = "";
+        public string FeeID = "";
+        public string FeeAmount = "";
+        public string Currency = "";
+        public string FeeCategory = "";
+        public string FeeType = "";
+
 
         public override bool IsValid()
         {
@@ -21,12 +22,13 @@ namespace SchoolOSApiLogic.Entities
                 StatusDesc = "PLEASE SUPPLY A SCHOOL CODE";
                 return false;
             }
-            if (string.IsNullOrEmpty(SchoolName))
+            if (string.IsNullOrEmpty(FeeID))
             {
                 StatusCode = Globals.FAILURE_STATUS_CODE;
-                StatusDesc = "PLEASE SUPPLY A SCHOOL NAME";
+                StatusDesc = "PLEASE SUPPLY A FEE ID";
                 return false;
             }
+
             return base.IsValid();
         }
 

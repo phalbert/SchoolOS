@@ -8,5 +8,7 @@ namespace SchoolOSApiLogic.Entities
     {
         public string VendorCode = "";
         public string Password = "";
+        public string SchoolCode = "";
+        public string ModifiedBy = "";
     }
 }
