@@ -4,10 +4,8 @@ using System.Text;
 
 namespace SchoolOSApiLogic.Entities
 {
-    public class SchoolSemester: Result
+    public class SchoolSemester: Request
     {
-
-        public string SchoolCode = "";
         public string SemesterCode = "";
         public string StartDate ="" ;
         public string Enddate = "";

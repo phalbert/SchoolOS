@@ -33,7 +33,7 @@ namespace SchoolOSApiLogic
             return result;
         }
 
-        public Result SaveSchoolFee(Fee fee)
+        public Result SaveSchoolFees(SchoolFee fee)
         {
             Result result = new Result();
             try
@@ -47,6 +47,31 @@ namespace SchoolOSApiLogic
 
                 Bussinesslogic bll = new Bussinesslogic();
                 result = bll.SaveSchoolFee(fee);
+            }
+            catch (Exception ex)
+            {
+                string msg = $"EXCEPTION: {ex.Message}";
+                DatabaseHandler.LogError(msg, ex.StackTrace, fee.SchoolCode);
+                result.StatusCode = Globals.FAILURE_STATUS_CODE;
+                result.StatusDesc = msg;//"{0} is an {1}",0,1
+            }
+            return result;
+        }
+
+        public Result SaveStudentFees(StudentFee fee)
+        {
+            Result result = new Result();
+            try
+            {
+                if (!fee.IsValid())
+                {
+                    result.StatusCode = fee.StatusCode;
+                    result.StatusDesc = fee.StatusDesc;
+                    return result;
+                }
+
+                Bussinesslogic bll = new Bussinesslogic();
+                result = bll.SaveStudentFees(fee);
             }
             catch (Exception ex)
             {
@@ -233,9 +258,113 @@ namespace SchoolOSApiLogic
             return result;
         }
 
+        public Result SaveUserType(UserType type)
+        {
+            Result result = new Result();
+            try
+            {
+                if (!type.IsValid())
+                {
+                    result.StatusCode = type.StatusCode;
+                    result.StatusDesc = type.StatusDesc;
+                    return result;
+                }
+
+                Bussinesslogic bll = new Bussinesslogic();
+                result = bll.SaveUserType(type);
+            }
+            catch (Exception ex)
+            {
+                string msg = $"EXCEPTION: {ex.Message}";
+                DatabaseHandler.LogError(msg, ex.StackTrace, type.SchoolCode);
+                result.StatusCode = Globals.FAILURE_STATUS_CODE;
+                result.StatusDesc = msg;//"{0} is an {1}",0,1
+            }
+            return result;
+        }
+
+        public Result SaveMainLink(MainLink link)
+        {
+            Result result = new Result();
+            try
+            {
+                if (!link.IsValid())
+                {
+                    result.StatusCode = link.StatusCode;
+                    result.StatusDesc = link.StatusDesc;
+                    return result;
+                }
+
+                Bussinesslogic bll = new Bussinesslogic();
+                result = bll.SaveMainLink(link);
+            }
+            catch (Exception ex)
+            {
+                string msg = $"EXCEPTION: {ex.Message}";
+                DatabaseHandler.LogError(msg, ex.StackTrace, link.SchoolCode);
+                result.StatusCode = Globals.FAILURE_STATUS_CODE;
+                result.StatusDesc = msg;//"{0} is an {1}",0,1
+            }
+            return result;
+        }
+
+        public Result SaveSubLink(SubLink link)
+        {
+
+            Result result = new Result();
+            try
+            {
+                if (!link.IsValid())
+                {
+                    result.StatusCode = link.StatusCode;
+                    result.StatusDesc = link.StatusDesc;
+                    return result;
+                }
+
+                Bussinesslogic bll = new Bussinesslogic();
+                result = bll.SaveSubLink(link);
+            }
+            catch (Exception ex)
+            {
+                string msg = $"EXCEPTION: {ex.Message}";
+                DatabaseHandler.LogError(msg, ex.StackTrace, link.SchoolCode);
+                result.StatusCode = Globals.FAILURE_STATUS_CODE;
+                result.StatusDesc = msg;//"{0} is an {1}",0,1
+            }
+            return result;
+        }
+
+        public Result SaveMenu(Menu menu)
+        {
+
+            Result result = new Result();
+            try
+            {
+                if (!menu.IsValid())
+                {
+                    result.StatusCode = menu.StatusCode;
+                    result.StatusDesc = menu.StatusDesc;
+                    return result;
+                }
+
+                Bussinesslogic bll = new Bussinesslogic();
+                result = bll.SaveMenu(menu);
+            }
+            catch (Exception ex)
+            {
+                string msg = $"EXCEPTION: {ex.Message}";
+                DatabaseHandler.LogError(msg, ex.StackTrace, menu.SchoolCode);
+                result.StatusCode = Globals.FAILURE_STATUS_CODE;
+                result.StatusDesc = msg;//"{0} is an {1}",0,1
+            }
+            return result;
+        }
+
         public static void LogError(string message, string stackTrace, string Identifier)
         {
             DatabaseHandler.LogError(message, stackTrace, Identifier);
         }
+
+        
     }
 }

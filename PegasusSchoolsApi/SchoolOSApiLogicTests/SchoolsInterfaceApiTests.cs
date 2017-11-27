@@ -29,7 +29,7 @@ namespace SchoolOSApiLogic.Tests
             sch.UnebCentreNumber = "123444";
             sch.VendorCode = "TEST";
             Result result = schApi.SaveSchool(sch);
-            Assert.AreEqual(result.StatusCode,Globals.SUCCESS_STATUS_CODE);
+            Assert.AreEqual(result.StatusCode, Globals.SUCCESS_STATUS_CODE);
         }
 
         [TestMethod()]
@@ -74,12 +74,14 @@ namespace SchoolOSApiLogic.Tests
             Assert.AreEqual(result.StatusCode, Globals.FAILURE_STATUS_CODE);
         }
 
+
+
         [TestMethod]
         public void SaveSchoolClassTest()
         {
-           SchoolsInterfaceApi schclsapi = new SchoolsInterfaceApi();
+            SchoolsInterfaceApi schclsapi = new SchoolsInterfaceApi();
 
-           SchoolClass schcls = new SchoolClass();
+            SchoolClass schcls = new SchoolClass();
 
             schcls.SchoolCode = "TEST_SCHOOL";
             schcls.ClassCode = "S4";
@@ -108,7 +110,7 @@ namespace SchoolOSApiLogic.Tests
 
             SchoolSemester sem = new SchoolSemester();
 
-           sem.SchoolCode = "TEST_SCHOOL";
+            sem.SchoolCode = "TEST_SCHOOL";
             sem.SemesterCode = "2017_Term3";
             sem.StartDate = "2017-10-08";
             sem.Enddate = "2017-12-16";
@@ -164,7 +166,7 @@ namespace SchoolOSApiLogic.Tests
             Result result = stdApi.SaveSchoolStaff(staff);
             Assert.AreEqual(result.StatusCode, Globals.FAILURE_STATUS_CODE);
         }
-   
+
         [TestMethod()]
         public void SaveSubjectTest()
         {
@@ -174,7 +176,7 @@ namespace SchoolOSApiLogic.Tests
             sub.SchoolCode = "TEST_SCHOOL";
             sub.SubjectCode = "TEST_SUBJECT";
             sub.SubjectName = "Test Subject";
-           
+
             Result result = stdApi.SaveSubject(sub);
             Assert.AreEqual(result.StatusCode, Globals.SUCCESS_STATUS_CODE);
         }
@@ -188,7 +190,7 @@ namespace SchoolOSApiLogic.Tests
             user.UserPassword = "T3rr1613";
             user.UserType = "ADMIN";
             user.UserCategory = "ADMIN";
-            
+
             Result result = stdApi.SaveSystemUser(user);
             Assert.AreEqual(result.StatusCode, Globals.SUCCESS_STATUS_CODE);
         }
@@ -223,9 +225,130 @@ namespace SchoolOSApiLogic.Tests
             staff.StaffCategory = "TEACHING_STAFF";
             staff.StaffIDNumber = "12345";
             staff.StaffType = "FULL_TIME";
-            
+
             Result result = stdApi.SaveSchoolStaff(staff);
             Assert.AreEqual(result.StatusCode, Globals.SUCCESS_STATUS_CODE);
         }
+
+        [TestMethod()]
+        public void SaveUserTypeTest()
+        {
+            SchoolsInterfaceApi stdApi = new SchoolsInterfaceApi();
+            UserType std = new UserType();
+            std.SchoolCode = "TEST_SCHOOL";
+            std.UserTypeCode = "ADMIN";
+            std.UserTypeName = "Administrator";
+            Result result = stdApi.SaveUserType(std);
+            Assert.AreEqual(result.StatusCode, Globals.SUCCESS_STATUS_CODE);
+        }
+
+        [TestMethod()]
+        public void SaveUserTypeTestInvalidData()
+        {
+            SchoolsInterfaceApi stdApi = new SchoolsInterfaceApi();
+            UserType std = new UserType();
+            Result result = stdApi.SaveUserType(std);
+            Assert.AreEqual(result.StatusCode, Globals.FAILURE_STATUS_CODE);
+        }
+
+        [TestMethod()]
+        public void SaveMainLinkTest()
+        {
+            SchoolsInterfaceApi stdApi = new SchoolsInterfaceApi();
+            MainLink std = new MainLink();
+            std.SchoolCode = "TEST_SCHOOL";
+            std.MainLinkCode = "ADMIN";
+            std.MainLinkText = "Administrator";
+            Result result = stdApi.SaveMainLink(std);
+            Assert.AreEqual(result.StatusCode, Globals.SUCCESS_STATUS_CODE);
+        }
+
+        [TestMethod()]
+        public void SaveMainLinkTestInvalidData()
+        {
+            SchoolsInterfaceApi stdApi = new SchoolsInterfaceApi();
+            MainLink std = new MainLink();
+            Result result = stdApi.SaveMainLink(std);
+            Assert.AreEqual(result.StatusCode, Globals.FAILURE_STATUS_CODE);
+        }
+
+        [TestMethod()]
+        public void SaveSubLinkTest()
+        {
+            SchoolsInterfaceApi stdApi = new SchoolsInterfaceApi();
+            SubLink std = new SubLink();
+            std.SchoolCode = "TEST_SCHOOL";
+            std.SubLinkCode = "ADMIN";
+            std.SubLinkText = "Administrator";
+            Result result = stdApi.SaveSubLink(std);
+            Assert.AreEqual(result.StatusCode, Globals.SUCCESS_STATUS_CODE);
+        }
+
+        [TestMethod()]
+        public void SaveSubLinkTestInvalidData()
+        {
+            SchoolsInterfaceApi stdApi = new SchoolsInterfaceApi();
+            SubLink std = new SubLink();
+            Result result = stdApi.SaveSubLink(std);
+            Assert.AreEqual(result.StatusCode, Globals.FAILURE_STATUS_CODE);
+        }
+
+        [TestMethod()]
+        public void SaveMenuTest()
+        {
+            SchoolsInterfaceApi stdApi = new SchoolsInterfaceApi();
+            Menu std = new Menu();
+            std.SchoolCode = "TEST_SCHOOL";
+            Result result = stdApi.SaveMenu(std);
+            Assert.AreEqual(result.StatusCode, Globals.SUCCESS_STATUS_CODE);
+        }
+
+        [TestMethod()]
+        public void SaveMenuTestInvalidData()
+        {
+            SchoolsInterfaceApi stdApi = new SchoolsInterfaceApi();
+            Menu std = new Menu();
+            Result result = stdApi.SaveMenu(std);
+            Assert.AreEqual(result.StatusCode, Globals.FAILURE_STATUS_CODE);
+        }
+
+        [TestMethod()]
+        public void SaveSchoolFeeTest()
+        {
+            SchoolsInterfaceApi stdApi = new SchoolsInterfaceApi();
+            SchoolFee std = new SchoolFee();
+            std.SchoolCode = "TEST_SCHOOL";
+            Result result = stdApi.SaveSchoolFees(std);
+            Assert.AreEqual(result.StatusCode, Globals.SUCCESS_STATUS_CODE);
+        }
+
+        [TestMethod()]
+        public void SaveSchoolFeeTestInvalidData()
+        {
+            SchoolsInterfaceApi stdApi = new SchoolsInterfaceApi();
+            SchoolFee std = new SchoolFee();
+            Result result = stdApi.SaveSchoolFees(std);
+            Assert.AreEqual(result.StatusCode, Globals.FAILURE_STATUS_CODE);
+        }
+
+        [TestMethod()]
+        public void SaveStudentFeeTest()
+        {
+            SchoolsInterfaceApi stdApi = new SchoolsInterfaceApi();
+            StudentFee std = new StudentFee();
+            std.SchoolCode = "TEST_SCHOOL";
+            Result result = stdApi.SaveStudentFees(std);
+            Assert.AreEqual(result.StatusCode, Globals.SUCCESS_STATUS_CODE);
+        }
+
+        [TestMethod()]
+        public void SaveStudentFeeTestInvalidData()
+        {
+            SchoolsInterfaceApi stdApi = new SchoolsInterfaceApi();
+            StudentFee std = new StudentFee();
+            Result result = stdApi.SaveStudentFees(std);
+            Assert.AreEqual(result.StatusCode, Globals.FAILURE_STATUS_CODE);
+        }
+
     }
 }

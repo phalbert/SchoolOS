@@ -4,9 +4,8 @@ using System.Text;
 
 namespace SchoolOSApiLogic.Entities
 {
-   public class SchoolClass:Result
+   public class SchoolClass:Request
     {
-        public string SchoolCode = "";
         public string ClassCode = "";
         public string SchoolClassName = "";
 

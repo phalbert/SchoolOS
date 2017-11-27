@@ -4,12 +4,12 @@ using System.Text;
 
 namespace SchoolOSApiLogic.Entities
 {
-    public class Fee : Request
+    public class SchoolFee : Request
     {
         public string FeeName = "";
         public string FeeID = "";
         public string FeeAmount = "";
-        public string Currency = "";
+        public string CurrencyCode = "";
         public string FeeCategory = "";
         public string FeeType = "";
 
