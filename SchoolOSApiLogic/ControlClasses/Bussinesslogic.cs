@@ -33,7 +33,7 @@ namespace SchoolOSApiLogic.ControlClasses
         public Result SaveSchoolFee(SchoolFee fee)
         {
             Result result = new Result();
-            DataTable dt = dh.ExecuteDataSet("SaveSchoolFee", new string[] { fee.ModifiedBy }).Tables[0];
+            DataTable dt = dh.ExecuteDataSet("SaveSchoolFees", new string[] {fee.FeeID,fee.FeeName,fee.FeeAmount,fee.CurrencyCode,fee.SchoolCode, fee.ModifiedBy }).Tables[0];
 
             if (dt.Rows.Count == 0)
             {
@@ -245,7 +245,7 @@ namespace SchoolOSApiLogic.ControlClasses
         public Result SaveSubLink(SubLink sublink)
         {
             Result result = new Result();
-            DataTable dt = dh.ExecuteDataSet("SaveSubLink", new string[] { sublink.SchoolCode, sublink.SubLinkCode, sublink.SubLinkText, sublink.ModifiedBy }).Tables[0];
+            DataTable dt = dh.ExecuteDataSet("SaveSubLink", new string[] { sublink.SchoolCode, sublink.SubLinkCode, sublink.SubLinkText, sublink.ModifiedBy,sublink.URL }).Tables[0];
 
             if (dt.Rows.Count == 0)
             {

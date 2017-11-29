@@ -18,7 +18,7 @@ public class Service : System.Web.Services.WebService
     }
 
     [WebMethod]
-    public Result SaveSchool(SchoolOSApiLogic.Entities.School sch)
+    public Result SaveSchool(School sch)
     {
         Result result = new Result();
         try
@@ -37,7 +37,7 @@ public class Service : System.Web.Services.WebService
     }
 
     [WebMethod]
-    public Result SaveStudent(SchoolOSApiLogic.Entities.Student std)
+    public Result SaveStudent(Student std)
     {
         Result result = new Result();
         try
@@ -56,7 +56,7 @@ public class Service : System.Web.Services.WebService
     }
 
     [WebMethod]
-    public Result SaveSchoolClass(SchoolOSApiLogic.Entities.SchoolClass schcls)
+    public Result SaveSchoolClass(SchoolClass schcls)
     {
         Result result = new Result();
         try
@@ -75,7 +75,7 @@ public class Service : System.Web.Services.WebService
     }
 
     [WebMethod]
-    public Result SaveSchoolSemester(SchoolOSApiLogic.Entities.SchoolSemester semester)
+    public Result SaveSchoolSemester(SchoolSemester semester)
     {
         Result result = new Result();
         try
