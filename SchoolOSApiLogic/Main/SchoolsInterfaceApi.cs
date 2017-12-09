@@ -2,12 +2,43 @@
 using SchoolOSApiLogic.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 
 namespace SchoolOSApiLogic
 {
     public class SchoolsInterfaceApi
     {
+        public SystemUserDetails Login(string Username, string Password)
+        {
+            SystemUserDetails result = new SystemUserDetails();
+            try
+            {
+                Bussinesslogic bll = new Bussinesslogic();
+                result = bll.Login(Username, Password);
+            }
+            catch (Exception ex)
+            {
+                string msg = $"EXCEPTION: {ex.Message}";
+                DatabaseHandler.LogError(msg, ex.StackTrace, Username);
+                result.StatusCode = Globals.FAILURE_STATUS_CODE;
+                result.StatusDesc = msg;//"{0} is an {1}",0,1
+            }
+            return result;
+        }
+
+        public DataSet ExecuteDataSet(string StoredProc, params string[] Parameters)
+        {
+            Bussinesslogic bll = new Bussinesslogic();
+            return bll.ExecuteDataSet(StoredProc, Parameters);
+        }
+
+        public int ExecuteNonQuery(string StoredProc, params string[] Parameters)
+        {
+            Bussinesslogic bll = new Bussinesslogic();
+            return bll.ExecuteNonQuery(StoredProc, Parameters);
+        }
+
         public Result SaveSchool(School sch)
         {
             Result result = new Result();
@@ -334,7 +365,7 @@ namespace SchoolOSApiLogic
             return result;
         }
 
-        public Result SaveMenu(Menu menu)
+        public Result SaveMenu(MenuItem menu)
         {
 
             Result result = new Result();
@@ -364,7 +395,5 @@ namespace SchoolOSApiLogic
         {
             DatabaseHandler.LogError(message, stackTrace, Identifier);
         }
-
-        
     }
 }

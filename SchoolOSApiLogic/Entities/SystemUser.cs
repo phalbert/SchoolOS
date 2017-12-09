@@ -11,6 +11,7 @@ namespace SchoolOSApiLogic.Entities
         public string UserType = "";
         public string UserCategory = "";
         public string SecretKey = "";
+        public string ApprovedBy = "";
 
         public override bool IsValid()
         {

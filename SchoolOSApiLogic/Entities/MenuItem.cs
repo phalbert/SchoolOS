@@ -4,9 +4,10 @@ using System.Text;
 
 namespace SchoolOSApiLogic.Entities
 {
-    public class Menu : Request
+    public class MenuItem : Request
     {
-        public Dictionary<MainLink, SubLink[]> menuItems = new Dictionary<MainLink, SubLink[]>();
+        public MainLink mainLink = new MainLink();
+        public List<SubLink> subLinks = new List<SubLink>();
         public string UserType = "";
         public string UserCategory = "";
 

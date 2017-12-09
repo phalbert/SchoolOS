@@ -1,0 +1,9 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="SchoolOSApiLogic.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="SchoolOSApiLogic_SharedCommonsAPI_SharedCommonsAPI" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://192.168.23.15:5099/LiveSharedCommonsAPI/Service.asmx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

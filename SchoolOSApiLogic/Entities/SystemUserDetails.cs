@@ -6,11 +6,7 @@ namespace SchoolOSApiLogic.Entities
 {
     public class SystemUserDetails:Result
     {
-        public string Username = "";
-        public string UserPassword = "";
-        public string UserType = "";
-        public string UserCategory = "";
-        public string SecretKey = "";
-        public Menu UserMenuOptions = null;
+        public SystemUser User = null;
+        public List<MenuItem> UserMenuOptions = null;
     }
 }

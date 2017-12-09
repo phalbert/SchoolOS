@@ -20,7 +20,7 @@ namespace SchoolOSApiLogic.Tests
             School sch = new School();
             sch.SchoolName = "TEST SCHOOl";
             sch.ModifiedBy = "admin";
-            sch.Password = "TEST";
+            sch.VendorPassword = "TEST";
             sch.SchoolCode = "TEST_SCHOOL";
             sch.SchoolEmail = "nsubugak@yahoo.com";
             sch.SchoolID = "";
@@ -258,7 +258,7 @@ namespace SchoolOSApiLogic.Tests
             MainLink std = new MainLink();
             std.SchoolCode = "TEST_SCHOOL";
             std.MainLinkCode = "ADMIN";
-            std.MainLinkText = "Administrator";
+            std.MainLinkName = "Administrator";
             Result result = stdApi.SaveMainLink(std);
           Assert.AreEqual(Globals.SUCCESS_STATUS_CODE,result.StatusCode);
         }
@@ -279,7 +279,7 @@ namespace SchoolOSApiLogic.Tests
             SubLink std = new SubLink();
             std.SchoolCode = "TEST_SCHOOL";
             std.SubLinkCode = "ADMIN";
-            std.SubLinkText = "Administrator";
+            std.SubLinkName = "Administrator";
             std.URL = "https://google.com";
             Result result = stdApi.SaveSubLink(std);
             Assert.AreEqual(Globals.SUCCESS_STATUS_CODE,result.StatusCode);
@@ -298,7 +298,7 @@ namespace SchoolOSApiLogic.Tests
         public void SaveMenuTest()
         {
             SchoolsInterfaceApi stdApi = new SchoolsInterfaceApi();
-            Menu std = new Menu();
+            MenuItem std = new MenuItem();
             std.SchoolCode = "TEST_SCHOOL";
             std.UserType = "ADMIN";
             Result result = stdApi.SaveMenu(std);
@@ -309,7 +309,7 @@ namespace SchoolOSApiLogic.Tests
         public void SaveMenuTestInvalidData()
         {
             SchoolsInterfaceApi stdApi = new SchoolsInterfaceApi();
-            Menu std = new Menu();
+            MenuItem std = new MenuItem();
             Result result = stdApi.SaveMenu(std);
             Assert.AreEqual(Globals.FAILURE_STATUS_CODE,result.StatusCode);
         }

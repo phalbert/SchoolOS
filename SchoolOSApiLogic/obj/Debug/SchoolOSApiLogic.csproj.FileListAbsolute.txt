@@ -11,4 +11,5 @@ D:\Work\PegasusSchoolOS\SchoolOS\SchoolOSApiLogic\bin\Debug\Microsoft.Practices.
 D:\Work\PegasusSchoolOS\SchoolOS\SchoolOSApiLogic\bin\Debug\Microsoft.Practices.ObjectBuilder.dll
 D:\Work\PegasusSchoolOS\SchoolOS\SchoolOSApiLogic\obj\Debug\SchoolOSApiLogic.dll
 D:\Work\PegasusSchoolOS\SchoolOS\SchoolOSApiLogic\obj\Debug\SchoolOSApiLogic.pdb
+D:\Work\PegasusSchoolOS\SchoolOS\SchoolOSApiLogic\bin\Debug\SchoolOSApiLogic.dll.config
 D:\Work\PegasusSchoolOS\SchoolOS\SchoolOSApiLogic\obj\Debug\SchoolOSApiLogic.csprojResolveAssemblyReference.cache

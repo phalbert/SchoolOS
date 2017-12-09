@@ -6,13 +6,13 @@ namespace SchoolOSApiLogic.Entities
 {
     public class SubLink:Request
     {
-        public string SubLinkText = "";
+        public string SubLinkName = "";
         public string SubLinkCode = "";
         public string URL = "";
 
         public override bool IsValid()
         {
-            if (string.IsNullOrEmpty(SubLinkText))
+            if (string.IsNullOrEmpty(SubLinkName))
             {
                 StatusCode = Globals.FAILURE_STATUS_CODE;
                 StatusDesc = "PLEASE SUPPLY A SUBLINK TEXT";

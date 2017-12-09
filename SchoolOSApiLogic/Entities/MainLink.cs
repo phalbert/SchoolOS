@@ -6,12 +6,12 @@ namespace SchoolOSApiLogic.Entities
 {
     public class MainLink:Request
     {
-        public string MainLinkText = "";
+        public string MainLinkName = "";
         public string MainLinkCode = "";
 
         public override bool IsValid()
         {
-            if (string.IsNullOrEmpty(MainLinkText))
+            if (string.IsNullOrEmpty(MainLinkName))
             {
                 StatusCode = Globals.FAILURE_STATUS_CODE;
                 StatusDesc = "PLEASE SUPPLY A MAIN LINK TEXT";

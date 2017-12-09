@@ -56,6 +56,25 @@ public class Service : System.Web.Services.WebService
     }
 
     [WebMethod]
+    public SystemUserDetails Login(string Username,string Password)
+    {
+        SystemUserDetails result = new SystemUserDetails();
+        try
+        {
+            SchoolOSApiLogic.SchoolsInterfaceApi api = new SchoolOSApiLogic.SchoolsInterfaceApi();
+            return api.Login(Username, Password);
+        }
+        catch (Exception ex)
+        {
+            string msg = "EXCEPTION:" + ex.Message;
+            SchoolOSApiLogic.SchoolsInterfaceApi.LogError(msg, ex.StackTrace, Username);
+            result.StatusCode = Globals.FAILURE_STATUS_CODE;
+            result.StatusDesc = msg;//"{0} is an {1}",0,1
+        }
+        return result;
+    }
+
+    [WebMethod]
     public Result SaveSchoolClass(SchoolClass schcls)
     {
         Result result = new Result();
@@ -205,7 +224,7 @@ public class Service : System.Web.Services.WebService
     }
 
     [WebMethod]
-    public Result SaveMenu(Menu sub)
+    public Result SaveMenu(MenuItem sub)
     {
         SchoolOSApiLogic.SchoolsInterfaceApi api = new SchoolOSApiLogic.SchoolsInterfaceApi();
         return api.SaveMenu(sub);

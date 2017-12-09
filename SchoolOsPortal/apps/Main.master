@@ -1,0 +1,272 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Main.master.cs" Inherits="Main" %>
+
+<%@ Import Namespace="System.Data" %>
+<%@ Import Namespace="System.Collections.Generic" %>
+<%@ Import Namespace="InterLinkClass.PegasusManagementApi" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
+<html lang="en">
+<head id="Head1" runat="server">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>PegPay Company OS</title>
+    <!------------------------------------------------- CSS Files ------------------------------------------------->
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Custom CSS -->
+    <link href="css/PutCustomCssHere.css" rel="stylesheet" />
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+        .ajax__calendar_container {
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body style="font-size: 12px;">
+    <form runat="server" id="form1" autocomplete="off">
+        <div id="wrapper">
+            <!------------------------------------------------ Navigation ------------------------------------------->
+            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+          
+            <!-------------------------------- Brand and toggle get grouped for better mobile display --------------->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" id="TitleLbl" runat="server" href="LoggedInStartPage.aspx"><i class="fa fa-bank"></i> BANK-NAME:[Stanbic Bank] <i class="fa fa-bank"></i></a>
+            </div>
+            <!-------------------------------------------------- Top Menu Items ------------------------------------>
+            <ul class="nav navbar-right top-nav" style="padding-right:10px;">
+              
+                 <% 
+
+                     SystemUser user = Session["User"] as SystemUser;
+                    %>
+                <% if (user.UserType != "NONE")
+                    { %>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <asp:Label runat="server" Text="Username" ID="lblName"/> <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
+                        </li>
+                        <li>
+                            <a href="ChangePassword.aspx"><i class="fa fa-fw fa-gear"></i> Password Management</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <asp:LinkButton ID="btnLogout" runat="server" OnClick="LinkButton1_Click"><i class="fa fa-fw fa-power-off"></i>Log Out</asp:LinkButton>
+                        </li>
+                    </ul>
+                </li>
+                <%} %>
+            </ul>
+
+            <!----------- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens ------>
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                <% if (user.UserType != "NONE")
+                    { %>
+                    <li class="UserProfileSection" style="padding-top:10px;">
+                        <p><b>Name:</b> <asp:Label ID="lblUsersName" runat="server">Users FullName</asp:Label></p>
+                        <p><b>Role:</b> <asp:Label ID="lblUsersRole" runat="server">Users Role</asp:Label></p>
+                        <p><b>Company:</b> <asp:Label ID="lblCompnay" runat="server">Users Company</asp:Label></p>
+                        
+                        <%--<p><b>Last Login:</b> <asp:Label ID="lblLastLogin" runat="server">Users Company</asp:Label></p>--%>
+                    </li>
+                   
+                    <%---------------------------- Default Landing Page for All Users ---------------------------%>
+                    <li style="border-top:none;">
+                        <a href="LoggedInStartPage.aspx" style="border-top:hidden;" class="active" data-toggle="collapse" data-target="#Start"><i class="fa fa-fw fa-home"></i> Home</a>
+                    </li>
+                     <%} %>
+                    <%------------------------------------- Accountant Section -------------------------------------%>
+                    <% if (user.UserType.ToUpper() == ("ACCOUNTANT") || user.UserType.ToUpper().Contains("ADMIN"))
+                        { %>
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#quick"><i class="fa fa-fw fa-dashboard"></i> Employee Payments<i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="quick" class="collapse">
+                             <li>
+                                <a href="MakeQuickPayment.aspx"><i class="fa fa-caret-right"></i> Quick Payments</a>
+                            </li>
+                             <li>
+                                <a href="AddOrEditEmployee.aspx"><i class="fa fa-caret-right"></i> Save Employee</a>
+                            </li>
+                             <li>
+                                <a href="AddOrEditDepartment.aspx"><i class="fa fa-caret-right"></i> Save Department</a>
+                            </li>
+                        </ul>
+                    </li>
+                   <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#teller"><i class="fa fa-fw fa-dashboard"></i> Accountant<i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="teller" class="collapse">
+                             <li>
+                                <a href="MakePayment.aspx"><i class="fa fa-caret-right"></i> Initiate Purchase</a>
+                            </li>
+                            <li>
+                                <a href="CompletePayment.aspx"><i class="fa fa-caret-right"></i> Complete Purchase</a>
+                            </li>
+                            <li>
+                                <a href="MakeASale.aspx"><i class="fa fa-caret-right"></i> Initiate Sale</a>
+                            </li>
+                             <li>
+                                <a href="CompleteSale.aspx"><i class="fa fa-caret-right"></i> Complete Sale</a>
+                            </li>
+                            <li>
+                                <a href="ManagePurchases.aspx"><i class="fa fa-caret-right"></i> Manage Purchases</a>
+                            </li>
+                             <li>
+                                <a href="ManageSales.aspx"><i class="fa fa-caret-right"></i> Manage Sales</a>
+                            </li>
+                             <li>
+                                <a href="ManageSaleItems.aspx"><i class="fa fa-caret-right"></i> Manage SaleItems</a>
+                            </li>
+                             <li>
+                                <a href="ManageInvoices.aspx"><i class="fa fa-caret-right"></i> Manage Invoices</a>
+                            </li>
+                            <li>
+                                <a href="AddOrEditClient.aspx"><i class="fa fa-caret-right"></i>  Register Client</a>
+                            </li>
+                             <li>
+                                <a href="AddOrEditSupplier.aspx"><i class="fa fa-caret-right"></i>  Register Supplier</a>
+                            </li>
+                             <li>
+                                <a href="AddOrEditContract.aspx"><i class="fa fa-caret-right"></i> Register Contract</a>
+                            </li>
+                             <li>
+                                <a href="AddOrEditInvoice.aspx"><i class="fa fa-caret-right"></i> Create Invoice</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <%} %>
+                    <%--------------------------------- Teller Supervisor Section ------------------------------%>
+                     <% if (user.UserType.ToUpper().Contains("ADMIN"))
+                         { %>
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-bar-chart-o"></i> Administrator<i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="demo" class="collapse">
+                            <li>
+                                <a href="AddOrEditSystemUser.aspx"><i class="fa fa-caret-right"></i> Register System User</a>
+                            </li>
+                            <li>
+                                <a href="AddOrEditSystemSetting.aspx"><i class="fa fa-caret-right"></i> Save System Setting</a>
+                            </li>
+                            <li>
+                                <a href="ViewAuditLogs.aspx"><i class="fa fa-caret-right"></i> View Audit Trail</a>
+                            </li>
+                             <li>
+                                <a href="ViewAuditLogs.aspx"><i class="fa fa-caret-right"></i> View Error Logs</a>
+                            </li>
+                        </ul>
+                    </li>
+                     <%} %>
+                     <%--------------------------------- System Amdin Section ------------------------------%>
+                     <% if (user.UserType.ToUpper().Contains("SYS_ADMIN"))
+                         { %>
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo1"><i class="fa fa-fw fa-bar-chart-o"></i> Sys Admin<i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="demo1" class="collapse">
+                            <li>
+                                <a href="AddOrEditCompany.aspx"><i class="fa fa-caret-right"></i> Register Compnay</a>
+                            </li>
+                        </ul>
+                    </li>
+                     <%} %>
+                     <%------------------------------------- All transactions Section  ----------------------------%>
+                    <% if (user.UserType != "NONE")
+                        { %>
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#Reports"><i class="fa fa-fw fa-file"></i> Reports<i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="Reports" class="collapse">
+                            <li>
+                                <a href="Transactions.aspx"><i class="fa fa-caret-right"></i> Search General Ledger</a>
+                            </li>
+                            <li>
+                                <a href="ViewPurchases.aspx"><i class="fa fa-caret-right"></i> View Purchases</a>
+                            </li>
+                            <li>
+                                <a href="ViewSales.aspx"><i class="fa fa-caret-right"></i> View Sales</a>
+                            </li>
+                             <li>
+                                <a href="ViewContracts.aspx"><i class="fa fa-caret-right"></i> View Contracts</a>
+                            </li>
+                        </ul>
+                     </li>
+                     <%} %>
+                    <%------------------------------------- System Settings Section  ----------------------------%>
+                    <% if (user.UserType != "NONE")
+                        { %>
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#SysSettings"><i class="fa fa-fw fa-file"></i> System Settings<i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="SysSettings" class="collapse">
+                            <li>
+                                <a href="ChangePassword.aspx"><i class="fa fa-caret-right"></i> Password Management</a>
+                            </li>
+                            <li>
+                                <a href="AddOrEditSystemSetting.aspx"><i class="fa fa-caret-right"></i> Create System Setting</a>
+                            </li>
+                        </ul>
+                     </li>
+                     <%} %>
+                </ul>
+            </div>
+
+        </nav>
+            <ajaxToolkit:ToolkitScriptManager ID="ScriptManager1" runat="Server" EnableScriptGlobalization="true"
+                EnableScriptLocalization="true">
+            </ajaxToolkit:ToolkitScriptManager>
+            <div id="page-wrapper">
+                <div class="container-fluid" style="height: 100%; min-height: 800px; padding-top: 50px">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+            </div>
+            <br />
+        </div>
+        <!-------------------------- Placed at the end of the document so the pages load faster ------------------------------->
+        <script type="text/javascript" src="js/jquery.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.js"></script>
+        <!------------------------------ Bootstrap Core JavaScript ------------------------------------------------------------>
+        <script type="text/javascript" src="js/bootstrap.min.js"></script>
+        <%
+            //changes the navbar based on the choosen theme color for the bank
+            string style = "<style type=\"text/css\">" +
+                          ".navbar-inverse {" +
+                          "background-color:#D71921;" +
+                          "border-color: inherit;" +
+                          "color: white;" +
+                          "}" +
+                          "</style>";
+            Response.Write(style);
+        %>
+        <script type="text/javascript">
+            function Comma(Num) {
+                try {
+                    Num += '';
+                    Num = Num.replace(',', ''); Num = Num.replace(',', ''); Num = Num.replace(',', '');
+                    Num = Num.replace(',', ''); Num = Num.replace(',', ''); Num = Num.replace(',', '');
+                    x = Num.split('.');
+                    x1 = x[0];
+                    x2 = x.length > 1 ? '.' + x[1] : '';
+                    var rgx = /(\d+)(\d{3})/;
+                    while (rgx.test(x1))
+                        x1 = x1.replace(rgx, '$1' + ',' + '$2');
+                    var result = x1 + x2;
+                    return result;
+                }
+                catch (err) {
+                    return Num;
+                }
+            }
+        </script>
+    </form>
+</body>
+</html>

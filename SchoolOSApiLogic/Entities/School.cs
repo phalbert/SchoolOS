@@ -12,6 +12,18 @@ namespace SchoolOSApiLogic.Entities
         public string SchoolLocation = "";
         public string SchoolEmail = "";
         public string SchoolPhone = "";
+        public string[] SchoolType = { };
+        public string[] SchoolCategories = { };
+        public string PlotNo = "";
+        public string RoadName = "";
+        public string SubCounty = "";
+        public string District = "";
+        public string PostOfficeBox = "";
+        public string LiquidationBankName = "";
+        public string LiquidationAccountName = "";
+        public string LiquidationAccount = "";
+
+
 
         public override bool IsValid()
         {
