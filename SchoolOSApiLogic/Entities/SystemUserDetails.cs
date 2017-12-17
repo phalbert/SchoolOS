@@ -7,6 +7,7 @@ namespace SchoolOSApiLogic.Entities
     public class SystemUserDetails:Result
     {
         public SystemUser User = null;
+        public School SchoolDetails = null;
         public List<MenuItem> UserMenuOptions = null;
     }
 }

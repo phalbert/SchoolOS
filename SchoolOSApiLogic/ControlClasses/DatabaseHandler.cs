@@ -29,7 +29,7 @@ namespace SchoolOSApiLogic.ControlClasses
         }
 
 
-        internal DataSet ExecuteDataSet(string storedProcedureName, params string[] Parameters)
+        internal DataSet ExecuteDataSet(string storedProcedureName, params object[] Parameters)
         {
             try
             {

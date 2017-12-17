@@ -87,7 +87,7 @@ public partial class RegisterSchool : System.Web.UI.Page
     {
         SystemUser user = new SystemUser();
         user.ModifiedBy = txtFullName.Text;
-        user.Password = Globals.SCHOOL_PASSWORD;
+        user.VendorPassword = Globals.SCHOOL_PASSWORD;
         user.SchoolCode = txtSchoolCode.Text;
         user.SecretKey = SharedCommons.SharedCommons.GenerateUniqueId("");
         user.UserCategory = "ADMIN";
@@ -113,7 +113,7 @@ public partial class RegisterSchool : System.Web.UI.Page
         staff.FullName = txtFullName.Text;
         staff.Gender = "";
         staff.ModifiedBy = txtFullName.Text;
-        staff.Password = Globals.SCHOOL_PASSWORD;
+        staff.VendorPassword = Globals.SCHOOL_PASSWORD;
         staff.PegPayStaffIDNumber = "";
         staff.PhoneNumber = txtPrincipalPhone.Text;
         staff.SchoolCode = txtSchoolCode.Text;
@@ -136,7 +136,7 @@ public partial class RegisterSchool : System.Web.UI.Page
     {
         School sch = new School();
         sch.ModifiedBy = txtSchoolName.Text;
-        sch.Password = Globals.SCHOOL_PASSWORD;
+        sch.VendorPassword = Globals.SCHOOL_PASSWORD;
         sch.VendorCode = Globals.SCHOOL_VENDOR_CODE;
         sch.SchoolName = txtSchoolName.Text;
         sch.SchoolCode = txtSchoolCode.Text;
@@ -150,7 +150,7 @@ public partial class RegisterSchool : System.Web.UI.Page
         sch.District = txtDistrict.Text;
         sch.SchoolType = GetSchoolTypes();
         sch.SchoolCategories= GetSchoolCategories();
-        sch.LiquidationAccount = txtAccountNumber.Text;
+        sch.LiquidationAccountNumber = txtAccountNumber.Text;
         sch.LiquidationAccountName = txtAccountName.Text;
         sch.LiquidationBankName = txtSchoolBank.Text;
         return sch;

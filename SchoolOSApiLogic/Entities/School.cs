@@ -21,7 +21,8 @@ namespace SchoolOSApiLogic.Entities
         public string PostOfficeBox = "";
         public string LiquidationBankName = "";
         public string LiquidationAccountName = "";
-        public string LiquidationAccount = "";
+        public string LiquidationAccountNumber = "";
+        public string SchoolLogo = "";
 
 
 

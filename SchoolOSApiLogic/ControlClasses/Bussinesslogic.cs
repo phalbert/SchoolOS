@@ -15,7 +15,7 @@ namespace SchoolOSApiLogic.ControlClasses
         public Result SaveSchool(School sch)
         {
             Result result = new Result();
-            DataTable dt = dh.ExecuteDataSet("SaveSchool", new string[] { sch.SchoolCode, sch.SchoolName, sch.SchoolLocation, sch.SchoolEmail, sch.SchoolPhone, sch.UnebCentreNumber, sch.ModifiedBy }).Tables[0];
+            DataTable dt = dh.ExecuteDataSet("SaveSchool", new string[] { sch.SchoolCode, sch.SchoolName, sch.SchoolLocation, sch.SchoolEmail, sch.SchoolPhone, sch.UnebCentreNumber, sch.ModifiedBy,sch.District,sch.SubCounty,sch.SchoolLogo,sch.RoadName,sch.PlotNo,sch.PostOfficeBox,sch.LiquidationBankName,sch.LiquidationAccountName,sch.LiquidationAccountNumber }).Tables[0];
 
             if (dt.Rows.Count == 0)
             {
@@ -115,7 +115,7 @@ namespace SchoolOSApiLogic.ControlClasses
         public Result SaveSystemUser(SystemUser user)
         {
             Result result = new Result();
-            DataTable dt = dh.ExecuteDataSet("SaveSystemUser", new string[] { user.Username, user.VendorPassword, user.UserType, user.UserCategory, user.SecretKey, user.ModifiedBy }).Tables[0];
+            DataTable dt = dh.ExecuteDataSet("SaveSystemUser", new string[] { user.Username, user.VendorPassword, user.UserType, user.UserCategory, user.SecretKey, user.ModifiedBy,user.ProfilePic }).Tables[0];
 
             if (dt.Rows.Count == 0)
             {
@@ -246,7 +246,9 @@ namespace SchoolOSApiLogic.ControlClasses
             }
 
             List<MenuItem> usersMenuOptions = GetUsersMenuItems(user);
-            
+            School sch = GetSchoolById(user.SchoolCode);
+
+            result.SchoolDetails = sch;
             result.User = user;
             result.UserMenuOptions = usersMenuOptions;
             result.StatusCode = Globals.SUCCESS_STATUS_CODE;
@@ -255,6 +257,36 @@ namespace SchoolOSApiLogic.ControlClasses
             result.RequestID = UserId;
 
             return result;
+        }
+
+        private School GetSchoolById(string Id)
+        {
+            School sch = new School();
+            DataTable dt = dh.ExecuteDataSet("GetSchoolById", Id).Tables[0];
+
+            if (dt.Rows.Count == 0)
+            {
+                sch.StatusCode = Globals.FAILURE_STATUS_CODE;
+                sch.StatusDesc = $"NOT FOUND";
+                return sch;
+            }
+
+            DataRow dr = dt.Rows[0];
+            sch.LiquidationAccountName = dr["LiquidationAccountName"].ToString();
+            sch.District= dr["District"].ToString();
+            sch.LiquidationAccountNumber= dr["LiquidationAccountNumber"].ToString();
+            sch.LiquidationBankName= dr["LiquidationBankName"].ToString();
+            sch.PlotNo= dr["PlotNo"].ToString();
+            sch.PostOfficeBox= dr["PostOfficeBox"].ToString();
+            sch.RoadName= dr["RoadName"].ToString();
+            sch.SchoolCategories = null;
+            sch.SchoolCode = Id;
+            sch.SchoolEmail= dr["SchoolEmail"].ToString();
+            sch.SchoolLocation= dr["SchoolLocation"].ToString();
+            sch.SchoolLogo= dr["SchoolLogo"].ToString();
+            sch.SchoolName= dr["SchoolName"].ToString();
+            sch.SchoolType = null;
+            return sch;
         }
 
         private List<MenuItem> GetUsersMenuItems(SystemUser user)
@@ -309,7 +341,24 @@ namespace SchoolOSApiLogic.ControlClasses
 
         private SystemUser AuthenticateSystemUser(string userId, string password)
         {
-            SystemUser user = GetSystemUserById(userId);
+            SystemUser user = new SystemUser();
+
+            if (string.IsNullOrEmpty(userId))
+            {
+                user.StatusCode = Globals.FAILURE_STATUS_CODE;
+                user.StatusDesc = "PLEASE SUPPLY A USER NAME";
+                return user;
+            }
+
+
+            if (string.IsNullOrEmpty(password))
+            {
+                user.StatusCode = Globals.FAILURE_STATUS_CODE;
+                user.StatusDesc = "PLEASE SUPPLY A PASSWORD";
+                return user;
+            }
+
+            user = GetSystemUserById(userId);
 
             if (user.StatusCode != Globals.SUCCESS_STATUS_CODE)
             {
@@ -429,7 +478,7 @@ namespace SchoolOSApiLogic.ControlClasses
             return result;
         }
 
-        public DataSet ExecuteDataSet(string StoredProc,params string[] Parameters)
+        public DataSet ExecuteDataSet(string StoredProc,params object[] Parameters)
         {
             return dh.ExecuteDataSet(StoredProc, Parameters);
         }

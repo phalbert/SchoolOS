@@ -9,6 +9,23 @@ using InterLinkClass.PegasusManagementApi;
 public class Bussinesslogic
 {
     MSystemService client = new MSystemService();
+    InterLinkClass.PegPaySchoolsApi.Service SchoolsApi = new InterLinkClass.PegPaySchoolsApi.Service();
+
+    public string GetImageById(string Id)
+    {
+        string base64String = "";
+        DataSet ds = SchoolsApi.ExecuteDataSet("GetImageById",new string[] { Id });
+        DataTable dt = ds.Tables[0];
+        if (dt.Rows.Count == 0)
+        {
+            return "";
+        }
+
+        DataRow dr = dt.Rows[0];
+        base64String = dr["Image"].ToString();
+        base64String = base64String.Replace(" ", string.Empty);
+        return base64String;
+    }
 
     public void ShowMessage(Label lblmsg, string msg, bool IsError, System.Web.SessionState.HttpSessionState Session)
     {

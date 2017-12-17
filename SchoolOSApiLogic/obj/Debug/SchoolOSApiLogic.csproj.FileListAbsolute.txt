@@ -3,6 +3,7 @@ E:\Elijahs\SchoolOS\SchoolOSApiLogic\obj\Debug\SchoolOSApiLogic.pdb
 E:\Elijahs\SchoolOS\SchoolOSApiLogic\bin\Debug\SchoolOSApiLogic.dll
 E:\Elijahs\SchoolOS\SchoolOSApiLogic\bin\Debug\SchoolOSApiLogic.pdb
 E:\Elijahs\SchoolOS\SchoolOSApiLogic\obj\Debug\SchoolOSApiLogic.csprojResolveAssemblyReference.cache
+D:\Work\PegasusSchoolOS\SchoolOS\SchoolOSApiLogic\bin\Debug\SchoolOSApiLogic.dll.config
 D:\Work\PegasusSchoolOS\SchoolOS\SchoolOSApiLogic\bin\Debug\SchoolOSApiLogic.dll
 D:\Work\PegasusSchoolOS\SchoolOS\SchoolOSApiLogic\bin\Debug\SchoolOSApiLogic.pdb
 D:\Work\PegasusSchoolOS\SchoolOS\SchoolOSApiLogic\bin\Debug\Encryption.dll
@@ -11,5 +12,4 @@ D:\Work\PegasusSchoolOS\SchoolOS\SchoolOSApiLogic\bin\Debug\Microsoft.Practices.
 D:\Work\PegasusSchoolOS\SchoolOS\SchoolOSApiLogic\bin\Debug\Microsoft.Practices.ObjectBuilder.dll
 D:\Work\PegasusSchoolOS\SchoolOS\SchoolOSApiLogic\obj\Debug\SchoolOSApiLogic.dll
 D:\Work\PegasusSchoolOS\SchoolOS\SchoolOSApiLogic\obj\Debug\SchoolOSApiLogic.pdb
-D:\Work\PegasusSchoolOS\SchoolOS\SchoolOSApiLogic\bin\Debug\SchoolOSApiLogic.dll.config
 D:\Work\PegasusSchoolOS\SchoolOS\SchoolOSApiLogic\obj\Debug\SchoolOSApiLogic.csprojResolveAssemblyReference.cache

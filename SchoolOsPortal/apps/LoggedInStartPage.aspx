@@ -1,13 +1,14 @@
 <%@ Page Language="C#" MasterPageFile="~/Main.master" AutoEventWireup="true" CodeFile="LoggedInStartPage.aspx.cs" Inherits="Admin" Title="START PAGE" %>
 
-<%@ Import Namespace="InterLinkClass.PegasusManagementApi" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <% InterLinkClass.PegPaySchoolsApi.SystemUserDetails user = Session["User"] as InterLinkClass.PegPaySchoolsApi.SystemUserDetails; %>
     <hr />
     <div class="row" style="padding-top: 10px">
         <div class="col-md-5">
             <a href="LoggedInStartPage.aspx">
                 <img class="img-responsive img-thumbnail" style="height: 300px; border: none; border-color: #DDDDDD;border-style:solid;border-width:1px;"
-                    src="Images\PegasusNewLogo.png" alt="">
+                    src="ImageHandler.ashx?Id=<%=user.SchoolDetails.SchoolLogo %>" alt="">
             </a>
         </div>
         <div class="col-md-7">

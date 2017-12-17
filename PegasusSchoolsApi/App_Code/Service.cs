@@ -1,6 +1,7 @@
 ﻿using SchoolOSApiLogic.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Web;
 using System.Web.Services;
 
@@ -15,6 +16,14 @@ public class Service : System.Web.Services.WebService
 
         //Uncomment the following line if using designed components 
         //InitializeComponent(); 
+    }
+
+    [WebMethod]
+    public DataSet ExecuteDataSet(string storedProc, params Object[]  parameters)
+    {
+        SchoolOSApiLogic.SchoolsInterfaceApi api = new SchoolOSApiLogic.SchoolsInterfaceApi();
+        DataSet  ds = api.ExecuteDataSet(storedProc,parameters);
+        return ds;
     }
 
     [WebMethod]

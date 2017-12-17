@@ -20,6 +20,7 @@ namespace InterLinkClass.PegPaySchoolsApi {
     using System.Web.Services.Protocols;
     using System.Xml.Serialization;
     using System.ComponentModel;
+    using System.Data;
     
     
     /// <remarks/>
@@ -28,7 +29,10 @@ namespace InterLinkClass.PegPaySchoolsApi {
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="ServiceSoap", Namespace="http://pegasus.co.ug/")]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Entity))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(object[]))]
     public partial class Service : System.Web.Services.Protocols.SoapHttpClientProtocol {
+        
+        private System.Threading.SendOrPostCallback ExecuteDataSetOperationCompleted;
         
         private System.Threading.SendOrPostCallback SaveSchoolOperationCompleted;
         
@@ -99,6 +103,9 @@ namespace InterLinkClass.PegPaySchoolsApi {
         }
         
         /// <remarks/>
+        public event ExecuteDataSetCompletedEventHandler ExecuteDataSetCompleted;
+        
+        /// <remarks/>
         public event SaveSchoolCompletedEventHandler SaveSchoolCompleted;
         
         /// <remarks/>
@@ -142,6 +149,37 @@ namespace InterLinkClass.PegPaySchoolsApi {
         
         /// <remarks/>
         public event SaveMenuCompletedEventHandler SaveMenuCompleted;
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://pegasus.co.ug/ExecuteDataSet", RequestNamespace="http://pegasus.co.ug/", ResponseNamespace="http://pegasus.co.ug/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataSet ExecuteDataSet(string storedProc, object[] parameters) {
+            object[] results = this.Invoke("ExecuteDataSet", new object[] {
+                        storedProc,
+                        parameters});
+            return ((System.Data.DataSet)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ExecuteDataSetAsync(string storedProc, object[] parameters) {
+            this.ExecuteDataSetAsync(storedProc, parameters, null);
+        }
+        
+        /// <remarks/>
+        public void ExecuteDataSetAsync(string storedProc, object[] parameters, object userState) {
+            if ((this.ExecuteDataSetOperationCompleted == null)) {
+                this.ExecuteDataSetOperationCompleted = new System.Threading.SendOrPostCallback(this.OnExecuteDataSetOperationCompleted);
+            }
+            this.InvokeAsync("ExecuteDataSet", new object[] {
+                        storedProc,
+                        parameters}, this.ExecuteDataSetOperationCompleted, userState);
+        }
+        
+        private void OnExecuteDataSetOperationCompleted(object arg) {
+            if ((this.ExecuteDataSetCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ExecuteDataSetCompleted(this, new ExecuteDataSetCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://pegasus.co.ug/SaveSchool", RequestNamespace="http://pegasus.co.ug/", ResponseNamespace="http://pegasus.co.ug/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
@@ -553,19 +591,19 @@ namespace InterLinkClass.PegPaySchoolsApi {
         
         /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://pegasus.co.ug/SaveMenu", RequestNamespace="http://pegasus.co.ug/", ResponseNamespace="http://pegasus.co.ug/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public Result SaveMenu(Menu sub) {
+        public Result SaveMenu(MenuItem sub) {
             object[] results = this.Invoke("SaveMenu", new object[] {
                         sub});
             return ((Result)(results[0]));
         }
         
         /// <remarks/>
-        public void SaveMenuAsync(Menu sub) {
+        public void SaveMenuAsync(MenuItem sub) {
             this.SaveMenuAsync(sub, null);
         }
         
         /// <remarks/>
-        public void SaveMenuAsync(Menu sub, object userState) {
+        public void SaveMenuAsync(MenuItem sub, object userState) {
             if ((this.SaveMenuOperationCompleted == null)) {
                 this.SaveMenuOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSaveMenuOperationCompleted);
             }
@@ -600,210 +638,11 @@ namespace InterLinkClass.PegPaySchoolsApi {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://pegasus.co.ug/")]
-    public partial class School : Request {
-        
-        private string schoolIDField;
-        
-        private string schoolNameField;
-        
-        private string unebCentreNumberField;
-        
-        private string schoolLocationField;
-        
-        private string schoolEmailField;
-        
-        private string schoolPhoneField;
-        
-        private string[] schoolTypeField;
-        
-        private string[] schoolCategoriesField;
-        
-        private string plotNoField;
-        
-        private string roadNameField;
-        
-        private string subCountyField;
-        
-        private string districtField;
-        
-        private string postOfficeBoxField;
-        
-        private string liquidationBankNameField;
-        
-        private string liquidationAccountNameField;
-        
-        private string liquidationAccountField;
-        
-        /// <remarks/>
-        public string SchoolID {
-            get {
-                return this.schoolIDField;
-            }
-            set {
-                this.schoolIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string SchoolName {
-            get {
-                return this.schoolNameField;
-            }
-            set {
-                this.schoolNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string UnebCentreNumber {
-            get {
-                return this.unebCentreNumberField;
-            }
-            set {
-                this.unebCentreNumberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string SchoolLocation {
-            get {
-                return this.schoolLocationField;
-            }
-            set {
-                this.schoolLocationField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string SchoolEmail {
-            get {
-                return this.schoolEmailField;
-            }
-            set {
-                this.schoolEmailField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string SchoolPhone {
-            get {
-                return this.schoolPhoneField;
-            }
-            set {
-                this.schoolPhoneField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string[] SchoolType {
-            get {
-                return this.schoolTypeField;
-            }
-            set {
-                this.schoolTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string[] SchoolCategories {
-            get {
-                return this.schoolCategoriesField;
-            }
-            set {
-                this.schoolCategoriesField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string PlotNo {
-            get {
-                return this.plotNoField;
-            }
-            set {
-                this.plotNoField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string RoadName {
-            get {
-                return this.roadNameField;
-            }
-            set {
-                this.roadNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string SubCounty {
-            get {
-                return this.subCountyField;
-            }
-            set {
-                this.subCountyField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string District {
-            get {
-                return this.districtField;
-            }
-            set {
-                this.districtField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string PostOfficeBox {
-            get {
-                return this.postOfficeBoxField;
-            }
-            set {
-                this.postOfficeBoxField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string LiquidationBankName {
-            get {
-                return this.liquidationBankNameField;
-            }
-            set {
-                this.liquidationBankNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string LiquidationAccountName {
-            get {
-                return this.liquidationAccountNameField;
-            }
-            set {
-                this.liquidationAccountNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string LiquidationAccount {
-            get {
-                return this.liquidationAccountField;
-            }
-            set {
-                this.liquidationAccountField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Status))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Result))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SystemUserDetails))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Request))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(UserType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SubLink))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(MainLink))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(StudentFee))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolFee))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Subject))]
@@ -811,8 +650,10 @@ namespace InterLinkClass.PegPaySchoolsApi {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolStaff))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolSemester))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolClass))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Menu))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SystemUser))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(MainLink))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(MenuItem))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SubLink))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Student))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(School))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
@@ -820,55 +661,7 @@ namespace InterLinkClass.PegPaySchoolsApi {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://pegasus.co.ug/")]
-    public partial class Request : Status {
-        
-        private string vendorCodeField;
-        
-        private string passwordField;
-        
-        private string schoolCodeField;
-        
-        private string modifiedByField;
-        
-        /// <remarks/>
-        public string VendorCode {
-            get {
-                return this.vendorCodeField;
-            }
-            set {
-                this.vendorCodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Password {
-            get {
-                return this.passwordField;
-            }
-            set {
-                this.passwordField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string SchoolCode {
-            get {
-                return this.schoolCodeField;
-            }
-            set {
-                this.schoolCodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ModifiedBy {
-            get {
-                return this.modifiedByField;
-            }
-            set {
-                this.modifiedByField = value;
-            }
-        }
+    public partial class Entity {
     }
     
     /// <remarks/>
@@ -876,8 +669,6 @@ namespace InterLinkClass.PegPaySchoolsApi {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SystemUserDetails))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Request))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(UserType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SubLink))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(MainLink))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(StudentFee))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolFee))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Subject))]
@@ -885,8 +676,10 @@ namespace InterLinkClass.PegPaySchoolsApi {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolStaff))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolSemester))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolClass))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Menu))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SystemUser))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(MainLink))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(MenuItem))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SubLink))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Student))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(School))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
@@ -919,42 +712,6 @@ namespace InterLinkClass.PegPaySchoolsApi {
                 this.statusDescField = value;
             }
         }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Status))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Result))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SystemUserDetails))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Request))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(UserType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SubLink))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(MainLink))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(StudentFee))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolFee))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Subject))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(ClassStream))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolStaff))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolSemester))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolClass))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Menu))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SystemUser))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Student))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(School))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://pegasus.co.ug/")]
-    public partial class Entity {
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://pegasus.co.ug/")]
-    public partial class KeyValuePairOfMainLinkArrayOfSubLink {
     }
     
     /// <remarks/>
@@ -1013,7 +770,9 @@ namespace InterLinkClass.PegPaySchoolsApi {
         
         private SystemUser userField;
         
-        private Menu userMenuOptionsField;
+        private School schoolDetailsField;
+        
+        private MenuItem[] userMenuOptionsField;
         
         /// <remarks/>
         public SystemUser User {
@@ -1026,7 +785,17 @@ namespace InterLinkClass.PegPaySchoolsApi {
         }
         
         /// <remarks/>
-        public Menu UserMenuOptions {
+        public School SchoolDetails {
+            get {
+                return this.schoolDetailsField;
+            }
+            set {
+                this.schoolDetailsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public MenuItem[] UserMenuOptions {
             get {
                 return this.userMenuOptionsField;
             }
@@ -1118,46 +887,72 @@ namespace InterLinkClass.PegPaySchoolsApi {
     }
     
     /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(UserType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(StudentFee))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolFee))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Subject))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(ClassStream))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolStaff))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolSemester))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolClass))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SystemUser))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(MainLink))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(MenuItem))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SubLink))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Student))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(School))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://pegasus.co.ug/")]
-    public partial class Menu : Request {
+    public partial class Request : Status {
         
-        private KeyValuePairOfMainLinkArrayOfSubLink menuItemsField;
+        private string vendorCodeField;
         
-        private string userTypeField;
+        private string vendorPasswordField;
         
-        private string userCategoryField;
+        private string schoolCodeField;
+        
+        private string modifiedByField;
         
         /// <remarks/>
-        public KeyValuePairOfMainLinkArrayOfSubLink MenuItems {
+        public string VendorCode {
             get {
-                return this.menuItemsField;
+                return this.vendorCodeField;
             }
             set {
-                this.menuItemsField = value;
+                this.vendorCodeField = value;
             }
         }
         
         /// <remarks/>
-        public string UserType {
+        public string VendorPassword {
             get {
-                return this.userTypeField;
+                return this.vendorPasswordField;
             }
             set {
-                this.userTypeField = value;
+                this.vendorPasswordField = value;
             }
         }
         
         /// <remarks/>
-        public string UserCategory {
+        public string SchoolCode {
             get {
-                return this.userCategoryField;
+                return this.schoolCodeField;
             }
             set {
-                this.userCategoryField = value;
+                this.schoolCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ModifiedBy {
+            get {
+                return this.modifiedByField;
+            }
+            set {
+                this.modifiedByField = value;
             }
         }
     }
@@ -1191,84 +986,6 @@ namespace InterLinkClass.PegPaySchoolsApi {
             }
             set {
                 this.userTypeNameField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://pegasus.co.ug/")]
-    public partial class SubLink : Request {
-        
-        private string subLinkTextField;
-        
-        private string subLinkCodeField;
-        
-        private string uRLField;
-        
-        /// <remarks/>
-        public string SubLinkText {
-            get {
-                return this.subLinkTextField;
-            }
-            set {
-                this.subLinkTextField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string SubLinkCode {
-            get {
-                return this.subLinkCodeField;
-            }
-            set {
-                this.subLinkCodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string URL {
-            get {
-                return this.uRLField;
-            }
-            set {
-                this.uRLField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://pegasus.co.ug/")]
-    public partial class MainLink : Request {
-        
-        private string mainLinkTextField;
-        
-        private string mainLinkCodeField;
-        
-        /// <remarks/>
-        public string MainLinkText {
-            get {
-                return this.mainLinkTextField;
-            }
-            set {
-                this.mainLinkTextField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string MainLinkCode {
-            get {
-                return this.mainLinkCodeField;
-            }
-            set {
-                this.mainLinkCodeField = value;
             }
         }
     }
@@ -1666,6 +1383,141 @@ namespace InterLinkClass.PegPaySchoolsApi {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://pegasus.co.ug/")]
+    public partial class MainLink : Request {
+        
+        private string mainLinkNameField;
+        
+        private string mainLinkCodeField;
+        
+        /// <remarks/>
+        public string MainLinkName {
+            get {
+                return this.mainLinkNameField;
+            }
+            set {
+                this.mainLinkNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string MainLinkCode {
+            get {
+                return this.mainLinkCodeField;
+            }
+            set {
+                this.mainLinkCodeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://pegasus.co.ug/")]
+    public partial class MenuItem : Request {
+        
+        private MainLink mainLinkField;
+        
+        private SubLink[] subLinksField;
+        
+        private string userTypeField;
+        
+        private string userCategoryField;
+        
+        /// <remarks/>
+        public MainLink mainLink {
+            get {
+                return this.mainLinkField;
+            }
+            set {
+                this.mainLinkField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public SubLink[] subLinks {
+            get {
+                return this.subLinksField;
+            }
+            set {
+                this.subLinksField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string UserType {
+            get {
+                return this.userTypeField;
+            }
+            set {
+                this.userTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string UserCategory {
+            get {
+                return this.userCategoryField;
+            }
+            set {
+                this.userCategoryField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://pegasus.co.ug/")]
+    public partial class SubLink : Request {
+        
+        private string subLinkNameField;
+        
+        private string subLinkCodeField;
+        
+        private string uRLField;
+        
+        /// <remarks/>
+        public string SubLinkName {
+            get {
+                return this.subLinkNameField;
+            }
+            set {
+                this.subLinkNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string SubLinkCode {
+            get {
+                return this.subLinkCodeField;
+            }
+            set {
+                this.subLinkCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string URL {
+            get {
+                return this.uRLField;
+            }
+            set {
+                this.uRLField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://pegasus.co.ug/")]
     public partial class Student : Request {
         
         private string studentNumberField;
@@ -1797,6 +1649,245 @@ namespace InterLinkClass.PegPaySchoolsApi {
             }
             set {
                 this.phoneNumberField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://pegasus.co.ug/")]
+    public partial class School : Request {
+        
+        private string schoolIDField;
+        
+        private string schoolNameField;
+        
+        private string unebCentreNumberField;
+        
+        private string schoolLocationField;
+        
+        private string schoolEmailField;
+        
+        private string schoolPhoneField;
+        
+        private string[] schoolTypeField;
+        
+        private string[] schoolCategoriesField;
+        
+        private string plotNoField;
+        
+        private string roadNameField;
+        
+        private string subCountyField;
+        
+        private string districtField;
+        
+        private string postOfficeBoxField;
+        
+        private string liquidationBankNameField;
+        
+        private string liquidationAccountNameField;
+        
+        private string liquidationAccountNumberField;
+        
+        private string schoolLogoField;
+        
+        /// <remarks/>
+        public string SchoolID {
+            get {
+                return this.schoolIDField;
+            }
+            set {
+                this.schoolIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string SchoolName {
+            get {
+                return this.schoolNameField;
+            }
+            set {
+                this.schoolNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string UnebCentreNumber {
+            get {
+                return this.unebCentreNumberField;
+            }
+            set {
+                this.unebCentreNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string SchoolLocation {
+            get {
+                return this.schoolLocationField;
+            }
+            set {
+                this.schoolLocationField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string SchoolEmail {
+            get {
+                return this.schoolEmailField;
+            }
+            set {
+                this.schoolEmailField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string SchoolPhone {
+            get {
+                return this.schoolPhoneField;
+            }
+            set {
+                this.schoolPhoneField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string[] SchoolType {
+            get {
+                return this.schoolTypeField;
+            }
+            set {
+                this.schoolTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string[] SchoolCategories {
+            get {
+                return this.schoolCategoriesField;
+            }
+            set {
+                this.schoolCategoriesField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string PlotNo {
+            get {
+                return this.plotNoField;
+            }
+            set {
+                this.plotNoField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string RoadName {
+            get {
+                return this.roadNameField;
+            }
+            set {
+                this.roadNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string SubCounty {
+            get {
+                return this.subCountyField;
+            }
+            set {
+                this.subCountyField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string District {
+            get {
+                return this.districtField;
+            }
+            set {
+                this.districtField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string PostOfficeBox {
+            get {
+                return this.postOfficeBoxField;
+            }
+            set {
+                this.postOfficeBoxField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string LiquidationBankName {
+            get {
+                return this.liquidationBankNameField;
+            }
+            set {
+                this.liquidationBankNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string LiquidationAccountName {
+            get {
+                return this.liquidationAccountNameField;
+            }
+            set {
+                this.liquidationAccountNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string LiquidationAccountNumber {
+            get {
+                return this.liquidationAccountNumberField;
+            }
+            set {
+                this.liquidationAccountNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string SchoolLogo {
+            get {
+                return this.schoolLogoField;
+            }
+            set {
+                this.schoolLogoField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")]
+    public delegate void ExecuteDataSetCompletedEventHandler(object sender, ExecuteDataSetCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ExecuteDataSetCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ExecuteDataSetCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataSet Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataSet)(this.results[0]));
             }
         }
     }

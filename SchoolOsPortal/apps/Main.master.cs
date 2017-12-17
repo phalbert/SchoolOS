@@ -10,14 +10,12 @@ using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
 using System.Net;
 using System.Globalization;
-using InterLinkClass.PegasusManagementApi;
+using InterLinkClass.PegPaySchoolsApi;
 
 public partial class Main : System.Web.UI.MasterPage
 {
     Bussinesslogic bll = new Bussinesslogic();
-    SystemUser user;
-    Company usersCompany;
-    UserType usersRole;
+    SystemUserDetails details;
     protected void Page_Load(object sender, EventArgs e)
     {
         try
@@ -26,7 +24,7 @@ public partial class Main : System.Web.UI.MasterPage
 
             if ((Session["User"] == null))
             {
-                Response.Redirect("Default.aspx");
+                Response.Redirect("Default.aspx?MSG=SESSION EXPIRED");
             }
             else
             {
@@ -47,65 +45,14 @@ public partial class Main : System.Web.UI.MasterPage
 
     private void LoadData()
     {
-        user = (SystemUser)Session["User"];
-        usersCompany = (Company)Session["UsersCompany"];
-        usersRole = (UserType)Session["UsersRole"];
-        //string lastLogin = Session["LastLogin"] as string;
-
-        TitleLbl.InnerHtml = "<i class=\"fa fa-bank\"></i> " + usersCompany.CompanyName.ToUpper() + "  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date:" + DateTime.Now;
-        lblName.Text = user.Name;
-        lblUsersName.Text = user.Name;
-        lblUsersRole.Text = usersRole.UserTypeName;
-        lblCompnay.Text = usersCompany.CompanyName;
-        //lblLastLogin.Text = lastLogin;
     }
 
     private void Logout()
     {
         Session.Clear();
         Session.Abandon();
-        bll.InsertIntoAuditLog("LOGOUT", "", user.CompanyCode, user.UserId, "Successfull Logout of User with ID :" + user.UserId);
+        bll.InsertIntoAuditLog("LOGOUT", "", details.User.SchoolCode, details.User.Username, "Successfull Logout of User with ID :" + details.User.Username);
         Response.Redirect("Default.aspx");
     }
-
-    protected void LinkButton1_Click(object sender, EventArgs e)
-    {
-        Logout();
-    }
-    protected void btnCallSystemTool_Click(object sender, EventArgs e)
-    {
-        Response.Redirect("Admin.aspx");
-    }
-    protected void btnCallAccountDetails_Click(object sender, EventArgs e)
-    {
-        Response.Redirect("SystemPassword.aspx");
-    }
-    protected void btnCalRecon_Click(object sender, EventArgs e)
-    {
-        Response.Redirect("Accountant.aspx");
-    }
-    protected void btnCalReports_Click(object sender, EventArgs e)
-    {
-        Response.Redirect("Reports.aspx");
-    }
-    protected void btnCallBatching_Click(object sender, EventArgs e)
-    {
-        Response.Redirect("Batching.aspx");
-    }
-    protected void btnCallPayments_Click(object sender, EventArgs e)
-    {
-        Response.Redirect("Payment.aspx");
-    }
-    protected void btnCallBatching_Click1(object sender, EventArgs e)
-    {
-        Response.Redirect("Billing.aspx");
-    }
-    protected void LinkButton2_Click(object sender, EventArgs e)
-    {
-
-    }
-    protected void Ftransfer_Click(object sender, EventArgs e)
-    {
-
-    }
+    
 }

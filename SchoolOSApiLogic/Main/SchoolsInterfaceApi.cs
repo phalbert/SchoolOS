@@ -27,7 +27,7 @@ namespace SchoolOSApiLogic
             return result;
         }
 
-        public DataSet ExecuteDataSet(string StoredProc, params string[] Parameters)
+        public DataSet ExecuteDataSet(string StoredProc, params object[] Parameters)
         {
             Bussinesslogic bll = new Bussinesslogic();
             return bll.ExecuteDataSet(StoredProc, Parameters);

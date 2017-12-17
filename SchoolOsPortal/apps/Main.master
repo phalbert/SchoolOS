@@ -2,271 +2,247 @@
 
 <%@ Import Namespace="System.Data" %>
 <%@ Import Namespace="System.Collections.Generic" %>
-<%@ Import Namespace="InterLinkClass.PegasusManagementApi" %>
+<%@ Import Namespace="InterLinkClass.PegPaySchoolsApi" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <!DOCTYPE html>
-<html lang="en">
-<head id="Head1" runat="server">
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>PegPay Company OS</title>
-    <!------------------------------------------------- CSS Files ------------------------------------------------->
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" />
-    <!-- Custom CSS -->
-    <link href="css/PutCustomCssHere.css" rel="stylesheet" />
-    <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-    <style type="text/css">
-        .ajax__calendar_container {
-            z-index: 1000;
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>PegPay Uganda </title>
+    <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
+    <link rel="shortcut icon" href="img/favicon.ico.png" />
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+    <!-- global css -->
+    <link type="text/css" href="css/pegpay-master.css" rel="stylesheet" />
+
+    <style id="skin">
+        a.dropdown-toggle {
+            height: 60px;
+        }
+
+            a.dropdown-toggle.padding-user {
+                height: 60px;
+            }
+
+        li.dropdown.user.user-menu {
+            height: 60px;
+        }
+
+        .skin-default .sidebar a {
+            color: #808b9c;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .skin-default .icon-list li a:hover {
+            background: #eee;
+        }
+
+        @media screen and (min-width:550px) {
+            .skin-default .navbar .navbar-right > .nav {
+                height: 60px;
+                margin-right: 15px;
+            }
         }
     </style>
+    <!------------------------------ end of global css --------------------------->
 </head>
-<body style="font-size: 12px;">
-    <form runat="server" id="form1" autocomplete="off">
-        <div id="wrapper">
-            <!------------------------------------------------ Navigation ------------------------------------------->
-            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-          
-            <!-------------------------------- Brand and toggle get grouped for better mobile display --------------->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" id="TitleLbl" runat="server" href="LoggedInStartPage.aspx"><i class="fa fa-bank"></i> BANK-NAME:[Stanbic Bank] <i class="fa fa-bank"></i></a>
+
+<% InterLinkClass.PegPaySchoolsApi.SystemUserDetails user = Session["User"] as InterLinkClass.PegPaySchoolsApi.SystemUserDetails;  %>
+
+<body class="skin-default">
+    <!-- header logo: style can be found in header-->
+    <header class="header">
+        <nav class="navbar navbar-static-top" role="navigation">
+            <a href="index.php" class="logo">
+                <!-- Add the class icon to your logo image or logo icon to add the margining -->
+                <!--<img src="img/pegasus.png" alt="logo" height="40px"/>-->
+                <h3 style="color: #fff;">FlexiSchools</h3>
+            </a>
+            <!-- Header Navbar: style can be found in header-->
+            <!-- Sidebar toggle button-->
+            <!-- Sidebar toggle button-->
+            <div>
+                <a href="javascript:void(0)" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button"><i class="fa fa-fw ti-menu"></i>
+                </a>
             </div>
-            <!-------------------------------------------------- Top Menu Items ------------------------------------>
-            <ul class="nav navbar-right top-nav" style="padding-right:10px;">
-              
-                 <% 
+            <div class="navbar-right">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown messages-menu">
+                        <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw ti-email black"></i>
 
-                     SystemUser user = Session["User"] as SystemUser;
-                    %>
-                <% if (user.UserType != "NONE")
-                    { %>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <asp:Label runat="server" Text="Username" ID="lblName"/> <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
-                        </li>
-                        <li>
-                            <a href="ChangePassword.aspx"><i class="fa fa-fw fa-gear"></i> Password Management</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <asp:LinkButton ID="btnLogout" runat="server" OnClick="LinkButton1_Click"><i class="fa fa-fw fa-power-off"></i>Log Out</asp:LinkButton>
-                        </li>
-                    </ul>
-                </li>
-                <%} %>
-            </ul>
+                        </a>
 
-            <!----------- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens ------>
-            <div class="collapse navbar-collapse navbar-ex1-collapse">
-                <ul class="nav navbar-nav side-nav">
-                <% if (user.UserType != "NONE")
-                    { %>
-                    <li class="UserProfileSection" style="padding-top:10px;">
-                        <p><b>Name:</b> <asp:Label ID="lblUsersName" runat="server">Users FullName</asp:Label></p>
-                        <p><b>Role:</b> <asp:Label ID="lblUsersRole" runat="server">Users Role</asp:Label></p>
-                        <p><b>Company:</b> <asp:Label ID="lblCompnay" runat="server">Users Company</asp:Label></p>
-                        
-                        <%--<p><b>Last Login:</b> <asp:Label ID="lblLastLogin" runat="server">Users Company</asp:Label></p>--%>
+
                     </li>
-                   
-                    <%---------------------------- Default Landing Page for All Users ---------------------------%>
-                    <li style="border-top:none;">
-                        <a href="LoggedInStartPage.aspx" style="border-top:hidden;" class="active" data-toggle="collapse" data-target="#Start"><i class="fa fa-fw fa-home"></i> Home</a>
-                    </li>
-                     <%} %>
-                    <%------------------------------------- Accountant Section -------------------------------------%>
-                    <% if (user.UserType.ToUpper() == ("ACCOUNTANT") || user.UserType.ToUpper().Contains("ADMIN"))
-                        { %>
-                    <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#quick"><i class="fa fa-fw fa-dashboard"></i> Employee Payments<i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="quick" class="collapse">
-                             <li>
-                                <a href="MakeQuickPayment.aspx"><i class="fa fa-caret-right"></i> Quick Payments</a>
+
+                    <!-- User Account: style can be found in dropdown-->
+                    <li class="dropdown user user-menu">
+                        <a href="javascript:void(0)" class="dropdown-toggle padding-user" data-toggle="dropdown">
+                            <img src="img/authors/ronald.png" width="35" class="img-circle img-responsive pull-left" height="35" alt="User Image">
+                            <div class="riot">
+                                <div>
+                                    Hi, Ronald
+                               
+                                    <span>
+                                        <i class="caret"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- User image -->
+                            <li class="user-header">
+                                <img src="img/authors/xavatar1.jpg.pagespeed.ic.m_VzT4x7Rt.jpg" class="img-circle" alt="User Image">
+                                <p><%= user.User.Username %></p>
                             </li>
-                             <li>
-                                <a href="AddOrEditEmployee.aspx"><i class="fa fa-caret-right"></i> Save Employee</a>
+                            <!-- Menu Body -->
+                            <li class="p-t-3">
+                                <a href="user_profile.html">
+                                    <i class="fa fa-fw ti-user"></i>My Profile
+                            </a>
                             </li>
-                             <li>
-                                <a href="AddOrEditDepartment.aspx"><i class="fa fa-caret-right"></i> Save Department</a>
+                            <li role="presentation"></li>
+                            <li>
+                                <a href="edit_user.html">
+                                    <i class="fa fa-fw ti-settings"></i>Account Settings
+                            </a>
+                            </li>
+                            <li role="presentation" class="divider"></li>
+                            <!-- Menu Footer-->
+                            <li class="user-footer">
+                                <div class="pull-left">
+                                    <a href="lockscreen.html">
+                                        <i class="fa fa-fw ti-lock"></i>
+                                        Lock
+                                </a>
+                                </div>
+                                <div class="pull-right">
+                                    <a href="login.html">
+                                        <i class="fa fa-fw ti-shift-right"></i>
+                                        Logout
+                                </a>
+                                </div>
                             </li>
                         </ul>
                     </li>
-                   <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#teller"><i class="fa fa-fw fa-dashboard"></i> Accountant<i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="teller" class="collapse">
-                             <li>
-                                <a href="MakePayment.aspx"><i class="fa fa-caret-right"></i> Initiate Purchase</a>
-                            </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <aside class="left-side sidebar-offcanvas">
+        <!--------------------------- sidebar: style can be found in sidebar---------------------->
+        <section class="sidebar">
+            <div id="menu" role="navigation">
+                <div class="nav_profile">
+                    <div class="media profile-left">
+                        <img style="vertical-align: middle;" src="ImageHandler.ashx?Id=<%=user.SchoolDetails.SchoolLogo %>" width="200px" />
+                        <br />
+                        <div class="content-profile">
+                            <h4 style="text-align: center" class="media-heading"><%=user.User.Username %>
+                            </h4>
+                            <ul class="icon-list">
+                                <li>
+                                    <a href="users.php">
+                                        <i class="fa fa-fw ti-user"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="lockscreen.php">
+                                        <i class="fa fa-fw ti-lock"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="edit_user.php">
+                                        <i class="fa fa-fw ti-settings"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="login.php">
+                                        <i class="fa fa-fw ti-shift-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!--------------------------------------- .navigation ----------------------------------------->
+                <ul class="navigation">
+                    <li class="active" id="active">
+                        <a href="LoggedInStartPage.aspx">
+                            <i class="menu-icon ti-desktop"></i>
+                            <span class="mm-text ">Dashboard</span>
+                        </a>
+                    </li>
+                    <% foreach (InterLinkClass.PegPaySchoolsApi.MenuItem menuItem in user.UserMenuOptions)
+                        {%>
+                    <li class="menu-dropdown">
+                        <a href="#">
+                            <i class="menu-icon ti-user"></i>
+                            <span><%=menuItem.mainLink.MainLinkName %></span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="sub-menu">
+                            <% foreach (InterLinkClass.PegPaySchoolsApi.SubLink subLink in menuItem.subLinks)
+                                { %>
                             <li>
-                                <a href="CompletePayment.aspx"><i class="fa fa-caret-right"></i> Complete Purchase</a>
+                                <a href="<%=subLink.URL %>">
+                                    <i class="fa fa-fw ti-files"></i>
+                                    <%=subLink.SubLinkName %>
+                                </a>
                             </li>
-                            <li>
-                                <a href="MakeASale.aspx"><i class="fa fa-caret-right"></i> Initiate Sale</a>
-                            </li>
-                             <li>
-                                <a href="CompleteSale.aspx"><i class="fa fa-caret-right"></i> Complete Sale</a>
-                            </li>
-                            <li>
-                                <a href="ManagePurchases.aspx"><i class="fa fa-caret-right"></i> Manage Purchases</a>
-                            </li>
-                             <li>
-                                <a href="ManageSales.aspx"><i class="fa fa-caret-right"></i> Manage Sales</a>
-                            </li>
-                             <li>
-                                <a href="ManageSaleItems.aspx"><i class="fa fa-caret-right"></i> Manage SaleItems</a>
-                            </li>
-                             <li>
-                                <a href="ManageInvoices.aspx"><i class="fa fa-caret-right"></i> Manage Invoices</a>
-                            </li>
-                            <li>
-                                <a href="AddOrEditClient.aspx"><i class="fa fa-caret-right"></i>  Register Client</a>
-                            </li>
-                             <li>
-                                <a href="AddOrEditSupplier.aspx"><i class="fa fa-caret-right"></i>  Register Supplier</a>
-                            </li>
-                             <li>
-                                <a href="AddOrEditContract.aspx"><i class="fa fa-caret-right"></i> Register Contract</a>
-                            </li>
-                             <li>
-                                <a href="AddOrEditInvoice.aspx"><i class="fa fa-caret-right"></i> Create Invoice</a>
-                            </li>
+                            <%} %>
                         </ul>
                     </li>
                     <%} %>
-                    <%--------------------------------- Teller Supervisor Section ------------------------------%>
-                     <% if (user.UserType.ToUpper().Contains("ADMIN"))
-                         { %>
-                    <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-bar-chart-o"></i> Administrator<i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="demo" class="collapse">
-                            <li>
-                                <a href="AddOrEditSystemUser.aspx"><i class="fa fa-caret-right"></i> Register System User</a>
-                            </li>
-                            <li>
-                                <a href="AddOrEditSystemSetting.aspx"><i class="fa fa-caret-right"></i> Save System Setting</a>
-                            </li>
-                            <li>
-                                <a href="ViewAuditLogs.aspx"><i class="fa fa-caret-right"></i> View Audit Trail</a>
-                            </li>
-                             <li>
-                                <a href="ViewAuditLogs.aspx"><i class="fa fa-caret-right"></i> View Error Logs</a>
-                            </li>
-                        </ul>
-                    </li>
-                     <%} %>
-                     <%--------------------------------- System Amdin Section ------------------------------%>
-                     <% if (user.UserType.ToUpper().Contains("SYS_ADMIN"))
-                         { %>
-                    <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo1"><i class="fa fa-fw fa-bar-chart-o"></i> Sys Admin<i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="demo1" class="collapse">
-                            <li>
-                                <a href="AddOrEditCompany.aspx"><i class="fa fa-caret-right"></i> Register Compnay</a>
-                            </li>
-                        </ul>
-                    </li>
-                     <%} %>
-                     <%------------------------------------- All transactions Section  ----------------------------%>
-                    <% if (user.UserType != "NONE")
-                        { %>
-                    <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#Reports"><i class="fa fa-fw fa-file"></i> Reports<i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="Reports" class="collapse">
-                            <li>
-                                <a href="Transactions.aspx"><i class="fa fa-caret-right"></i> Search General Ledger</a>
-                            </li>
-                            <li>
-                                <a href="ViewPurchases.aspx"><i class="fa fa-caret-right"></i> View Purchases</a>
-                            </li>
-                            <li>
-                                <a href="ViewSales.aspx"><i class="fa fa-caret-right"></i> View Sales</a>
-                            </li>
-                             <li>
-                                <a href="ViewContracts.aspx"><i class="fa fa-caret-right"></i> View Contracts</a>
-                            </li>
-                        </ul>
-                     </li>
-                     <%} %>
-                    <%------------------------------------- System Settings Section  ----------------------------%>
-                    <% if (user.UserType != "NONE")
-                        { %>
-                    <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#SysSettings"><i class="fa fa-fw fa-file"></i> System Settings<i class="fa fa-fw fa-caret-down"></i></a>
-                        <ul id="SysSettings" class="collapse">
-                            <li>
-                                <a href="ChangePassword.aspx"><i class="fa fa-caret-right"></i> Password Management</a>
-                            </li>
-                            <li>
-                                <a href="AddOrEditSystemSetting.aspx"><i class="fa fa-caret-right"></i> Create System Setting</a>
-                            </li>
-                        </ul>
-                     </li>
-                     <%} %>
                 </ul>
-            </div>
 
-        </nav>
-            <ajaxToolkit:ToolkitScriptManager ID="ScriptManager1" runat="Server" EnableScriptGlobalization="true"
-                EnableScriptLocalization="true">
-            </ajaxToolkit:ToolkitScriptManager>
-            <div id="page-wrapper">
-                <div class="container-fluid" style="height: 100%; min-height: 800px; padding-top: 50px">
-                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-                    </asp:ContentPlaceHolder>
-                </div>
             </div>
-            <br />
-        </div>
-        <!-------------------------- Placed at the end of the document so the pages load faster ------------------------------->
-        <script type="text/javascript" src="js/jquery.js"></script>
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.js"></script>
-        <!------------------------------ Bootstrap Core JavaScript ------------------------------------------------------------>
-        <script type="text/javascript" src="js/bootstrap.min.js"></script>
-        <%
-            //changes the navbar based on the choosen theme color for the bank
-            string style = "<style type=\"text/css\">" +
-                          ".navbar-inverse {" +
-                          "background-color:#D71921;" +
-                          "border-color: inherit;" +
-                          "color: white;" +
-                          "}" +
-                          "</style>";
-            Response.Write(style);
-        %>
-        <script type="text/javascript">
-            function Comma(Num) {
-                try {
-                    Num += '';
-                    Num = Num.replace(',', ''); Num = Num.replace(',', ''); Num = Num.replace(',', '');
-                    Num = Num.replace(',', ''); Num = Num.replace(',', ''); Num = Num.replace(',', '');
-                    x = Num.split('.');
-                    x1 = x[0];
-                    x2 = x.length > 1 ? '.' + x[1] : '';
-                    var rgx = /(\d+)(\d{3})/;
-                    while (rgx.test(x1))
-                        x1 = x1.replace(rgx, '$1' + ',' + '$2');
-                    var result = x1 + x2;
-                    return result;
-                }
-                catch (err) {
-                    return Num;
-                }
-            }
-        </script>
-    </form>
+        </section>
+    </aside>
+
+    <div class="wrapper row-offcanvas row-offcanvas-left">
+        <!------------------------- Left side column. contains the logo and sidebar ------------->
+
+        <aside class="right-side">
+            <!----------------------- Content Header (Page header) ----------------------------->
+            <section class="content-header">
+                <h1>Blank</h1>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="index.php">
+                            <i class="fa fa-fw ti-home"></i>Dashboard
+                    </a>
+                    </li>
+                    <li>Pages</li>
+                    <li class="active">
+                        <a href="#">Blank</a>
+                    </li>
+                </ol>
+            </section>
+
+            <!------------------------------------- Main content --------------------->
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+            <!--------------------------------------- /.content ----------------------->
+        </aside>
+    </div>
+
+    <!--------------------------------- global js ----------------------->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/g/bootstrap@3.3.7,bootstrap.switch@3.3.2,jquery.nicescroll@3.6.0"></script>
+    <script src="js/app.js" type="text/javascript"></script>
+    <!------------------------------ end of page level js --------------->
+
 </body>
+
 </html>
+
