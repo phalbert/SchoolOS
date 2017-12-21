@@ -825,6 +825,10 @@ namespace InterLinkClass.PegPaySchoolsApi {
         
         private string approvedByField;
         
+        private string profilePicField;
+        
+        private string fullNameField;
+        
         /// <remarks/>
         public string Username {
             get {
@@ -882,6 +886,26 @@ namespace InterLinkClass.PegPaySchoolsApi {
             }
             set {
                 this.approvedByField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ProfilePic {
+            get {
+                return this.profilePicField;
+            }
+            set {
+                this.profilePicField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string FullName {
+            get {
+                return this.fullNameField;
+            }
+            set {
+                this.fullNameField = value;
             }
         }
     }
@@ -1000,6 +1024,8 @@ namespace InterLinkClass.PegPaySchoolsApi {
         
         private string studentIDField;
         
+        private string classIDField;
+        
         private string feeIDField;
         
         /// <remarks/>
@@ -1009,6 +1035,16 @@ namespace InterLinkClass.PegPaySchoolsApi {
             }
             set {
                 this.studentIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ClassID {
+            get {
+                return this.classIDField;
+            }
+            set {
+                this.classIDField = value;
             }
         }
         
@@ -1042,6 +1078,8 @@ namespace InterLinkClass.PegPaySchoolsApi {
         private string feeCategoryField;
         
         private string feeTypeField;
+        
+        private string approvedByField;
         
         /// <remarks/>
         public string FeeName {
@@ -1100,6 +1138,16 @@ namespace InterLinkClass.PegPaySchoolsApi {
             }
             set {
                 this.feeTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ApprovedBy {
+            get {
+                return this.approvedByField;
+            }
+            set {
+                this.approvedByField = value;
             }
         }
     }

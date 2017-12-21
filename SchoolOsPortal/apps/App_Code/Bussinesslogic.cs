@@ -14,7 +14,7 @@ public class Bussinesslogic
     public string GetImageById(string Id)
     {
         string base64String = "";
-        DataSet ds = SchoolsApi.ExecuteDataSet("GetImageById",new string[] { Id });
+        DataSet ds = SchoolsApi.ExecuteDataSet("GetImageById", new string[] { Id });
         DataTable dt = ds.Tables[0];
         if (dt.Rows.Count == 0)
         {
@@ -74,6 +74,7 @@ public class Bussinesslogic
             return "0";
         }
     }
+
 
     public void LoadSupplierCatgoriesIntoDropDown(string CompanyCode, SystemUser user, DropDownList ddlst)
     {
@@ -349,6 +350,27 @@ public class Bussinesslogic
         }
     }
 
+    public void LoadSchoolsIntoDropDown(InterLinkClass.PegPaySchoolsApi.SystemUserDetails user, DropDownList ddlst)
+    {
+        string[] parameters = { };
+        DataSet ds = SchoolsApi.ExecuteDataSet("GetSchoolsForDropDown", parameters);
+        DataTable dt = ds.Tables[0];
+
+        ddlst.Items.Clear();
+        foreach (DataRow dr in dt.Rows)
+        {
+            string Text = dr["Name"].ToString();
+            string Value = dr["Code"].ToString();
+            ddlst.Items.Add(new ListItem(Text, Value));
+        }
+
+        if (user.User.UserType != "SYS_ADMIN")
+        {
+            ddlst.SelectedValue = user.SchoolDetails.SchoolCode;
+            ddlst.Enabled = false;
+        }
+    }
+
     public void LoadContractTypesIntoDropDown(string CompanyCode, SystemUser user, DropDownList ddlst)
     {
         string[] parameters = { CompanyCode };
@@ -420,6 +442,20 @@ public class Bussinesslogic
         {
             string Text = dr["CurrencyName"].ToString();
             string Value = dr["CurrencyCode"].ToString();
+            ddlst.Items.Add(new ListItem(Text, Value));
+        }
+    }
+
+    public void LoadDataIntoDropDown(string storedProcName, string[] parameters, DropDownList ddlst)
+    {
+        DataSet ds = SchoolsApi.ExecuteDataSet(storedProcName, parameters);
+        DataTable dt = ds.Tables[0];
+
+        ddlst.Items.Clear();
+        foreach (DataRow dr in dt.Rows)
+        {
+            string Text = dr["Name"].ToString();
+            string Value = dr["Code"].ToString();
             ddlst.Items.Add(new ListItem(Text, Value));
         }
     }
@@ -690,6 +726,29 @@ public class Bussinesslogic
     public DataTable SearchClientsTable(string[] searchParams)
     {
         DataSet ds = client.ExecuteDataSet("SearchClientsTable", searchParams);
+        DataTable dt = ds.Tables[0];
+        return dt;
+    }
+
+    public DataTable SearchSchoolsTable(string[] searchParams)
+    {
+        DataSet ds = SchoolsApi.ExecuteDataSet("SearchSchoolsTable", searchParams);
+        DataTable dt = ds.Tables[0];
+        return dt;
+    }
+
+    public DataTable SearchSchoolsTableForUnapprovedSchools()
+    {
+        DataSet ds = SchoolsApi.ExecuteDataSet("SearchSchoolsTableForUnapprovedSchools2", new object[] { });
+        DataTable dt = ds.Tables[0];
+        return dt;
+    }
+
+
+
+    public DataTable SearchTable(string storedProc, string[] searchParams)
+    {
+        DataSet ds = SchoolsApi.ExecuteDataSet(storedProc, searchParams);
         DataTable dt = ds.Tables[0];
         return dt;
     }

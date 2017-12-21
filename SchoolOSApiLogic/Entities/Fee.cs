@@ -12,6 +12,7 @@ namespace SchoolOSApiLogic.Entities
         public string CurrencyCode = "";
         public string FeeCategory = "";
         public string FeeType = "";
+        public string ApprovedBy = "";
 
 
         public override bool IsValid()

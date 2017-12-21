@@ -7,6 +7,7 @@ namespace SchoolOSApiLogic.Entities
     public class StudentFee : Request
     {
         public string StudentID = "";
+        public string ClassID = "";
         public string FeeID = "";
 
         public override bool IsValid()

@@ -115,7 +115,7 @@ namespace SchoolOSApiLogic.ControlClasses
         public Result SaveSystemUser(SystemUser user)
         {
             Result result = new Result();
-            DataTable dt = dh.ExecuteDataSet("SaveSystemUser", new string[] { user.Username, user.VendorPassword, user.UserType, user.UserCategory, user.SecretKey, user.ModifiedBy,user.ProfilePic }).Tables[0];
+            DataTable dt = dh.ExecuteDataSet("SaveSystemUser", new string[] { user.Username, user.UserPassword, user.UserType, user.UserCategory, user.SecretKey, user.ModifiedBy,user.ProfilePic,user.SchoolCode,user.FullName }).Tables[0];
 
             if (dt.Rows.Count == 0)
             {
@@ -426,6 +426,8 @@ namespace SchoolOSApiLogic.ControlClasses
             user.Username = userId;
             user.UserPassword= row["Password"].ToString();
             user.UserType= row["UserType"].ToString();
+            user.ProfilePic = row["ProfilePic"].ToString();
+            user.FullName = row["FullName"].ToString();
             user.StatusCode = Globals.SUCCESS_STATUS_CODE;
             user.StatusDesc = Globals.SUCCESS_STATUS_DESC;
             return user;

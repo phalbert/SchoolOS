@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="Images/favicon.ico.png" />
     <link href="css/pegpay-login.css" rel="stylesheet" />
+      <script src='https://www.google.com/recaptcha/api.js'></script>
 
     <style>
         @import url("vendors/iCheck/css/minimal/_all.css");
@@ -117,17 +118,7 @@
                                 <div class="g-recaptcha" data-theme="dark" data-sitekey="6Le2u_wSAAAAAL_gETRxPdb5oU3p5if1cDLCasKT"></div>
 
                                 <div class='form-group'>
-                                    <div>
-                                        <img alt='Captcha image' src='show-captcha.php?rand=1' id='scaptcha_img' />
-                                    </div>
-                                    <label for='scaptcha'>Enter the code above here:</label>
-                                    <input type='text' name='scaptcha' id='scaptcha' maxlength="10" /><br />
-                                    <span id='contactus_scaptcha_errorloc' class='error'></span>
-                                    <div class='short_explanation'>
-                                        Can't read the image?
-   
-                                        <a href='javascript: refresh_captcha_img();'>Click here to refresh</a>.
-                                    </div>
+                                   <div class="g-recaptcha" data-sitekey="6Leefj0UAAAAAAb8CMhdkGZxmVVhKGxMGkUPqB6z"></div>
                                 </div>
                                 <div class="form-group">
                                     <asp:Button runat="server" ID="btnLogin" Text="Sign In" class="btn btn-primary btn-block" OnClick="btnLogin_Click" />
@@ -143,31 +134,12 @@
     <!-- global js -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
     <!-- end of global js -->
     <!-- page level js -->
     <script type="text/javascript" src="vendors/iCheck/js/icheck.js.pagespeed.jm.mc8O_8_6ZX.js"></script>
     <script src="vendors/bootstrapvalidator/js/bootstrapValidator.min.js.pagespeed.jm.6svL6oFoHD.js" type="text/javascript"></script>
-    <script type="text/javascript">//<![CDATA[
-        "use strict"; $(document).ready(function () { $(window).on('load', function () { $('.preloader img').fadeOut(); $('.preloader').fadeOut(); }); $('input').iCheck({ checkboxClass: 'icheckbox_minimal-blue', radioClass: 'iradio_minimal-blue', increaseArea: '20%' }); $("#authentication").bootstrapValidator({ fields: { username: { validators: { notEmpty: { message: 'The email address is required' }, regexp: { regexp: /^\S+@\S{1,}\.\S{1,}$/, message: 'Please enter valid email format' } } }, password: { validators: { notEmpty: { message: 'Password is required' } } } } }); });
-        //]]></script>
-    <script type="text/javascript">
-        frmvalidator.addValidation("scaptcha", "req", "Please enter the code in the image above");
-
-        document.forms['contactus'].scaptcha.validator
-          = new FG_CaptchaValidator(document.forms['contactus'].scaptcha,
-                        document.images['scaptcha_img']);
-
-        function SCaptcha_Validate() {
-            return document.forms['contactus'].scaptcha.validator.validate();
-        }
-
-        frmvalidator.setAddnlValidationFunction("SCaptcha_Validate");
-
-        function refresh_captcha_img() {
-            var img = document.images['scaptcha_img'];
-            img.src = img.src.substring(0, img.src.lastIndexOf("?")) + "?rand=" + Math.random() * 1000;
-        }
-   </script>
+    
 </body>
 
 </html>

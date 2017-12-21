@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600");
 @font-face {
     font-family: 'Glyphicons Halflings';
@@ -28,7 +28,7 @@ html {
     -webkit-text-size-adjust: 100%
 }
 
-body {
+form {
     margin: 0
 }
 
@@ -1385,7 +1385,7 @@ html {
     -webkit-tap-highlight-color: transparent
 }
 
-body {
+form {
     font-family: "Open Sans", sans-serif;
     font-size: 14px;
     line-height: 1.428571429;
@@ -11835,7 +11835,7 @@ html {
     font-size: small
 }
 
-body {
+form {
     background: none repeat scroll 0 0 #fcfcfc;
     -webkit-font-smoothing: antialiased;
     transition: all .25s ease-out;
@@ -11857,12 +11857,12 @@ label {
     letter-spacing: 1px
 }
 
-body.modal-open,
-body.swal2-in {
+form.modal-open,
+form.swal2-in {
     padding: 0!important
 }
 
-body>.header {
+body>form>.header {
     position: fixed;
     top: 0;
     left: 0;
@@ -11871,11 +11871,11 @@ body>.header {
     background: #233742
 }
 
-body>.header .navbar {
+body>form>.header .navbar {
     margin-bottom: 0
 }
 
-body>.header .navbar .nav>li>a>.label {
+body>form>.header .navbar .nav>li>a>.label {
     border-radius: 50%;
     position: absolute;
     top: 12px;
@@ -11889,11 +11889,11 @@ body>.header .navbar .nav>li>a>.label {
     padding: 2px
 }
 
-body>.header .navbar .nav>li>a:hover>.label {
+body>form>.header .navbar .nav>li>a:hover>.label {
     top: 7px
 }
 
-body>.header .logo {
+body>form>.header .logo {
     display: block;
     float: left;
     height: 60px;
@@ -11904,7 +11904,7 @@ body>.header .logo {
     background-color: seagreen;
 }
 
-body>.header .logo .icon {
+body>form>.header .logo .icon {
     margin-right: 10px
 }
 
@@ -12872,7 +12872,7 @@ a {
     clear: both
 }
 
-body>.header .navbar .sidebar-toggle {
+body>form>.header .navbar .sidebar-toggle {
     float: left;
     color: #fff;
     font-size: 23px;
@@ -12880,7 +12880,7 @@ body>.header .navbar .sidebar-toggle {
     margin-left: 10px
 }
 
-body>.header .navbar .sidebar-toggle i {
+body>form>.header .navbar .sidebar-toggle i {
     vertical-align: middle
 }
 
@@ -13058,24 +13058,24 @@ div.uploader {
     margin: 3px 0
 }
 
-body.fixed-layout>.header,
-body.fixed-layout .left-side,
-body.fixed-layout .navbar {
+form.fixed-layout>.header,
+form.fixed-layout .left-side,
+form.fixed-layout .navbar {
     position: fixed
 }
 
-body.fixed-layout>.header {
+form.fixed-layout>.header {
     top: 0;
     right: 0;
     left: 0
 }
 
-body.fixed-layout .navbar {
+form.fixed-layout .navbar {
     left: 0;
     right: 0
 }
 
-body.fixed-layout .wrapper {
+form.fixed-layout .wrapper {
     margin-top: 50px
 }
 
@@ -13083,7 +13083,7 @@ body.fixed-layout .wrapper {
     padding-top: 50px
 }
 
-body.fixed-top>.header {
+form.fixed-top>.header {
     position: fixed
 }
 
@@ -13166,15 +13166,15 @@ body.fixed-top>.header {
     .sidebar-offcanvas {
         left: 0
     }
-    body.fixed .sidebar-offcanvas {
+    form.fixed .sidebar-offcanvas {
         margin-top: 50px;
         left: -250px
     }
-    body.fixed .row-offcanvas-left .navbar {
+    form.fixed .row-offcanvas-left .navbar {
         left: 250px;
         right: 0
     }
-    body.fixed .row-offcanvas-left .sidebar-offcanvas {
+    form.fixed .row-offcanvas-left .sidebar-offcanvas {
         left: 0
     }
 }
@@ -13202,7 +13202,7 @@ body.fixed-top>.header {
     .navbar .navbar-right {
         float: right
     }
-    body>.header .navbar {
+    form>.header .navbar {
         padding-left: 19px;
         padding-right: 8px
     }
@@ -13249,24 +13249,24 @@ body.fixed-top>.header {
 }
 
 @media screen and (max-width:560px) {
-    body>.header {
+    form>.header {
         position: fixed
     }
-    body>.header .logo,
-    body>.header .navbar {
+    form>.header .logo,
+    form>.header .navbar {
         width: 100%;
         float: none;
         position: relative;
         height: initial
     }
-    body>.header .navbar {
+    form>.header .navbar {
         margin: 0
     }
-    body.fixed>.header {
+    form.fixed>.header {
         position: fixed
     }
-    body.fixed>.wrapper,
-    body.fixed .sidebar-offcanvas {
+    form.fixed>.wrapper,
+    form.fixed .sidebar-offcanvas {
         margin-top: 100px
     }
 }
@@ -13284,9 +13284,9 @@ body.fixed-top>.header {
 }
 
 @media (min-width:768px) {
-    body.boxed,
-    body.boxed .Footer,
-    body.boxed .navbar.navbar-fixed-top {
+    form.boxed,
+    form.boxed .Footer,
+    form.boxed .navbar.navbar-fixed-top {
         max-width: 650px;
         margin-left: auto;
         margin-right: auto
@@ -13294,9 +13294,9 @@ body.fixed-top>.header {
 }
 
 @media (min-width:1024px) {
-    body.boxed,
-    body.boxed .Footer,
-    body.boxed .navbar.navbar-fixed-top {
+    form.boxed,
+    form.boxed .Footer,
+    form.boxed .navbar.navbar-fixed-top {
         max-width: 900px;
         margin-left: auto;
         margin-right: auto
@@ -13304,9 +13304,9 @@ body.fixed-top>.header {
 }
 
 @media (min-width:1200px) {
-    body.boxed,
-    body.boxed .Footer,
-    body.boxed .navbar.navbar-fixed-top {
+    form.boxed,
+    form.boxed .Footer,
+    form.boxed .navbar.navbar-fixed-top {
         max-width: 1170px;
         margin-left: auto;
         margin-right: auto

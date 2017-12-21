@@ -13,6 +13,7 @@ namespace SchoolOSApiLogic.Entities
         public string SecretKey = "";
         public string ApprovedBy = "";
         public string ProfilePic = "";
+        public string FullName = "";
 
         public override bool IsValid()
         {

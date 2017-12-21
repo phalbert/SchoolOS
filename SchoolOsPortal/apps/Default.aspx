@@ -6,181 +6,147 @@
     UICulture="auto" %>
 
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
+<html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head id="Head1" runat="server">
-    <title>PEGPAY - MANAGEMENT SYSTEM</title>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
+    <title>School Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="Images/favicon.ico.png" />
+    <link href="css/pegpay-login.css" rel="stylesheet" />
+      <script src='https://www.google.com/recaptcha/api.js'></script>
 
+    <style>
+        @import url("vendors/iCheck/css/minimal/_all.css");
+        @import url("vendors/iCheck/css/square/_all.css");
+        @import url("vendors/iCheck/css/flat/_all.css");
+        @import url("vendors/iCheck/css/line/_all.css");
+        @import url("vendors/iCheck/css/polaris/polaris.css");
+        @import url("vendors/iCheck/css/futurico/futurico.css");
 
-    <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet" />
+        .bv-form .help-block {
+            margin-bottom: 0;
+        }
 
-    <!-- Custom CSS -->
-    <link href="css/PutCustomCssHere.css" rel="stylesheet" />
+        .bv-form .tooltip-inner {
+            text-align: left;
+        }
 
-    <!-- Morris Charts CSS -->
-    <link href="css/plugins/morris.css" rel="stylesheet" />
+        .nav-tabs li.bv-tab-success > a {
+            color: #3c763d;
+        }
 
-    <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+        .nav-tabs li.bv-tab-error > a {
+            color: #a94442;
+        }
 
+        .bv-form .bv-icon-no-label {
+            top: 0;
+        }
 
+        .bv-form .bv-icon-input-group {
+            top: 0;
+            z-index: 100;
+        }
+    </style>
 
+    <style type="text/css">
+        .short_explanation {
+            font-family: Arial, sans-serif;
+            font-size: 0.8em;
+            color: #333;
+        }
+
+        .error {
+            font-family: Verdana, Arial, sans-serif;
+            font-size: 0.7em;
+            color: #900;
+            background-color: #ffff00;
+        }
+    </style>
+
+    <link href="css/A.login.css.pagespeed.cf.uxB68C_gDO.css" rel="stylesheet">
+    <!--end page level css-->
+    <script type='text/javascript' src='scripts/fg_captcha_validator.js'></script>
 </head>
-<body style="margin-top: 25px; color: black;">
+
+<body id="sign-in">
     <div class="container">
         <div class="row">
-            <div class="col-lg-3"></div>
-            <div class="col-sm-5">
-                <div class="page-header">
+            <%-------------------------------------------- Message Label ----------------------------------%>
+            <div data-row-span="4">
+                <div class="text-center">
+                    <% 
+                        string IsError = Session["IsError"] as string;
+                        if (IsError == null)
+                        {
+                            Response.Write("<div>");
 
-                    <div class="text-center" style="font-size: large;">
+                        }
+                        else if (IsError == "True")
+                        {
+                            Response.Write("<div class=\"alert alert-danger\">");
 
-                        <h4>
-                            <a href="#">
-                                <b>
-                                    <asp:Label ID="lblmsg" runat="server" Style="color:#449D44;">
-                            PEGASUS BUSSINESS MANAGEMENT SYSTEM
-                                    </asp:Label>
-                                </b>
-                            </a>
-                        </h4>
-
-                    </div>
-
+                        }
+                        else
+                        {
+                            Response.Write("<div class=\"alert alert-success\">");
+                        }
+                    %>
+                    <strong>
+                        <asp:Label ID="lblmsg" runat="server"></asp:Label>
+                    </strong>
+                    <%Response.Write("</div>"); %>
                 </div>
-
-            </div>
-            <div class="col-lg-4"></div>
-        </div>
-
-        <div class="row">
-            <div class="col-lg-3"></div>
-            <div class="col-sm-5">
-                <asp:MultiView ID="MultiView1" runat="server">
-                    <asp:View ID="View1" runat="server">
-                        <div id="loginbox" style="margin-top: 50px;" class="mainbox">
-                            <div class="panel panel-primary">
-                                <div class="panel-heading">
-                                    <div class="panel-title">
-                                        <div class="text-center">Sign Into Your Account</div>
-                                    </div>
-                                </div>
-
-                                <div style="padding-top: 30px;" class="panel-body">
-
-                                    <div style="display: none" id="login-alert" class="alert alert-danger col-sm-12"></div>
-
-                                    <form id="loginform" runat="server" class="form-horizontal" role="form">
-
-
-                                        <div class="text-center" style="margin-bottom: 25px">
-                                            <img id="logoImage" class="img-responsive img-thumbnail" runat="server" height="150" width="150" src="Images/PegasusNewLogo.png" style="border-color: #DDDDDD;border-style:solid;border-width:1px;" />
-                                        </div>
-
-                                        <div style="margin-bottom: 25px" class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                            <asp:TextBox ID="txtEmail" runat="server" TextMode="SingleLine" CssClass="form-control" Text="" placeholder="username or email"></asp:TextBox>
-
-                                        </div>
-
-                                        <div style="margin-bottom: 25px" class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                            <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" CssClass="form-control" Text="" placeholder="Password"></asp:TextBox>
-
-                                        </div>
-
-                                        <div style="margin-top: 10px" class="form-group">
-                                            <!-- Button -->
-                                            <div class="row">
-                                                <div class="col-sm-3 controls"></div>
-                                                <div class="col-sm-6 controls">
-                                                    <div class="text-center">
-                                                        <asp:Button ID="btnSubmit" runat="server" CssClass="btn btn-success btn-block" Text="Sign In" OnClick="btnLogin_Click" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-3 controls"></div>
-                                            </div>
-
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </asp:View>
-                    <asp:View ID="View2" runat="server">
-                        <div id="Div1" style="margin-top: 50px;" class="mainbox">
-                            <div class="panel panel-primary">
-                                <div class="panel-heading">
-                                    <div class="panel-title">
-                                        <div class="text-center">Change Your Password</div>
-                                    </div>
-                                </div>
-
-                                <div style="padding-top: 30px;" class="panel-body">
-
-                                    <div style="display: none" id="Div2" class="alert alert-danger col-sm-12"></div>
-
-                                    <form id="Form1" runat="server" class="form-horizontal" role="form">
-
-
-                                        <div class="text-center" style="margin-bottom: 25px">
-                                            <img id="Img1" runat="server" height="50" width="50" src="Images/PEGASUS/Billing.jpg" alt="" />
-                                        </div>
-
-                                        <div style="margin-bottom: 25px" class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                            <asp:TextBox ID="txtnewpassword" runat="server" TextMode="Password" CssClass="form-control" Text="" placeholder="New Password"></asp:TextBox>
-
-                                        </div>
-
-                                        <div style="margin-bottom: 25px" class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                            <asp:TextBox ID="txtConfirmnewpassword" runat="server" TextMode="Password" CssClass="form-control" Text="" placeholder="Confirm New Password"></asp:TextBox>
-
-                                        </div>
-
-                                        <div style="margin-top: 10px" class="form-group">
-                                            <!-- Button -->
-                                            <div class="row">
-                                                <div class="col-sm-3 controls"></div>
-                                                <div class="col-sm-6 controls">
-                                                    <div class="text-center">
-                                                        <asp:Button ID="btnChangePassword" runat="server" CssClass="btn btn-success btn-block" Text="Change Password" OnClick="btnChangenewPassword_Click" />
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-3 controls"></div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </asp:View>
-                </asp:MultiView>
             </div>
 
-            <div class="col-lg-4"></div>
+            <%-------------------------------------------- Login Form ----------------------------------%>
+            <div class="col-md-4 col-md-offset-4 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 login-form">
+                <div class="panel-header">
+                    <h2 class="text-center">
+                        <img src="Images/pegasus.png" alt="Logo" width="200px" height="auto">
+                    </h2>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <form runat="server" id="authentication" method="post" class="login_validator">
+                                <div class="form-group">
+                                    <label for="email" class="sr-only">School Code</label>
+                                    <asp:TextBox runat="server" type="text" class="form-control  form-control-lg" ID="txtUsername" name="code" placeholder="Enter Username"></asp:TextBox>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="sr-only">Password</label>
+                                    <asp:TextBox runat="server" TextMode="Password" class="form-control form-control-lg" ID="txtPassword" name="password" placeholder="Password"></asp:TextBox>
+                                </div>
+                                <div class="g-recaptcha" data-theme="dark" data-sitekey="6Le2u_wSAAAAAL_gETRxPdb5oU3p5if1cDLCasKT"></div>
+
+                                <div class='form-group'>
+                                   <div class="g-recaptcha" data-sitekey="6Leefj0UAAAAAAb8CMhdkGZxmVVhKGxMGkUPqB6z"></div>
+                                </div>
+                                <div class="form-group">
+                                    <asp:Button runat="server" ID="btnLogin" Text="Sign In" class="btn btn-primary btn-block" OnClick="btnLogin_Click" />
+                                </div>
+                                <a href="forgot_password.aspx" id="forgot" class="forgot">Forgot Password ? </a>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <script type="text/javascript">
-        function DisableButtons() {
-            var inputs = document.getElementsByTagName("INPUT");
-            for (var i in inputs) {
-                if (inputs[i].type == "button" || inputs[i].type == "submit") {
-                    inputs[i].disabled = true;
-                }
-            }
-        }
-        window.onbeforeunload = DisableButtons;
-    </script>
+    <!-- global js -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
+    <!-- end of global js -->
+    <!-- page level js -->
+    <script type="text/javascript" src="vendors/iCheck/js/icheck.js.pagespeed.jm.mc8O_8_6ZX.js"></script>
+    <script src="vendors/bootstrapvalidator/js/bootstrapValidator.min.js.pagespeed.jm.6svL6oFoHD.js" type="text/javascript"></script>
+    
 </body>
 
 </html>
+
