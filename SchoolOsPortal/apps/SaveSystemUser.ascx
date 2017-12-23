@@ -55,8 +55,8 @@
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col-lg-6">
-                                            <label>Company Code</label>
-                                            <asp:DropDownList ID="ddCompanies" runat="server" CssClass="form-control">
+                                            <label>School Code</label>
+                                            <asp:DropDownList ID="ddSchools" runat="server" CssClass="form-control">
                                                 <asp:ListItem Value="TRUE">YES</asp:ListItem>
                                                 <asp:ListItem Value="FALSE">NO</asp:ListItem>
                                             </asp:DropDownList>
@@ -74,13 +74,13 @@
 
                                     <div class="row">
                                         <div class="col-lg-6">
-                                            <label>Name</label>
+                                            <label>Full Name</label>
                                             <asp:TextBox ID="txtName" runat="server" CssClass="form-control" placeholder="Enter text" />
                                             <p class="help-block">The Name of the Company</p>
                                         </div>
                                         <div class="col-lg-6">
-                                            <label>UserID</label>
-                                            <asp:TextBox ID="txtUserID" runat="server" CssClass="form-control" placeholder="Enter text" />
+                                            <label>Phone</label>
+                                            <asp:TextBox ID="txtPhone" runat="server" CssClass="form-control" placeholder="Enter text" />
                                             <p class="help-block">Brief Summary of what Contract Covers</p>
                                         </div>
                                     </div>
@@ -100,19 +100,6 @@
                                             <p class="help-block">The Code to be associated with the Client. Unique Identifier for Client</p>
                                         </div>
                                     </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <label>Send Email with Credentials</label>
-                                            <asp:DropDownList ID="ddSendEmail" runat="server" CssClass="form-control">
-                                                <asp:ListItem Value="YES">YES</asp:ListItem>
-                                                <asp:ListItem Value="NO">NO</asp:ListItem>
-                                            </asp:DropDownList>
-                                            <p class="help-block">Send an Email with Credentials</p>
-                                        </div>
-                                    </div>
-
-                                    
 
                                 </div>
 

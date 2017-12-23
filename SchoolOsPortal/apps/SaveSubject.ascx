@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="SaveClass.ascx.cs" Inherits="SaveClass" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="SaveSubject.ascx.cs" Inherits="SaveSubject" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
@@ -50,7 +50,7 @@
                             <div class="panel panel-success">
 
                                 <div class="panel-heading text-center">
-                                    SUPPLY THE CLASS DETAILS USING FORM BELOW
+                                    SUPPLY THE SUBJECT DETAILS USING FORM BELOW
                                 </div>
 
                                 <div class="panel-body">
@@ -64,8 +64,8 @@
                                         </div>
 
                                         <div class="col-lg-6">
-                                            <label>Class Name</label>
-                                            <asp:TextBox ID="txtClassName" runat="server" CssClass="form-control" placeholder="Enter text" />
+                                            <label>Subject Name</label>
+                                            <asp:TextBox ID="txtName" runat="server" CssClass="form-control" placeholder="Enter text" />
                                         </div>
 
                                     </div>
@@ -97,7 +97,7 @@
                     <div class="col-lg-2"></div>
                     <div class="col-lg-8">
                         <div class="alert alert-info">
-                            This Class Already Exists! Are you sure you want to Update it.
+                            This Subject Already Exists! Are you sure you want to Update it.
                         </div>
                     </div>
                     <div class="col-lg-2"></div>
@@ -110,5 +110,6 @@
             </div>
             <hr />
         </div>
+
     </asp:View>
 </asp:MultiView>

@@ -5,7 +5,7 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
-public partial class ManageSubjects : System.Web.UI.Page
+public partial class ManageClassStreams : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -36,14 +36,14 @@ public partial class ManageSubjects : System.Web.UI.Page
 
     private void HighLightCorrectTab()
     {
-        if (MultiView.GetActiveView() == ListSubjectsView)
+        if (MultiView.GetActiveView() == ListStreamsUserView)
         {
-            SetActiveTab(ListSubjectsLink);
+            SetActiveTab(ListClassStreamLink);
             return;
         }
-        if (MultiView.GetActiveView() == SaveSubjectView)
+        if (MultiView.GetActiveView() == SaveStreamView)
         {
-            SetActiveTab(SaveSubjectLink);
+            SetActiveTab(SaveStreamLink);
             return;
         }
 
@@ -51,8 +51,8 @@ public partial class ManageSubjects : System.Web.UI.Page
 
     private void SetActiveTab(HtmlGenericControl control)
     {
-        SaveSubjectLink.Attributes["class"] = "";
-        ListSubjectsLink.Attributes["class"] = "";
+        SaveStreamLink.Attributes["class"] = "";
+        ListClassStreamLink.Attributes["class"] = "";
         control.Attributes["class"] = "active";
     }
 
@@ -76,14 +76,14 @@ public partial class ManageSubjects : System.Web.UI.Page
     private void ChangeViews(LinkButton link)
     {
 
-        if (link.ID == ListSubjectsLinkButton.ID)
+        if (link.ID == ListClassStreamLinkButton.ID)
         {
-            MultiView.SetActiveView(ListSubjectsView);
+            MultiView.SetActiveView(ListStreamsUserView);
             return;
         }
-        if (link.ID == SaveSubjectLinkButton.ID)
+        if (link.ID == SaveStreamLinkButton.ID)
         {
-            MultiView.SetActiveView(SaveSubjectView);
+            MultiView.SetActiveView(SaveStreamView);
             return;
         }
     }

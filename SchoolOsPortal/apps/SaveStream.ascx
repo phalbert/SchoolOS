@@ -1,4 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="SaveClass.ascx.cs" Inherits="SaveClass" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="SaveStream.ascx.cs" Inherits="SaveStream" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
@@ -62,9 +62,19 @@
                                                 <asp:ListItem>False</asp:ListItem>
                                             </asp:DropDownList>
                                         </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <label>Class</label>
+                                            <asp:DropDownList ID="ddClasses" runat="server" CssClass="form-control">
+                                                <asp:ListItem>True</asp:ListItem>
+                                                <asp:ListItem>False</asp:ListItem>
+                                            </asp:DropDownList>
+                                        </div>
+
 
                                         <div class="col-lg-6">
-                                            <label>Class Name</label>
+                                            <label>Stream Name</label>
                                             <asp:TextBox ID="txtClassName" runat="server" CssClass="form-control" placeholder="Enter text" />
                                         </div>
 
@@ -97,7 +107,7 @@
                     <div class="col-lg-2"></div>
                     <div class="col-lg-8">
                         <div class="alert alert-info">
-                            This Class Already Exists! Are you sure you want to Update it.
+                            This Class Stream Already Exists! Are you sure you want to Update it.
                         </div>
                     </div>
                     <div class="col-lg-2"></div>

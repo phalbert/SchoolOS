@@ -1,7 +1,7 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Main.master" CodeFile="ManageSubjects.aspx.cs" Inherits="ManageSubjects" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Main.master" CodeFile="ManageClassStreams.aspx.cs" Inherits="ManageClassStreams" %>
 
-<%@ Register TagPrefix="uc" TagName="ListSubjectsUserControl" Src="~/ListSubjects.ascx" %>
-<%@ Register TagPrefix="uc" TagName="SaveSubjectUserControl" Src="~/SaveSubject.ascx" %>
+<%@ Register TagPrefix="uc" TagName="ListStreamsUserControl" Src="~/ListClasses.ascx" %>
+<%@ Register TagPrefix="uc" TagName="SaveStreamUserControl" Src="~/SaveClass.ascx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
@@ -31,20 +31,20 @@
             <!------------------------------------------------------- Main content --------------------------------------->
             <div class="row">
                 <ul class="nav nav-tabs" style="padding-top: 50px;">
-                    <li id="ListSubjectsLink" runat="server" class="active">
-                        <asp:LinkButton ID="ListSubjectsLinkButton" runat="server" OnClick="btnTabPane_Click">View Subjects</asp:LinkButton></li>
-                    <li id="SaveSubjectLink" runat="server" >
-                        <asp:LinkButton ID="SaveSubjectLinkButton" runat="server" OnClick="btnTabPane_Click">Save Subject</asp:LinkButton></li>
+                    <li id="ListClassStreamLink" runat="server" class="active">
+                        <asp:LinkButton ID="ListClassStreamLinkButton" runat="server" OnClick="btnTabPane_Click">View Class Streams</asp:LinkButton></li>
+                    <li id="SaveStreamLink" runat="server" >
+                        <asp:LinkButton ID="SaveStreamLinkButton" runat="server" OnClick="btnTabPane_Click">Save Class Stream</asp:LinkButton></li>
                 </ul>
             </div>
 
             <div class="container" style="margin-top: 30px;">
                 <asp:MultiView ActiveViewIndex="0" ID="MultiView" runat="server">
-                    <asp:View ID="ListSubjectsView" runat="server">
-                        <uc:ListSubjectsUserControl ID="ListSubjectsUserControl" runat="server" />
+                    <asp:View ID="ListStreamsUserView" runat="server">
+                        <uc:ListStreamsUserControl ID="ListStreamsUserControl" runat="server" />
                     </asp:View>
-                    <asp:View ID="SaveSubjectView" runat="server">
-                        <uc:SaveSubjectUserControl ID="SaveSubjectUserControl" runat="server" />
+                    <asp:View ID="SaveStreamView" runat="server">
+                        <uc:SaveStreamUserControl ID="SaveStreamUserControl" runat="server" />
                     </asp:View>
                 </asp:MultiView>
             </div>
@@ -53,4 +53,3 @@
         </aside>
     </div>
 </asp:Content>
-

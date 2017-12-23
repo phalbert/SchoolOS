@@ -182,24 +182,24 @@ public class Bussinesslogic
     }
 
 
-    public Result SendCredentialsToUser(SystemUser user)
+    public InterLinkClass.PegPaySchoolsApi.Result SendCredentialsToUser(InterLinkClass.PegPaySchoolsApi.SystemUser user)
     {
-        Result result = new Result();
+        InterLinkClass.PegPaySchoolsApi.Result result = new InterLinkClass.PegPaySchoolsApi.Result();
         try
         {
             InterLinkClass.MailApi.Messenger mailApi = new InterLinkClass.MailApi.Messenger();
             InterLinkClass.MailApi.Email email = new InterLinkClass.MailApi.Email();
             email.From = "notifications@pegasustechnologies.co.ug";
             email.Message = "Hi<br/>" +
-                            "Your Credentials for The Pegasus Bussiness Management Portal are Below<br/>" +
-                            "UserId: " + user.UserId + "<br/>" +
-                            "Password: " + user.Password + "<br/>" +
+                            "Your Credentials for The Flexipay School Management Portal are Below<br/>" +
+                            "UserId: " + user.Username + "<br/>" +
+                            "Password: " + user.UserPassword + "<br/>" +
                             "Role: " + user.UserType + "<br/>" +
                             "Thank you. <br/>";
             InterLinkClass.MailApi.EmailAddress address = new InterLinkClass.MailApi.EmailAddress();
-            address.Address = user.UserId;
+            address.Address = user.Email;
             address.AddressType = InterLinkClass.MailApi.EmailAddressType.To;
-            address.Name = user.Name;
+            address.Name = user.FullName;
 
             email.MailAddresses = new InterLinkClass.MailApi.EmailAddress[] { address };
             InterLinkClass.MailApi.Result resp = mailApi.PostEmail(email);

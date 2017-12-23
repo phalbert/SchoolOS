@@ -56,79 +56,142 @@
                                 <div class="panel-body">
                                     <div class="row">
                                         <div class="col-lg-6">
-                                            <label>School Name</label>
-                                            
-                                            <p class="help-block">The Name of the Company</p>
+                                            <label>Name of the School</label>
+                                            <asp:TextBox ID="txtSchoolName" CssClass="form-control" runat="server"></asp:TextBox>
                                         </div>
                                     </div>
+                                    <br />
 
                                     <div class="row">
                                         <div class="col-lg-6">
-                                            <label>Client Name</label>
-                                            <asp:TextBox ID="txtClientName" runat="server" CssClass="form-control" placeholder="Enter text" />
-                                            <p class="help-block">The Name of the Client</p>
+
+                                            <label>School Code</label>
+                                            <asp:TextBox ID="txtSchoolCode" CssClass="form-control" runat="server"></asp:TextBox>
                                         </div>
                                         <div class="col-lg-6">
-                                            <label>Client Code</label>
-                                            <asp:TextBox ID="txtClientCode" runat="server" CssClass="form-control" placeholder="Enter text" />
-                                            <p class="help-block">The Code to be associated with the Client. Unique Identifier for Client</p>
+                                            <label>UNEB Centre Number <small>If applicable</small></label>
+                                            <asp:TextBox ID="txtUnebNumber" CssClass="form-control" runat="server"></asp:TextBox>
                                         </div>
                                     </div>
+                                     <br />
 
                                     <div class="row">
                                         <div class="col-lg-6">
-                                            <label>Client Address</label>
-                                            <asp:TextBox ID="txtClientAddress" runat="server" CssClass="form-control" placeholder="Enter text" />
-                                            <p class="help-block">The Location of this client</p>
+                                            <label>Schools Bank</label>
+                                            <asp:TextBox ID="txtSchoolBank" CssClass="form-control" runat="server"></asp:TextBox>
                                         </div>
                                         <div class="col-lg-6">
-                                            <label>Telephone Number</label>
-                                            <asp:TextBox ID="txtTelNumber" runat="server" CssClass="form-control" placeholder="Enter text" />
-                                            <p class="help-block">The Telephone Number of this client</p>
+                                            <label>Account Name</label>
+                                            <asp:TextBox ID="txtAccountName"  CssClass="form-control" runat="server"></asp:TextBox>
                                         </div>
                                     </div>
+                                     <br />
 
                                     <div class="row">
                                         <div class="col-lg-6">
-                                            <label>Mobile Number</label>
-                                            <asp:TextBox ID="txtMobileNumber" runat="server" CssClass="form-control" placeholder="Enter text" />
-                                            <p class="help-block">The Mobile Number of this client</p>
+                                            <label>Account Number</label>
+                                            <asp:TextBox ID="txtAccountNumber" CssClass="form-control" runat="server"></asp:TextBox>
                                         </div>
-                                        <div class="col-lg-6">
-                                            <label>Contact Person Name</label>
-                                            <asp:TextBox ID="txtContactPersonName" runat="server" CssClass="form-control" placeholder="Enter text" />
-                                            <p class="help-block">The Name of clients contact</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
                                         <div class="col-lg-6">
                                             <label>Email</label>
-                                            <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" placeholder="Enter text" />
-                                            <p class="help-block">The Email address of this client</p>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <label>Bank Name</label>
-                                            <asp:TextBox ID="txtBankName" runat="server" CssClass="form-control" placeholder="Enter text" />
-                                            <p class="help-block">Name of Bank where Accounts are held</p>
+                                            <asp:TextBox ID="txtSchoolEmail" CssClass="form-control" runat="server"></asp:TextBox>
                                         </div>
                                     </div>
+                                     <br />
 
                                     <div class="row">
                                         <div class="col-lg-6">
-                                            <label>Bank Account Name</label>
-                                            <asp:TextBox ID="txtBankAccountName" runat="server" CssClass="form-control" placeholder="Enter text" />
-                                            <p class="help-block">The Names in which the account is held</p>
+                                            <label>Plot No.</label>
+                                            <asp:TextBox ID="txtPlotNumber"  CssClass="form-control" runat="server"></asp:TextBox>
                                         </div>
                                         <div class="col-lg-6">
-                                            <label>Bank Account Number</label>
-                                            <asp:TextBox ID="txtBankAccountNumber" runat="server" CssClass="form-control" placeholder="Enter text" />
-                                            <p class="help-block"></p>
+                                            <label>Street / Road name</label>
+                                            <asp:TextBox ID="txtRoadName" CssClass="form-control" runat="server"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                     <br />
+
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <label>Divison / Sub County</label>
+                                            <asp:TextBox ID="txtSubCounty" CssClass="form-control" runat="server"></asp:TextBox>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label>District</label>
+                                            <asp:TextBox ID="txtDistrict" CssClass="form-control" runat="server"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                     <br />
+
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <label>PostOffice Box Number</label>
+                                            <asp:TextBox ID="txtPostOfficeNumber" CssClass="form-control" runat="server"></asp:TextBox>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label>Office Phone</label>
+                                            <asp:TextBox ID="txtOfficePhone" CssClass="form-control" runat="server"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                     <br />
+
+
+
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="col-lg-6">
+                                                <label>
+                                                    School Type
+                                                <small>(check what applies)</small>
+                                                </label>
+                                                <div data-row-span="12">
+                                                    <div data-field-span="2">
+                                                        <asp:CheckBox ID="chkDay" runat="server" />&nbsp;<label for="day">
+                                                            Day</label>
+                                                    </div>
+                                                    <div data-field-span="2">
+                                                        <asp:CheckBox ID="chkBoarding" runat="server" />&nbsp;<label for="boarding"> Boarding</label>
+                                                    </div>
+                                                    <div data-field-span="2">
+                                                        <asp:CheckBox ID="chkEvening" runat="server" />&nbsp;<label for="evening"> Evening</label>
+                                                    </div>
+                                                    <div data-field-span="2">
+                                                        <asp:CheckBox ID="chkSingle" runat="server" />&nbsp;<label for="single"> Single</label>
+                                                    </div>
+                                                    <div data-field-span="2">
+                                                        <asp:CheckBox ID="chkMixed" runat="server" />&nbsp;<label for="mixed"> Mixed</label>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label>
+                                                School Category
+                               
+                                    <small>(check what applies)</small>
+                                            </label>
+                                            <div data-row-span="12">
+                                                <div data-field-span="2">
+                                                    <asp:CheckBox ID="chkNusery" runat="server" />&nbsp;<label for="chkNusery">
+                                                        Nursery</label>
+                                                </div>
+                                                <div data-field-span="2">
+                                                    <asp:CheckBox ID="chkPrimary" runat="server" />&nbsp;<label for="primary"> Primary</label>
+                                                </div>
+                                                <div data-field-span="2">
+                                                    <asp:CheckBox ID="chkSecondary" runat="server" />&nbsp;<label for="secondary"> Secondary</label>
+                                                </div>
+                                                <div data-field-span="2">
+                                                    <asp:CheckBox ID="chkTertiary" runat="server" />&nbsp;<label for="tertiary"> Tertiary</label>
+                                                </div>
+
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
-                                
+
                                 <div class="panel-footer">
                                     <div class="text-center">
                                         <asp:Button ID="btnSubmit" runat="server" Text="Save" Width="200px" CssClass="btn btn-success btn-lg" OnClick="btnSubmit_Click" />

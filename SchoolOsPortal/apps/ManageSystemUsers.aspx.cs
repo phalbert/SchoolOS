@@ -5,7 +5,7 @@ using System.Web.UI;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
-public partial class ManageSubjects : System.Web.UI.Page
+public partial class ManageSystemUsers : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -36,14 +36,19 @@ public partial class ManageSubjects : System.Web.UI.Page
 
     private void HighLightCorrectTab()
     {
-        if (MultiView.GetActiveView() == ListSubjectsView)
+        if (MultiView.GetActiveView() == ListSystemUsersView)
         {
-            SetActiveTab(ListSubjectsLink);
+            SetActiveTab(ListSystemUsersLink);
             return;
         }
-        if (MultiView.GetActiveView() == SaveSubjectView)
+        if (MultiView.GetActiveView() == SaveSystemUsersView)
         {
-            SetActiveTab(SaveSubjectLink);
+            SetActiveTab(SaveSystemUsersLink);
+            return;
+        }
+        if (MultiView.GetActiveView() == ApproveSystemUsersView)
+        {
+            SetActiveTab(ApproveSystemUsersLink);
             return;
         }
 
@@ -51,8 +56,9 @@ public partial class ManageSubjects : System.Web.UI.Page
 
     private void SetActiveTab(HtmlGenericControl control)
     {
-        SaveSubjectLink.Attributes["class"] = "";
-        ListSubjectsLink.Attributes["class"] = "";
+        SaveSystemUsersLink.Attributes["class"] = "";
+        ListSystemUsersLink.Attributes["class"] = "";
+        ApproveSystemUsersLink.Attributes["class"] = "";
         control.Attributes["class"] = "active";
     }
 
@@ -76,14 +82,19 @@ public partial class ManageSubjects : System.Web.UI.Page
     private void ChangeViews(LinkButton link)
     {
 
-        if (link.ID == ListSubjectsLinkButton.ID)
+        if (link.ID == ListSystemUsersLinkButton.ID)
         {
-            MultiView.SetActiveView(ListSubjectsView);
+            MultiView.SetActiveView(ListSystemUsersView);
             return;
         }
-        if (link.ID == SaveSubjectLinkButton.ID)
+        if (link.ID == SaveSystemUsersLinkButton.ID)
         {
-            MultiView.SetActiveView(SaveSubjectView);
+            MultiView.SetActiveView(SaveSystemUsersView);
+            return;
+        }
+        if (link.ID == ApproveSystemUsersLinkButton.ID)
+        {
+            MultiView.SetActiveView(ApproveSystemUsersView);
             return;
         }
     }

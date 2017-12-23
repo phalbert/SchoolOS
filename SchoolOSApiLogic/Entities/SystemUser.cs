@@ -14,6 +14,9 @@ namespace SchoolOSApiLogic.Entities
         public string ApprovedBy = "";
         public string ProfilePic = "";
         public string FullName = "";
+        public string IsActive = "";
+        public string Email = "";
+        public string PhoneNumber = "";
 
         public override bool IsValid()
         {

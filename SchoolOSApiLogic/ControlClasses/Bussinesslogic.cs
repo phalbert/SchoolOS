@@ -115,7 +115,8 @@ namespace SchoolOSApiLogic.ControlClasses
         public Result SaveSystemUser(SystemUser user)
         {
             Result result = new Result();
-            DataTable dt = dh.ExecuteDataSet("SaveSystemUser", new string[] { user.Username, user.UserPassword, user.UserType, user.UserCategory, user.SecretKey, user.ModifiedBy,user.ProfilePic,user.SchoolCode,user.FullName }).Tables[0];
+            user.UserPassword = sharedCommons.GenearetHMACSha256Hash(user.SecretKey, user.UserPassword);
+            DataTable dt = dh.ExecuteDataSet("SaveSystemUser", new string[] { user.Username, user.UserPassword, user.UserType, user.UserCategory, user.SecretKey, user.ModifiedBy,user.ProfilePic,user.SchoolCode,user.FullName,user.IsActive,user.Email,user.PhoneNumber }).Tables[0];
 
             if (dt.Rows.Count == 0)
             {

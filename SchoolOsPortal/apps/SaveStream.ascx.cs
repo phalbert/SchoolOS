@@ -5,12 +5,12 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class SaveSchool : System.Web.UI.UserControl
+public partial class SaveStream : System.Web.UI.UserControl
 {
     public event EventHandler SaveCompleted;
     Bussinesslogic bll = new Bussinesslogic();
     SystemUserDetails user = new SystemUserDetails();
-    Service schoolsApi = new Service();
+    Service schoolApi = new Service();
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -54,13 +54,14 @@ public partial class SaveSchool : System.Web.UI.UserControl
         btnSubmit.Visible = true;
         btnEdit.Visible = false;
 
+        bll.LoadSchoolsIntoDropDown(user, ddSchools);
+        bll.LoadDataIntoDropDown("GetClassesForDropDown", new string[] { ddSchools.SelectedValue }, ddClasses);
     }
 
     private void LoadEntityData(string id)
     {
         btnSubmit.Visible = false;
         btnEdit.Visible = true;
-
     }
 
     protected void btnEdit_Click(object sender, EventArgs e)
@@ -80,8 +81,8 @@ public partial class SaveSchool : System.Web.UI.UserControl
         try
         {
             string msg = "";
-            School newUser = GetSchool();
-            Result result = schoolsApi.SaveSchool(newUser);
+            ClassStream aclient = GetClient();
+            Result result = schoolApi.SaveClassStream(aclient);
 
             if (result.StatusCode != Globals.SUCCESS_STATUS_CODE)
             {
@@ -90,16 +91,12 @@ public partial class SaveSchool : System.Web.UI.UserControl
                 return;
             }
 
-            msg = "DETAILS SAVED SUCCESSFULLY";
+            msg = "STUDENT SAVED SUCCESSFULLY";
             bll.ShowMessage(lblmsg, msg, false, Session);
-
-
-           
 
             if (SaveCompleted != null)
             {
                 MyEventArgs eventArgs = new MyEventArgs();
-                eventArgs.PegPayId = newUser.SchoolCode;
 
                 //Pass on msg
                 Session["ExternalMsg"] = msg;
@@ -114,76 +111,15 @@ public partial class SaveSchool : System.Web.UI.UserControl
         }
     }
 
-    private School GetSchool()
+    private ClassStream GetClient()
     {
-        School sch = new School();
-        sch.ModifiedBy = txtSchoolName.Text;
-        sch.VendorPassword = Globals.SCHOOL_PASSWORD;
-        sch.VendorCode = Globals.SCHOOL_VENDOR_CODE;
-        sch.SchoolName = txtSchoolName.Text;
-        sch.SchoolCode = txtSchoolCode.Text;
-        sch.SchoolEmail = txtSchoolEmail.Text;
-        sch.SubCounty = txtSubCounty.Text;
-        sch.UnebCentreNumber = txtUnebNumber.Text;
-        sch.SchoolPhone = txtOfficePhone.Text;
-        sch.PlotNo = txtPlotNumber.Text;
-        sch.PostOfficeBox = txtPostOfficeNumber.Text;
-        sch.RoadName = txtRoadName.Text;
-        sch.District = txtDistrict.Text;
-        sch.SchoolType = GetSchoolTypes();
-        sch.SchoolCategories = GetSchoolCategories();
-        sch.LiquidationAccountNumber = txtAccountNumber.Text;
-        sch.LiquidationAccountName = txtAccountName.Text;
-        sch.LiquidationBankName = txtSchoolBank.Text;
-        return sch;
-    }
-
-    private string[] GetSchoolCategories()
-    {
-        List<string> types = new List<string>();
-        if (chkNusery.Checked)
-        {
-            types.Add("NUSERY");
-        }
-        if (chkPrimary.Checked)
-        {
-            types.Add("PRIMARY");
-        }
-        if (chkSecondary.Checked)
-        {
-            types.Add("SECONDARY");
-        }
-        if (chkTertiary.Checked)
-        {
-            types.Add("TERTIARY");
-        }
-        return types.ToArray();
-    }
-
-    private string[] GetSchoolTypes()
-    {
-        List<string> types = new List<string>();
-        if (chkDay.Checked)
-        {
-            types.Add("DAY");
-        }
-        if (chkBoarding.Checked)
-        {
-            types.Add("BOARDING");
-        }
-        if (chkEvening.Checked)
-        {
-            types.Add("EVENING");
-        }
-        if (chkSingle.Checked)
-        {
-            types.Add("SINGLE");
-        }
-        if (chkMixed.Checked)
-        {
-            types.Add("MIXED");
-        }
-        return types.ToArray();
+        ClassStream std = new ClassStream();
+        std.ClassCode = ddClasses.SelectedValue;
+        std.StreamCode = SharedCommons.SharedCommons.GenerateUniqueId("STREAM");
+        std.StreamName = txtClassName.Text;
+        std.SchoolCode = ddSchools.SelectedValue;
+        std.ModifiedBy = user.User.Username;
+        return std;
     }
 
 
@@ -195,10 +131,5 @@ public partial class SaveSchool : System.Web.UI.UserControl
     protected void btnCancel_Click(object sender, EventArgs e)
     {
 
-    }
-
-    public void ShowExternalMessage()
-    {
-        bll.ShowExternalMessage(lblmsg, Session);
     }
 }

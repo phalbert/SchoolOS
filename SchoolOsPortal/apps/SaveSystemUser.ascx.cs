@@ -1,4 +1,5 @@
-﻿using InterLinkClass.PegasusManagementApi;
+﻿
+using InterLinkClass.PegPaySchoolsApi;
 using System;
 using System.Collections.Generic;
 using System.Web;
@@ -9,15 +10,15 @@ public partial class SaveSystemUser : System.Web.UI.UserControl
 {
     public event EventHandler SaveCompleted;
     Bussinesslogic bll = new Bussinesslogic();
-    SystemUser user = new SystemUser();
-    MSystemService client = new MSystemService();
+    SystemUserDetails user = new SystemUserDetails();
+    Service schoolsApi = new Service();
 
     protected void Page_Load(object sender, EventArgs e)
     {
         try
         {
 
-            user = Session["User"] as SystemUser;
+            user = Session["User"] as SystemUserDetails;
             Session["IsError"] = null;
             string Id = Request.QueryString["BankCode"];
 
@@ -53,8 +54,8 @@ public partial class SaveSystemUser : System.Web.UI.UserControl
     {
         btnSubmit.Visible = true;
         btnEdit.Visible = false;
-        bll.LoadCompaniesIntoDropDown(user, ddCompanies);
-        bll.LoadUserTypesIntoDropDown(ddCompanies.SelectedValue, user, ddUserTypes);
+        bll.LoadSchoolsIntoDropDown(user, ddSchools);
+        bll.LoadDataIntoDropDown("GetUserTypesForDropDown", new string[] { ddSchools.SelectedValue }, ddUserTypes);
 
     }
 
@@ -82,8 +83,8 @@ public partial class SaveSystemUser : System.Web.UI.UserControl
         try
         {
             string msg = "";
-            SystemUser aclient = GetSystemUser();
-            Result result = client.SaveSystemUser(aclient);
+            SystemUser newUser = GetSystemUser();
+            Result result = schoolsApi.SaveSystemUser(newUser);
 
             if (result.StatusCode != Globals.SUCCESS_STATUS_CODE)
             {
@@ -95,12 +96,8 @@ public partial class SaveSystemUser : System.Web.UI.UserControl
             msg = "SYSTEM USER DETAILS SAVED SUCCESSFULLY";
             bll.ShowMessage(lblmsg, msg, false, Session);
 
-            if (ddSendEmail.SelectedValue != "YES")
-            {
-                return;
-            }
 
-            Result mailResult = bll.SendCredentialsToUser(user);
+            Result mailResult = bll.SendCredentialsToUser(newUser);
 
             if (mailResult.StatusCode != Globals.SUCCESS_STATUS_CODE)
             {
@@ -115,7 +112,7 @@ public partial class SaveSystemUser : System.Web.UI.UserControl
             if (SaveCompleted != null)
             {
                 MyEventArgs eventArgs = new MyEventArgs();
-                eventArgs.PegPayId = txtUserID.Text;
+                eventArgs.PegPayId = newUser.Username;
 
                 //Pass on msg
                 Session["ExternalMsg"] = msg;
@@ -132,16 +129,17 @@ public partial class SaveSystemUser : System.Web.UI.UserControl
 
     private SystemUser GetSystemUser()
     {
-        SystemUser user = new SystemUser();
-        user.CompanyCode = ddCompanies.SelectedValue;
-        user.Name = txtName.Text;
-        user.UserId = txtUserID.Text;
-        user.Password = SharedCommons.SharedCommons.GeneratePassword();
-        user.IsActive = ddIsActive.SelectedValue;
-        user.UserType = ddUserTypes.SelectedValue;
-        user.ModifiedBy = this.user.UserId;
-        user.Email = txtEMail.Text;
-        return user;
+        SystemUser newUser = new SystemUser();
+        newUser.SchoolCode = ddSchools.SelectedValue;
+        newUser.PhoneNumber = txtPhone.Text;
+        newUser.FullName = txtName.Text;
+        newUser.Username = newUser.PhoneNumber + "_" + newUser.SchoolCode;
+        newUser.Email = txtEMail.Text;
+        newUser.UserPassword = SharedCommons.SharedCommons.GeneratePassword();
+        newUser.IsActive = ddIsActive.SelectedValue;
+        newUser.UserType = ddUserTypes.SelectedValue;
+        newUser.ModifiedBy = user.User.Username;
+        return newUser;
     }
 
 

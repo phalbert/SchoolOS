@@ -829,6 +829,12 @@ namespace InterLinkClass.PegPaySchoolsApi {
         
         private string fullNameField;
         
+        private string isActiveField;
+        
+        private string emailField;
+        
+        private string phoneNumberField;
+        
         /// <remarks/>
         public string Username {
             get {
@@ -906,6 +912,36 @@ namespace InterLinkClass.PegPaySchoolsApi {
             }
             set {
                 this.fullNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string IsActive {
+            get {
+                return this.isActiveField;
+            }
+            set {
+                this.isActiveField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Email {
+            get {
+                return this.emailField;
+            }
+            set {
+                this.emailField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string PhoneNumber {
+            get {
+                return this.phoneNumberField;
+            }
+            set {
+                this.phoneNumberField = value;
             }
         }
     }
