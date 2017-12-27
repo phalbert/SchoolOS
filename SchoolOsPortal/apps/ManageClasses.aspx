@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Main.master" AutoEventWireup="true" CodeFile="ManageClasses.aspx.cs" Inherits="ManageClasses" %>
 
-<%@ Register TagPrefix="uc" TagName="ListClassesUserControl" Src="~/ListClasses.ascx" %>
-<%@ Register TagPrefix="uc" TagName="SaveClassUserControl" Src="~/SaveClass.ascx" %>
+<%@ Register TagPrefix="uc" TagName="ListClassesUserControl" Src="~/CustomUserControls/ListClasses.ascx" %>
+<%@ Register TagPrefix="uc" TagName="SaveClassUserControl" Src="~/CustomUserControls/SaveClass.ascx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 

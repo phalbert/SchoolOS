@@ -319,13 +319,13 @@
 <!-- global js -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/g/bootstrap@3.3.7,bootstrap.switch@3.3.2,jquery.nicescroll@3.6.0"></script>
-<script src="js/app.js" type="text/javascript"></script>
+<script src="scripts/js/app.js" type="text/javascript"></script>
 <!-- end of global js-->
 <!--page level js-->
-<script src="vendors/iCheck/js/icheck.js"></script>
-<script src="vendors/datedropper/datedropper.js"></script>
-<script src="vendors/airdatepicker.js"></script>
-<script type="text/javascript" src="vendors/select2/js/select2.js.pagespeed.jm.Eugd1Y0BmV.js"></script>
+<script src="scripts/vendors/iCheck/js/icheck.js"></script>
+<script src="scripts/vendors/datedropper/datedropper.js"></script>
+<script src="scripts/vendors/airdatepicker.js"></script>
+<script type="text/javascript" src="scripts/vendors/select2/js/select2.js.pagespeed.jm.Eugd1Y0BmV.js"></script>
 <script type="text/javascript">//<![CDATA[
     "use strict"; $(document).ready(function () { $(".dob").dateDropper({ dropPrimaryColor: "#428bca" }); $("#country").select2({ theme: "bootstrap" }); $("#complex-form").find('input').iCheck({ checkboxClass: 'icheckbox_square-blue', radioClass: 'iradio_square-blue', increaseArea: '20%' }); });
     //]]></script>

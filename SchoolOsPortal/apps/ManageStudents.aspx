@@ -1,9 +1,9 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Main.master" CodeFile="ManageStudents.aspx.cs" Inherits="ManageStudents" %>
 
-<%@ Register TagPrefix="uc" TagName="SaveStudentsUserControl" Src="~/SaveStudent.ascx" %>
-<%@ Register TagPrefix="uc" TagName="AdmitStudentsUserControl" Src="~/ApproveStudents.ascx" %>
-<%@ Register TagPrefix="uc" TagName="ListStudentsUserControl" Src="~/ListStudents.ascx" %>
-<%@ Register TagPrefix="uc" TagName="BulkStudentUploadUserControl" Src="~/BulkStudentUpload.ascx" %>
+<%@ Register TagPrefix="uc" TagName="SaveStudentsUserControl" Src="~/CustomUserControls/SaveStudent.ascx" %>
+<%@ Register TagPrefix="uc" TagName="AdmitStudentsUserControl" Src="~/CustomUserControls/ApproveStudents.ascx" %>
+<%@ Register TagPrefix="uc" TagName="ListStudentsUserControl" Src="~/CustomUserControls/ListStudents.ascx" %>
+<%@ Register TagPrefix="uc" TagName="BulkStudentUploadUserControl" Src="~/CustomUserControls/BulkStudentUpload.ascx" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
     <style>

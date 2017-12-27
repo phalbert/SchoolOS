@@ -22,6 +22,12 @@ public partial class Main : System.Web.UI.MasterPage
         {
             ServicePointManager.ServerCertificateValidationCallback = SharedCommons.SharedCommons.RemoteCertificateValidation;
             details = Session["User"] as SystemUserDetails;
+            string Logout = Request.QueryString["Logout"];
+            if (!string.IsNullOrEmpty(Logout))
+            {
+                LogoutLinkButton_Click(null, null);
+                return;
+            }
             if ((details== null))
             {
                 Response.Redirect("Default.aspx?MSG=SESSION EXPIRED");
@@ -45,7 +51,8 @@ public partial class Main : System.Web.UI.MasterPage
 
     private void LoadData()
     {
-        LogoutLinkButton.Text = details.User.Username;
+     //   LogoutLinkButton.Text = " Hi," + details.User.FullName;
+     
     }
 
     private void Logout()

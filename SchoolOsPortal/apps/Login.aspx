@@ -13,12 +13,12 @@
       <script src='https://www.google.com/recaptcha/api.js'></script>
 
     <style>
-        @import url("vendors/iCheck/css/minimal/_all.css");
-        @import url("vendors/iCheck/css/square/_all.css");
-        @import url("vendors/iCheck/css/flat/_all.css");
-        @import url("vendors/iCheck/css/line/_all.css");
-        @import url("vendors/iCheck/css/polaris/polaris.css");
-        @import url("vendors/iCheck/css/futurico/futurico.css");
+        @import url("scripts/vendors/iCheck/css/minimal/_all.css");
+        @import url("scripts/vendors/iCheck/css/square/_all.css");
+        @import url("scripts/vendors/iCheck/css/flat/_all.css");
+        @import url("scripts/vendors/iCheck/css/line/_all.css");
+        @import url("scripts/vendors/iCheck/css/polaris/polaris.css");
+        @import url("scripts/vendors/iCheck/css/futurico/futurico.css");
 
         .bv-form .help-block {
             margin-bottom: 0;
@@ -137,8 +137,8 @@
   
     <!-- end of global js -->
     <!-- page level js -->
-    <script type="text/javascript" src="vendors/iCheck/js/icheck.js.pagespeed.jm.mc8O_8_6ZX.js"></script>
-    <script src="vendors/bootstrapvalidator/js/bootstrapValidator.min.js.pagespeed.jm.6svL6oFoHD.js" type="text/javascript"></script>
+    <script type="text/javascript" src="scripts/vendors/iCheck/js/icheck.js.pagespeed.jm.mc8O_8_6ZX.js"></script>
+    <script src="scripts/vendors/bootstrapvalidator/js/bootstrapValidator.min.js.pagespeed.jm.6svL6oFoHD.js" type="text/javascript"></script>
     
 </body>
 

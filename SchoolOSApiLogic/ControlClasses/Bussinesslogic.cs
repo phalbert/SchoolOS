@@ -15,7 +15,7 @@ namespace SchoolOSApiLogic.ControlClasses
         public Result SaveSchool(School sch)
         {
             Result result = new Result();
-            DataTable dt = dh.ExecuteDataSet("SaveSchool", new string[] { sch.SchoolCode, sch.SchoolName, sch.SchoolLocation, sch.SchoolEmail, sch.SchoolPhone, sch.UnebCentreNumber, sch.ModifiedBy,sch.District,sch.SubCounty,sch.SchoolLogo,sch.RoadName,sch.PlotNo,sch.PostOfficeBox,sch.LiquidationBankName,sch.LiquidationAccountName,sch.LiquidationAccountNumber }).Tables[0];
+            DataTable dt = dh.ExecuteDataSet("SaveSchool", new string[] { sch.SchoolCode, sch.SchoolName, sch.SchoolLocation, sch.SchoolEmail, sch.SchoolPhone, sch.UnebCentreNumber, sch.ModifiedBy, sch.District, sch.SubCounty, sch.SchoolLogo, sch.RoadName, sch.PlotNo, sch.PostOfficeBox, sch.LiquidationBankName, sch.LiquidationAccountName, sch.LiquidationAccountNumber }).Tables[0];
 
             if (dt.Rows.Count == 0)
             {
@@ -27,6 +27,7 @@ namespace SchoolOSApiLogic.ControlClasses
             result.StatusCode = Globals.SUCCESS_STATUS_CODE;
             result.StatusDesc = Globals.SUCCESS_STATUS_DESC;
             result.PegPayID = dt.Rows[0][0].ToString();
+            result.ThirdPartyID = dt.Rows[0][1].ToString();
             result.RequestID = sch.SchoolCode;
 
             return result;
@@ -35,7 +36,7 @@ namespace SchoolOSApiLogic.ControlClasses
         public Result SaveSchoolFee(SchoolFee fee)
         {
             Result result = new Result();
-            DataTable dt = dh.ExecuteDataSet("SaveSchoolFees", new string[] {fee.FeeID,fee.FeeName,fee.FeeAmount,fee.CurrencyCode,fee.SchoolCode, fee.ModifiedBy }).Tables[0];
+            DataTable dt = dh.ExecuteDataSet("SaveSchoolFees", new string[] { fee.FeeID, fee.FeeName, fee.FeeAmount, fee.CurrencyCode, fee.SchoolCode, fee.ModifiedBy }).Tables[0];
 
             if (dt.Rows.Count == 0)
             {
@@ -116,7 +117,7 @@ namespace SchoolOSApiLogic.ControlClasses
         {
             Result result = new Result();
             user.UserPassword = sharedCommons.GenearetHMACSha256Hash(user.SecretKey, user.UserPassword);
-            DataTable dt = dh.ExecuteDataSet("SaveSystemUser", new string[] { user.Username, user.UserPassword, user.UserType, user.UserCategory, user.SecretKey, user.ModifiedBy,user.ProfilePic,user.SchoolCode,user.FullName,user.IsActive,user.Email,user.PhoneNumber }).Tables[0];
+            DataTable dt = dh.ExecuteDataSet("SaveSystemUser", new string[] { user.Username, user.UserPassword, user.UserType, user.UserCategory, user.SecretKey, user.ModifiedBy, user.ProfilePic, user.SchoolCode, user.FullName, user.IsActive, user.Email, user.PhoneNumber }).Tables[0];
 
             if (dt.Rows.Count == 0)
             {
@@ -148,6 +149,7 @@ namespace SchoolOSApiLogic.ControlClasses
             result.StatusCode = Globals.SUCCESS_STATUS_CODE;
             result.StatusDesc = Globals.SUCCESS_STATUS_DESC;
             result.PegPayID = dt.Rows[0][0].ToString();
+            result.ThirdPartyID = dt.Rows[0][1].ToString();
             result.RequestID = std.StudentNumber;
 
             return result;
@@ -228,12 +230,32 @@ namespace SchoolOSApiLogic.ControlClasses
             result.StatusCode = Globals.SUCCESS_STATUS_CODE;
             result.StatusDesc = Globals.SUCCESS_STATUS_DESC;
             result.PegPayID = dt.Rows[0][0].ToString();
-            result.RequestID = mainLink.SchoolCode;
+            result.RequestID = mainLink.MainLinkCode;
 
             return result;
         }
 
-        public SystemUserDetails Login(string UserId,string Password)
+        public Result SaveSchoolTerm(SchoolTerm term)
+        {
+            Result result = new Result();
+            DataTable dt = dh.ExecuteDataSet("SaveSchoolTerm", new string[] { term.TermName, term.TermCode, term.StartDate, term.EndDate, term.SchoolCode, term.ModifiedBy }).Tables[0];
+
+            if (dt.Rows.Count == 0)
+            {
+                result.StatusCode = Globals.FAILURE_STATUS_CODE;
+                result.StatusDesc = "NO ROWS AFFECTED";
+                return result;
+            }
+
+            result.StatusCode = Globals.SUCCESS_STATUS_CODE;
+            result.StatusDesc = Globals.SUCCESS_STATUS_DESC;
+            result.PegPayID = dt.Rows[0][0].ToString();
+            result.RequestID = term.TermCode;
+
+            return result;
+        }
+
+        public SystemUserDetails Login(string UserId, string Password)
         {
             SystemUserDetails result = new SystemUserDetails();
 
@@ -274,18 +296,18 @@ namespace SchoolOSApiLogic.ControlClasses
 
             DataRow dr = dt.Rows[0];
             sch.LiquidationAccountName = dr["LiquidationAccountName"].ToString();
-            sch.District= dr["District"].ToString();
-            sch.LiquidationAccountNumber= dr["LiquidationAccountNumber"].ToString();
-            sch.LiquidationBankName= dr["LiquidationBankName"].ToString();
-            sch.PlotNo= dr["PlotNo"].ToString();
-            sch.PostOfficeBox= dr["PostOfficeBox"].ToString();
-            sch.RoadName= dr["RoadName"].ToString();
+            sch.District = dr["District"].ToString();
+            sch.LiquidationAccountNumber = dr["LiquidationAccountNumber"].ToString();
+            sch.LiquidationBankName = dr["LiquidationBankName"].ToString();
+            sch.PlotNo = dr["PlotNo"].ToString();
+            sch.PostOfficeBox = dr["PostOfficeBox"].ToString();
+            sch.RoadName = dr["RoadName"].ToString();
             sch.SchoolCategories = null;
             sch.SchoolCode = Id;
-            sch.SchoolEmail= dr["SchoolEmail"].ToString();
-            sch.SchoolLocation= dr["SchoolLocation"].ToString();
-            sch.SchoolLogo= dr["SchoolLogo"].ToString();
-            sch.SchoolName= dr["SchoolName"].ToString();
+            sch.SchoolEmail = dr["SchoolEmail"].ToString();
+            sch.SchoolLocation = dr["SchoolLocation"].ToString();
+            sch.SchoolLogo = dr["SchoolLogo"].ToString();
+            sch.SchoolName = dr["SchoolName"].ToString();
             sch.SchoolType = null;
             return sch;
         }
@@ -300,7 +322,7 @@ namespace SchoolOSApiLogic.ControlClasses
                 return menuItems;
             }
 
-            foreach(DataRow dr in dt.Rows)
+            foreach (DataRow dr in dt.Rows)
             {
                 MainLink mainLink = new MainLink();
                 mainLink.MainLinkCode = dr["MainLinkCode"].ToString();
@@ -335,7 +357,7 @@ namespace SchoolOSApiLogic.ControlClasses
 
             }
 
-            
+
 
             return menuItems;
         }
@@ -367,7 +389,7 @@ namespace SchoolOSApiLogic.ControlClasses
                 user.StatusDesc = "INVALID USERNAME/PASSWORD!!";
                 return user;
             }
-            
+
             string hashedPassword = GenearetHMACSha256Hash(user.SecretKey, password);
 
             if (user.UserPassword != hashedPassword)
@@ -421,12 +443,12 @@ namespace SchoolOSApiLogic.ControlClasses
             }
             DataRow row = dt.Rows[0];
             user.ApprovedBy = row["ApprovedBy"].ToString();
-            user.SchoolCode= row["SchoolCode"].ToString();
-            user.SecretKey= row["SecretKey"].ToString();
-            user.UserCategory= row["UserCategory"].ToString();
+            user.SchoolCode = row["SchoolCode"].ToString();
+            user.SecretKey = row["SecretKey"].ToString();
+            user.UserCategory = row["UserCategory"].ToString();
             user.Username = userId;
-            user.UserPassword= row["Password"].ToString();
-            user.UserType= row["UserType"].ToString();
+            user.UserPassword = row["Password"].ToString();
+            user.UserType = row["UserType"].ToString();
             user.ProfilePic = row["ProfilePic"].ToString();
             user.FullName = row["FullName"].ToString();
             user.StatusCode = Globals.SUCCESS_STATUS_CODE;
@@ -437,7 +459,7 @@ namespace SchoolOSApiLogic.ControlClasses
         public Result SaveSubLink(SubLink sublink)
         {
             Result result = new Result();
-            DataTable dt = dh.ExecuteDataSet("SaveSubLink", new string[] { sublink.SchoolCode, sublink.SubLinkCode, sublink.SubLinkName, sublink.ModifiedBy,sublink.URL }).Tables[0];
+            DataTable dt = dh.ExecuteDataSet("SaveSubLink", new string[] { sublink.SchoolCode, sublink.SubLinkCode, sublink.SubLinkName, sublink.ModifiedBy, sublink.URL }).Tables[0];
 
             if (dt.Rows.Count == 0)
             {
@@ -454,34 +476,32 @@ namespace SchoolOSApiLogic.ControlClasses
             return result;
         }
 
-        public Result SaveMenu(MenuItem menu)
+        public Result SaveMenuItem(MenuItem menu)
         {
             Result result = new Result();
 
-            //foreach (var menuItem in menu.MenuItems)
-            //{
-            //    foreach (var sublink in menuItem.Value)
-            //    {
-            //        DataTable dt = dh.ExecuteDataSet("SaveMenuItem", new string[] { menu.SchoolCode, menuItem.Key.MainLinkCode, sublink.SubLinkCode, menu.ModifiedBy }).Tables[0];
+            foreach (var sublink in menu.subLinks)
+            {
+                DataTable dt = dh.ExecuteDataSet("SaveMenuItem", new string[] { menu.SchoolCode, sublink.SubLinkCode, menu.mainLink.MainLinkCode, menu.ModifiedBy }).Tables[0];
 
-            //        if (dt.Rows.Count == 0)
-            //        {
-            //            result.StatusCode = Globals.FAILURE_STATUS_CODE;
-            //            result.StatusDesc = "NO ROWS AFFECTED";
-            //            return result;
-            //        }
-            //    }
-            //}
+                if (dt.Rows.Count == 0)
+                {
+                    result.StatusCode = Globals.FAILURE_STATUS_CODE;
+                    result.StatusDesc = "NO ROWS AFFECTED";
+                    return result;
+                }
+            }
+
 
             result.StatusCode = Globals.SUCCESS_STATUS_CODE;
             result.StatusDesc = Globals.SUCCESS_STATUS_DESC;
             result.PegPayID = "";
-            result.RequestID = menu.SchoolCode;
+            result.RequestID = menu.mainLink.MainLinkCode;
 
             return result;
         }
 
-        public DataSet ExecuteDataSet(string StoredProc,params object[] Parameters)
+        public DataSet ExecuteDataSet(string StoredProc, params object[] Parameters)
         {
             return dh.ExecuteDataSet(StoredProc, Parameters);
         }
@@ -495,7 +515,7 @@ namespace SchoolOSApiLogic.ControlClasses
         public Result SaveSchoolFees(SchoolFee fee)
         {
             Result result = new Result();
-            DataTable dt = dh.ExecuteDataSet("SaveSchoolFees", new string[] { fee.FeeID, fee.FeeName, fee.FeeAmount,fee.CurrencyCode,fee.SchoolCode, fee.ModifiedBy }).Tables[0];
+            DataTable dt = dh.ExecuteDataSet("SaveSchoolFees", new string[] { fee.FeeID, fee.FeeName, fee.FeeAmount, fee.CurrencyCode, fee.SchoolCode, fee.ModifiedBy }).Tables[0];
 
             if (dt.Rows.Count == 0)
             {
@@ -530,7 +550,7 @@ namespace SchoolOSApiLogic.ControlClasses
             return result;
         }
 
-       
+
 
     }
 }

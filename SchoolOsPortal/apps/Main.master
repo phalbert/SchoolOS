@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
 
-<head>
+<head runat="server">
     <meta charset="UTF-8">
     <title>PegPay Uganda </title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
@@ -21,6 +21,7 @@
     <![endif]-->
     <!-- global css -->
     <link type="text/css" href="css/pegpay-master.css" rel="stylesheet" />
+     
 
     <style id="skin">
         a.dropdown-toggle {
@@ -51,6 +52,11 @@
             }
         }
     </style>
+    <style type="text/css">
+        .ajax__calendar_container {
+            z-index: 1000;
+        }
+    </style>
     <!------------------------------ end of global css --------------------------->
 </head>
 
@@ -63,7 +69,7 @@
 
         <header class="header">
             <nav class="navbar navbar-static-top" role="navigation">
-                <a href="index.php" class="logo">
+                <a href="index.php" class="logo" >
                     <!--<img src="img/pegasus.png" alt="logo" height="40px"/>-->
                     <h3 style="color: #fff;">FlexiSchools</h3>
                 </a>
@@ -75,24 +81,24 @@
                 <div class="navbar-right">
                     <ul class="nav navbar-nav">
                         <li class="dropdown messages-menu">
-                            <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw ti-email black"></i>
+                            <asp:LinkButton Id="LogOutLinkButton" runat="server" OnClick="LogoutLinkButton_Click" CssClass="dropdown-toggle"><i class="fa fa-fw ti-power-off black"></i>
 
-                            </a>
+                            </asp:LinkButton>
 
 
                         </li>
 
                         <!-------------------------------------- User Account: style can be found in dropdown--------------------------------->
                         <li class="dropdown user user-menu">
-                            <a href="javascript:void(0)" class="dropdown-toggle padding-user" data-toggle="dropdown">
+                            <a href="?Logout" class="dropdown-toggle padding-user" data-toggle="dropdown">
                                 <img src="ImageHandler.ashx?Id=<%= user.User.ProfilePic %>" width="35" class="img-circle img-responsive pull-left" height="35" alt="User Image">
                                 <div class="riot">
                                     <div>
-                                        Hi, <%=user.User.FullName %>
-                               
-                                    <span>
-                                        <i class="caret"></i>
-                                    </span>
+                                        <%=user.User.FullName %>
+
+                                        <span>
+                                            <i class="caret"></i>
+                                        </span>
                                     </div>
                                 </div>
                             </a>
@@ -100,31 +106,9 @@
                                 <!------------------------------------------ User image ----------------------------->
                                 <li class="user-header">
                                     <img src="ImageHandler.ashx?Id=<%= user.User.ProfilePic %>" class="img-circle" alt="User Image">
-                                    <p><%= user.User.FullName %></p>
+                                    <p></p>
                                 </li>
-                                <!--------------------------------------------- Menu Body ------------------------------------->
-                                <li class="p-t-3">
-                                    <a href="user_profile.html">
-                                        <i class="fa fa-fw ti-user"></i>
-                                        My Profile
-                                    </a>
-                                </li>
-                                <li role="presentation"></li>
-                                <li>
-                                    <a href="edit_user.html">
-                                        <i class="fa fa-fw ti-settings"></i>
-                                        Account Settings
-                                    </a>
-                                </li>
-                                <li role="presentation" class="divider"></li>
-                                <li class="user-footer">
-                                    <div class="pull-left">
-                                        <a href="login.php">
-                                            <i class="fa fa-fw ti-shift-right"></i>
-                                            Logout
-                                        </a>
-                                    </div>
-                                </li>
+                               
                             </ul>
                         </li>
                     </ul>
@@ -141,8 +125,9 @@
                             <img style="vertical-align: middle;" src="ImageHandler.ashx?Id=<%=user.SchoolDetails.SchoolLogo %>" width="200px" />
                             <br />
                             <div class="content-profile">
-                                <h4 style="text-align: center" class="media-heading"><asp:LinkButton ID="LogoutLinkButton" runat="server" Text="" OnClick="LogoutLinkButton_Click">Username</asp:LinkButton>
-                            </h4>
+                                <h4 style="text-align: center" class="media-heading">
+                                    Username</asp:LinkButton>
+                                </h4>
                                 <ul class="icon-list">
                                     <li>
                                         <a href="users.php">
@@ -204,6 +189,9 @@
             </section>
         </aside>
 
+        <ajaxToolkit:ToolkitScriptManager ID="ScriptManager1" runat="Server" EnableScriptGlobalization="true"
+            EnableScriptLocalization="true">
+        </ajaxToolkit:ToolkitScriptManager>
         <!------------------------------------- Main content --------------------->
         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
         </asp:ContentPlaceHolder>
@@ -217,7 +205,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/g/bootstrap@3.3.7,bootstrap.switch@3.3.2,jquery.nicescroll@3.6.0"></script>
 
-    <script src="js/app.js" type="text/javascript"></script>
+    <script src="scripts/js/app.js" type="text/javascript"></script>
     <!------------------------------ end of page level js --------------->
 </body>
 

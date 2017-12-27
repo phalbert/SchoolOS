@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Main.master" CodeFile="ManageClassStreams.aspx.cs" Inherits="ManageClassStreams" %>
 
-<%@ Register TagPrefix="uc" TagName="ListStreamsUserControl" Src="~/ListClasses.ascx" %>
-<%@ Register TagPrefix="uc" TagName="SaveStreamUserControl" Src="~/SaveClass.ascx" %>
+<%@ Register TagPrefix="uc" TagName="ListStreamsUserControl" Src="~/CustomUserControls/ListStreams.ascx" %>
+<%@ Register TagPrefix="uc" TagName="SaveStreamUserControl" Src="~/CustomUserControls/SaveClass.ascx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 

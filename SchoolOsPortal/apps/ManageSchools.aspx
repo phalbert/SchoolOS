@@ -1,9 +1,9 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Main.master" CodeFile="ManageSchools.aspx.cs" Inherits="ManageSchools" %>
 
 
-<%@ Register TagPrefix="uc" TagName="ListSchoolsUserControl" Src="~/ListSchools.ascx" %>
-<%@ Register TagPrefix="uc" TagName="SaveSchoolsUserControl" Src="~/SaveSchool.ascx" %>
-<%@ Register TagPrefix="uc" TagName="AprroveSchoolsUserControl" Src="~/ApproveSchools.ascx" %>
+<%@ Register TagPrefix="uc" TagName="ListSchoolsUserControl" Src="~/CustomUserControls/ListSchools.ascx" %>
+<%@ Register TagPrefix="uc" TagName="SaveSchoolsUserControl" Src="~/CustomUserControls/SaveSchool.ascx" %>
+<%@ Register TagPrefix="uc" TagName="AprroveSchoolsUserControl" Src="~/CustomUserControls/ApproveSchools.ascx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 

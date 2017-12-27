@@ -9,6 +9,10 @@ namespace SchoolOSApiLogic
 {
     public class SchoolsInterfaceApi
     {
+        //Do not declare global variables in here
+        //Globals may prevent external initialization of this interface (if exception happens in Global variable initialization)
+        //remember main API has no try catch
+
         public SystemUserDetails Login(string Username, string Password)
         {
             SystemUserDetails result = new SystemUserDetails();
@@ -339,6 +343,31 @@ namespace SchoolOSApiLogic
             return result;
         }
 
+        public Result SaveSchoolTerm(SchoolTerm link)
+        {
+            Result result = new Result();
+            try
+            {
+                if (!link.IsValid())
+                {
+                    result.StatusCode = link.StatusCode;
+                    result.StatusDesc = link.StatusDesc;
+                    return result;
+                }
+
+                Bussinesslogic bll = new Bussinesslogic();
+                result = bll.SaveSchoolTerm(link);
+            }
+            catch (Exception ex)
+            {
+                string msg = $"EXCEPTION: {ex.Message}";
+                DatabaseHandler.LogError(msg, ex.StackTrace, link.SchoolCode);
+                result.StatusCode = Globals.FAILURE_STATUS_CODE;
+                result.StatusDesc = msg;//"{0} is an {1}",0,1
+            }
+            return result;
+        }
+
         public Result SaveSubLink(SubLink link)
         {
 
@@ -379,7 +408,7 @@ namespace SchoolOSApiLogic
                 }
 
                 Bussinesslogic bll = new Bussinesslogic();
-                result = bll.SaveMenu(menu);
+                result = bll.SaveMenuItem(menu);
             }
             catch (Exception ex)
             {

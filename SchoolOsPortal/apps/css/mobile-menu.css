@@ -1,0 +1,47 @@
+@media (max-width: 768px)  {
+    /**Menu**/
+    .mobile-main-nav{ min-height: 0 }
+    .mobile-main-nav .navbar-toggle {  position: absolute;  left: 240px;  }
+    .mobile-main-nav #navbar{position: fixed;left: 0;  top: 0px; bottom: 0;  z-index: 9; background: #323232; margin: 0px; padding: 0 15px; height: 360px !important; width: 250px !important; -webkit-transform: translateX(-300px);  -webkit-transition: transform 280ms cubic-bezier(0.25,.8,0.25,1); transform: translateX(-300px);  transition: transform 280ms cubic-bezier(0.25,.8,0.25,1);  }
+    .mobile-main-nav #navbar.collapsing{   }
+    .mobile-main-nav #navbar:before{ opacity: 0;}
+  
+    .mobile-main-nav #navbar.in {  -webkit-transform: translateX(0px);  -webkit-transition: transform 280ms cubic-bezier(0.25,.8,0.25,1); transform: translateX(0px);  transition: transform 280ms cubic-bezier(0.25,.8,0.25,1); overflow-y:visible;  }
+  
+  
+    .mobile-main-nav #navbar.in:before,.mobile-main-nav #navbar.collapsing:before{ content: "" ;position: fixed; display: block; background: rgba(0,0,0,0.2); left: 0; top: 0; width: 100vw; bottom: 0;   animation: show 2000ms cubic-bezier(0.175, 0.885, 0.32, 1.275) 560ms forwards; }
+
+    .mobile-main-nav .nav{margin-top: 50px}
+    .mobile-main-nav .nav li {  display: block;  float: none; }
+   .mobile-main-nav  .navbar-nav>li>a:hover{color:#FFF}
+}
+
+.animate-show {
+    animation: show 800ms cubic-bezier(0.175, 0.885, 0.32, 1.275) .6s forwards;
+    /*opacity: 0;*/
+}
+
+
+@keyframes hide{
+    0%{ opacity: 1; z-index: 9;  }
+    99% { opacity: 0; top:-100px;  }
+    100% {  opacity: 0; top:-100px; z-index: 0;   }
+}
+
+@keyframes show{
+    0%{ opacity: 0 ;  }
+    100% { opacity: 1;transform: none; }
+}
+
+.navbar {border:0px!important;}
+.btn-default{border:0px!important;border-radius: 0px!important;float:right!important;}
+@media (max-width: 736px) {
+.btn-primary{border:0px!important;border-radius: 0px!important;}
+.btn-danger{border:0px!important;border-radius: 0px!important;}
+}
+
+@media (max-width: 736px) {
+.navbar-default .navbar-nav>li>a {
+    color:#ffffff !important;
+    }
+}

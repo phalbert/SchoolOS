@@ -226,6 +226,13 @@ public class Service : System.Web.Services.WebService
     }
 
     [WebMethod]
+    public Result SaveSchoolTerm(SchoolTerm sub)
+    {
+        SchoolOSApiLogic.SchoolsInterfaceApi api = new SchoolOSApiLogic.SchoolsInterfaceApi();
+        return api.SaveSchoolTerm(sub);
+    }
+
+    [WebMethod]
     public Result SaveUserType(UserType sub)
     {
         SchoolOSApiLogic.SchoolsInterfaceApi api = new SchoolOSApiLogic.SchoolsInterfaceApi();

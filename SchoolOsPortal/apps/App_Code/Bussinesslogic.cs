@@ -27,6 +27,18 @@ public class Bussinesslogic
         return base64String;
     }
 
+    public string GetBase64StringOfUploadedFile(FileUpload fileUpload)
+    {
+        string base64string = "";
+        if (fileUpload.PostedFile.ContentLength != 0)
+        {
+            byte[] b = new byte[fileUpload.PostedFile.ContentLength];
+            fileUpload.PostedFile.InputStream.Read(b, 0, b.Length);
+            string base64String = System.Convert.ToBase64String(b, 0, b.Length);
+        }
+        return base64string;
+    }
+
     public void ShowMessage(Label lblmsg, string msg, bool IsError, System.Web.SessionState.HttpSessionState Session)
     {
         lblmsg.Text = msg;
@@ -164,16 +176,17 @@ public class Bussinesslogic
     {
         try
         {
-            DataTable datatable = client.ExecuteDataSet("InsertIntoAuditTrail",
-                                                           new string[]
-                                                           {
-                                                             ActionType,
-                                                             TableName,
-                                                             BankCode,
-                                                             ModifiedBy,
-                                                             Action
-                                                           }).Tables[0];
-            return datatable.Rows[0][0].ToString();
+            return "";
+            //DataTable datatable = client.ExecuteDataSet("InsertIntoAuditTrail",
+            //                                               new string[]
+            //                                               {
+            //                                                 ActionType,
+            //                                                 TableName,
+            //                                                 BankCode,
+            //                                                 ModifiedBy,
+            //                                                 Action
+            //                                               }).Tables[0];
+            //return datatable.Rows[0][0].ToString();
         }
         catch (Exception ex)
         {

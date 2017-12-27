@@ -60,6 +60,8 @@ namespace InterLinkClass.PegPaySchoolsApi {
         
         private System.Threading.SendOrPostCallback SaveSubLinkOperationCompleted;
         
+        private System.Threading.SendOrPostCallback SaveSchoolTermOperationCompleted;
+        
         private System.Threading.SendOrPostCallback SaveUserTypeOperationCompleted;
         
         private System.Threading.SendOrPostCallback SaveMenuOperationCompleted;
@@ -143,6 +145,9 @@ namespace InterLinkClass.PegPaySchoolsApi {
         
         /// <remarks/>
         public event SaveSubLinkCompletedEventHandler SaveSubLinkCompleted;
+        
+        /// <remarks/>
+        public event SaveSchoolTermCompletedEventHandler SaveSchoolTermCompleted;
         
         /// <remarks/>
         public event SaveUserTypeCompletedEventHandler SaveUserTypeCompleted;
@@ -561,6 +566,35 @@ namespace InterLinkClass.PegPaySchoolsApi {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://pegasus.co.ug/SaveSchoolTerm", RequestNamespace="http://pegasus.co.ug/", ResponseNamespace="http://pegasus.co.ug/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Result SaveSchoolTerm(SchoolTerm sub) {
+            object[] results = this.Invoke("SaveSchoolTerm", new object[] {
+                        sub});
+            return ((Result)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void SaveSchoolTermAsync(SchoolTerm sub) {
+            this.SaveSchoolTermAsync(sub, null);
+        }
+        
+        /// <remarks/>
+        public void SaveSchoolTermAsync(SchoolTerm sub, object userState) {
+            if ((this.SaveSchoolTermOperationCompleted == null)) {
+                this.SaveSchoolTermOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSaveSchoolTermOperationCompleted);
+            }
+            this.InvokeAsync("SaveSchoolTerm", new object[] {
+                        sub}, this.SaveSchoolTermOperationCompleted, userState);
+        }
+        
+        private void OnSaveSchoolTermOperationCompleted(object arg) {
+            if ((this.SaveSchoolTermCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.SaveSchoolTermCompleted(this, new SaveSchoolTermCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://pegasus.co.ug/SaveUserType", RequestNamespace="http://pegasus.co.ug/", ResponseNamespace="http://pegasus.co.ug/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public Result SaveUserType(UserType sub) {
             object[] results = this.Invoke("SaveUserType", new object[] {
@@ -643,6 +677,7 @@ namespace InterLinkClass.PegPaySchoolsApi {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SystemUserDetails))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Request))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(UserType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolTerm))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(StudentFee))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolFee))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Subject))]
@@ -669,6 +704,7 @@ namespace InterLinkClass.PegPaySchoolsApi {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SystemUserDetails))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Request))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(UserType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolTerm))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(StudentFee))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolFee))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Subject))]
@@ -948,6 +984,7 @@ namespace InterLinkClass.PegPaySchoolsApi {
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(UserType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolTerm))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(StudentFee))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolFee))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Subject))]
@@ -1056,13 +1093,72 @@ namespace InterLinkClass.PegPaySchoolsApi {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://pegasus.co.ug/")]
+    public partial class SchoolTerm : Request {
+        
+        private string termCodeField;
+        
+        private string termNameField;
+        
+        private string startDateField;
+        
+        private string endDateField;
+        
+        /// <remarks/>
+        public string TermCode {
+            get {
+                return this.termCodeField;
+            }
+            set {
+                this.termCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string TermName {
+            get {
+                return this.termNameField;
+            }
+            set {
+                this.termNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string StartDate {
+            get {
+                return this.startDateField;
+            }
+            set {
+                this.startDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string EndDate {
+            get {
+                return this.endDateField;
+            }
+            set {
+                this.endDateField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1590.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://pegasus.co.ug/")]
     public partial class StudentFee : Request {
         
         private string studentIDField;
         
-        private string classIDField;
+        private string classCodeField;
         
         private string feeIDField;
+        
+        private string termCodeField;
         
         /// <remarks/>
         public string StudentID {
@@ -1075,12 +1171,12 @@ namespace InterLinkClass.PegPaySchoolsApi {
         }
         
         /// <remarks/>
-        public string ClassID {
+        public string ClassCode {
             get {
-                return this.classIDField;
+                return this.classCodeField;
             }
             set {
-                this.classIDField = value;
+                this.classCodeField = value;
             }
         }
         
@@ -1091,6 +1187,16 @@ namespace InterLinkClass.PegPaySchoolsApi {
             }
             set {
                 this.feeIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string TermCode {
+            get {
+                return this.termCodeField;
+            }
+            set {
+                this.termCodeField = value;
             }
         }
     }
@@ -2301,6 +2407,32 @@ namespace InterLinkClass.PegPaySchoolsApi {
         private object[] results;
         
         internal SaveSubLinkCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Result Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Result)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")]
+    public delegate void SaveSchoolTermCompletedEventHandler(object sender, SaveSchoolTermCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1590.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class SaveSchoolTermCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal SaveSchoolTermCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

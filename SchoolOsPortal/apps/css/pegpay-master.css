@@ -11868,7 +11868,7 @@ body>form>.header {
     left: 0;
     right: 0;
     z-index: 1030;
-    background: #233742
+    background: #2E576B
 }
 
 body>form>.header .navbar {
@@ -11901,7 +11901,7 @@ body>form>.header .logo {
     padding: 3px 10px;
     text-align: center;
     width: 250px;
-    background-color: seagreen;
+    background-color: #2E576B;
 }
 
 body>form>.header .logo .icon {

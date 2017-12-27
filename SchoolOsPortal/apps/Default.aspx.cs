@@ -22,22 +22,7 @@ public partial class _Default : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        try
-        {
-
-            if (IsPostBack)
-            {
-
-            }
-            else
-            {
-                LoadData();
-            }
-        }
-        catch (Exception ex)
-        {
-            bll.ShowMessage(lblmsg, ex.Message, true, Session);
-        }
+        Response.Redirect("~/Start/Index.html");
     }
 
     private void LoadData()
@@ -46,28 +31,5 @@ public partial class _Default : System.Web.UI.Page
     }
 
 
-    protected void btnLogin_Click(object sender, EventArgs e)
-    {
-        try
-        {
-            string Username = txtUsername.Text;
-            string Password = txtPassword.Text;
-            SystemUserDetails userDetails = schoolsApi.Login(Username, Password);
-
-            if (userDetails.StatusCode != Globals.SUCCESS_STATUS_CODE)
-            {
-                string msg = "FAILED: " + userDetails.StatusDesc;
-                bll.ShowMessage(lblmsg, msg, true, Session);
-                return;
-            }
-
-            Session["User"] = userDetails;
-            Response.Redirect("LoggedInStartPage.aspx");
-        }
-        catch (Exception ex)
-        {
-            string msg = "FAILED: " + ex.Message;
-            bll.ShowMessage(lblmsg, msg, true, Session);
-        }
-    }
+   
 }

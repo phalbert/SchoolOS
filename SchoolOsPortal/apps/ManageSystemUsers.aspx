@@ -1,8 +1,8 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Main.master" CodeFile="ManageSystemUsers.aspx.cs" Inherits="ManageSystemUsers" %>
 
-<%@ Register TagPrefix="uc" TagName="ListSystemUsersControl" Src="~/ListSystemUsers.ascx" %>
-<%@ Register TagPrefix="uc" TagName="SaveSystemUsersControl" Src="~/SaveSystemUser.ascx" %>
-<%@ Register TagPrefix="uc" TagName="ApproveSystemUsersControl" Src="~/ApproveSystemUsers.ascx" %>
+<%@ Register TagPrefix="uc" TagName="ListSystemUsersControl" Src="~/CustomUserControls/ListSystemUsers.ascx" %>
+<%@ Register TagPrefix="uc" TagName="SaveSystemUsersControl" Src="~/CustomUserControls/SaveSystemUser.ascx" %>
+<%@ Register TagPrefix="uc" TagName="ApproveSystemUsersControl" Src="~/CustomUserControls/ApproveSystemUsers.ascx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 

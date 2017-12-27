@@ -1,152 +1,472 @@
-<%@ Page Language="C#" AutoEventWireup="true"
-    CodeFile="Default.aspx.cs"
-    Inherits="_Default"
-    EnableEventValidation="false"
-    Culture="auto"
-    UICulture="auto" %>
-
-
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="keywords" content="flexipay Uganda, flexi pay uganda, flexipay, school fees, uganda, best, school fees payments uganda, fees, mtn, airtel, mobile money, visa, mastercard, papyap" />
+    <meta name="description" content="FlexiPay - Pay School Fees with Convenience" />
+    <meta name="author" content="matchstick.ug" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <title>FEXIPAY UGANDA</title>
 
-    <title>School Login</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="Images/favicon.ico.png" />
-    <link href="css/pegpay-login.css" rel="stylesheet" />
-      <script src='https://www.google.com/recaptcha/api.js'></script>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="images/favicon.ico" />
 
-    <style>
-        @import url("vendors/iCheck/css/minimal/_all.css");
-        @import url("vendors/iCheck/css/square/_all.css");
-        @import url("vendors/iCheck/css/flat/_all.css");
-        @import url("vendors/iCheck/css/line/_all.css");
-        @import url("vendors/iCheck/css/polaris/polaris.css");
-        @import url("vendors/iCheck/css/futurico/futurico.css");
+    <!-- font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,500,500i,600,700,800,900%7CPoppins:200,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dosis:300,400,500,600,700,800">
 
-        .bv-form .help-block {
-            margin-bottom: 0;
-        }
+    <!-- Plugins -->
+    <link rel="stylesheet" type="text/css" href="css/plugins-css.css" />
 
-        .bv-form .tooltip-inner {
-            text-align: left;
-        }
+    <!-- revoluation -->
+    <link rel="stylesheet" type="text/css" href="scripts/revolution/css/settings.css" media="screen" />
 
-        .nav-tabs li.bv-tab-success > a {
-            color: #3c763d;
-        }
+    <!-- Typography -->
+    <link rel="stylesheet" type="text/css" href="css/typography.css" />
 
-        .nav-tabs li.bv-tab-error > a {
-            color: #a94442;
-        }
+    <!-- Shortcodes -->
+    <link rel="stylesheet" type="text/css" href="css/shortcodes/shortcodes.css" />
 
-        .bv-form .bv-icon-no-label {
-            top: 0;
-        }
+    <!-- Style -->
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
 
-        .bv-form .bv-icon-input-group {
-            top: 0;
-            z-index: 100;
-        }
-    </style>
+    <!-- Responsive -->
+    <link rel="stylesheet" type="text/css" href="css/responsive.css" />
 
-    <style type="text/css">
-        .short_explanation {
-            font-family: Arial, sans-serif;
-            font-size: 0.8em;
-            color: #333;
-        }
+    <!-- Mobile Menu -->
+    <link rel="stylesheet" type="text/css" href="css/mobile-menu.css" />
 
-        .error {
-            font-family: Verdana, Arial, sans-serif;
-            font-size: 0.7em;
-            color: #900;
-            background-color: #ffff00;
-        }
-    </style>
 
-    <link href="css/A.login.css.pagespeed.cf.uxB68C_gDO.css" rel="stylesheet">
-    <!--end page level css-->
-    <script type='text/javascript' src='scripts/fg_captcha_validator.js'></script>
+
 </head>
 
-<body id="sign-in">
-    <div class="container">
-        <div class="row">
-            <%-------------------------------------------- Message Label ----------------------------------%>
-            <div data-row-span="4">
-                <div class="text-center">
-                    <% 
-                        string IsError = Session["IsError"] as string;
-                        if (IsError == null)
-                        {
-                            Response.Write("<div>");
+<body>
 
-                        }
-                        else if (IsError == "True")
-                        {
-                            Response.Write("<div class=\"alert alert-danger\">");
+    <div class="wrapper">
 
-                        }
-                        else
-                        {
-                            Response.Write("<div class=\"alert alert-success\">");
-                        }
-                    %>
-                    <strong>
-                        <asp:Label ID="lblmsg" runat="server"></asp:Label>
-                    </strong>
-                    <%Response.Write("</div>"); %>
+
+        <!--=================================
+ header -->
+
+        <header id="header" class="header default">
+
+            <!--=================================
+ mega menu -->
+
+            <!-- menu start -->
+
+            <nav id="menu" class="mega-menu hidden-sm hidden-xs">
+                <!-- menu list items container -->
+                <section class="menu-list-items">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12 col-md-12">
+                                <!-- menu logo -->
+                                <ul class="menu-logo">
+                                    <li>
+                                        <a href="index.php">
+                                            <img id="logo_img" src="images/logo-icon-dark.png" alt="logo">
+                                        </a>
+                                    </li>
+                                </ul>
+                                <!-- menu links -->
+                                <div style="margin-top: 40px;" class="menu-bar">
+                                    <ul class="menu-links">
+
+                                        <li><a href="index.php">Home</a></li>
+
+                                        <li><a href="about.php">About FlexiPay</a></li>
+                                        <li><a href="how-it-works.php">How It Works</a></li>
+                                        <!--Link to School setup intro and registration page -->
+                                        <li><a class="btn btn-danger" href="RegisterSchool.aspx">Get Started</a></li>
+                                        &nbsp;&nbsp;
+            <!--Link to School login page -->
+                                        <li><a class="btn btn-primary" href="Login.aspx">School Login&nbsp;<i class="fa fa-sign-in"></i></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </nav>
+            <!-- menu end -->
+
+
+            <!------Mobile menu ---->
+            <nav class="navbar navbar-default mobile-main-nav hidden-md hidden-lg">
+                <div class="container">
+
+                    <div id="navbar" class="navbar-collapse" aria-expanded="true">
+                        <br>
+                        <br>
+                        <ul class="menu-logo">
+                            <li>
+                                <a href="index.php">
+                                    <img id="logo_img" src="images/logo-icon-dark.png" alt="logo">
+                                </a>
+                            </li>
+                        </ul>
+                        <ul style="color: #fff;" class="nav navbar-nav">
+                            <li><a href="index.php">Home</a></li>
+
+                            <li><a href="about.php">About FlexiPay</a></li>
+                            <li><a href="how-it-works.php">How It Works</a></li>
+                        </ul>
+                    </div>
+                    <!--/.nav-collapse -->
                 </div>
+            </nav>
+            <div class="top-mobile-menu hidden-md hidden-lg">
+                <span style="float: left!important; color: #fff!important; padding: 8px 10px 5px 20px!important;">FLEXIPAY</span>&nbsp;<a class="btn btn-danger" href="javascript:void(0)">Get Started</a>&nbsp;<a class="btn btn-primary" href="javascript:void(0)">Login&nbsp;<i class="fa fa-sign-in"></i></a>
+                <span style="background: 0!important; color: #fff!important;" class="btn btn-default" data-toggle="collapse" data-target="#navbar" aria-expanded="true">
+                    <i style="color: #fff;" class="fa fa-bars" aria-hidden="true"></i>MENU
+                </span>
             </div>
+            <!-- mobile menu end -->
 
-            <%-------------------------------------------- Login Form ----------------------------------%>
-            <div class="col-md-4 col-md-offset-4 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 login-form">
-                <div class="panel-header">
-                    <h2 class="text-center">
-                        <img src="Images/pegasus.png" alt="Logo" width="200px" height="auto">
-                    </h2>
-                </div>
-                <div class="panel-body">
+
+
+        </header>
+
+        <!--=================================
+ header -->
+
+        <!--=================================
+ banner -->
+
+        <section class="slider-parallax typer-banner business bg-overlay-black-60 parallax" data-jarallax='{"speed": 0.6}' style="background-image: url('images/man-on-laptop.jpg');">
+            <div class="slider-content-middle">
+                <div class="container">
                     <div class="row">
-                        <div class="col-xs-12">
-                            <form runat="server" id="authentication" method="post" class="login_validator">
-                                <div class="form-group">
-                                    <label for="email" class="sr-only">School Code</label>
-                                    <asp:TextBox runat="server" type="text" class="form-control  form-control-lg" ID="txtUsername" name="code" placeholder="Enter Username"></asp:TextBox>
-                                </div>
-                                <div class="form-group">
-                                    <label for="password" class="sr-only">Password</label>
-                                    <asp:TextBox runat="server" TextMode="Password" class="form-control form-control-lg" ID="txtPassword" name="password" placeholder="Password"></asp:TextBox>
-                                </div>
-                                <div class="g-recaptcha" data-theme="dark" data-sitekey="6Le2u_wSAAAAAL_gETRxPdb5oU3p5if1cDLCasKT"></div>
-
-                                <div class='form-group'>
-                                   <div class="g-recaptcha" data-sitekey="6Leefj0UAAAAAAb8CMhdkGZxmVVhKGxMGkUPqB6z"></div>
-                                </div>
-                                <div class="form-group">
-                                    <asp:Button runat="server" ID="btnLogin" Text="Sign In" class="btn btn-primary btn-block" OnClick="btnLogin_Click" />
-                                </div>
-                                <a href="forgot_password.aspx" id="forgot" class="forgot">Forgot Password ? </a>
-                            </form>
+                        <div class="col-lg-12 col-md-12">
+                            <div class="slider-content text-center">
+                                <h1 class="text-white">A new age convenient way to pay school fees with zero hustle </h1>
+                                <p class="text-white mt-40">Forget about lining up at the bank. Pay your childrens' school fees comfortably anywhere in the World. </p>
+                                <a class="button move mt-20" href="#">Get Started </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <!-- global js -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  
-    <!-- end of global js -->
-    <!-- page level js -->
-    <script type="text/javascript" src="vendors/iCheck/js/icheck.js.pagespeed.jm.mc8O_8_6ZX.js"></script>
-    <script src="vendors/bootstrapvalidator/js/bootstrapValidator.min.js.pagespeed.jm.6svL6oFoHD.js" type="text/javascript"></script>
-    
+        </section>
+
+        <!--=================================
+ banner -->
+
+        <!--=================================
+ about -->
+
+        <!--=================================
+ about -->
+
+        <!--=================================
+ counter -->
+
+        <section class="black-bg page-section-ptb">
+            <div class="container">
+                <div class="row">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xx-12 sm-mb-40">
+                            <div class="counter big-counter text-center">
+                                <span class="timer theme-color" data-to="2915" data-speed="10000">2915</span>
+                                <label class="text-white">SCHOOLS SIGNED ON</label><br />
+                                <span style="color: #999; text-decoration: underline; cursor: pointer; font-size: 12px;">Explore list of schools</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xx-12 sm-mb-40">
+                            <div class="counter big-counter text-center">
+                                <span class="timer theme-color" data-to="24" data-speed="10000">24</span>
+                                <label class="text-white">BANKS WE ARE WORKING WITH</label><br />
+                                <span style="color: #999; text-decoration: underline; cursor: pointer; font-size: 12px;">Explore list of banks</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xx-12 sm-mb-40">
+                            <div class="counter big-counter text-center">
+                                <span class="timer theme-color" data-to="3750" data-speed="10000">3750</span>
+                                <label class="text-white">STUDENT PAYMENTS PROCESSED</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-6 col-xx-12">
+                            <div class="counter big-counter text-center">
+                                <span class="timer theme-color" data-to="501750000" data-speed="10000">501,750,000</span>
+                                <label class="text-white">AMOUNT TRANSACTED (UGX)</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--=================================
+ counter -->
+
+
+        <!--=================================
+ feature -->
+
+        <section class="custom-content-02 white-bg-bg page-section-ptb">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <h2 style="text-transform: uppercase; font-family: 'Avenir Next', sans-serif; margin-bottom: 20px; font-size: 24px;">Benefits for Schools</h2>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 mb-60">
+                        <div class="feature-text left-icon">
+                            <div class="feature-icon">
+                                <span class="ti-desktop"></span>
+                            </div>
+                            <div class="feature-info">
+                                <h5 class="text-back">Student Information Management System</h5>
+                                <p>Know our process and Possimus delectus ex, harum, quis rerum maxime in magnam. lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 mb-60">
+                        <div class="feature-text left-icon">
+                            <div class="feature-icon">
+                                <span class="ti-split-h"></span>
+                            </div>
+                            <div class="feature-info">
+                                <h5 class="text-back">Reconciliation</h5>
+                                <p>Realtime reconcilation between and Possimus delectus ex, harum, quis rerum maxime in magnam. lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 mb-60">
+                        <div class="feature-text left-icon">
+                            <div class="feature-icon">
+                                <span class="ti-layers-alt"></span>
+                            </div>
+                            <div class="feature-info">
+                                <h5 class="text-back">Reporting & Intelligence</h5>
+                                <p>Comprehensive reports showing and Possimus delectus ex, harum, quis rerum maxime in magnam. lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <h2 style="text-transform: uppercase; font-family: 'Avenir Next', sans-serif; margin-bottom: 20px; font-size: 24px;">Benefits for Students & Parents</h2>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 xs-mb-40">
+                        <div class="feature-text left-icon">
+                            <div class="feature-icon">
+                                <span class="ti-face-smile"></span>
+                            </div>
+                            <div class="feature-info">
+                                <h5 class="text-back">Flexible</h5>
+                                <p>Fossimus delectus ex, harum, quis rerum maxime in magnam. lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 xs-mb-40 xs-mt-20">
+                        <div class="feature-text left-icon">
+                            <div class="feature-icon">
+                                <span class="ti-heart "></span>
+                            </div>
+                            <div class="feature-info">
+                                <h5 class="text-back">Easy</h5>
+                                <p>Fossimus delectus ex, harum, quis rerum maxime in magnam. lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 xs-mt-20">
+                        <div class="feature-text left-icon">
+                            <div class="feature-icon">
+                                <span class="ti-layers-alt"></span>
+                            </div>
+                            <div class="feature-info">
+                                <h5 class="text-back">Monitoring & Reports</h5>
+                                <p>Track all payments on mobile Fossimus delectus ex, harum, quis rerum maxime in magnam. lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--=================================
+ feature -->
+
+
+        <!--=================================
+ play-video -->
+
+        <section class="page-section-pt bg-overlay-theme-90 parallax" style="background-image: url('http://placehold.it/1920x374');">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9 col-md-offset-1">
+                        <div class="play-video-section text-center">
+                            <div class="play-video text-center">
+                                <a class="view-video popup-youtube" href="https://www.youtube.com/watch?v=LgvseYYhqU0"><i class="fa fa-play"></i></a>
+                            </div>
+                            <div class="content mt-40">
+                                <h2 class="text-white mb-20">Flexipay creates an environment that ensures banks, schools and students focus on their work while we do the rest of the hard work.</h2>
+                                <br />
+                                <br />
+                                <br />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--=================================
+ play-video -->
+
+
+        <!--=================================
+ custom -->
+
+        <section class="custom-content-02 white-bg-bg page-section-ptb">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-6 sm-mb-40">
+                        <div class="feature-text round theme-icon">
+                            <div class="feature-icon">
+                                <span class="ti-face-smile"></span>
+                            </div>
+                            <div class="feature-info">
+                                <h5 class="text-back">Flexible</h5>
+                                <p>YFossimus delectus ex, harum, quis rerum maxime in magnam. lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 sm-mb-40">
+                        <div class="feature-text round theme-icon">
+                            <div class="feature-icon">
+                                <span class="ti-heart"></span>
+                            </div>
+                            <div class="feature-info">
+                                <h5 class="text-back">Easy </h5>
+                                <p>Fossimus delectus ex, harum, quis rerum maxime in magnam. lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 xs-mb-40">
+                        <div class="feature-text round theme-icon">
+                            <div class="feature-icon">
+                                <span class="ti-credit-card"></span>
+                            </div>
+                            <div class="feature-info">
+                                <h5 class="text-back">Several Payment Options</h5>
+                                <p>Fossimus delectus ex, harum, quis rerum maxime in magnam. lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6">
+                        <div class="feature-text round theme-icon">
+                            <div class="feature-icon">
+                                <span class="ti-layout-grid4-alt"></span>
+                            </div>
+                            <div class="feature-info">
+                                <h5 class="text-back">Detailed Reports</h5>
+                                <p>Fossimus delectus ex, harum, quis rerum maxime in magnam. lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--=================================
+ custom -->
+
+
+        <!--=================================
+ footer -->
+
+        <footer id="footer" class="footer black-bg">
+            <div class="container">
+                <div class="row  page-section-pt">
+                    <div class="col-lg-4 col-md-6 col-sm-6">
+                        <div class="footer-logo">
+                            <img id="logo-footer" class="mb-30" src="images/logo-icon-dark.png" alt="">
+                            <p class="pb-10">FlexiPay is a school fees payments and collections solution that allows parents, guardians, students and educational institutions greater convenience, savings and flexibility. It gives them the ability to pay and receive their school fees securely and conveniently.</p>
+                        </div>
+                        <div class="social-icons color-hover">
+                            <ul>
+                                <li class="social-facebook"><a href="index.html#"><i class="fa fa-facebook"></i></a></li>
+                                <li class="social-twitter"><a href="index.html#"><i class="fa fa-twitter"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6">
+                        <div class="footer-useful-link footer-hedding">
+                            <h6 class="text-white mb-30 mt-10 text-uppercase">Pay With</h6>
+                            <ul>
+                                <img src="https://www.pesapal.com/images/payments/visa.png" alt="Visa" title="Visa">
+                                <img src="https://www.pesapal.com/images/payments/mastercard.png" alt="MasterCard" title="MasterCard">
+                                <img src="https://www.pesapal.com/images/payments/mtnug.png" alt="MTN" title="MTN">
+                                <img src="https://www.pesapal.com/images/payments/airtel.png" alt="Airtel Money" title="Airtel Money">
+                            </ul>
+                            <br />
+                            <h6 class="text-white mb-30 mt-10 text-uppercase">Certified</h6>
+                            <ul>
+                                <img src="https://www.pesapal.com/images/norton.png" alt="Norton" title="Norton">
+                                <img src="https://www.pesapal.com/media/1322/pcidss.png" alt="PCI DSS PTS" title="PCI DSS PTS">
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6">
+                        <h6 class="text-white mb-30 mt-10 text-uppercase">Contact Us</h6>
+                        <ul class="addresss-info">
+                            <li><i class="fa fa-map-marker"></i>
+                                <p>Address: 3rd Floor Rofra House, Plot 546, Gaba Road, P.O.Box 36817, Kampala, Uganda</p>
+                            </li>
+                            <li><i class="fa fa-phone"></i><a href="tel:+256392174874"><span>(+256)0392-174874 </span></a></li>
+                            <li><i class="fa fa-envelope-o"></i>Email: info@pegasustechnologies.co.ug</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-widget mt-20">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <p class="mt-15">&copy;Copyright <span id="copyright">
+                                <script>document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))</script>
+                            </span><a href="http://www.pegasustechnologies.co.ug">Pegasus Technologies </a>All Rights Reserved | <a href="">Privacy Policy</a> | <a href="#">Terms and Conditions</a> </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!--=================================
+ footer -->
+
+        <!--=================================
+ jquery -->
+
+        <!-- jquery -->
+        <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+
+        <!-- plugins-jquery -->
+        <script type="text/javascript" src="js/plugins-jquery.js"></script>
+
+        <!-- plugin_path -->
+        <script type="text/javascript">var plugin_path = 'js/';</script>
+
+
+        <!-- REVOLUTION JS FILES -->
+        <script type="text/javascript" src="revolution/js/jquery.themepunch.tools.min.js"></script>
+        <script type="text/javascript" src="revolution/js/jquery.themepunch.revolution.min.js"></script>
+
+        <!-- SLIDER REVOLUTION 5.0 EXTENSIONS  (Load Extensions only on Local File Systems !  The following part can be removed on Server for On Demand Loading) -->
+        <script type="text/javascript" src="scripts/evolution/js/extensions/revolution.extension.actions.min.js"></script>
+        <script type="text/javascript" src="scripts/revolution/js/extensions/revolution.extension.carousel.min.js"></script>
+        <script type="text/javascript" src="scripts/revolution/js/extensions/revolution.extension.kenburn.min.js"></script>
+        <script type="text/javascript" src="scripts/revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
+        <script type="text/javascript" src="scripts/revolution/js/extensions/revolution.extension.migration.min.js"></script>
+        <script type="text/javascript" src="scripts/revolution/js/extensions/revolution.extension.navigation.min.js"></script>
+        <script type="text/javascript" src="scripts/revolution/js/extensions/revolution.extension.parallax.min.js"></script>
+        <script type="text/javascript" src="scripts/revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
+        <script type="text/javascript" src="scripts/revolution/js/extensions/revolution.extension.video.min.js"></script>
+        <!-- revolution custom -->
+        <script type="text/javascript" src="scripts/revolution/js/revolution-custom.js"></script>
+
+        <!-- custom -->
+        <script type="text/javascript" src="scripts/js/custom.js"></script>
 </body>
-
 </html>
-

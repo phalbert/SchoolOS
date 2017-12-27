@@ -43,16 +43,15 @@ public partial class Admin : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            bll.ShowMessage(lblUsername, ex.Message, true);
+            bll.ShowMessage(lblmsg, ex.Message, true);
         }
     }
 
     private void LoadData()
     {
 
-        lblUsername.Text = user.User.Username;
-
-        MultiView1.ActiveViewIndex = 0;
+        lblmsg.Text = user.User.Username;
+        UsersPic.Attributes["src"] = "ImageHandler.ashx?Id=" + user.User.ProfilePic;
 
     }
 

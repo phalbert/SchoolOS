@@ -1,9 +1,9 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Main.master" CodeFile="ManageSchoolFees.aspx.cs" Inherits="ManageSchoolFees" %>
 
-<%@ Register TagPrefix="uc" TagName="SaveFeeUserControl" Src="~/SaveFee.ascx" %>
-<%@ Register TagPrefix="uc" TagName="ApproveFeesUserControl" Src="~/ApproveFees.ascx" %>
-<%@ Register TagPrefix="uc" TagName="ListFeesUserControl" Src="~/ListFees.ascx" %>
-<%@ Register TagPrefix="uc" TagName="AssignFeesUserControl" Src="~/AssignFees.ascx" %>
+<%@ Register TagPrefix="uc" TagName="SaveFeeUserControl" Src="~/CustomUserControls/SaveFee.ascx" %>
+<%@ Register TagPrefix="uc" TagName="ApproveFeesUserControl" Src="~/CustomUserControls/ApproveFees.ascx" %>
+<%@ Register TagPrefix="uc" TagName="ListFeesUserControl" Src="~/CustomUserControls/ListFees.ascx" %>
+<%@ Register TagPrefix="uc" TagName="AssignFeesUserControl" Src="~/CustomUserControls/AssignFees.ascx" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
     <style>
