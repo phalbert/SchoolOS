@@ -23,6 +23,7 @@ namespace SchoolOSApiLogic.Entities
         public string LiquidationAccountName = "";
         public string LiquidationAccountNumber = "";
         public string SchoolLogo = "";
+        internal string ApprovedBy = "";
 
 
 

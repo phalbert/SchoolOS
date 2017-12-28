@@ -57,7 +57,7 @@ public partial class AssignFees : System.Web.UI.UserControl
         bll.LoadSchoolsIntoDropDown(user, ddSchools);
         bll.LoadDataIntoDropDown("GetClassesForDropDown", new string[] { ddSchools.SelectedValue }, ddClasses);
         bll.LoadDataIntoDropDown("GetFeesForDropDown", new string[] { ddSchools.SelectedValue }, ddFees);
-        bll.LoadDataIntoDropDown("GetTermsForDropDown", new string[] { ddSchools.SelectedValue }, ddFees);
+        bll.LoadDataIntoDropDown("GetTermsForDropDown", new string[] { ddSchools.SelectedValue }, ddTerms);
     }
 
     private void LoadEntityData(string id)
@@ -93,7 +93,7 @@ public partial class AssignFees : System.Web.UI.UserControl
                 return;
             }
 
-            msg = "STUDENT SAVED SUCCESSFULLY";
+            msg = "FEES ASSIGNED SUCCESSFULLY";
             bll.ShowMessage(lblmsg, msg, false, Session);
 
             if (SaveCompleted != null)
@@ -134,5 +134,20 @@ public partial class AssignFees : System.Web.UI.UserControl
     protected void btnCancel_Click(object sender, EventArgs e)
     {
 
+    }
+
+    protected void ddSchools_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        try
+        {
+            bll.LoadDataIntoDropDown("GetClassesForDropDown", new string[] { ddSchools.SelectedValue }, ddClasses);
+            bll.LoadDataIntoDropDown("GetFeesForDropDown", new string[] { ddSchools.SelectedValue }, ddFees);
+            bll.LoadDataIntoDropDown("GetTermsForDropDown", new string[] { ddSchools.SelectedValue }, ddTerms);
+        }
+        catch (Exception ex)
+        {
+            bll.LogError("SAVE-CLIENT", ex.StackTrace, "", ex.Message, "EXCEPTION");
+            bll.ShowMessage(lblmsg, ex.Message, true, Session);
+        }
     }
 }

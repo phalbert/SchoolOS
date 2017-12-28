@@ -57,7 +57,7 @@
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <label>School</label>
-                                            <asp:DropDownList ID="ddSchools" runat="server" CssClass="form-control">
+                                            <asp:DropDownList ID="ddSchools" runat="server" OnSelectedIndexChanged="ddSchools_SelectedIndexChanged" AutoPostBack="true" CssClass="form-control">
                                                 <asp:ListItem>True</asp:ListItem>
                                                 <asp:ListItem>False</asp:ListItem>
                                             </asp:DropDownList>
@@ -92,7 +92,7 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <label>Student ID</label>
-                                            <asp:TextBox ID="txtStudentId" runat="server" CssClass="form-control" placeholder="Enter text" />
+                                            <asp:TextBox ID="txtStudentId" Text="ALL" runat="server" CssClass="form-control" placeholder="Enter Specific Student Id or ALL" />
                                         </div>
                                     </div>
                                 </div>

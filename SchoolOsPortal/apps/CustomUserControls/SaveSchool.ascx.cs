@@ -1,6 +1,7 @@
 ﻿using InterLinkClass.PegPaySchoolsApi;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -81,6 +82,16 @@ public partial class SaveSchool : System.Web.UI.UserControl
         {
             string msg = "";
             School newUser = GetSchool();
+
+            DataTable dt = bll.ExecuteDataTableOnSchoolsDB("GetSchoolById", new string[] { newUser.SchoolCode });
+
+            if (dt.Rows.Count != 0)
+            {
+                msg = "FAILED: SCHOOL CODE ALREADY IN USE. PLEASE PICK ANOTHER ONE";
+                bll.ShowMessage(lblmsg, msg, false, Session);
+                return;
+            }
+
             Result result = schoolsApi.SaveSchool(newUser);
 
             if (result.StatusCode != Globals.SUCCESS_STATUS_CODE)

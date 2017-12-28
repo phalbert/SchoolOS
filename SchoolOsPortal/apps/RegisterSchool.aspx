@@ -5,7 +5,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 
-    <title>PegPay School Registration</title>
+    <title>School Registration</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="Images/favicon.ico.png" />
     <link type="text/css" href="css/A.app.css.pagespeed.cf.odGN98LG8l.css" rel="stylesheet" />
@@ -120,15 +120,15 @@
                             <div data-row-span="4">
                                 <div data-field-span="2">
                                     <label>Name of the School</label>
-                                    <asp:TextBox ID="txtSchoolName" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtSchoolName" required="true" runat="server"></asp:TextBox>
                                 </div>
                                 <div data-field-span="1">
                                     <label>School Code</label>
-                                    <asp:TextBox ID="txtSchoolCode" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtSchoolCode" maxlength="10" required="true" runat="server"></asp:TextBox>
                                 </div>
                                 <div data-field-span="1">
                                     <label>UNEB Centre Number <small>If applicable</small></label>
-                                    <asp:TextBox ID="txtUnebNumber" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtUnebNumber"  runat="server"></asp:TextBox>
                                 </div>
 
                             </div>
@@ -136,15 +136,15 @@
                               <div data-row-span="4">
                                 <div data-field-span="2">
                                     <label>Schools Bank</label>
-                                    <asp:TextBox ID="txtSchoolBank" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtSchoolBank" required="true" runat="server"></asp:TextBox>
                                 </div>
                                 <div data-field-span="1">
                                     <label>Account Name</label>
-                                    <asp:TextBox ID="txtAccountName" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtAccountName" required="true" runat="server"></asp:TextBox>
                                 </div>
                                 <div data-field-span="1">
                                     <label>Account Number</label>
-                                    <asp:TextBox ID="txtAccountNumber" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtAccountNumber" required="true" runat="server"></asp:TextBox>
                                 </div>
 
                             </div>
@@ -177,7 +177,7 @@
                                 </div>
                                 <div data-field-span="3">
                                     <label>Full Name</label>
-                                    <asp:TextBox ID="txtFullName" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtFullName" required="true" runat="server"></asp:TextBox>
                                 </div>
                             </div>
 
@@ -188,7 +188,14 @@
                                 </div>
                                 <div data-field-span="2">
                                     <label>Mobile No.</label>
-                                    <asp:TextBox ID="txtPrincipalPhone" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtPrincipalPhone" required="true" runat="server"></asp:TextBox>
+                                </div>
+                            </div>
+
+                             <div data-row-span="4">
+                                <div data-field-span="2" data-field-error="Please enter prefered username">
+                                    <label>UserId</label>
+                                    <asp:TextBox ID="txtUserId" required="true" runat="server"></asp:TextBox>
                                 </div>
                             </div>
                             <br>
@@ -197,35 +204,35 @@
                                 <div data-row-span="2">
                                     <div data-field-span="1">
                                         <label>Plot No.</label>
-                                        <asp:TextBox ID="txtPlotNumber" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="txtPlotNumber" required="true" runat="server"></asp:TextBox>
                                     </div>
                                     <div data-field-span="1">
                                         <label>Street / Road name</label>
-                                        <asp:TextBox ID="txtRoadName" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="txtRoadName" required="true" runat="server"></asp:TextBox>
                                     </div>
                                 </div>
                                 <div data-row-span="4">
                                     <div data-field-span="2">
                                         <label>Divison / Sub County</label>
-                                        <asp:TextBox ID="txtSubCounty" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="txtSubCounty" required="true" runat="server"></asp:TextBox>
                                     </div>
                                     <div data-field-span="2">
                                         <label>District</label>
-                                        <asp:TextBox ID="txtDistrict" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="txtDistrict" required="true" runat="server"></asp:TextBox>
                                     </div>
                                 </div>
                                 <div data-row-span="4">
                                     <div data-field-span="1">
                                         <label>Box Number</label>
-                                        <asp:TextBox ID="txtPostOfficeNumber" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="txtPostOfficeNumber" required="true" runat="server"></asp:TextBox>
                                     </div>
                                     <div data-field-span="1">
                                         <label>Office Phone</label>
-                                        <asp:TextBox ID="txtOfficePhone" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="txtOfficePhone" required="true" runat="server"></asp:TextBox>
                                     </div>
                                     <div data-field-span="1">
                                         <label>Email</label>
-                                        <asp:TextBox ID="txtSchoolEmail" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="txtSchoolEmail" required="true" runat="server"></asp:TextBox>
                                     </div>
                                 </div>
                             </fieldset>
@@ -288,7 +295,7 @@
                                     <div data-field-span="1">
                                         <label></label>
                                         <label>
-                                            <asp:CheckBox ID="chkTerms" runat="server" />
+                                            <asp:CheckBox ID="chkTerms" required="true" runat="server" />
                                             I/We confirm having read and understood the account
                                         rules of Pegasus Technologies, and hereby agree to be
                                         bound by the terms and conditions and amendments governing this account as issued by Pegasus Technologies from time-to-time.</label>
@@ -302,10 +309,10 @@
                                     <asp:Button runat="server" Text="Submit" ID="btnSubmit" class="btn-lg btn-primary" OnClick="btnSubmit_Click" />
 
                                     &nbsp;
-                                    <asp:Button runat="server" Text="Cancel" ID="btnCancel" class="btn-lg btn-danger" OnClick="btnCancel_Click" />
+                                    <asp:Button runat="server" Text="Cancel" ID="btnCancel" class="btn-lg btn-danger" OnClick="btnCancel_Click" novalidate/>
 
                                     &nbsp;
-                                    <asp:Button runat="server" Text="Reset" ID="btnReset" class="btn-lg btn-default bttn_reset" OnClick="btnReset_Click" />
+                                    <asp:Button runat="server" Text="Reset" ID="btnReset" class="btn-lg btn-default bttn_reset" OnClick="btnReset_Click" novalidate/>
 
                                 </div>
                             </div>

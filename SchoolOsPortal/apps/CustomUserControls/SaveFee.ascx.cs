@@ -90,7 +90,7 @@ public partial class SaveFee : System.Web.UI.UserControl
                 return;
             }
 
-            msg = "STUDENT SAVED SUCCESSFULLY";
+            msg = "SCHOOL FEE SAVED SUCCESSFULLY";
             bll.ShowMessage(lblmsg, msg, false, Session);
 
             if (SaveCompleted != null)
@@ -118,7 +118,7 @@ public partial class SaveFee : System.Web.UI.UserControl
         std.FeeCategory = "FLAT_FEE";
         std.FeeID = SharedCommons.SharedCommons.GenerateUniqueId("FEE");
         std.FeeName = txtfeeName.Text;
-        std.FeeType = "FLAT_FEE";
+        std.FeeType = "Debit";
         std.SchoolCode = ddSchools.SelectedValue;
         std.ApprovedBy = user.User.Username;
         std.ModifiedBy = user.User.Username;

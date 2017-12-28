@@ -38,7 +38,7 @@
                 <label>
                     School
                 </label>
-               <asp:DropDownList ID="ddSchools" runat="server" CssClass="form-control">
+                <asp:DropDownList ID="ddSchools" runat="server" CssClass="form-control">
                     <asp:ListItem>True</asp:ListItem>
                     <asp:ListItem>False</asp:ListItem>
                 </asp:DropDownList>
@@ -56,10 +56,17 @@
             <div class="col-lg-1"></div>
         </div>
 
-        <hr />
         <%------------------------------------------- Search Results  -----------------------------------%>
         <asp:MultiView runat="server" ID="Multiview2">
             <asp:View runat="server" ID="resultView">
+                <hr />
+                <div class="row text-center">
+                    <asp:Button ID="btnApprove" runat="server" Text="Aprove" CssClass="btn btn-primary btn-lg"
+                        OnClick="btnApprove_Click" />
+                    <asp:Button ID="btnReject" runat="server" Text="Reject" CssClass="btn btn-danger btn-lg"
+                        OnClick="btnReject_Click" />
+                </div>
+                <hr />
                 <div class="row">
                     <div class="table-responsive">
                         <asp:GridView runat="server" Width="100%" CssClass="table table-bordered table-hover"
@@ -69,8 +76,11 @@
                                 Font-Overline="False" Font-Strikeout="False" Font-Underline="False" Height="30px" />
                             <Columns>
                                 <asp:TemplateField HeaderText="Details">
+                                    <HeaderTemplate>
+                                        <asp:CheckBox ID="chkboxSelectAll" Text=" Select All" runat="server" AutoPostBack="true" OnCheckedChanged="dataGridResults_SelectedIndexChanged" />
+                                    </HeaderTemplate>
                                     <ItemTemplate>
-                                        <asp:Button ID="btnedit" runat="server" Text="Edit" CommandName="EditEntity" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" />
+                                        <asp:Button ID="CheckBox" runat="server" Text="Edit" CommandName="EditEntity" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" />
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>

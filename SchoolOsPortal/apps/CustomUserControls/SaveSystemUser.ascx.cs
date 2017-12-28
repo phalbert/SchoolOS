@@ -2,6 +2,7 @@
 using InterLinkClass.PegPaySchoolsApi;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -84,6 +85,16 @@ public partial class SaveSystemUser : System.Web.UI.UserControl
         {
             string msg = "";
             SystemUser newUser = GetSystemUser();
+
+            DataTable dt = bll.ExecuteDataTableOnSchoolsDB("GetSystemUserById", new string[] { newUser.Username });
+
+            if (dt.Rows.Count != 0)
+            {
+                msg = "FAILED: USER ID ALREADY IN USE. PLEASE PICK ANOTHER ONE";
+                bll.ShowMessage(lblmsg, msg, false, Session);
+                return;
+            }
+
             Result result = schoolsApi.SaveSystemUser(newUser);
 
             if (result.StatusCode != Globals.SUCCESS_STATUS_CODE)
@@ -93,22 +104,10 @@ public partial class SaveSystemUser : System.Web.UI.UserControl
                 return;
             }
 
+            UserPic.Attributes["src"] = "../ImageHandler.ashx?Id=" + result.ThirdPartyID;
             msg = "SYSTEM USER DETAILS SAVED SUCCESSFULLY";
             bll.ShowMessage(lblmsg, msg, false, Session);
-
-
-            Result mailResult = bll.SendCredentialsToUser(newUser);
-
-            if (mailResult.StatusCode != Globals.SUCCESS_STATUS_CODE)
-            {
-                msg = msg + ", FAILED TO SEND EMAIL WITH CREDENTIALS: " + mailResult.StatusDesc;
-                bll.ShowMessage(lblmsg, msg, false, Session);
-                return;
-            }
-
-            msg = "SYSTEM USER DETAILS SAVED SUCCESSFULLY, EMAIL WITH CREDENTIALS SENT SUCCSSFULLY";
-            bll.ShowMessage(lblmsg, msg, false, Session);
-
+           
             if (SaveCompleted != null)
             {
                 MyEventArgs eventArgs = new MyEventArgs();
@@ -133,7 +132,7 @@ public partial class SaveSystemUser : System.Web.UI.UserControl
         newUser.SchoolCode = ddSchools.SelectedValue;
         newUser.PhoneNumber = txtPhone.Text;
         newUser.FullName = txtName.Text;
-        newUser.Username = newUser.PhoneNumber + "_" + newUser.SchoolCode;
+        newUser.Username = txtUserId.Text;
         newUser.Email = txtEMail.Text;
         newUser.UserPassword = SharedCommons.SharedCommons.GeneratePassword();
         newUser.IsActive = ddIsActive.SelectedValue;

@@ -97,12 +97,122 @@ public partial class ApproveStudents : System.Web.UI.UserControl
 
     }
 
-    protected void btnReject_Click(object sender, EventArgs e)
+    protected void dataGridResults_SelectedIndexChanged(object sender, EventArgs e)
     {
-
+        try
+        {
+            CheckBox ChkBoxHeader = (CheckBox)dataGridResults.HeaderRow.FindControl("chkboxSelectAll");
+            foreach (GridViewRow row in dataGridResults.Rows)
+            {
+                CheckBox ChkBoxRows = (CheckBox)row.FindControl("CheckBox");
+                if (ChkBoxHeader.Checked == true)
+                {
+                    ChkBoxRows.Checked = true;
+                }
+                else
+                {
+                    ChkBoxRows.Checked = false;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            string msg = "FAILED: " + ex.Message;
+            bll.ShowMessage(lblmsg, msg, true, Session);
+        }
     }
 
     protected void btnApprove_Click(object sender, EventArgs e)
+    {
+        //loop thru the rows
+        foreach (GridViewRow row in dataGridResults.Rows)
+        {
+            //for each row get the checkbox attached
+            CheckBox ChkBox = (CheckBox)row.FindControl("CheckBox");
+
+            //has user ticked the box
+            if (ChkBox.Checked)
+            {
+                //if this row is not the header row
+                if (row.RowType != DataControlRowType.Header)
+                {
+                    try
+                    {
+                        //approve
+                        Approve(row);
+                    }
+                    catch (Exception ex)
+                    {
+                        string msg = "FAILED: " + ex.Message;
+                        bll.ShowMessage(lblmsg, msg, true, Session);
+                    }
+                }
+            }
+        }
+    }
+
+    private void Approve(GridViewRow row)
+    {
+        //get the Bank User Id and the bank code
+        string Id = row.Cells[1].Text.Trim();
+        string SchoolCode = ddSchools.SelectedValue;
+        string ApprovedBy = user.User.Username;
+        string[] parameters = { Id, SchoolCode, ApprovedBy };
+
+        DataTable dt = schoolsApi.ExecuteDataSet("ApproveStudent", parameters).Tables[0];
+        if (dt.Rows.Count != 0)
+        {
+            SearchDB();
+            string msg = "Student(s) Approved Successfully";
+            bll.ShowMessage(lblmsg, msg, false, Session);
+        }
+        else
+        {
+            string msg = "No Rows Affected";
+            bll.ShowMessage(lblmsg, msg, true, Session);
+        }
+    }
+
+    protected void btnReject_Click(object sender, EventArgs e)
+    {
+        //loop thru the rows
+        foreach (GridViewRow row in dataGridResults.Rows)
+        {
+            //for each row get the checkbox attached
+            CheckBox ChkBox = (CheckBox)row.FindControl("CheckBox");
+
+            //has user ticked the box
+            if (ChkBox.Checked)
+            {
+                //if this row is not the header row
+                if (row.RowType != DataControlRowType.Header)
+                {
+                    try
+                    {
+                        //send reversal request
+                        Reject(row);
+                    }
+                    catch (Exception ex)
+                    {
+                        string msg = "FAILED: " + ex.Message;
+                        bll.ShowMessage(lblmsg, msg, true, Session);
+                    }
+                }
+            }
+        }
+    }
+
+    private void Reject(GridViewRow row)
+    {
+        //get the Bank Transaction Id and the bank code
+        string SchoolCode = row.Cells[1].Text.Trim();
+        string ApprovedBy = user.User.Username;
+        string[] parameters = { SchoolCode, ApprovedBy };
+
+
+    }
+
+    protected void chkboxSelectAll_CheckedChanged(object sender, EventArgs e)
     {
 
     }

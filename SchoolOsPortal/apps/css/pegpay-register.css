@@ -1,6 +1,6 @@
 /* iCheck plugin skins
 ----------------------------------- */
-@import url("../vendors/iCheck/css/minimal/_all.css");
+@import url("../scripts/vendors/iCheck/css/minimal/_all.css");
 /*
 @import url("vendors/iCheck/css/minimal/minimal.css");
 @import url("vendors/iCheck/css/minimal/red.css");
@@ -14,7 +14,7 @@
 @import url("vendors/iCheck/css/minimal/purple.css");
 */
 
-@import url("../vendors/iCheck/css/square/_all.css");
+@import url("../scripts/vendors/iCheck/css/square/_all.css");
 /*
 @import url("vendors/iCheck/css/square/square.css");
 @import url("vendors/iCheck/css/square/red.css");
@@ -28,7 +28,7 @@
 @import url("vendors/iCheck/css/square/purple.css");
 */
 
-@import url("../vendors/iCheck/css/flat/_all.css");
+@import url("../scripts/vendors/iCheck/css/flat/_all.css");
 /*
 @import url("vendors/iCheck/css/flat/flat.css");
 @import url("vendors/iCheck/css/flat/red.css");
@@ -42,7 +42,7 @@
 @import url("vendors/iCheck/css/flat/purple.css");
 */
 
-@import url("../vendors/iCheck/css/line/_all.css");
+@import url("../scripts/vendors/iCheck/css/line/_all.css");
 /*
 @import url("vendors/iCheck/css/line/line.css");
 @import url("vendors/iCheck/css/line/red.css");
@@ -56,9 +56,9 @@
 @import url("vendors/iCheck/css/line/purple.css");
 */
 
-@import url("../vendors/iCheck/css/polaris/polaris.css");
+@import url("../scripts/vendors/iCheck/css/polaris/polaris.css");
 
-@import url("../vendors/iCheck/css/futurico/futurico.css");.grid-form *, .grid-form *:before, .grid-form *:after { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
+@import url("../scripts/vendors/iCheck/css/futurico/futurico.css");.grid-form *, .grid-form *:before, .grid-form *:after { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
 .grid-form input[type="text"], .grid-form input[type="email"], .grid-form input[type="number"], .grid-form input[type="password"], .grid-form input[type="search"], .grid-form input[type="tel"], .grid-form input[type="url"], .grid-form input[type="color"], .grid-form input[type="date"], .grid-form input[type="datetime"], .grid-form input[type="datetime-local"], .grid-form input[type="month"], .grid-form input[type="time"], .grid-form input[type="week"], .grid-form textarea, .grid-form select { font-size: 18px; padding: 0; margin: 0; width: 100%; }
 .grid-form input[type="text"], .grid-form input[type="email"], .grid-form input[type="number"], .grid-form input[type="password"], .grid-form input[type="search"], .grid-form input[type="tel"], .grid-form input[type="url"], .grid-form input[type="color"], .grid-form input[type="date"], .grid-form input[type="datetime"], .grid-form input[type="datetime-local"], .grid-form input[type="month"], .grid-form input[type="time"], .grid-form input[type="week"], .grid-form textarea { border: 0; background: transparent; }
 .grid-form input[type="text"]::-webkit-input-placeholder, .grid-form input[type="email"]::-webkit-input-placeholder, .grid-form input[type="number"]::-webkit-input-placeholder, .grid-form input[type="password"]::-webkit-input-placeholder, .grid-form input[type="search"]::-webkit-input-placeholder, .grid-form input[type="tel"]::-webkit-input-placeholder, .grid-form input[type="url"]::-webkit-input-placeholder, .grid-form input[type="color"]::-webkit-input-placeholder, .grid-form input[type="date"]::-webkit-input-placeholder, .grid-form input[type="datetime"]::-webkit-input-placeholder, .grid-form input[type="datetime-local"]::-webkit-input-placeholder, .grid-form input[type="month"]::-webkit-input-placeholder, .grid-form input[type="time"]::-webkit-input-placeholder, .grid-form input[type="week"]::-webkit-input-placeholder, .grid-form textarea::-webkit-input-placeholder { font-weight: 100; color: #595959; }

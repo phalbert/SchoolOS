@@ -130,14 +130,14 @@ namespace SchoolOSApiLogic.ControlClasses
             result.StatusDesc = Globals.SUCCESS_STATUS_DESC;
             result.PegPayID = dt.Rows[0][0].ToString();
             result.RequestID = user.SchoolCode;
-
+            result.ThirdPartyID = dt.Rows[0][1].ToString();
             return result;
         }
 
         public Result SaveStudent(Student std)
         {
             Result result = new Result();
-            DataTable dt = dh.ExecuteDataSet("SaveStudent", new string[] { std.SchoolCode, std.StudentNumber, std.PegPayStudentNumber, std.StudentName, std.ClassCode, std.StreamCode, std.DateOfBirth, std.StudentCategory, std.ModifiedBy }).Tables[0];
+            DataTable dt = dh.ExecuteDataSet("SaveStudent", new string[] { std.SchoolCode, std.StudentNumber, std.PegPayStudentNumber, std.StudentName, std.ClassCode, std.StreamCode, std.DateOfBirth, std.StudentCategory, std.ModifiedBy,std.ProfilePic }).Tables[0];
 
             if (dt.Rows.Count == 0)
             {
@@ -269,7 +269,14 @@ namespace SchoolOSApiLogic.ControlClasses
             }
 
             List<MenuItem> usersMenuOptions = GetUsersMenuItems(user);
-            School sch = GetSchoolById(user.SchoolCode);
+            School sch = AuthenticateSchool(user.SchoolCode);
+
+            if (sch.StatusCode != Globals.SUCCESS_STATUS_CODE)
+            {
+                result.StatusCode = sch.StatusCode;
+                result.StatusDesc = sch.StatusDesc;
+                return result;
+            }
 
             result.SchoolDetails = sch;
             result.User = user;
@@ -281,6 +288,8 @@ namespace SchoolOSApiLogic.ControlClasses
 
             return result;
         }
+
+
 
         private School GetSchoolById(string Id)
         {
@@ -295,6 +304,7 @@ namespace SchoolOSApiLogic.ControlClasses
             }
 
             DataRow dr = dt.Rows[0];
+            sch.ApprovedBy = dr["ApprovedBy"].ToString();
             sch.LiquidationAccountName = dr["LiquidationAccountName"].ToString();
             sch.District = dr["District"].ToString();
             sch.LiquidationAccountNumber = dr["LiquidationAccountNumber"].ToString();
@@ -309,13 +319,15 @@ namespace SchoolOSApiLogic.ControlClasses
             sch.SchoolLogo = dr["SchoolLogo"].ToString();
             sch.SchoolName = dr["SchoolName"].ToString();
             sch.SchoolType = null;
+            sch.StatusCode = Globals.SUCCESS_STATUS_CODE;
+            sch.StatusDesc = Globals.SUCCESS_STATUS_DESC;
             return sch;
         }
 
         private List<MenuItem> GetUsersMenuItems(SystemUser user)
         {
             List<MenuItem> menuItems = new List<MenuItem>();
-            DataTable dt = dh.ExecuteDataSet("GetUserMenuItems", user.UserCategory, user.UserType).Tables[0];
+            DataTable dt = dh.ExecuteDataSet("GetUserMenuItems", user.UserType, user.UserType, user.SchoolCode).Tables[0];
 
             if (dt.Rows.Count == 0)
             {
@@ -360,6 +372,36 @@ namespace SchoolOSApiLogic.ControlClasses
 
 
             return menuItems;
+        }
+
+        private School AuthenticateSchool(string schoolId)
+        {
+            School sch = new School();
+
+            if (string.IsNullOrEmpty(schoolId))
+            {
+                sch.StatusCode = Globals.FAILURE_STATUS_CODE;
+                sch.StatusDesc = "NO SCHOOL ID FOUND";
+                return sch;
+            }
+
+            sch = GetSchoolById(schoolId);
+
+            //not found
+            if (sch.SchoolCode != Globals.SUCCESS_STATUS_CODE)
+            {
+                return sch;
+            }
+
+            //not approved
+            if (string.IsNullOrEmpty(sch.ApprovedBy))
+            {
+                sch.StatusCode = Globals.FAILURE_STATUS_CODE;
+                sch.StatusDesc = $"SCHOOL [{sch.ApprovedBy}] HAS NOT YET BEEN APPROVED";
+                return sch;
+            }
+
+            return sch;
         }
 
         private SystemUser AuthenticateSystemUser(string userId, string password)

@@ -51,7 +51,7 @@
                             <div class="panel panel-success">
 
                                 <div class="panel-heading text-center">
-                                    SUPPLY THE SUBLINK DETAILS USING FORM BELOW
+                                    SUPPLY THE MENU ITEMS DETAILS USING FORM BELOW
                                 </div>
 
                                 <div class="panel-body">

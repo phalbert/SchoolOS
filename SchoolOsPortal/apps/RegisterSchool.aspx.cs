@@ -1,6 +1,7 @@
 ﻿using InterLinkClass.PegPaySchoolsApi;
 using System;
 using System.Collections.Generic;
+using System.Data;
 
 public partial class RegisterSchool : System.Web.UI.Page
 {
@@ -47,6 +48,7 @@ public partial class RegisterSchool : System.Web.UI.Page
 
             //save school
             Result result = SaveSchool();
+
             if (result.StatusCode != Globals.SUCCESS_STATUS_CODE)
             {
                 string msg = "FAILED: " + result.StatusDesc;
@@ -64,7 +66,7 @@ public partial class RegisterSchool : System.Web.UI.Page
             }
 
             //success
-            string successMsg = "SUCCESS!! SCHOOL SAVED SUCCESSFULLY";
+            string successMsg = "SUCCESS!! SCHOOL DETAILS SAVED SUCCESSFULLY, PENDING APPROVAL";
             bll.ShowMessage(lblmsg, successMsg, false, Session);
 
         }
@@ -92,8 +94,12 @@ public partial class RegisterSchool : System.Web.UI.Page
         user.SecretKey = SharedCommons.SharedCommons.GenerateUniqueId("");
         user.UserCategory = "ADMIN";
         user.UserType = "ADMIN";
-        user.Username = txtPrincipalEmail.Text;
-        user.UserPassword = SharedCommons.SharedCommons.GenearetHMACSha256Hash(user.SecretKey,SharedCommons.SharedCommons.GeneratePassword());
+        user.Username = txtUserId.Text;
+        user.IsActive = "TRUE";
+        user.PhoneNumber = txtPrincipalPhone.Text;
+        user.Email = txtPrincipalEmail.Text;
+        user.FullName = txtFullName.Text;
+        user.UserPassword = SharedCommons.SharedCommons.GeneratePassword();
         user.VendorCode = Globals.SCHOOL_VENDOR_CODE;
         return user;
     }
@@ -127,7 +133,44 @@ public partial class RegisterSchool : System.Web.UI.Page
     private Result SaveSchool()
     {
         Result result = new Result();
-        School school = GetSchool();
+        School school = GetSchool();      
+
+        if (string.IsNullOrEmpty(school.SchoolCode))
+        {
+            string msg = "FAILED: PLEASE SUPPLY A PREFERED SCHOOL CODE";
+            result.StatusCode = Globals.FAILURE_STATUS_CODE;
+            result.StatusDesc = msg;
+            return result;
+        }
+
+        if (string.IsNullOrEmpty(school.SchoolCode))
+        {
+            string msg = "FAILED: PLEASE SUPPLY A PREFERED USERNAME";
+            result.StatusCode = Globals.FAILURE_STATUS_CODE;
+            result.StatusDesc = msg;
+            return result;
+        }
+
+        DataTable dt = bll.ExecuteDataTableOnSchoolsDB("GetSchoolById", new string[] { school.SchoolCode });
+
+        if (dt.Rows.Count != 0)
+        {
+            string msg = "FAILED: SCHOOL CODE ALREADY IN USE. PLEASE PICK ANOTHER ONE";
+            result.StatusCode = Globals.FAILURE_STATUS_CODE;
+            result.StatusDesc = msg;
+            return result;
+        }
+
+        dt = bll.ExecuteDataTableOnSchoolsDB("GetSystemUserById", new string[] { txtUserId.Text });
+
+        if (dt.Rows.Count != 0)
+        {
+            string msg = "FAILED: USERNAME ALREADY IN USE. PLEASE PICK ANOTHER ONE";
+            result.StatusCode = Globals.FAILURE_STATUS_CODE;
+            result.StatusDesc = msg;
+            return result;
+        }
+
         result = schoolsApi.SaveSchool(school);
         return result;
     }
@@ -149,7 +192,7 @@ public partial class RegisterSchool : System.Web.UI.Page
         sch.RoadName = txtRoadName.Text;
         sch.District = txtDistrict.Text;
         sch.SchoolType = GetSchoolTypes();
-        sch.SchoolCategories= GetSchoolCategories();
+        sch.SchoolCategories = GetSchoolCategories();
         sch.LiquidationAccountNumber = txtAccountNumber.Text;
         sch.LiquidationAccountName = txtAccountName.Text;
         sch.LiquidationBankName = txtSchoolBank.Text;
@@ -221,7 +264,7 @@ public partial class RegisterSchool : System.Web.UI.Page
     {
         try
         {
-            Response.Redirect("~/RegisterSchool.aspx");
+            Response.Redirect("~/Default.aspx");
         }
         catch (Exception ex)
         {

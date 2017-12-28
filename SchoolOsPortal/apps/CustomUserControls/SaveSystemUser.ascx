@@ -56,7 +56,7 @@
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <label>User Pic</label><br />
-                                            <img src="../ImageHandler.ashx?Id=Default" width="150" height="150" runat="server" id="SchoolLogo" class="img-thumbnail" />
+                                            <img src="../ImageHandler.ashx?Id=Default" width="150" height="150" runat="server" id="UserPic" class="img-thumbnail" />
 
                                         </div>
                                     </div>
@@ -98,12 +98,11 @@
                                             <p class="help-block">The Name of the Company</p>
                                         </div>
                                         <div class="col-lg-6">
-                                            <label>Is Activated</label>
+                                            <label>Is Active</label>
                                             <asp:DropDownList ID="ddIsActive" runat="server" CssClass="form-control">
                                                 <asp:ListItem Value="TRUE">YES</asp:ListItem>
                                                 <asp:ListItem Value="FALSE">NO</asp:ListItem>
                                             </asp:DropDownList>
-                                            <p class="help-block">The Code to be associated with the Client. Unique Identifier for Client</p>
                                         </div>
                                     </div>
                                     <br />
@@ -111,6 +110,10 @@
                                         <div class="col-lg-6">
                                             <label>Upload Profile Pic</label>
                                             <asp:FileUpload ID="fuProfilePic" CssClass="form-control" runat="server"></asp:FileUpload>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label>UserId</label>
+                                            <asp:TextBox ID="txtUserId" runat="server" CssClass="form-control" placeholder="Enter text" />
                                         </div>
                                     </div>
                                 </div>

@@ -238,13 +238,13 @@ namespace SharedCommons
 
         public static string GeneratePassword()
         {
-            string Password = GenerateMD5Hash("T3rr1613");
+            string Password = "T3rr1613";
             return Password;
         }
 
         public static string GeneratePin()
         {
-            string Password = GenerateMD5Hash("13254");
+            string Password = "13254";
             return Password;
         }
 

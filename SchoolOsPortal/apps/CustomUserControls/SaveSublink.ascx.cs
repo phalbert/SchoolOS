@@ -90,7 +90,7 @@ public partial class CustomUserControls_SaveSublink : System.Web.UI.UserControl
                 return;
             }
 
-            msg = "STUDENT SAVED SUCCESSFULLY";
+            msg = "LINK SAVED SUCCESSFULLY";
             bll.ShowMessage(lblmsg, msg, false, Session);
 
             if (SaveCompleted != null)

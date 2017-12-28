@@ -1,6 +1,7 @@
 ﻿using InterLinkClass.PegPaySchoolsApi;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -83,8 +84,18 @@ public partial class SaveStudent : System.Web.UI.UserControl
         try
         {
             string msg = "";
-            Student aclient = GetClient();
-            Result result = schoolApi.SaveStudent(aclient);
+            Student std = GetObject();
+
+            DataTable dt = bll.ExecuteDataTableOnSchoolsDB("GetStudentById", new string[] { std.StudentNumber,std.SchoolCode });
+
+            if (dt.Rows.Count != 0)
+            {
+                msg = "FAILED: SCHOOL CODE ALREADY IN USE. PLEASE PICK ANOTHER ONE";
+                bll.ShowMessage(lblmsg, msg, false, Session);
+                return;
+            }
+
+            Result result = schoolApi.SaveStudent(std);
 
             if (result.StatusCode != Globals.SUCCESS_STATUS_CODE)
             {
@@ -114,7 +125,7 @@ public partial class SaveStudent : System.Web.UI.UserControl
         }
     }
 
-    private Student GetClient()
+    private Student GetObject()
     {
         Student std = new Student();
         std.ClassCode = ddClass.SelectedValue;
@@ -143,5 +154,20 @@ public partial class SaveStudent : System.Web.UI.UserControl
     protected void btnCancel_Click(object sender, EventArgs e)
     {
 
+    }
+
+    protected void ddSchools_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        try
+        {
+            bll.LoadDataIntoDropDown("GetClassesForDropDown", new string[] { ddSchools.SelectedValue }, ddClass);
+            bll.LoadDataIntoDropDown("GetStreamsForDropDown", new string[] { ddSchools.SelectedValue }, ddStream);
+            bll.LoadDataIntoDropDown("GetStudentCategoriesForDropDown", new string[] { ddSchools.SelectedValue }, ddStdCategory);
+        }
+        catch (Exception ex)
+        {
+            bll.LogError("SAVE-CLIENT", ex.StackTrace, "", ex.Message, "EXCEPTION");
+            bll.ShowMessage(lblmsg, ex.Message, true, Session);
+        }
     }
 }

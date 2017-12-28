@@ -142,10 +142,10 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>InterLinkClass_PegasusManagementApi_Service</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="http://192.168.0.3:99/MailApi/Messenger.asmx%3fWSDL">
+    <WebReferenceUrl Include="http://192.168.23.15:5099/MailApi/Messenger.asmx%3fWSDL">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\MailApi\</RelPath>
-      <UpdateFromURL>http://192.168.0.3:99/MailApi/Messenger.asmx%3fWSDL</UpdateFromURL>
+      <UpdateFromURL>http://192.168.23.15:5099/MailApi/Messenger.asmx%3fWSDL</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

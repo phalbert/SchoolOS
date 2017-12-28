@@ -62,7 +62,7 @@
             <asp:View runat="server" ID="resultView">
                 <hr />
                 <div class="row text-center">
-                    <asp:Button ID="btnApprove" runat="server" Text="Admit" CssClass="btn btn-primary btn-lg"
+                    <asp:Button ID="btnApprove" runat="server" Text="Aprove" CssClass="btn btn-primary btn-lg"
                         OnClick="btnApprove_Click" />
                     <asp:Button ID="btnReject" runat="server" Text="Reject" CssClass="btn btn-danger btn-lg"
                         OnClick="btnReject_Click" />
@@ -77,8 +77,11 @@
                                 Font-Overline="False" Font-Strikeout="False" Font-Underline="False" Height="30px" />
                             <Columns>
                                 <asp:TemplateField HeaderText="Select">
+                                     <HeaderTemplate>
+                                        <asp:CheckBox ID="chkboxSelectAll" Text=" Select All" runat="server" AutoPostBack="true" OnCheckedChanged="dataGridResults_SelectedIndexChanged" />
+                                    </HeaderTemplate>
                                     <ItemTemplate>
-                                        <asp:CheckBox ID="btnedit" runat="server" CommandName="EditEntity" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" />
+                                        <asp:CheckBox ID="CheckBox" runat="server" CommandName="EditEntity" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" />
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>

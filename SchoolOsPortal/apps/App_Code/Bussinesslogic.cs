@@ -27,6 +27,31 @@ public class Bussinesslogic
         return base64String;
     }
 
+    public InterLinkClass.PegPaySchoolsApi.SystemUser GetSystemUserById2(string userId)
+    {
+        InterLinkClass.PegPaySchoolsApi.SystemUser user = new InterLinkClass.PegPaySchoolsApi.SystemUser();
+        DataTable dt = SchoolsApi.ExecuteDataSet("GetSystemUserById",new string[] { userId }).Tables[0];
+        if (dt.Rows.Count == 0)
+        {
+            user.StatusCode = Globals.FAILURE_STATUS_CODE;
+            user.StatusDesc = "USER ["+userId+"] NOT FOUND";
+            return user;
+        }
+        DataRow row = dt.Rows[0];
+        user.ApprovedBy = row["ApprovedBy"].ToString();
+        user.SchoolCode = row["SchoolCode"].ToString();
+        user.SecretKey = row["SecretKey"].ToString();
+        user.UserCategory = row["UserCategory"].ToString();
+        user.Username = userId;
+        user.UserPassword = row["Password"].ToString();
+        user.UserType = row["UserType"].ToString();
+        user.ProfilePic = row["ProfilePic"].ToString();
+        user.FullName = row["FullName"].ToString();
+        user.StatusCode = Globals.SUCCESS_STATUS_CODE;
+        user.StatusDesc = "SUCCESS";
+        return user;
+    }
+
     public string GetBase64StringOfUploadedFile(FileUpload fileUpload)
     {
         string base64string = "";
@@ -34,9 +59,15 @@ public class Bussinesslogic
         {
             byte[] b = new byte[fileUpload.PostedFile.ContentLength];
             fileUpload.PostedFile.InputStream.Read(b, 0, b.Length);
-            string base64String = System.Convert.ToBase64String(b, 0, b.Length);
+            base64string = System.Convert.ToBase64String(b, 0, b.Length);
+            base64string = "data:" + fileUpload.PostedFile.ContentType + ";base64," + base64string;
         }
         return base64string;
+    }
+
+    public DataTable ExecuteDataTableOnSchoolsDB(string storedProc, string[] args)
+    {
+        return SchoolsApi.ExecuteDataSet(storedProc, args).Tables[0];
     }
 
     public void ShowMessage(Label lblmsg, string msg, bool IsError, System.Web.SessionState.HttpSessionState Session)
@@ -377,7 +408,7 @@ public class Bussinesslogic
             ddlst.Items.Add(new ListItem(Text, Value));
         }
 
-        if (user.User.UserType != "SYS_ADMIN")
+        if (user.User.UserType != "ADMIN")
         {
             ddlst.SelectedValue = user.SchoolDetails.SchoolCode;
             ddlst.Enabled = false;

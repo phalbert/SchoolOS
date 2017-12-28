@@ -90,7 +90,7 @@ public partial class CustomUserControls_SaveSchoolTerm : System.Web.UI.UserContr
                 return;
             }
 
-            msg = "STUDENT SAVED SUCCESSFULLY";
+            msg = "SEMESTER SAVED SUCCESSFULLY";
             bll.ShowMessage(lblmsg, msg, false, Session);
 
             if (SaveCompleted != null)

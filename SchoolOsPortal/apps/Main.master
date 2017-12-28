@@ -7,10 +7,9 @@
 
 <!DOCTYPE html>
 <html>
-
 <head runat="server">
     <meta charset="UTF-8">
-    <title>PegPay Uganda </title>
+    <title>FlexiSchools </title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
     <link rel="shortcut icon" href="img/favicon.ico.png" />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -20,22 +19,14 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
     <!-- global css -->
-    <link type="text/css" href="css/pegpay-master.css" rel="stylesheet" />
-     
+    <link type="text/css" rel="stylesheet" href="css/flexi1.css" />
+    <!-- end of global css -->
+    <!--page level css -->
+
+
+
 
     <style id="skin">
-        a.dropdown-toggle {
-            height: 60px;
-        }
-
-            a.dropdown-toggle.padding-user {
-                height: 60px;
-            }
-
-        li.dropdown.user.user-menu {
-            height: 60px;
-        }
-
         .skin-default .sidebar a {
             color: #808b9c;
             -webkit-font-smoothing: antialiased;
@@ -47,21 +38,14 @@
 
         @media screen and (min-width:550px) {
             .skin-default .navbar .navbar-right > .nav {
-                height: 60px;
                 margin-right: 15px;
             }
         }
     </style>
-    <style type="text/css">
-        .ajax__calendar_container {
-            z-index: 1000;
-        }
-    </style>
-    <!------------------------------ end of global css --------------------------->
+    <link href="css/flexi2.css" rel="stylesheet" type="text/css" />
+
+    <!--end of page level css-->
 </head>
-
-
-
 <body class="skin-default">
 
     <form runat="server">
@@ -69,145 +53,107 @@
 
         <header class="header">
             <nav class="navbar navbar-static-top" role="navigation">
-                <a href="index.php" class="logo" >
-                    <!--<img src="img/pegasus.png" alt="logo" height="40px"/>-->
+
+                <a href="index.html" class="logo">
                     <h3 style="color: #fff;">FlexiSchools</h3>
                 </a>
 
                 <div>
-                    <a href="javascript:void(0)" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button"><i class="fa fa-fw ti-menu"></i>
+                    <a href="index.html#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+                        <i class="fa fa-fw ti-menu"></i>
                     </a>
                 </div>
+
                 <div class="navbar-right">
                     <ul class="nav navbar-nav">
+                        <!------------------------- User Account: style can be found in dropdown ------------------------->
+                        <li class="dropdown session">
+                            <a href="#" style="margin-top: 8px; color: white" name="session" id="session"><%=user.SchoolDetails.SchoolName %></a>
+                        </li>
+
                         <li class="dropdown messages-menu">
-                            <asp:LinkButton Id="LogOutLinkButton" runat="server" OnClick="LogoutLinkButton_Click" CssClass="dropdown-toggle"><i class="fa fa-fw ti-power-off black"></i>
-
+                            <asp:LinkButton ID="LogOutLinkButton" runat="server" OnClick="LogoutLinkButton_Click" CssClass="dropdown-toggle">
+                                <i class="fa fa-fw ti-new-window black"></i>
                             </asp:LinkButton>
-
-
                         </li>
 
-                        <!-------------------------------------- User Account: style can be found in dropdown--------------------------------->
-                        <li class="dropdown user user-menu">
-                            <a href="?Logout" class="dropdown-toggle padding-user" data-toggle="dropdown">
-                                <img src="ImageHandler.ashx?Id=<%= user.User.ProfilePic %>" width="35" class="img-circle img-responsive pull-left" height="35" alt="User Image">
-                                <div class="riot">
-                                    <div>
-                                        <%=user.User.FullName %>
-
-                                        <span>
-                                            <i class="caret"></i>
-                                        </span>
-                                    </div>
-                                </div>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <!------------------------------------------ User image ----------------------------->
-                                <li class="user-header">
-                                    <img src="ImageHandler.ashx?Id=<%= user.User.ProfilePic %>" class="img-circle" alt="User Image">
-                                    <p></p>
-                                </li>
-                               
-                            </ul>
-                        </li>
                     </ul>
                 </div>
+
             </nav>
         </header>
+        <div class="wrapper row-offcanvas row-offcanvas-left">
+            <aside class="left-side sidebar-offcanvas">
+                <!----------------------------------------- sidebar: style can be found in sidebar -------------------------->
+                <section class="sidebar">
+                    <div id="menu" role="navigation">
+                        <div class="nav_profile">
+                            <div style="text-align: center;" class="media profile-left">
+                                <img class="img-circle img-thumbnail" src="ImageHandler.ashx?Id=<%= user.User.ProfilePic %>"  style="width:200px;height:200px"/>
+                                <br />
+                                <div class="content-profile">
+                                    <h4 style="text-align: center" class="media-heading"><%=user.User.FullName %>
+                                    </h4>
 
-        <aside class="left-side sidebar-offcanvas">
-            <!--------------------------- sidebar: style can be found in sidebar---------------------->
-            <section class="sidebar">
-                <div id="menu" role="navigation">
-                    <div class="nav_profile">
-                        <div class="media profile-left">
-                            <img style="vertical-align: middle;" src="ImageHandler.ashx?Id=<%=user.SchoolDetails.SchoolLogo %>" width="200px" />
-                            <br />
-                            <div class="content-profile">
-                                <h4 style="text-align: center" class="media-heading">
-                                    Username</asp:LinkButton>
-                                </h4>
-                                <ul class="icon-list">
-                                    <li>
-                                        <a href="users.php">
-                                            <i class="fa fa-fw ti-user"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="lockscreen.php">
-                                            <i class="fa fa-fw ti-lock"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="edit_user.php">
-                                            <i class="fa fa-fw ti-settings"></i>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="login.php">
-                                            <i class="fa fa-fw ti-shift-right"></i>
-                                        </a>
-                                    </li>
-                                </ul>
+                                </div>
                             </div>
                         </div>
+
+                        <!--------------------------------------- .navigation ----------------------------------------->
+                        <ul class="navigation">
+                            <li class="active" id="active">
+                                <a href="LoggedInStartPage.aspx">
+                                    <i class="menu-icon ti-layout-grid3-alt"></i>
+                                    <span class="mm-text ">Dashboard</span>
+                                </a>
+                            </li>
+                            <% foreach (InterLinkClass.PegPaySchoolsApi.MenuItem menuItem in user.UserMenuOptions)
+                                {%>
+                            <li class="menu-dropdown">
+                                <a href="#">
+                                    <i class="menu-icon ti-layout-grid3-alt"></i>
+                                    <span><%=menuItem.mainLink.MainLinkName %></span>
+                                    <span class="fa arrow"></span>
+                                </a>
+                                <ul class="sub-menu">
+                                    <% foreach (InterLinkClass.PegPaySchoolsApi.SubLink subLink in menuItem.subLinks)
+                                        { %>
+                                    <li>
+                                        <a href="<%=subLink.URL %>">
+                                            <i class="fa fa-fw ti-arrow-circle-right"></i>
+                                            <%=subLink.SubLinkName %>
+                                        </a>
+                                    </li>
+                                    <%} %>
+                                </ul>
+                            </li>
+                            <%} %>
+                        </ul>
+                        <!---------------------------------- / .navigation ------------------------------------->
+
                     </div>
+                </section>
+                <!----------------------------------------- /.sidebar -------------------------------------------->
+            </aside>
 
-                    <!--------------------------------------- .navigation ----------------------------------------->
-                    <ul class="navigation">
-                        <li class="active" id="active">
-                            <a href="LoggedInStartPage.aspx">
-                                <i class="menu-icon ti-layout-grid3-alt"></i>
-                                <span class="mm-text ">Dashboard</span>
-                            </a>
-                        </li>
-                        <% foreach (InterLinkClass.PegPaySchoolsApi.MenuItem menuItem in user.UserMenuOptions)
-                            {%>
-                        <li class="menu-dropdown">
-                            <a href="#">
-                                <i class="menu-icon ti-layout-grid3-alt"></i>
-                                <span><%=menuItem.mainLink.MainLinkName %></span>
-                                <span class="fa arrow"></span>
-                            </a>
-                            <ul class="sub-menu">
-                                <% foreach (InterLinkClass.PegPaySchoolsApi.SubLink subLink in menuItem.subLinks)
-                                    { %>
-                                <li>
-                                    <a href="<%=subLink.URL %>">
-                                        <i class="fa fa-fw ti-arrow-circle-right"></i>
-                                        <%=subLink.SubLinkName %>
-                                    </a>
-                                </li>
-                                <%} %>
-                            </ul>
-                        </li>
-                        <%} %>
-                    </ul>
+            <%--------------------------------------------- Ajax ScriptManager  ---------------------------------%>
+            <ajaxToolkit:ToolkitScriptManager ID="ScriptManager1" runat="Server" EnableScriptGlobalization="true"
+                EnableScriptLocalization="true">
+            </ajaxToolkit:ToolkitScriptManager>
+            
+            <!--------------------------------------- Main content --------------------->
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+            <!--------------------------------------- /.content ----------------------->
 
-                </div>
-            </section>
-        </aside>
-
-        <ajaxToolkit:ToolkitScriptManager ID="ScriptManager1" runat="Server" EnableScriptGlobalization="true"
-            EnableScriptLocalization="true">
-        </ajaxToolkit:ToolkitScriptManager>
-        <!------------------------------------- Main content --------------------->
-        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-        </asp:ContentPlaceHolder>
-        <!--------------------------------------- /.content ----------------------->
-
-
-
+        </div>
+        
+        <!--------------------------------- global js ----------------------->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/g/bootstrap@3.3.7,bootstrap.switch@3.3.2,jquery.nicescroll@3.6.0"></script>
+        <script src="js/app.js" type="text/javascript"></script>
+        <!------------------------------ end of page level js --------------->
     </form>
 
-    <!--------------------------------- global js ----------------------->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/g/bootstrap@3.3.7,bootstrap.switch@3.3.2,jquery.nicescroll@3.6.0"></script>
-
-    <script src="scripts/js/app.js" type="text/javascript"></script>
-    <!------------------------------ end of page level js --------------->
 </body>
-
 </html>
-

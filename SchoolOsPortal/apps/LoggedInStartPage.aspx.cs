@@ -51,7 +51,7 @@ public partial class Admin : System.Web.UI.Page
     {
 
         lblmsg.Text = user.User.Username;
-        UsersPic.Attributes["src"] = "ImageHandler.ashx?Id=" + user.User.ProfilePic;
+        UsersPic.Attributes["src"] = "ImageHandler.ashx?Id=" + user.SchoolDetails.SchoolLogo;
 
     }
 

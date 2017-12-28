@@ -50,7 +50,7 @@
                             <div class="panel panel-success">
 
                                 <div class="panel-heading text-center">
-                                    SUPPLY THE SUBJECT DETAILS USING FORM BELOW
+                                    SUPPLY THE SEMESTER DETAILS USING FORM BELOW
                                 </div>
 
                                 <div class="panel-body">
@@ -69,6 +69,7 @@
                                         </div>
 
                                     </div>
+                                    <br />
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <label>Start Date</label>

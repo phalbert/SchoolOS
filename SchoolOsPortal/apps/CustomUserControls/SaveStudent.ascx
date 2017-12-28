@@ -65,7 +65,7 @@
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <label>School</label>
-                                            <asp:DropDownList ID="ddSchools" runat="server" CssClass="form-control">
+                                            <asp:DropDownList ID="ddSchools" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddSchools_SelectedIndexChanged" CssClass="form-control">
                                                 <asp:ListItem>True</asp:ListItem>
                                                 <asp:ListItem>False</asp:ListItem>
                                             </asp:DropDownList>
@@ -135,8 +135,8 @@
                                         <div class="col-lg-6">
                                             <label>Student Gender</label>
                                             <asp:DropDownList ID="ddGender" runat="server" CssClass="form-control">
-                                                <asp:ListItem>True</asp:ListItem>
-                                                <asp:ListItem>False</asp:ListItem>
+                                                <asp:ListItem>Male</asp:ListItem>
+                                                <asp:ListItem>Female</asp:ListItem>
                                             </asp:DropDownList>
                                         </div>
                                     </div>
@@ -158,6 +158,9 @@
                 </div>
             </div>
         </div>
+          <ajaxToolkit:CalendarExtender ID="CalendarExtender1" runat="server" CssClass="cal_Theme1"
+            Format="yyyy-MM-dd" PopupPosition="BottomRight" TargetControlID="txtDateOfBirth">
+        </ajaxToolkit:CalendarExtender>
     </asp:View>
 
     <%------------------------------------------------------------ Confirm View ------------------------------- --%>

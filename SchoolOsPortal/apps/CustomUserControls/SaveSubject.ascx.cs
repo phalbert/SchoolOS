@@ -90,7 +90,7 @@ public partial class SaveSubject : System.Web.UI.UserControl
                 return;
             }
 
-            msg = "STUDENT SAVED SUCCESSFULLY";
+            msg = "SUBJECT SAVED SUCCESSFULLY";
             bll.ShowMessage(lblmsg, msg, false, Session);
 
             if (SaveCompleted != null)

@@ -118,7 +118,7 @@
                                 <div class="g-recaptcha" data-theme="dark" data-sitekey="6Le2u_wSAAAAAL_gETRxPdb5oU3p5if1cDLCasKT"></div>
 
                                 <div class='form-group'>
-                                   <div class="g-recaptcha" data-sitekey="6Leefj0UAAAAAAb8CMhdkGZxmVVhKGxMGkUPqB6z"></div>
+                                   <div class="g-recaptcha" data-sitekey="6LdAfD0UAAAAAM_bf1xJN2Z279--f3DoI1EWzfux"></div>
                                 </div>
                                 <div class="form-group">
                                     <asp:Button runat="server" ID="btnLogin" Text="Sign In" class="btn btn-primary btn-block" OnClick="btnLogin_Click" />
