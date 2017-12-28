@@ -32,10 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Encryption">
-      <HintPath>D:\Work\TelecomsApiLevel3\TelecomsApi_1\Bin\Encryption.dll</HintPath>
-    </Reference>
-    <Reference Include="EPPlus">
-      <HintPath>..\..\..\GenericApi\Pegasus Test CoreBanking\Staging\Services\PegPayCoreBankingUSSDTransactionsSenderService\EPPlus.dll</HintPath>
+      <HintPath>..\..\..\..\PegasusInhouseServices_1\application\apps\bin\Encryption.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

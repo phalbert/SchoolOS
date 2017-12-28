@@ -120,10 +120,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://localhost:2509/SchoolApi.asmx">
+    <WebReferenceUrl Include="http://localhost:8020/FlexiSchoolsApi/SchoolApi.asmx%3fWSDL">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\PegPaySchoolsApi\</RelPath>
-      <UpdateFromURL>http://localhost:2509/SchoolApi.asmx</UpdateFromURL>
+      <UpdateFromURL>http://localhost:8020/FlexiSchoolsApi/SchoolApi.asmx%3fWSDL</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
@@ -186,9 +186,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Web References\PegasusManagementApi\MSystemService.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Web References\PegPaySchoolsApi\SchoolApi.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

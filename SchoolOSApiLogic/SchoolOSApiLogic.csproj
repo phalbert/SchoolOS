@@ -33,17 +33,21 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Encryption">
-      <HintPath>..\..\..\TelecomsApiLevel3\TelecomsApi_1\Bin\Encryption.dll</HintPath>
+    <Reference Include="Encryption, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\PegasusInhouseServices_1\PegasusChangeManagementApi\ChangeManagementSystem\bin\Debug\Encryption.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common">
-      <HintPath>..\..\..\NftFingerPrintAttendanceWebPortal\AttendanceLibrary\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\PegasusInhouseServices_1\PegasusChangeManagementApi\ChangeManagementSystem\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data">
-      <HintPath>..\..\..\NftFingerPrintAttendanceWebPortal\AttendanceLibrary\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\PegasusInhouseServices_1\PegasusChangeManagementApi\ChangeManagementSystem\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.ObjectBuilder">
-      <HintPath>..\..\..\NftFingerPrintAttendanceWebPortal\AttendanceLibrary\bin\Debug\Microsoft.Practices.ObjectBuilder.dll</HintPath>
+    <Reference Include="Microsoft.Practices.ObjectBuilder, Version=1.0.51206.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\PegasusInhouseServices_1\PegasusChangeManagementApi\ChangeManagementSystem\bin\Debug\Microsoft.Practices.ObjectBuilder.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />

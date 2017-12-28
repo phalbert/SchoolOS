@@ -12,3 +12,13 @@ D:\Work\PegasusSchoolOS\SchoolOS\SchoolOSApiLogic\bin\Debug\Microsoft.Practices.
 D:\Work\PegasusSchoolOS\SchoolOS\SchoolOSApiLogic\bin\Debug\Microsoft.Practices.ObjectBuilder.dll
 D:\Work\PegasusSchoolOS\SchoolOS\SchoolOSApiLogic\obj\Debug\SchoolOSApiLogic.dll
 D:\Work\PegasusSchoolOS\SchoolOS\SchoolOSApiLogic\obj\Debug\SchoolOSApiLogic.pdb
+E:\PePay\FlexiSchools\SchoolOS\SchoolOSApiLogic\bin\Debug\SchoolOSApiLogic.dll.config
+E:\PePay\FlexiSchools\SchoolOS\SchoolOSApiLogic\bin\Debug\SchoolOSApiLogic.dll
+E:\PePay\FlexiSchools\SchoolOS\SchoolOSApiLogic\bin\Debug\SchoolOSApiLogic.pdb
+E:\PePay\FlexiSchools\SchoolOS\SchoolOSApiLogic\bin\Debug\Encryption.dll
+E:\PePay\FlexiSchools\SchoolOS\SchoolOSApiLogic\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
+E:\PePay\FlexiSchools\SchoolOS\SchoolOSApiLogic\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
+E:\PePay\FlexiSchools\SchoolOS\SchoolOSApiLogic\bin\Debug\Microsoft.Practices.ObjectBuilder.dll
+E:\PePay\FlexiSchools\SchoolOS\SchoolOSApiLogic\obj\Debug\SchoolOSApiLogic.csprojResolveAssemblyReference.cache
+E:\PePay\FlexiSchools\SchoolOS\SchoolOSApiLogic\obj\Debug\SchoolOSApiLogic.dll
+E:\PePay\FlexiSchools\SchoolOS\SchoolOSApiLogic\obj\Debug\SchoolOSApiLogic.pdb

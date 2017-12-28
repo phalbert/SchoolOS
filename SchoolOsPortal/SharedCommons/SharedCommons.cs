@@ -4,7 +4,6 @@ using System.Net.Security;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using OfficeOpenXml;
 using System.IO;
 using System.Data;
 using System.Reflection;
@@ -436,91 +435,91 @@ namespace SharedCommons
             return hex.ToString();
         }
 
-        public static string ExportDataTableToExcel(DataTable dt, string path)
-        {
-            FileInfo newFile = new FileInfo(path);
+        //public static string ExportDataTableToExcel(DataTable dt, string path)
+        //{
+        //    FileInfo newFile = new FileInfo(path);
 
-            ExcelPackage package = new ExcelPackage();
-            ExcelWorksheet ws = package.Workbook.Worksheets.Add("sheet1");
+        //    ExcelPackage package = new ExcelPackage();
+        //    ExcelWorksheet ws = package.Workbook.Worksheets.Add("sheet1");
 
-            //set heading
-            int excelColumn = 1;
-            foreach (DataColumn dc in dt.Columns)
-            {
-                ws.Cells[1, excelColumn].Value = dc.ColumnName;
-                excelColumn++;
-            }
+        //    //set heading
+        //    int excelColumn = 1;
+        //    foreach (DataColumn dc in dt.Columns)
+        //    {
+        //        ws.Cells[1, excelColumn].Value = dc.ColumnName;
+        //        excelColumn++;
+        //    }
 
-            ws.Cells[1, 1, 1, dt.Columns.Count].Style.Font.Bold = true;
+        //    ws.Cells[1, 1, 1, dt.Columns.Count].Style.Font.Bold = true;
 
-            int i = 2;//row position in excel sheet
+        //    int i = 2;//row position in excel sheet
 
-            foreach (DataRow dr in dt.Rows)
-            {
-                int dataColumn = 1;
-                int tableColumnNumber = 0;
-                foreach (DataColumn dc in dt.Columns)
-                {
-                    ws.Cells[i, dataColumn].Value = dr[tableColumnNumber].ToString();
-                    dataColumn++;
-                    tableColumnNumber++;
-                }
-                i++;
-            }
-            package.SaveAs(newFile);
-            package.Save();
-            return path;
-        }
+        //    foreach (DataRow dr in dt.Rows)
+        //    {
+        //        int dataColumn = 1;
+        //        int tableColumnNumber = 0;
+        //        foreach (DataColumn dc in dt.Columns)
+        //        {
+        //            ws.Cells[i, dataColumn].Value = dr[tableColumnNumber].ToString();
+        //            dataColumn++;
+        //            tableColumnNumber++;
+        //        }
+        //        i++;
+        //    }
+        //    package.SaveAs(newFile);
+        //    package.Save();
+        //    return path;
+        //}
 
-        public static string ExportObjectsToExcel(Object[] baseObjArray, string path)
-        {
-            try
-            {
-                FileInfo newFile = new FileInfo(path);
+        //public static string ExportObjectsToExcel(Object[] baseObjArray, string path)
+        //{
+        //    try
+        //    {
+        //        FileInfo newFile = new FileInfo(path);
 
-                ExcelPackage package = new ExcelPackage();
-                ExcelWorksheet ws = package.Workbook.Worksheets.Add("sheet1");
+        //        ExcelPackage package = new ExcelPackage();
+        //        ExcelWorksheet ws = package.Workbook.Worksheets.Add("sheet1");
 
-                //we use reflection to 
-                //1. get the class of object passed
-                //2. loop thru all properties of that class
+        //        //we use reflection to 
+        //        //1. get the class of object passed
+        //        //2. loop thru all properties of that class
 
-                FieldInfo[] fields = baseObjArray[0].GetType().GetFields();
+        //        FieldInfo[] fields = baseObjArray[0].GetType().GetFields();
 
-                //set heading
-                int excelColumn = 1;
-                foreach (FieldInfo field in fields)
-                {
-                    ws.Cells[1, excelColumn].Value = field.Name;
-                    excelColumn++;
-                }
+        //        //set heading
+        //        int excelColumn = 1;
+        //        foreach (FieldInfo field in fields)
+        //        {
+        //            ws.Cells[1, excelColumn].Value = field.Name;
+        //            excelColumn++;
+        //        }
 
-                ws.Cells[1, 1, 1, fields.Length].Style.Font.Bold = true;
+        //        ws.Cells[1, 1, 1, fields.Length].Style.Font.Bold = true;
 
-                int i = 2;//row position in excel sheet
-                foreach (Object baseObj in baseObjArray)
-                {
-                    int dataColumn = 1;
-                    foreach (FieldInfo field in fields)
-                    {
-                        string fieldName = field.Name;
-                        //get value from field
-                        object obj = baseObj.GetType().GetField(fieldName).GetValue(baseObj);
-                        //add value to cell
-                        ws.Cells[i, dataColumn].Value = obj.ToString();
-                        dataColumn++;
-                    }
-                    i++;
-                }
-                package.SaveAs(newFile);
-                package.Save();
-                return path;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+        //        int i = 2;//row position in excel sheet
+        //        foreach (Object baseObj in baseObjArray)
+        //        {
+        //            int dataColumn = 1;
+        //            foreach (FieldInfo field in fields)
+        //            {
+        //                string fieldName = field.Name;
+        //                //get value from field
+        //                object obj = baseObj.GetType().GetField(fieldName).GetValue(baseObj);
+        //                //add value to cell
+        //                ws.Cells[i, dataColumn].Value = obj.ToString();
+        //                dataColumn++;
+        //            }
+        //            i++;
+        //        }
+        //        package.SaveAs(newFile);
+        //        package.Save();
+        //        return path;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
 
     }
 }

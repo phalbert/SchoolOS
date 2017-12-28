@@ -46,7 +46,7 @@ namespace InterLinkClass.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:2509/SchoolApi.asmx")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:8020/FlexiSchoolsApi/SchoolApi.asmx")]
         public string InterLinkClass_PegPaySchoolsApi_Service {
             get {
                 return ((string)(this["InterLinkClass_PegPaySchoolsApi_Service"]));
