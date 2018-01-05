@@ -80,7 +80,7 @@
                                         <asp:CheckBox ID="chkboxSelectAll" Text=" Select All" runat="server" AutoPostBack="true" OnCheckedChanged="dataGridResults_SelectedIndexChanged" />
                                     </HeaderTemplate>
                                     <ItemTemplate>
-                                        <asp:Button ID="CheckBox" runat="server" Text="Edit" CommandName="EditEntity" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" />
+                                        <asp:CheckBox ID="CheckBox" runat="server" Text="" CommandName="EditEntity" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" />
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>

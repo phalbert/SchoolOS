@@ -13,188 +13,133 @@ public class Service : System.Web.Services.WebService
 {
     public Service()
     {
-
-        //Uncomment the following line if using designed components 
-        //InitializeComponent(); 
+        
     }
 
     [WebMethod]
-    public DataSet ExecuteDataSet(string storedProc, params Object[]  parameters)
+    public DataSet ExecuteDataSet(string storedProc, params Object[] parameters)
     {
         SchoolOSApiLogic.SchoolsInterfaceApi api = new SchoolOSApiLogic.SchoolsInterfaceApi();
-        DataSet  ds = api.ExecuteDataSet(storedProc,parameters);
+        DataSet ds = api.ExecuteDataSet(storedProc, parameters);
         return ds;
+    }
+
+    [WebMethod]
+    public DataSet ExecuteDataSetOnCB(string storedProc, params string[] parameters)
+    {
+        SchoolOSApiLogic.SchoolsInterfaceApi api = new SchoolOSApiLogic.SchoolsInterfaceApi();
+        DataSet ds = api.ExecuteDataSetOnCB(storedProc, parameters);
+        return ds;
+    }
+
+    [WebMethod]
+    public int ExecuteNonQuery(string storedProc, params Object[] parameters)
+    {
+        SchoolOSApiLogic.SchoolsInterfaceApi api = new SchoolOSApiLogic.SchoolsInterfaceApi();
+        return api.ExecuteNonQuery(storedProc,parameters);
+    }
+
+    [WebMethod]
+    public Result ExecuteNonQueryOnCB(string storedProc, params string[] parameters)
+    {
+        SchoolOSApiLogic.SchoolsInterfaceApi api = new SchoolOSApiLogic.SchoolsInterfaceApi();
+        return api.ExecuteNonQueryOnCB(storedProc, parameters);
     }
 
     [WebMethod]
     public Result SaveSchool(School sch)
     {
-        Result result = new Result();
-        try
-        {
-            SchoolOSApiLogic.SchoolsInterfaceApi api = new SchoolOSApiLogic.SchoolsInterfaceApi();
-            result = api.SaveSchool(sch);
-        }
-        catch (Exception ex)
-        {
-            string msg = "EXCEPTION:" + ex.Message;
-            SchoolOSApiLogic.SchoolsInterfaceApi.LogError(msg, ex.StackTrace, sch.SchoolCode);
-            result.StatusCode = Globals.FAILURE_STATUS_CODE;
-            result.StatusDesc = msg;//"{0} is an {1}",0,1
-        }
-        return result;
+        SchoolOSApiLogic.SchoolsInterfaceApi api = new SchoolOSApiLogic.SchoolsInterfaceApi();
+        return api.SaveSchool(sch);
     }
 
     [WebMethod]
     public Result SaveStudent(Student std)
     {
-        Result result = new Result();
-        try
-        {
-            SchoolOSApiLogic.SchoolsInterfaceApi api = new SchoolOSApiLogic.SchoolsInterfaceApi();
-            result = api.SaveStudent(std);
-        }
-        catch (Exception ex)
-        {
-            string msg = "EXCEPTION:" + ex.Message;
-            SchoolOSApiLogic.SchoolsInterfaceApi.LogError(msg, ex.StackTrace, std.SchoolCode);
-            result.StatusCode = Globals.FAILURE_STATUS_CODE;
-            result.StatusDesc = msg;//"{0} is an {1}",0,1
-        }
-        return result;
+        SchoolOSApiLogic.SchoolsInterfaceApi api = new SchoolOSApiLogic.SchoolsInterfaceApi();
+        return api.SaveStudent(std);
     }
 
     [WebMethod]
-    public SystemUserDetails Login(string Username,string Password)
+    public SystemUserDetails Login(string Username, string Password)
     {
-        SystemUserDetails result = new SystemUserDetails();
-        try
-        {
-            SchoolOSApiLogic.SchoolsInterfaceApi api = new SchoolOSApiLogic.SchoolsInterfaceApi();
-            return api.Login(Username, Password);
-        }
-        catch (Exception ex)
-        {
-            string msg = "EXCEPTION:" + ex.Message;
-            SchoolOSApiLogic.SchoolsInterfaceApi.LogError(msg, ex.StackTrace, Username);
-            result.StatusCode = Globals.FAILURE_STATUS_CODE;
-            result.StatusDesc = msg;//"{0} is an {1}",0,1
-        }
-        return result;
+        SchoolOSApiLogic.SchoolsInterfaceApi api = new SchoolOSApiLogic.SchoolsInterfaceApi();
+        return api.Login(Username, Password);
     }
 
     [WebMethod]
     public Result SaveSchoolClass(SchoolClass schcls)
     {
-        Result result = new Result();
-        try
-        {
-            SchoolOSApiLogic.SchoolsInterfaceApi api = new SchoolOSApiLogic.SchoolsInterfaceApi();
-            result = api.SaveSchoolClass(schcls);
-        }
-        catch (Exception ex)
-        {
-            string msg = "EXCEPTION:" + ex.Message;
-            SchoolOSApiLogic.SchoolsInterfaceApi.LogError(msg, ex.StackTrace, schcls.ClassCode);
-            result.StatusCode = Globals.FAILURE_STATUS_CODE;
-            result.StatusDesc = msg;//"{0} is an {1}",0,1
-        }
-        return result;
+
+        SchoolOSApiLogic.SchoolsInterfaceApi api = new SchoolOSApiLogic.SchoolsInterfaceApi();
+        return api.SaveSchoolClass(schcls);
+
+    }
+
+    [WebMethod]
+    public Result SaveDepartment(Department dept)
+    {
+        SchoolOSApiLogic.SchoolsInterfaceApi api = new SchoolOSApiLogic.SchoolsInterfaceApi();
+        return api.SaveDepartment(dept);
+
     }
 
     [WebMethod]
     public Result SaveSchoolSemester(SchoolSemester semester)
     {
-        Result result = new Result();
-        try
-        {
-            SchoolOSApiLogic.SchoolsInterfaceApi api = new SchoolOSApiLogic.SchoolsInterfaceApi();
-            result = api.SaveSchoolSemester(semester);
-        }
-        catch (Exception ex)
-        {
-            string msg = "EXCEPTION:" + ex.Message;
-            SchoolOSApiLogic.SchoolsInterfaceApi.LogError(msg, ex.StackTrace, semester.SemesterCode);
-            result.StatusCode = Globals.FAILURE_STATUS_CODE;
-            result.StatusDesc = msg;//"{0} is an {1}",0,1
-        }
-        return result;
+
+        SchoolOSApiLogic.SchoolsInterfaceApi api = new SchoolOSApiLogic.SchoolsInterfaceApi();
+        return api.SaveSchoolSemester(semester);
+
+    }
+
+    [WebMethod]
+    public Result SaveSubjectResult(SubjectResults semester)
+    {
+        SchoolOSApiLogic.SchoolsInterfaceApi api = new SchoolOSApiLogic.SchoolsInterfaceApi();
+        return api.SaveSubjectResult(semester);
+    }
+
+    [WebMethod]
+    public Result SaveUploadedFile(UploadedFile semester)
+    {
+        SchoolOSApiLogic.SchoolsInterfaceApi api = new SchoolOSApiLogic.SchoolsInterfaceApi();
+        return api.SaveUploadedFile(semester);
+    }
+
+    [WebMethod]
+    public Result SaveStudentSubject(StudentSubject semester)
+    {
+        SchoolOSApiLogic.SchoolsInterfaceApi api = new SchoolOSApiLogic.SchoolsInterfaceApi();
+        return api.SaveStudentSubject(semester);
     }
 
     [WebMethod]
     public Result SaveSchoolStaff(SchoolStaff staff)
     {
-        Result result = new Result();
-        try
-        {
-            SchoolOSApiLogic.SchoolsInterfaceApi api = new SchoolOSApiLogic.SchoolsInterfaceApi();
-            result = api.SaveSchoolStaff(staff);
-        }
-        catch (Exception ex)
-        {
-            string msg = "EXCEPTION:" + ex.Message;
-            SchoolOSApiLogic.SchoolsInterfaceApi.LogError(msg, ex.StackTrace, staff.StaffIDNumber);
-            result.StatusCode = Globals.FAILURE_STATUS_CODE;
-            result.StatusDesc = msg;//"{0} is an {1}",0,1
-        }
-        return result;
+        SchoolOSApiLogic.SchoolsInterfaceApi api = new SchoolOSApiLogic.SchoolsInterfaceApi();
+        return api.SaveSchoolStaff(staff);
     }
 
     [WebMethod]
     public Result SaveClassStream(ClassStream stream)
     {
-        Result result = new Result();
-        try
-        {
-            SchoolOSApiLogic.SchoolsInterfaceApi api = new SchoolOSApiLogic.SchoolsInterfaceApi();
-            result = api.SaveClassStream(stream);
-        }
-        catch (Exception ex)
-        {
-            string msg = "EXCEPTION:" + ex.Message;
-            SchoolOSApiLogic.SchoolsInterfaceApi.LogError(msg, ex.StackTrace, stream.StreamCode);
-            result.StatusCode = Globals.FAILURE_STATUS_CODE;
-            result.StatusDesc = msg;//"{0} is an {1}",0,1
-        }
-        return result;
+        SchoolOSApiLogic.SchoolsInterfaceApi api = new SchoolOSApiLogic.SchoolsInterfaceApi();
+        return api.SaveClassStream(stream);
     }
 
     [WebMethod]
     public Result SaveSystemUser(SystemUser user)
     {
-        Result result = new Result();
-        try
-        {
-            SchoolOSApiLogic.SchoolsInterfaceApi api = new SchoolOSApiLogic.SchoolsInterfaceApi();
-            result = api.SaveSystemUser(user);
-        }
-        catch (Exception ex)
-        {
-            string msg = "EXCEPTION:" + ex.Message;
-            SchoolOSApiLogic.SchoolsInterfaceApi.LogError(msg, ex.StackTrace, user.Username);
-            result.StatusCode = Globals.FAILURE_STATUS_CODE;
-            result.StatusDesc = msg;//"{0} is an {1}",0,1
-        }
-        return result;
+        SchoolOSApiLogic.SchoolsInterfaceApi api = new SchoolOSApiLogic.SchoolsInterfaceApi();
+        return api.SaveSystemUser(user);
     }
 
     [WebMethod]
     public Result SaveSubject(Subject sub)
     {
-        Result result = new Result();
-        try
-        {
-            SchoolOSApiLogic.SchoolsInterfaceApi api = new SchoolOSApiLogic.SchoolsInterfaceApi();
-            result = api.SaveSubject(sub);
-        }
-        catch (Exception ex)
-        {
-            string msg = "EXCEPTION:" + ex.Message;
-            SchoolOSApiLogic.SchoolsInterfaceApi.LogError(msg, ex.StackTrace, sub.SubjectCode);
-            result.StatusCode = Globals.FAILURE_STATUS_CODE;
-            result.StatusDesc = msg;//"{0} is an {1}",0,1
-        }
-        return result;
+        SchoolOSApiLogic.SchoolsInterfaceApi api = new SchoolOSApiLogic.SchoolsInterfaceApi();
+        return api.SaveSubject(sub);
     }
 
     [WebMethod]

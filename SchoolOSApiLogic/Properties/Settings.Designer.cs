@@ -32,5 +32,15 @@ namespace SchoolOSApiLogic.Properties {
                 return ((string)(this["SchoolOSApiLogic_SharedCommonsAPI_SharedCommonsAPI"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:44122/Service.asmx")]
+        public string SchoolOSApiLogic_CBApi_Service {
+            get {
+                return ((string)(this["SchoolOSApiLogic_CBApi_Service"]));
+            }
+        }
     }
 }

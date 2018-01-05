@@ -16,7 +16,8 @@ public partial class RegisterSchool : System.Web.UI.Page
 
             if (IsPostBack)
             {
-
+                btnEdit.Visible = true;
+                btnSubmit.Visible = false;
             }
             else
             {
@@ -32,42 +33,50 @@ public partial class RegisterSchool : System.Web.UI.Page
     private void LoadData()
     {
         Session["IsError"] = null;
+        btnEdit.Visible = false;
+        btnSubmit.Visible = true;
+        bll.LoadDataIntoDropDown("GetSupportedBanksForDropDown", new string[] { }, ddBanks);
     }
 
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
         try
         {
-            //Confirm that terms and conditions have been read
-            if (!chkTerms.Checked)
+
+
+            if (string.IsNullOrEmpty(txtSchoolCode.Text))
             {
-                string msg = "PLEASE CONFIRM ACCEPTANCE OF THE TERMS AND CONDITIONS";
+                string msg = "FAILED: PLEASE SUPPLY A PREFERED SCHOOL CODE";
                 bll.ShowMessage(lblmsg, msg, true, Session);
                 return;
             }
 
-            //save school
-            Result result = SaveSchool();
-
-            if (result.StatusCode != Globals.SUCCESS_STATUS_CODE)
+            if (string.IsNullOrEmpty(txtUserId.Text))
             {
-                string msg = "FAILED: " + result.StatusDesc;
+                string msg = "FAILED: PLEASE SUPPLY A PREFERED USERNAME";
                 bll.ShowMessage(lblmsg, msg, true, Session);
                 return;
             }
 
-            //save system User
-            result = SaveSystemUser();
-            if (result.StatusCode != Globals.SUCCESS_STATUS_CODE)
+            DataTable dt = bll.ExecuteDataTableOnSchoolsDB("GetSchoolById", new string[] { txtSchoolCode.Text });
+
+            if (dt.Rows.Count != 0)
             {
-                string msg = "FAILED: " + result.StatusDesc;
+                string msg = "FAILED: SCHOOL CODE ALREADY IN USE. PLEASE PICK ANOTHER ONE";
                 bll.ShowMessage(lblmsg, msg, true, Session);
                 return;
             }
 
-            //success
-            string successMsg = "SUCCESS!! SCHOOL DETAILS SAVED SUCCESSFULLY, PENDING APPROVAL";
-            bll.ShowMessage(lblmsg, successMsg, false, Session);
+            dt = bll.ExecuteDataTableOnSchoolsDB("GetSystemUserById", new string[] { txtUserId.Text });
+
+            if (dt.Rows.Count != 0)
+            {
+                string msg = "FAILED: USERNAME ALREADY IN USE. PLEASE PICK ANOTHER ONE";
+                bll.ShowMessage(lblmsg, msg, true, Session);
+                return;
+            }
+
+            Save();
 
         }
         catch (Exception ex)
@@ -75,6 +84,41 @@ public partial class RegisterSchool : System.Web.UI.Page
             string msg = "FAILED: " + ex.Message;
             bll.ShowMessage(lblmsg, msg, true, Session);
         }
+    }
+
+    private void Save()
+    {
+        //Confirm that terms and conditions have been read
+        if (!chkTerms.Checked)
+        {
+            string msg = "PLEASE CONFIRM ACCEPTANCE OF THE TERMS AND CONDITIONS";
+            bll.ShowMessage(lblmsg, msg, true, Session);
+            return;
+        }
+
+
+        //save school
+        Result result = SaveSchool();
+
+        if (result.StatusCode != Globals.SUCCESS_STATUS_CODE)
+        {
+            string msg = "FAILED: " + result.StatusDesc;
+            bll.ShowMessage(lblmsg, msg, true, Session);
+            return;
+        }
+
+        //save system User
+        result = SaveSystemUser();
+        if (result.StatusCode != Globals.SUCCESS_STATUS_CODE)
+        {
+            string msg = "FAILED: " + result.StatusDesc;
+            bll.ShowMessage(lblmsg, msg, true, Session);
+            return;
+        }
+
+        //success
+        string successMsg = "SUCCESS!! SCHOOL DETAILS SAVED SUCCESSFULLY, PENDING APPROVAL";
+        bll.ShowMessage(lblmsg, successMsg, false, Session);
     }
 
     private Result SaveSystemUser()
@@ -91,9 +135,9 @@ public partial class RegisterSchool : System.Web.UI.Page
         user.ModifiedBy = txtFullName.Text;
         user.VendorPassword = Globals.SCHOOL_PASSWORD;
         user.SchoolCode = txtSchoolCode.Text;
-        user.SecretKey = SharedCommons.SharedCommons.GenerateUniqueId("");
-        user.UserCategory = "ADMIN";
-        user.UserType = "ADMIN";
+        user.SecretKey = "T3rr16132016";//SharedCommons.SharedCommons.GenerateUniqueId("");
+        user.UserCategory = "SCHOOL_ADMIN";
+        user.UserType = "SCHOOL_ADMIN";
         user.Username = txtUserId.Text;
         user.IsActive = "TRUE";
         user.PhoneNumber = txtPrincipalPhone.Text;
@@ -133,43 +177,7 @@ public partial class RegisterSchool : System.Web.UI.Page
     private Result SaveSchool()
     {
         Result result = new Result();
-        School school = GetSchool();      
-
-        if (string.IsNullOrEmpty(school.SchoolCode))
-        {
-            string msg = "FAILED: PLEASE SUPPLY A PREFERED SCHOOL CODE";
-            result.StatusCode = Globals.FAILURE_STATUS_CODE;
-            result.StatusDesc = msg;
-            return result;
-        }
-
-        if (string.IsNullOrEmpty(school.SchoolCode))
-        {
-            string msg = "FAILED: PLEASE SUPPLY A PREFERED USERNAME";
-            result.StatusCode = Globals.FAILURE_STATUS_CODE;
-            result.StatusDesc = msg;
-            return result;
-        }
-
-        DataTable dt = bll.ExecuteDataTableOnSchoolsDB("GetSchoolById", new string[] { school.SchoolCode });
-
-        if (dt.Rows.Count != 0)
-        {
-            string msg = "FAILED: SCHOOL CODE ALREADY IN USE. PLEASE PICK ANOTHER ONE";
-            result.StatusCode = Globals.FAILURE_STATUS_CODE;
-            result.StatusDesc = msg;
-            return result;
-        }
-
-        dt = bll.ExecuteDataTableOnSchoolsDB("GetSystemUserById", new string[] { txtUserId.Text });
-
-        if (dt.Rows.Count != 0)
-        {
-            string msg = "FAILED: USERNAME ALREADY IN USE. PLEASE PICK ANOTHER ONE";
-            result.StatusCode = Globals.FAILURE_STATUS_CODE;
-            result.StatusDesc = msg;
-            return result;
-        }
+        School school = GetSchool();
 
         result = schoolsApi.SaveSchool(school);
         return result;
@@ -195,7 +203,7 @@ public partial class RegisterSchool : System.Web.UI.Page
         sch.SchoolCategories = GetSchoolCategories();
         sch.LiquidationAccountNumber = txtAccountNumber.Text;
         sch.LiquidationAccountName = txtAccountName.Text;
-        sch.LiquidationBankName = txtSchoolBank.Text;
+        sch.LiquidationBankName = ddBanks.SelectedValue;
         return sch;
     }
 
@@ -265,6 +273,19 @@ public partial class RegisterSchool : System.Web.UI.Page
         try
         {
             Response.Redirect("~/Default.aspx");
+        }
+        catch (Exception ex)
+        {
+            string msg = "FAILED: " + ex.Message;
+            bll.ShowMessage(lblmsg, msg, true, Session);
+        }
+    }
+
+    protected void btnEdit_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            Save();
         }
         catch (Exception ex)
         {

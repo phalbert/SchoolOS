@@ -9,7 +9,10 @@
       <Value Profile="(Default)">http://localhost:34322/MSystemService.asmx</Value>
     </Setting>
     <Setting Name="InterLinkClass_PegPaySchoolsApi_Service" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://localhost:8020/FlexiSchoolsApi/SchoolApi.asmx</Value>
+      <Value Profile="(Default)">http://localhost:2509/SchoolApi.asmx</Value>
+    </Setting>
+    <Setting Name="InterLinkClass_CbAPI_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://localhost:44122/Service.asmx</Value>
     </Setting>
   </Settings>
 </SettingsFile>

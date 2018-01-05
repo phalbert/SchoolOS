@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ListStudents.ascx.cs" Inherits="ListStudents" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
-
+<%@ Register TagPrefix="uc" TagName="SaveStudentsUserControl" Src="~/CustomUserControls/SaveStudent.ascx" %>
 
 <asp:MultiView ID="MultiView1" ActiveViewIndex="0" runat="server">
     <asp:View ID="SearchView" runat="server">
@@ -38,7 +38,7 @@
                 <label>
                     School
                 </label>
-               <asp:DropDownList ID="ddSchools" runat="server" CssClass="form-control">
+                <asp:DropDownList ID="ddSchools" runat="server" CssClass="form-control">
                     <asp:ListItem>True</asp:ListItem>
                     <asp:ListItem>False</asp:ListItem>
                 </asp:DropDownList>
@@ -84,6 +84,7 @@
 
         <!------------------------------------------------- View2 -------------------------------------------------->
     </asp:View>
-    <asp:View ID="View2" runat="server">
+    <asp:View ID="EditStudentsView" runat="server">
+        <uc:SaveStudentsUserControl ID="SaveStudentsUserControl" runat="server" />
     </asp:View>
 </asp:MultiView>

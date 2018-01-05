@@ -30,11 +30,11 @@ public class Bussinesslogic
     public InterLinkClass.PegPaySchoolsApi.SystemUser GetSystemUserById2(string userId)
     {
         InterLinkClass.PegPaySchoolsApi.SystemUser user = new InterLinkClass.PegPaySchoolsApi.SystemUser();
-        DataTable dt = SchoolsApi.ExecuteDataSet("GetSystemUserById",new string[] { userId }).Tables[0];
+        DataTable dt = SchoolsApi.ExecuteDataSet("GetSystemUserById", new string[] { userId }).Tables[0];
         if (dt.Rows.Count == 0)
         {
             user.StatusCode = Globals.FAILURE_STATUS_CODE;
-            user.StatusDesc = "USER ["+userId+"] NOT FOUND";
+            user.StatusDesc = "USER [" + userId + "] NOT FOUND";
             return user;
         }
         DataRow row = dt.Rows[0];
@@ -50,6 +50,101 @@ public class Bussinesslogic
         user.StatusCode = Globals.SUCCESS_STATUS_CODE;
         user.StatusDesc = "SUCCESS";
         return user;
+    }
+
+    public InterLinkClass.PegPaySchoolsApi.SchoolStaff GetStaffById(string studentId, string schoolCode)
+    {
+        InterLinkClass.PegPaySchoolsApi.SchoolStaff user = new InterLinkClass.PegPaySchoolsApi.SchoolStaff();
+        DataTable dt = SchoolsApi.ExecuteDataSet("GetStaffById", new string[] { studentId,schoolCode }).Tables[0];
+        if (dt.Rows.Count == 0)
+        {
+            user.StatusCode = Globals.FAILURE_STATUS_CODE;
+            user.StatusDesc = "STAFF [" + studentId + "] NOT FOUND";
+            return user;
+        }
+        DataRow row = dt.Rows[0];
+        user.Email = row["Email"].ToString();
+        user.SchoolCode = row["SchoolCode"].ToString();
+        user.Gender = row["Gender"].ToString();
+        user.PegPayStaffIDNumber = row["PegPayStaffIDNumber"].ToString();
+        user.PhoneNumber = row["PhoneNumber"].ToString();
+        user.StaffIDNumber = row["StaffIDNumber"].ToString();
+        user.StaffType = row["StaffType"].ToString();
+        user.ProfilePic = row["ProfilePic"].ToString();
+        user.FullName = row["FullName"].ToString();
+        user.StatusCode = Globals.SUCCESS_STATUS_CODE;
+        user.StatusDesc = "SUCCESS";
+        return user;
+    }
+
+    public InterLinkClass.PegPaySchoolsApi.School GetSchoolById(string Id)
+    {
+        InterLinkClass.PegPaySchoolsApi.School sch = new InterLinkClass.PegPaySchoolsApi.School();
+        DataTable dt = SchoolsApi.ExecuteDataSet("GetSchoolById", new string[] { Id }).Tables[0];
+        if (dt.Rows.Count == 0)
+        {
+            sch.StatusCode = Globals.FAILURE_STATUS_CODE;
+            sch.StatusDesc = "SCHOOL [" + Id + "] NOT FOUND";
+            return sch;
+        }
+
+        DataRow row = dt.Rows[0];
+        sch.SchoolCode = row["SchoolCode"].ToString();
+        sch.District = row["District"].ToString();
+        sch.LiquidationAccountName = row["LiquidationAccountName"].ToString();
+        sch.LiquidationAccountNumber = row["LiquidationAccountNumber"].ToString();
+        sch.LiquidationBankName = row["LiquidationBankName"].ToString();
+        sch.ModifiedBy = row["ModifiedBy"].ToString();
+        sch.PlotNo = row["PlotNo"].ToString();
+        sch.PostOfficeBox = row["PostOfficeBox"].ToString();
+        sch.RoadName = row["RoadName"].ToString();
+        sch.SchoolEmail = row["SchoolEmail"].ToString();
+        sch.SchoolLocation = row["SchoolLocation"].ToString();
+        sch.SchoolLogo = row["SchoolLogo"].ToString();
+        sch.SchoolName = row["SchoolName"].ToString();
+        sch.SchoolPhone = row["SchoolPhone"].ToString();
+        sch.SubCounty = row["SubCounty"].ToString();
+        sch.StatusCode = Globals.SUCCESS_STATUS_CODE;
+        sch.StatusDesc = "SUCCESS";
+        return sch;
+    }
+
+    public InterLinkClass.PegPaySchoolsApi.Student GetStudentById(string studentId, string schoolCode)
+    {
+        InterLinkClass.PegPaySchoolsApi.Student sch = new InterLinkClass.PegPaySchoolsApi.Student();
+        DataTable dt = SchoolsApi.ExecuteDataSet("GetStudentById", new string[] { studentId,schoolCode }).Tables[0];
+        if (dt.Rows.Count == 0)
+        {
+            sch.StatusCode = Globals.FAILURE_STATUS_CODE;
+            sch.StatusDesc = "STUDENT [" + studentId + "] NOT FOUND";
+            return sch;
+        }
+
+        DataRow row = dt.Rows[0];
+        sch.SchoolCode = row["SchoolCode"].ToString();
+        sch.ClassCode= row["ClassCode"].ToString();
+        sch.DateOfBirth= row["DateOfBirth"].ToString();
+        sch.Email= row["Email"].ToString();
+        sch.Gender= row["Gender"].ToString();
+        sch.ModifiedBy= row["ModifiedBy"].ToString();
+        sch.PegPayStudentNumber= row["PegPayStudentNumber"].ToString();
+        sch.PhoneNumber= row["PhoneNumber"].ToString();
+        sch.ProfilePic= row["StudentPic"].ToString();
+        sch.StreamCode= row["StreamCode"].ToString();
+        sch.StudentCategory= row["StudentCategory"].ToString();
+        sch.StudentName= row["StudentName"].ToString();
+        sch.StudentNumber= row["StudentNumber"].ToString();
+        sch.StatusCode = Globals.SUCCESS_STATUS_CODE;
+        sch.StatusDesc = "SUCCESS";
+        return sch;
+    }
+
+    public DataTable SearchGeneralLedgerTableForStatement(string[] searchParams)
+    {
+        InterLinkClass.CbAPI.Service cbAPI = new InterLinkClass.CbAPI.Service();
+        DataSet ds = cbAPI.ExecuteDataSet("SearchGeneralLedgerTableForStatement", searchParams);
+        DataTable dt = ds.Tables[0];
+        return dt;
     }
 
     public string GetBase64StringOfUploadedFile(FileUpload fileUpload)
@@ -68,6 +163,21 @@ public class Bussinesslogic
     public DataTable ExecuteDataTableOnSchoolsDB(string storedProc, string[] args)
     {
         return SchoolsApi.ExecuteDataSet(storedProc, args).Tables[0];
+    }
+
+    public void ShowMessage2(Label lblmsg, string msg, bool IsError, System.Web.SessionState.HttpSessionState Session)
+    {
+        lblmsg.Text = msg;
+        if (IsError)
+        {
+            Session["IsError"] = "True";
+            lblmsg.ForeColor = Color.Black;
+        }
+        else
+        {
+            Session["IsError"] = "False";
+            lblmsg.ForeColor = Color.Black;
+        }
     }
 
     public void ShowMessage(Label lblmsg, string msg, bool IsError, System.Web.SessionState.HttpSessionState Session)
@@ -233,19 +343,21 @@ public class Bussinesslogic
         {
             InterLinkClass.MailApi.Messenger mailApi = new InterLinkClass.MailApi.Messenger();
             InterLinkClass.MailApi.Email email = new InterLinkClass.MailApi.Email();
-            email.From = "notifications@pegasustechnologies.co.ug";
+            email.From = "Flexi-Schools";
             email.Message = "Hi<br/>" +
                             "Your Credentials for The Flexipay School Management Portal are Below<br/>" +
                             "UserId: " + user.Username + "<br/>" +
                             "Password: " + user.UserPassword + "<br/>" +
                             "Role: " + user.UserType + "<br/>" +
                             "Thank you. <br/>";
-            InterLinkClass.MailApi.EmailAddress address = new InterLinkClass.MailApi.EmailAddress();
-            address.Address = user.Email;
-            address.AddressType = InterLinkClass.MailApi.EmailAddressType.To;
-            address.Name = user.FullName;
+            email.Subject = "Flexi-Schools Web Portal Credentials";
+            InterLinkClass.MailApi.EmailAddress addr = new InterLinkClass.MailApi.EmailAddress();
+            addr.Address = user.Email;
+            addr.Name = user.FullName;
+            addr.AddressType = InterLinkClass.MailApi.EmailAddressType.To;
 
-            email.MailAddresses = new InterLinkClass.MailApi.EmailAddress[] { address };
+            InterLinkClass.MailApi.EmailAddress[] addresses = { addr };
+            email.MailAddresses = addresses;
             InterLinkClass.MailApi.Result resp = mailApi.PostEmail(email);
             result.StatusCode = resp.StatusCode;
             result.StatusDesc = resp.StatusDesc;
@@ -496,6 +608,52 @@ public class Bussinesslogic
         DataTable dt = ds.Tables[0];
 
         ddlst.Items.Clear();
+        foreach (DataRow dr in dt.Rows)
+        {
+            string Text = dr["Name"].ToString();
+            string Value = dr["Code"].ToString();
+            ddlst.Items.Add(new ListItem(Text, Value));
+        }
+    }
+
+    public void LoadCbDataIntoDropDown(string storedProcName, string[] parameters, DropDownList ddlst)
+    {
+        InterLinkClass.CbAPI.Service cbAPI = new InterLinkClass.CbAPI.Service();
+        DataSet ds = cbAPI.ExecuteDataSet(storedProcName, parameters);
+        DataTable dt = ds.Tables[0];
+
+        ddlst.Items.Clear();
+        foreach (DataRow dr in dt.Rows)
+        {
+            string Text = dr["Name"].ToString();
+            string Value = dr["Code"].ToString();
+            ddlst.Items.Add(new ListItem(Text, Value));
+        }
+    }
+
+    public void LoadDataIntoDropDownALL(string storedProcName, string[] parameters, DropDownList ddlst)
+    {
+        DataSet ds = SchoolsApi.ExecuteDataSet(storedProcName, parameters);
+        DataTable dt = ds.Tables[0];
+
+        ddlst.Items.Clear();
+        ddlst.Items.Add("ALL");
+        foreach (DataRow dr in dt.Rows)
+        {
+            string Text = dr["Name"].ToString();
+            string Value = dr["Code"].ToString();
+            ddlst.Items.Add(new ListItem(Text, Value));
+        }
+    }
+
+    public void LoadCbDataIntoDropDownALL(string storedProcName, string[] parameters, DropDownList ddlst)
+    {
+        InterLinkClass.CbAPI.Service cbAPI = new InterLinkClass.CbAPI.Service();
+        DataSet ds = cbAPI.ExecuteDataSet(storedProcName, parameters);
+        DataTable dt = ds.Tables[0];
+
+        ddlst.Items.Clear();
+        ddlst.Items.Add("ALL");
         foreach (DataRow dr in dt.Rows)
         {
             string Text = dr["Name"].ToString();
@@ -828,7 +986,8 @@ public class Bussinesslogic
 
     public DataTable SearchGeneralLedgerTable(string[] searchParams)
     {
-        DataSet ds = client.ExecuteDataSet("SearchGeneralLedgerTable", searchParams);
+        InterLinkClass.CbAPI.Service cbAPI = new InterLinkClass.CbAPI.Service();
+        DataSet ds = cbAPI.ExecuteDataSet("SearchGeneralLedgerTable", searchParams);
         DataTable dt = ds.Tables[0];
         return dt;
     }

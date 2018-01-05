@@ -44,6 +44,7 @@ public partial class CustomUserControls_ListUserTypes : System.Web.UI.UserContro
     private void LoadData()
     {
         bll.LoadSchoolsIntoDropDown(user, ddSchools);
+
         //SearchDb();
     }
 

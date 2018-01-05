@@ -63,6 +63,7 @@
                                             </asp:DropDownList>
                                         </div>
                                     </div>
+                                    <br />
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <label>Class</label>
@@ -72,12 +73,10 @@
                                             </asp:DropDownList>
                                         </div>
 
-
                                         <div class="col-lg-6">
                                             <label>Stream Name</label>
                                             <asp:TextBox ID="txtClassName" runat="server" CssClass="form-control" placeholder="Enter text" />
                                         </div>
-
                                     </div>
                                     <br />
                                     <br />

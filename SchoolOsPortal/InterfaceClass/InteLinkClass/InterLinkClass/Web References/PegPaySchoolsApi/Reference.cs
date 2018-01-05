@@ -24,7 +24,7 @@ namespace InterLinkClass.PegPaySchoolsApi {
     
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1087.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="ServiceSoap", Namespace="http://pegasus.co.ug/")]
@@ -34,6 +34,12 @@ namespace InterLinkClass.PegPaySchoolsApi {
         
         private System.Threading.SendOrPostCallback ExecuteDataSetOperationCompleted;
         
+        private System.Threading.SendOrPostCallback ExecuteDataSetOnCBOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ExecuteNonQueryOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback ExecuteNonQueryOnCBOperationCompleted;
+        
         private System.Threading.SendOrPostCallback SaveSchoolOperationCompleted;
         
         private System.Threading.SendOrPostCallback SaveStudentOperationCompleted;
@@ -42,7 +48,15 @@ namespace InterLinkClass.PegPaySchoolsApi {
         
         private System.Threading.SendOrPostCallback SaveSchoolClassOperationCompleted;
         
+        private System.Threading.SendOrPostCallback SaveDepartmentOperationCompleted;
+        
         private System.Threading.SendOrPostCallback SaveSchoolSemesterOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback SaveSubjectResultOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback SaveUploadedFileOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback SaveStudentSubjectOperationCompleted;
         
         private System.Threading.SendOrPostCallback SaveSchoolStaffOperationCompleted;
         
@@ -108,6 +122,15 @@ namespace InterLinkClass.PegPaySchoolsApi {
         public event ExecuteDataSetCompletedEventHandler ExecuteDataSetCompleted;
         
         /// <remarks/>
+        public event ExecuteDataSetOnCBCompletedEventHandler ExecuteDataSetOnCBCompleted;
+        
+        /// <remarks/>
+        public event ExecuteNonQueryCompletedEventHandler ExecuteNonQueryCompleted;
+        
+        /// <remarks/>
+        public event ExecuteNonQueryOnCBCompletedEventHandler ExecuteNonQueryOnCBCompleted;
+        
+        /// <remarks/>
         public event SaveSchoolCompletedEventHandler SaveSchoolCompleted;
         
         /// <remarks/>
@@ -120,7 +143,19 @@ namespace InterLinkClass.PegPaySchoolsApi {
         public event SaveSchoolClassCompletedEventHandler SaveSchoolClassCompleted;
         
         /// <remarks/>
+        public event SaveDepartmentCompletedEventHandler SaveDepartmentCompleted;
+        
+        /// <remarks/>
         public event SaveSchoolSemesterCompletedEventHandler SaveSchoolSemesterCompleted;
+        
+        /// <remarks/>
+        public event SaveSubjectResultCompletedEventHandler SaveSubjectResultCompleted;
+        
+        /// <remarks/>
+        public event SaveUploadedFileCompletedEventHandler SaveUploadedFileCompleted;
+        
+        /// <remarks/>
+        public event SaveStudentSubjectCompletedEventHandler SaveStudentSubjectCompleted;
         
         /// <remarks/>
         public event SaveSchoolStaffCompletedEventHandler SaveSchoolStaffCompleted;
@@ -183,6 +218,99 @@ namespace InterLinkClass.PegPaySchoolsApi {
             if ((this.ExecuteDataSetCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.ExecuteDataSetCompleted(this, new ExecuteDataSetCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://pegasus.co.ug/ExecuteDataSetOnCB", RequestNamespace="http://pegasus.co.ug/", ResponseNamespace="http://pegasus.co.ug/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public System.Data.DataSet ExecuteDataSetOnCB(string storedProc, string[] parameters) {
+            object[] results = this.Invoke("ExecuteDataSetOnCB", new object[] {
+                        storedProc,
+                        parameters});
+            return ((System.Data.DataSet)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ExecuteDataSetOnCBAsync(string storedProc, string[] parameters) {
+            this.ExecuteDataSetOnCBAsync(storedProc, parameters, null);
+        }
+        
+        /// <remarks/>
+        public void ExecuteDataSetOnCBAsync(string storedProc, string[] parameters, object userState) {
+            if ((this.ExecuteDataSetOnCBOperationCompleted == null)) {
+                this.ExecuteDataSetOnCBOperationCompleted = new System.Threading.SendOrPostCallback(this.OnExecuteDataSetOnCBOperationCompleted);
+            }
+            this.InvokeAsync("ExecuteDataSetOnCB", new object[] {
+                        storedProc,
+                        parameters}, this.ExecuteDataSetOnCBOperationCompleted, userState);
+        }
+        
+        private void OnExecuteDataSetOnCBOperationCompleted(object arg) {
+            if ((this.ExecuteDataSetOnCBCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ExecuteDataSetOnCBCompleted(this, new ExecuteDataSetOnCBCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://pegasus.co.ug/ExecuteNonQuery", RequestNamespace="http://pegasus.co.ug/", ResponseNamespace="http://pegasus.co.ug/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public int ExecuteNonQuery(string storedProc, object[] parameters) {
+            object[] results = this.Invoke("ExecuteNonQuery", new object[] {
+                        storedProc,
+                        parameters});
+            return ((int)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ExecuteNonQueryAsync(string storedProc, object[] parameters) {
+            this.ExecuteNonQueryAsync(storedProc, parameters, null);
+        }
+        
+        /// <remarks/>
+        public void ExecuteNonQueryAsync(string storedProc, object[] parameters, object userState) {
+            if ((this.ExecuteNonQueryOperationCompleted == null)) {
+                this.ExecuteNonQueryOperationCompleted = new System.Threading.SendOrPostCallback(this.OnExecuteNonQueryOperationCompleted);
+            }
+            this.InvokeAsync("ExecuteNonQuery", new object[] {
+                        storedProc,
+                        parameters}, this.ExecuteNonQueryOperationCompleted, userState);
+        }
+        
+        private void OnExecuteNonQueryOperationCompleted(object arg) {
+            if ((this.ExecuteNonQueryCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ExecuteNonQueryCompleted(this, new ExecuteNonQueryCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://pegasus.co.ug/ExecuteNonQueryOnCB", RequestNamespace="http://pegasus.co.ug/", ResponseNamespace="http://pegasus.co.ug/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Result ExecuteNonQueryOnCB(string storedProc, string[] parameters) {
+            object[] results = this.Invoke("ExecuteNonQueryOnCB", new object[] {
+                        storedProc,
+                        parameters});
+            return ((Result)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void ExecuteNonQueryOnCBAsync(string storedProc, string[] parameters) {
+            this.ExecuteNonQueryOnCBAsync(storedProc, parameters, null);
+        }
+        
+        /// <remarks/>
+        public void ExecuteNonQueryOnCBAsync(string storedProc, string[] parameters, object userState) {
+            if ((this.ExecuteNonQueryOnCBOperationCompleted == null)) {
+                this.ExecuteNonQueryOnCBOperationCompleted = new System.Threading.SendOrPostCallback(this.OnExecuteNonQueryOnCBOperationCompleted);
+            }
+            this.InvokeAsync("ExecuteNonQueryOnCB", new object[] {
+                        storedProc,
+                        parameters}, this.ExecuteNonQueryOnCBOperationCompleted, userState);
+        }
+        
+        private void OnExecuteNonQueryOnCBOperationCompleted(object arg) {
+            if ((this.ExecuteNonQueryOnCBCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.ExecuteNonQueryOnCBCompleted(this, new ExecuteNonQueryOnCBCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -305,6 +433,35 @@ namespace InterLinkClass.PegPaySchoolsApi {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://pegasus.co.ug/SaveDepartment", RequestNamespace="http://pegasus.co.ug/", ResponseNamespace="http://pegasus.co.ug/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Result SaveDepartment(Department dept) {
+            object[] results = this.Invoke("SaveDepartment", new object[] {
+                        dept});
+            return ((Result)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void SaveDepartmentAsync(Department dept) {
+            this.SaveDepartmentAsync(dept, null);
+        }
+        
+        /// <remarks/>
+        public void SaveDepartmentAsync(Department dept, object userState) {
+            if ((this.SaveDepartmentOperationCompleted == null)) {
+                this.SaveDepartmentOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSaveDepartmentOperationCompleted);
+            }
+            this.InvokeAsync("SaveDepartment", new object[] {
+                        dept}, this.SaveDepartmentOperationCompleted, userState);
+        }
+        
+        private void OnSaveDepartmentOperationCompleted(object arg) {
+            if ((this.SaveDepartmentCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.SaveDepartmentCompleted(this, new SaveDepartmentCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://pegasus.co.ug/SaveSchoolSemester", RequestNamespace="http://pegasus.co.ug/", ResponseNamespace="http://pegasus.co.ug/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public Result SaveSchoolSemester(SchoolSemester semester) {
             object[] results = this.Invoke("SaveSchoolSemester", new object[] {
@@ -330,6 +487,93 @@ namespace InterLinkClass.PegPaySchoolsApi {
             if ((this.SaveSchoolSemesterCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.SaveSchoolSemesterCompleted(this, new SaveSchoolSemesterCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://pegasus.co.ug/SaveSubjectResult", RequestNamespace="http://pegasus.co.ug/", ResponseNamespace="http://pegasus.co.ug/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Result SaveSubjectResult(SubjectResults semester) {
+            object[] results = this.Invoke("SaveSubjectResult", new object[] {
+                        semester});
+            return ((Result)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void SaveSubjectResultAsync(SubjectResults semester) {
+            this.SaveSubjectResultAsync(semester, null);
+        }
+        
+        /// <remarks/>
+        public void SaveSubjectResultAsync(SubjectResults semester, object userState) {
+            if ((this.SaveSubjectResultOperationCompleted == null)) {
+                this.SaveSubjectResultOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSaveSubjectResultOperationCompleted);
+            }
+            this.InvokeAsync("SaveSubjectResult", new object[] {
+                        semester}, this.SaveSubjectResultOperationCompleted, userState);
+        }
+        
+        private void OnSaveSubjectResultOperationCompleted(object arg) {
+            if ((this.SaveSubjectResultCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.SaveSubjectResultCompleted(this, new SaveSubjectResultCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://pegasus.co.ug/SaveUploadedFile", RequestNamespace="http://pegasus.co.ug/", ResponseNamespace="http://pegasus.co.ug/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Result SaveUploadedFile(UploadedFile semester) {
+            object[] results = this.Invoke("SaveUploadedFile", new object[] {
+                        semester});
+            return ((Result)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void SaveUploadedFileAsync(UploadedFile semester) {
+            this.SaveUploadedFileAsync(semester, null);
+        }
+        
+        /// <remarks/>
+        public void SaveUploadedFileAsync(UploadedFile semester, object userState) {
+            if ((this.SaveUploadedFileOperationCompleted == null)) {
+                this.SaveUploadedFileOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSaveUploadedFileOperationCompleted);
+            }
+            this.InvokeAsync("SaveUploadedFile", new object[] {
+                        semester}, this.SaveUploadedFileOperationCompleted, userState);
+        }
+        
+        private void OnSaveUploadedFileOperationCompleted(object arg) {
+            if ((this.SaveUploadedFileCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.SaveUploadedFileCompleted(this, new SaveUploadedFileCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://pegasus.co.ug/SaveStudentSubject", RequestNamespace="http://pegasus.co.ug/", ResponseNamespace="http://pegasus.co.ug/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Result SaveStudentSubject(StudentSubject semester) {
+            object[] results = this.Invoke("SaveStudentSubject", new object[] {
+                        semester});
+            return ((Result)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void SaveStudentSubjectAsync(StudentSubject semester) {
+            this.SaveStudentSubjectAsync(semester, null);
+        }
+        
+        /// <remarks/>
+        public void SaveStudentSubjectAsync(StudentSubject semester, object userState) {
+            if ((this.SaveStudentSubjectOperationCompleted == null)) {
+                this.SaveStudentSubjectOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSaveStudentSubjectOperationCompleted);
+            }
+            this.InvokeAsync("SaveStudentSubject", new object[] {
+                        semester}, this.SaveStudentSubjectOperationCompleted, userState);
+        }
+        
+        private void OnSaveStudentSubjectOperationCompleted(object arg) {
+            if ((this.SaveStudentSubjectCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.SaveStudentSubjectCompleted(this, new SaveStudentSubjectCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -673,8 +917,6 @@ namespace InterLinkClass.PegPaySchoolsApi {
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Status))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Result))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SystemUserDetails))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Request))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(UserType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolTerm))]
@@ -683,7 +925,11 @@ namespace InterLinkClass.PegPaySchoolsApi {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Subject))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(ClassStream))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolStaff))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(StudentSubject))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(UploadedFile))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SubjectResults))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolSemester))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Department))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolClass))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SystemUser))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(MainLink))]
@@ -691,7 +937,9 @@ namespace InterLinkClass.PegPaySchoolsApi {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SubLink))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Student))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(School))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Result))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SystemUserDetails))]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -700,8 +948,6 @@ namespace InterLinkClass.PegPaySchoolsApi {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Result))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SystemUserDetails))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Request))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(UserType))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolTerm))]
@@ -710,7 +956,11 @@ namespace InterLinkClass.PegPaySchoolsApi {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Subject))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(ClassStream))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolStaff))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(StudentSubject))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(UploadedFile))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SubjectResults))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolSemester))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Department))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolClass))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SystemUser))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(MainLink))]
@@ -718,7 +968,9 @@ namespace InterLinkClass.PegPaySchoolsApi {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SubLink))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Student))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(School))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Result))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SystemUserDetails))]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -751,98 +1003,908 @@ namespace InterLinkClass.PegPaySchoolsApi {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SystemUserDetails))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(UserType))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolTerm))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(StudentFee))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolFee))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Subject))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(ClassStream))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolStaff))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(StudentSubject))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(UploadedFile))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SubjectResults))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolSemester))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Department))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolClass))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SystemUser))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(MainLink))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(MenuItem))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SubLink))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Student))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(School))]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://pegasus.co.ug/")]
-    public partial class Result : Status {
+    public partial class Request : Status {
         
-        private string pegPayIDField;
+        private string vendorCodeField;
         
-        private string thirdPartyIDField;
+        private string vendorPasswordField;
         
-        private string requestIDField;
+        private string schoolCodeField;
+        
+        private string modifiedByField;
         
         /// <remarks/>
-        public string PegPayID {
+        public string VendorCode {
             get {
-                return this.pegPayIDField;
+                return this.vendorCodeField;
             }
             set {
-                this.pegPayIDField = value;
+                this.vendorCodeField = value;
             }
         }
         
         /// <remarks/>
-        public string ThirdPartyID {
+        public string VendorPassword {
             get {
-                return this.thirdPartyIDField;
+                return this.vendorPasswordField;
             }
             set {
-                this.thirdPartyIDField = value;
+                this.vendorPasswordField = value;
             }
         }
         
         /// <remarks/>
-        public string RequestID {
+        public string SchoolCode {
             get {
-                return this.requestIDField;
+                return this.schoolCodeField;
             }
             set {
-                this.requestIDField = value;
+                this.schoolCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ModifiedBy {
+            get {
+                return this.modifiedByField;
+            }
+            set {
+                this.modifiedByField = value;
             }
         }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://pegasus.co.ug/")]
-    public partial class SystemUserDetails : Result {
+    public partial class UserType : Request {
         
-        private SystemUser userField;
+        private string userTypeCodeField;
         
-        private School schoolDetailsField;
-        
-        private MenuItem[] userMenuOptionsField;
+        private string userTypeNameField;
         
         /// <remarks/>
-        public SystemUser User {
+        public string UserTypeCode {
             get {
-                return this.userField;
+                return this.userTypeCodeField;
             }
             set {
-                this.userField = value;
+                this.userTypeCodeField = value;
             }
         }
         
         /// <remarks/>
-        public School SchoolDetails {
+        public string UserTypeName {
             get {
-                return this.schoolDetailsField;
+                return this.userTypeNameField;
             }
             set {
-                this.schoolDetailsField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public MenuItem[] UserMenuOptions {
-            get {
-                return this.userMenuOptionsField;
-            }
-            set {
-                this.userMenuOptionsField = value;
+                this.userTypeNameField = value;
             }
         }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://pegasus.co.ug/")]
+    public partial class SchoolTerm : Request {
+        
+        private string termCodeField;
+        
+        private string termNameField;
+        
+        private string startDateField;
+        
+        private string endDateField;
+        
+        /// <remarks/>
+        public string TermCode {
+            get {
+                return this.termCodeField;
+            }
+            set {
+                this.termCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string TermName {
+            get {
+                return this.termNameField;
+            }
+            set {
+                this.termNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string StartDate {
+            get {
+                return this.startDateField;
+            }
+            set {
+                this.startDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string EndDate {
+            get {
+                return this.endDateField;
+            }
+            set {
+                this.endDateField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://pegasus.co.ug/")]
+    public partial class StudentFee : Request {
+        
+        private string studentIDField;
+        
+        private string classCodeField;
+        
+        private string feeIDField;
+        
+        private string emailField;
+        
+        private string amountField;
+        
+        private string feeTypeField;
+        
+        private string tranIDField;
+        
+        private string paymentChannelField;
+        
+        private string paymentDateField;
+        
+        /// <remarks/>
+        public string StudentID {
+            get {
+                return this.studentIDField;
+            }
+            set {
+                this.studentIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ClassCode {
+            get {
+                return this.classCodeField;
+            }
+            set {
+                this.classCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string FeeID {
+            get {
+                return this.feeIDField;
+            }
+            set {
+                this.feeIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Email {
+            get {
+                return this.emailField;
+            }
+            set {
+                this.emailField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Amount {
+            get {
+                return this.amountField;
+            }
+            set {
+                this.amountField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string FeeType {
+            get {
+                return this.feeTypeField;
+            }
+            set {
+                this.feeTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string TranID {
+            get {
+                return this.tranIDField;
+            }
+            set {
+                this.tranIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string PaymentChannel {
+            get {
+                return this.paymentChannelField;
+            }
+            set {
+                this.paymentChannelField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string PaymentDate {
+            get {
+                return this.paymentDateField;
+            }
+            set {
+                this.paymentDateField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://pegasus.co.ug/")]
+    public partial class SchoolFee : Request {
+        
+        private string feeNameField;
+        
+        private string feeIDField;
+        
+        private string feeAmountField;
+        
+        private string currencyCodeField;
+        
+        private string feeCategoryField;
+        
+        private string feeTypeField;
+        
+        private string approvedByField;
+        
+        /// <remarks/>
+        public string FeeName {
+            get {
+                return this.feeNameField;
+            }
+            set {
+                this.feeNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string FeeID {
+            get {
+                return this.feeIDField;
+            }
+            set {
+                this.feeIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string FeeAmount {
+            get {
+                return this.feeAmountField;
+            }
+            set {
+                this.feeAmountField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CurrencyCode {
+            get {
+                return this.currencyCodeField;
+            }
+            set {
+                this.currencyCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string FeeCategory {
+            get {
+                return this.feeCategoryField;
+            }
+            set {
+                this.feeCategoryField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string FeeType {
+            get {
+                return this.feeTypeField;
+            }
+            set {
+                this.feeTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ApprovedBy {
+            get {
+                return this.approvedByField;
+            }
+            set {
+                this.approvedByField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://pegasus.co.ug/")]
+    public partial class Subject : Request {
+        
+        private string subjectNameField;
+        
+        private string subjectCodeField;
+        
+        /// <remarks/>
+        public string SubjectName {
+            get {
+                return this.subjectNameField;
+            }
+            set {
+                this.subjectNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string SubjectCode {
+            get {
+                return this.subjectCodeField;
+            }
+            set {
+                this.subjectCodeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://pegasus.co.ug/")]
+    public partial class ClassStream : Request {
+        
+        private string classCodeField;
+        
+        private string streamCodeField;
+        
+        private string streamNameField;
+        
+        /// <remarks/>
+        public string ClassCode {
+            get {
+                return this.classCodeField;
+            }
+            set {
+                this.classCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string StreamCode {
+            get {
+                return this.streamCodeField;
+            }
+            set {
+                this.streamCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string StreamName {
+            get {
+                return this.streamNameField;
+            }
+            set {
+                this.streamNameField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://pegasus.co.ug/")]
+    public partial class SchoolStaff : Request {
+        
+        private string fullNameField;
+        
+        private string genderField;
+        
+        private string staffCategoryField;
+        
+        private string staffTypeField;
+        
+        private string staffIDNumberField;
+        
+        private string pegPayStaffIDNumberField;
+        
+        private string profilePicField;
+        
+        private string phoneNumberField;
+        
+        private string emailField;
+        
+        /// <remarks/>
+        public string FullName {
+            get {
+                return this.fullNameField;
+            }
+            set {
+                this.fullNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Gender {
+            get {
+                return this.genderField;
+            }
+            set {
+                this.genderField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string StaffCategory {
+            get {
+                return this.staffCategoryField;
+            }
+            set {
+                this.staffCategoryField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string StaffType {
+            get {
+                return this.staffTypeField;
+            }
+            set {
+                this.staffTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string StaffIDNumber {
+            get {
+                return this.staffIDNumberField;
+            }
+            set {
+                this.staffIDNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string PegPayStaffIDNumber {
+            get {
+                return this.pegPayStaffIDNumberField;
+            }
+            set {
+                this.pegPayStaffIDNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ProfilePic {
+            get {
+                return this.profilePicField;
+            }
+            set {
+                this.profilePicField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string PhoneNumber {
+            get {
+                return this.phoneNumberField;
+            }
+            set {
+                this.phoneNumberField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Email {
+            get {
+                return this.emailField;
+            }
+            set {
+                this.emailField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://pegasus.co.ug/")]
+    public partial class StudentSubject : Request {
+        
+        private string classCodeField;
+        
+        private string studentIdField;
+        
+        private string subjectCodeField;
+        
+        private string termCodeField;
+        
+        /// <remarks/>
+        public string ClassCode {
+            get {
+                return this.classCodeField;
+            }
+            set {
+                this.classCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string StudentId {
+            get {
+                return this.studentIdField;
+            }
+            set {
+                this.studentIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string SubjectCode {
+            get {
+                return this.subjectCodeField;
+            }
+            set {
+                this.subjectCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string TermCode {
+            get {
+                return this.termCodeField;
+            }
+            set {
+                this.termCodeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://pegasus.co.ug/")]
+    public partial class UploadedFile : Request {
+        
+        private string idField;
+        
+        private string operationCodeField;
+        
+        private string fileContentsField;
+        
+        private string fileNameField;
+        
+        private string emailField;
+        
+        private string channelField;
+        
+        /// <remarks/>
+        public string ID {
+            get {
+                return this.idField;
+            }
+            set {
+                this.idField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string OperationCode {
+            get {
+                return this.operationCodeField;
+            }
+            set {
+                this.operationCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string FileContents {
+            get {
+                return this.fileContentsField;
+            }
+            set {
+                this.fileContentsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string FileName {
+            get {
+                return this.fileNameField;
+            }
+            set {
+                this.fileNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Email {
+            get {
+                return this.emailField;
+            }
+            set {
+                this.emailField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Channel {
+            get {
+                return this.channelField;
+            }
+            set {
+                this.channelField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://pegasus.co.ug/")]
+    public partial class SubjectResults : Request {
+        
+        private string studentIdField;
+        
+        private string subjectCodeField;
+        
+        private string termCodeField;
+        
+        private string markField;
+        
+        private string gradeField;
+        
+        /// <remarks/>
+        public string StudentId {
+            get {
+                return this.studentIdField;
+            }
+            set {
+                this.studentIdField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string SubjectCode {
+            get {
+                return this.subjectCodeField;
+            }
+            set {
+                this.subjectCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string TermCode {
+            get {
+                return this.termCodeField;
+            }
+            set {
+                this.termCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Mark {
+            get {
+                return this.markField;
+            }
+            set {
+                this.markField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Grade {
+            get {
+                return this.gradeField;
+            }
+            set {
+                this.gradeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://pegasus.co.ug/")]
+    public partial class SchoolSemester : Request {
+        
+        private string semesterCodeField;
+        
+        private string startDateField;
+        
+        private string enddateField;
+        
+        /// <remarks/>
+        public string SemesterCode {
+            get {
+                return this.semesterCodeField;
+            }
+            set {
+                this.semesterCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string StartDate {
+            get {
+                return this.startDateField;
+            }
+            set {
+                this.startDateField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Enddate {
+            get {
+                return this.enddateField;
+            }
+            set {
+                this.enddateField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://pegasus.co.ug/")]
+    public partial class Department : Request {
+        
+        private string departmentCodeField;
+        
+        private string departmentNameField;
+        
+        private string departmentCategoryField;
+        
+        /// <remarks/>
+        public string DepartmentCode {
+            get {
+                return this.departmentCodeField;
+            }
+            set {
+                this.departmentCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string DepartmentName {
+            get {
+                return this.departmentNameField;
+            }
+            set {
+                this.departmentNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string DepartmentCategory {
+            get {
+                return this.departmentCategoryField;
+            }
+            set {
+                this.departmentCategoryField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://pegasus.co.ug/")]
+    public partial class SchoolClass : Request {
+        
+        private string classCodeField;
+        
+        private string schoolClassNameField;
+        
+        /// <remarks/>
+        public string ClassCode {
+            get {
+                return this.classCodeField;
+            }
+            set {
+                this.classCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string SchoolClassName {
+            get {
+                return this.schoolClassNameField;
+            }
+            set {
+                this.schoolClassNameField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -983,592 +2045,7 @@ namespace InterLinkClass.PegPaySchoolsApi {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(UserType))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolTerm))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(StudentFee))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolFee))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Subject))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(ClassStream))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolStaff))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolSemester))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolClass))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SystemUser))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(MainLink))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(MenuItem))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SubLink))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Student))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(School))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://pegasus.co.ug/")]
-    public partial class Request : Status {
-        
-        private string vendorCodeField;
-        
-        private string vendorPasswordField;
-        
-        private string schoolCodeField;
-        
-        private string modifiedByField;
-        
-        /// <remarks/>
-        public string VendorCode {
-            get {
-                return this.vendorCodeField;
-            }
-            set {
-                this.vendorCodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string VendorPassword {
-            get {
-                return this.vendorPasswordField;
-            }
-            set {
-                this.vendorPasswordField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string SchoolCode {
-            get {
-                return this.schoolCodeField;
-            }
-            set {
-                this.schoolCodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ModifiedBy {
-            get {
-                return this.modifiedByField;
-            }
-            set {
-                this.modifiedByField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://pegasus.co.ug/")]
-    public partial class UserType : Request {
-        
-        private string userTypeCodeField;
-        
-        private string userTypeNameField;
-        
-        /// <remarks/>
-        public string UserTypeCode {
-            get {
-                return this.userTypeCodeField;
-            }
-            set {
-                this.userTypeCodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string UserTypeName {
-            get {
-                return this.userTypeNameField;
-            }
-            set {
-                this.userTypeNameField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://pegasus.co.ug/")]
-    public partial class SchoolTerm : Request {
-        
-        private string termCodeField;
-        
-        private string termNameField;
-        
-        private string startDateField;
-        
-        private string endDateField;
-        
-        /// <remarks/>
-        public string TermCode {
-            get {
-                return this.termCodeField;
-            }
-            set {
-                this.termCodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string TermName {
-            get {
-                return this.termNameField;
-            }
-            set {
-                this.termNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string StartDate {
-            get {
-                return this.startDateField;
-            }
-            set {
-                this.startDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string EndDate {
-            get {
-                return this.endDateField;
-            }
-            set {
-                this.endDateField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://pegasus.co.ug/")]
-    public partial class StudentFee : Request {
-        
-        private string studentIDField;
-        
-        private string classCodeField;
-        
-        private string feeIDField;
-        
-        private string termCodeField;
-        
-        /// <remarks/>
-        public string StudentID {
-            get {
-                return this.studentIDField;
-            }
-            set {
-                this.studentIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ClassCode {
-            get {
-                return this.classCodeField;
-            }
-            set {
-                this.classCodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string FeeID {
-            get {
-                return this.feeIDField;
-            }
-            set {
-                this.feeIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string TermCode {
-            get {
-                return this.termCodeField;
-            }
-            set {
-                this.termCodeField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://pegasus.co.ug/")]
-    public partial class SchoolFee : Request {
-        
-        private string feeNameField;
-        
-        private string feeIDField;
-        
-        private string feeAmountField;
-        
-        private string currencyCodeField;
-        
-        private string feeCategoryField;
-        
-        private string feeTypeField;
-        
-        private string approvedByField;
-        
-        /// <remarks/>
-        public string FeeName {
-            get {
-                return this.feeNameField;
-            }
-            set {
-                this.feeNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string FeeID {
-            get {
-                return this.feeIDField;
-            }
-            set {
-                this.feeIDField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string FeeAmount {
-            get {
-                return this.feeAmountField;
-            }
-            set {
-                this.feeAmountField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string CurrencyCode {
-            get {
-                return this.currencyCodeField;
-            }
-            set {
-                this.currencyCodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string FeeCategory {
-            get {
-                return this.feeCategoryField;
-            }
-            set {
-                this.feeCategoryField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string FeeType {
-            get {
-                return this.feeTypeField;
-            }
-            set {
-                this.feeTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ApprovedBy {
-            get {
-                return this.approvedByField;
-            }
-            set {
-                this.approvedByField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://pegasus.co.ug/")]
-    public partial class Subject : Request {
-        
-        private string subjectNameField;
-        
-        private string subjectCodeField;
-        
-        /// <remarks/>
-        public string SubjectName {
-            get {
-                return this.subjectNameField;
-            }
-            set {
-                this.subjectNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string SubjectCode {
-            get {
-                return this.subjectCodeField;
-            }
-            set {
-                this.subjectCodeField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://pegasus.co.ug/")]
-    public partial class ClassStream : Request {
-        
-        private string classCodeField;
-        
-        private string streamCodeField;
-        
-        private string streamNameField;
-        
-        /// <remarks/>
-        public string ClassCode {
-            get {
-                return this.classCodeField;
-            }
-            set {
-                this.classCodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string StreamCode {
-            get {
-                return this.streamCodeField;
-            }
-            set {
-                this.streamCodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string StreamName {
-            get {
-                return this.streamNameField;
-            }
-            set {
-                this.streamNameField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://pegasus.co.ug/")]
-    public partial class SchoolStaff : Request {
-        
-        private string fullNameField;
-        
-        private string genderField;
-        
-        private string staffCategoryField;
-        
-        private string staffTypeField;
-        
-        private string staffIDNumberField;
-        
-        private string pegPayStaffIDNumberField;
-        
-        private string profilePicField;
-        
-        private string phoneNumberField;
-        
-        private string emailField;
-        
-        /// <remarks/>
-        public string FullName {
-            get {
-                return this.fullNameField;
-            }
-            set {
-                this.fullNameField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Gender {
-            get {
-                return this.genderField;
-            }
-            set {
-                this.genderField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string StaffCategory {
-            get {
-                return this.staffCategoryField;
-            }
-            set {
-                this.staffCategoryField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string StaffType {
-            get {
-                return this.staffTypeField;
-            }
-            set {
-                this.staffTypeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string StaffIDNumber {
-            get {
-                return this.staffIDNumberField;
-            }
-            set {
-                this.staffIDNumberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string PegPayStaffIDNumber {
-            get {
-                return this.pegPayStaffIDNumberField;
-            }
-            set {
-                this.pegPayStaffIDNumberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string ProfilePic {
-            get {
-                return this.profilePicField;
-            }
-            set {
-                this.profilePicField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string PhoneNumber {
-            get {
-                return this.phoneNumberField;
-            }
-            set {
-                this.phoneNumberField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Email {
-            get {
-                return this.emailField;
-            }
-            set {
-                this.emailField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://pegasus.co.ug/")]
-    public partial class SchoolSemester : Request {
-        
-        private string semesterCodeField;
-        
-        private string startDateField;
-        
-        private string enddateField;
-        
-        /// <remarks/>
-        public string SemesterCode {
-            get {
-                return this.semesterCodeField;
-            }
-            set {
-                this.semesterCodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string StartDate {
-            get {
-                return this.startDateField;
-            }
-            set {
-                this.startDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Enddate {
-            get {
-                return this.enddateField;
-            }
-            set {
-                this.enddateField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://pegasus.co.ug/")]
-    public partial class SchoolClass : Request {
-        
-        private string classCodeField;
-        
-        private string schoolClassNameField;
-        
-        /// <remarks/>
-        public string ClassCode {
-            get {
-                return this.classCodeField;
-            }
-            set {
-                this.classCodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string SchoolClassName {
-            get {
-                return this.schoolClassNameField;
-            }
-            set {
-                this.schoolClassNameField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1601,7 +2078,7 @@ namespace InterLinkClass.PegPaySchoolsApi {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1658,7 +2135,7 @@ namespace InterLinkClass.PegPaySchoolsApi {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1703,7 +2180,7 @@ namespace InterLinkClass.PegPaySchoolsApi {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1844,7 +2321,7 @@ namespace InterLinkClass.PegPaySchoolsApi {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2057,11 +2534,102 @@ namespace InterLinkClass.PegPaySchoolsApi {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1087.0")]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SystemUserDetails))]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://pegasus.co.ug/")]
+    public partial class Result : Status {
+        
+        private string pegPayIDField;
+        
+        private string thirdPartyIDField;
+        
+        private string requestIDField;
+        
+        /// <remarks/>
+        public string PegPayID {
+            get {
+                return this.pegPayIDField;
+            }
+            set {
+                this.pegPayIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ThirdPartyID {
+            get {
+                return this.thirdPartyIDField;
+            }
+            set {
+                this.thirdPartyIDField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string RequestID {
+            get {
+                return this.requestIDField;
+            }
+            set {
+                this.requestIDField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://pegasus.co.ug/")]
+    public partial class SystemUserDetails : Result {
+        
+        private SystemUser userField;
+        
+        private School schoolDetailsField;
+        
+        private MenuItem[] userMenuOptionsField;
+        
+        /// <remarks/>
+        public SystemUser User {
+            get {
+                return this.userField;
+            }
+            set {
+                this.userField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public School SchoolDetails {
+            get {
+                return this.schoolDetailsField;
+            }
+            set {
+                this.schoolDetailsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public MenuItem[] UserMenuOptions {
+            get {
+                return this.userMenuOptionsField;
+            }
+            set {
+                this.userMenuOptionsField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
     public delegate void ExecuteDataSetCompletedEventHandler(object sender, ExecuteDataSetCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1087.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ExecuteDataSetCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2083,11 +2651,89 @@ namespace InterLinkClass.PegPaySchoolsApi {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1087.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void ExecuteDataSetOnCBCompletedEventHandler(object sender, ExecuteDataSetOnCBCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ExecuteDataSetOnCBCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ExecuteDataSetOnCBCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public System.Data.DataSet Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((System.Data.DataSet)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void ExecuteNonQueryCompletedEventHandler(object sender, ExecuteNonQueryCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ExecuteNonQueryCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ExecuteNonQueryCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public int Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((int)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void ExecuteNonQueryOnCBCompletedEventHandler(object sender, ExecuteNonQueryOnCBCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class ExecuteNonQueryOnCBCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal ExecuteNonQueryOnCBCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Result Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Result)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
     public delegate void SaveSchoolCompletedEventHandler(object sender, SaveSchoolCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1087.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SaveSchoolCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2109,11 +2755,11 @@ namespace InterLinkClass.PegPaySchoolsApi {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1087.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
     public delegate void SaveStudentCompletedEventHandler(object sender, SaveStudentCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1087.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SaveStudentCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2135,11 +2781,11 @@ namespace InterLinkClass.PegPaySchoolsApi {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1087.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
     public delegate void LoginCompletedEventHandler(object sender, LoginCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1087.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class LoginCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2161,11 +2807,11 @@ namespace InterLinkClass.PegPaySchoolsApi {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1087.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
     public delegate void SaveSchoolClassCompletedEventHandler(object sender, SaveSchoolClassCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1087.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SaveSchoolClassCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2187,11 +2833,37 @@ namespace InterLinkClass.PegPaySchoolsApi {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1087.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void SaveDepartmentCompletedEventHandler(object sender, SaveDepartmentCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class SaveDepartmentCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal SaveDepartmentCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Result Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Result)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
     public delegate void SaveSchoolSemesterCompletedEventHandler(object sender, SaveSchoolSemesterCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1087.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SaveSchoolSemesterCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2213,11 +2885,89 @@ namespace InterLinkClass.PegPaySchoolsApi {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1087.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void SaveSubjectResultCompletedEventHandler(object sender, SaveSubjectResultCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class SaveSubjectResultCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal SaveSubjectResultCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Result Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Result)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void SaveUploadedFileCompletedEventHandler(object sender, SaveUploadedFileCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class SaveUploadedFileCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal SaveUploadedFileCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Result Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Result)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    public delegate void SaveStudentSubjectCompletedEventHandler(object sender, SaveStudentSubjectCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class SaveStudentSubjectCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal SaveStudentSubjectCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Result Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Result)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
     public delegate void SaveSchoolStaffCompletedEventHandler(object sender, SaveSchoolStaffCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1087.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SaveSchoolStaffCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2239,11 +2989,11 @@ namespace InterLinkClass.PegPaySchoolsApi {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1087.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
     public delegate void SaveClassStreamCompletedEventHandler(object sender, SaveClassStreamCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1087.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SaveClassStreamCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2265,11 +3015,11 @@ namespace InterLinkClass.PegPaySchoolsApi {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1087.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
     public delegate void SaveSystemUserCompletedEventHandler(object sender, SaveSystemUserCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1087.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SaveSystemUserCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2291,11 +3041,11 @@ namespace InterLinkClass.PegPaySchoolsApi {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1087.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
     public delegate void SaveSubjectCompletedEventHandler(object sender, SaveSubjectCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1087.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SaveSubjectCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2317,11 +3067,11 @@ namespace InterLinkClass.PegPaySchoolsApi {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1087.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
     public delegate void SaveSchoolFeesCompletedEventHandler(object sender, SaveSchoolFeesCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1087.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SaveSchoolFeesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2343,11 +3093,11 @@ namespace InterLinkClass.PegPaySchoolsApi {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1087.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
     public delegate void SaveStudentFeesCompletedEventHandler(object sender, SaveStudentFeesCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1087.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SaveStudentFeesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2369,11 +3119,11 @@ namespace InterLinkClass.PegPaySchoolsApi {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1087.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
     public delegate void SaveMainLinkCompletedEventHandler(object sender, SaveMainLinkCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1087.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SaveMainLinkCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2395,11 +3145,11 @@ namespace InterLinkClass.PegPaySchoolsApi {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1087.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
     public delegate void SaveSubLinkCompletedEventHandler(object sender, SaveSubLinkCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1087.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SaveSubLinkCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2421,11 +3171,11 @@ namespace InterLinkClass.PegPaySchoolsApi {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1087.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
     public delegate void SaveSchoolTermCompletedEventHandler(object sender, SaveSchoolTermCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1087.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SaveSchoolTermCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2447,11 +3197,11 @@ namespace InterLinkClass.PegPaySchoolsApi {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1087.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
     public delegate void SaveUserTypeCompletedEventHandler(object sender, SaveUserTypeCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1087.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SaveUserTypeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2473,11 +3223,11 @@ namespace InterLinkClass.PegPaySchoolsApi {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1087.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
     public delegate void SaveMenuCompletedEventHandler(object sender, SaveMenuCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1087.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SaveMenuCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {

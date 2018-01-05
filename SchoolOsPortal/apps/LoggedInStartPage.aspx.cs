@@ -49,10 +49,21 @@ public partial class Admin : System.Web.UI.Page
 
     private void LoadData()
     {
-
-        lblmsg.Text = user.User.Username;
+        lblmsg.Text = user.User.FullName;
         UsersPic.Attributes["src"] = "ImageHandler.ashx?Id=" + user.SchoolDetails.SchoolLogo;
 
+        DataTable dt = bll.ExecuteDataTableOnSchoolsDB("GetDashBoardStatistics", new string[] { user.SchoolDetails.SchoolCode });
+
+        if (dt.Rows.Count == 0)
+        {
+            return;
+        }
+
+        DataRow dr = dt.Rows[0];
+        lblClassCount.Text = dr["ClassesCount"].ToString();
+        lblStudentCount.Text = dr["StudentCount"].ToString();
+        lblTeacherCount.Text = dr["TeacherCount"].ToString();
+        lblTranAmount.Text = dr["TransactionCount"].ToString();
     }
 
     protected void btnSearch_Click(object sender, EventArgs e)

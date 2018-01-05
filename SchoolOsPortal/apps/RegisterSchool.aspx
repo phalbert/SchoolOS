@@ -116,27 +116,30 @@
 
                         <fieldset>
                             <legend>School Details
-                        </legend>
+                            </legend>
                             <div data-row-span="4">
                                 <div data-field-span="2">
                                     <label>Name of the School</label>
                                     <asp:TextBox ID="txtSchoolName" required="true" runat="server"></asp:TextBox>
                                 </div>
                                 <div data-field-span="1">
-                                    <label>School Code</label>
-                                    <asp:TextBox ID="txtSchoolCode" maxlength="10" required="true" runat="server"></asp:TextBox>
+                                    <label>Prefered School Code</label>
+                                    <asp:TextBox ID="txtSchoolCode" MaxLength="10" required="true" runat="server"></asp:TextBox>
                                 </div>
                                 <div data-field-span="1">
                                     <label>UNEB Centre Number <small>If applicable</small></label>
-                                    <asp:TextBox ID="txtUnebNumber"  runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtUnebNumber" runat="server"></asp:TextBox>
                                 </div>
 
                             </div>
 
-                              <div data-row-span="4">
+                            <div data-row-span="4">
                                 <div data-field-span="2">
                                     <label>Schools Bank</label>
-                                    <asp:TextBox ID="txtSchoolBank" required="true" runat="server"></asp:TextBox>
+                                    <asp:DropDownList ID="ddBanks" runat="server" CssClass="form-control">
+                                        <asp:ListItem>True</asp:ListItem>
+                                        <asp:ListItem>False</asp:ListItem>
+                                    </asp:DropDownList>
                                 </div>
                                 <div data-field-span="1">
                                     <label>Account Name</label>
@@ -192,9 +195,9 @@
                                 </div>
                             </div>
 
-                             <div data-row-span="4">
+                            <div data-row-span="4">
                                 <div data-field-span="2" data-field-error="Please enter prefered username">
-                                    <label>UserId</label>
+                                    <label>UserId (for login)</label>
                                     <asp:TextBox ID="txtUserId" required="true" runat="server"></asp:TextBox>
                                 </div>
                             </div>
@@ -306,13 +309,16 @@
                             <br />
                             <div class="row">
                                 <div class="col-sm-offset-3 col-sm-9">
+                                    <asp:Button runat="server" Text="Submit" ID="btnEdit" class="btn-lg btn-primary" OnClick="btnEdit_Click" />
+
+                                    &nbsp;
                                     <asp:Button runat="server" Text="Submit" ID="btnSubmit" class="btn-lg btn-primary" OnClick="btnSubmit_Click" />
 
                                     &nbsp;
-                                    <asp:Button runat="server" Text="Cancel" ID="btnCancel" class="btn-lg btn-danger" OnClick="btnCancel_Click" novalidate/>
+                                    <asp:Button runat="server" Text="Cancel" ID="btnCancel" class="btn-lg btn-danger" OnClick="btnCancel_Click" formnovalidate="formnovalidate" />
 
                                     &nbsp;
-                                    <asp:Button runat="server" Text="Reset" ID="btnReset" class="btn-lg btn-default bttn_reset" OnClick="btnReset_Click" novalidate/>
+                                    <asp:Button runat="server" Text="Reset" ID="btnReset" class="btn-lg btn-default bttn_reset" OnClick="btnReset_Click" formnovalidate="formnovalidate" />
 
                                 </div>
                             </div>

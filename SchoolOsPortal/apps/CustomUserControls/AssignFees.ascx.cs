@@ -1,6 +1,7 @@
 ﻿using InterLinkClass.PegPaySchoolsApi;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -57,7 +58,8 @@ public partial class AssignFees : System.Web.UI.UserControl
         bll.LoadSchoolsIntoDropDown(user, ddSchools);
         bll.LoadDataIntoDropDown("GetClassesForDropDown", new string[] { ddSchools.SelectedValue }, ddClasses);
         bll.LoadDataIntoDropDown("GetFeesForDropDown", new string[] { ddSchools.SelectedValue }, ddFees);
-        bll.LoadDataIntoDropDown("GetTermsForDropDown", new string[] { ddSchools.SelectedValue }, ddTerms);
+        bll.LoadDataIntoDropDownALL("GetStudentsForDropDown", new string[] { ddSchools.SelectedValue,ddClasses.SelectedValue }, ddStudents);
+        ddFees_SelectedIndexChanged(null, null);
     }
 
     private void LoadEntityData(string id)
@@ -116,12 +118,16 @@ public partial class AssignFees : System.Web.UI.UserControl
     private StudentFee GetClient()
     {
         StudentFee std = new StudentFee();
-        std.StudentID = txtStudentId.Text;
+        std.StudentID = ddStudents.SelectedValue;
         std.ClassCode = ddClasses.SelectedValue;
         std.FeeID = ddFees.SelectedValue;
-        std.TermCode = ddTerms.SelectedValue;
+        std.Email = user.User.Email;
         std.SchoolCode = ddSchools.SelectedValue;
+        std.Amount = txtAmount.Text;
+        std.FeeType = txtTranType.Text;
         std.ModifiedBy = user.User.Username;
+        std.TranID = SharedCommons.SharedCommons.GenerateUniqueId("PAY");
+        std.PaymentChannel = Globals.SCHOOLS_WEB_PORTAL;
         return std;
     }
 
@@ -140,9 +146,45 @@ public partial class AssignFees : System.Web.UI.UserControl
     {
         try
         {
-            bll.LoadDataIntoDropDown("GetClassesForDropDown", new string[] { ddSchools.SelectedValue }, ddClasses);
+            bll.LoadDataIntoDropDownALL("GetClassesForDropDown", new string[] { ddSchools.SelectedValue }, ddClasses);
             bll.LoadDataIntoDropDown("GetFeesForDropDown", new string[] { ddSchools.SelectedValue }, ddFees);
-            bll.LoadDataIntoDropDown("GetTermsForDropDown", new string[] { ddSchools.SelectedValue }, ddTerms);
+            bll.LoadDataIntoDropDownALL("GetStudentsForDropDown", new string[] { ddSchools.SelectedValue, ddClasses.SelectedValue }, ddStudents);
+            ddFees_SelectedIndexChanged(null, null);
+        }
+        catch (Exception ex)
+        {
+            bll.LogError("SAVE-CLIENT", ex.StackTrace, "", ex.Message, "EXCEPTION");
+            bll.ShowMessage(lblmsg, ex.Message, true, Session);
+        }
+    }
+
+    protected void ddFees_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        try
+        {
+            DataTable dt = bll.ExecuteDataTableOnSchoolsDB("GetFeeById", new string[] { ddFees.SelectedValue,ddSchools.SelectedValue });
+            if (dt.Rows.Count == 0)
+            {
+                string msg = "UNABLE TO GET FEE DETAILS";
+                bll.ShowMessage(lblmsg, msg, true, Session);
+                return;
+            }
+            DataRow dr = dt.Rows[0];
+            txtTranType.Text = dr["FeeType"].ToString();
+            txtAmount.Text = dr["Amount"].ToString();
+        }
+        catch (Exception ex)
+        {
+            bll.LogError("SAVE-CLIENT", ex.StackTrace, "", ex.Message, "EXCEPTION");
+            bll.ShowMessage(lblmsg, ex.Message, true, Session);
+        }
+    }
+
+    protected void ddClasses_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        try
+        {
+            bll.LoadDataIntoDropDownALL("GetStudentsForDropDown", new string[] { ddSchools.SelectedValue, ddClasses.SelectedValue }, ddStudents);
         }
         catch (Exception ex)
         {

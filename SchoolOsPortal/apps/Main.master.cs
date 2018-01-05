@@ -16,6 +16,9 @@ public partial class Main : System.Web.UI.MasterPage
 {
     Bussinesslogic bll = new Bussinesslogic();
     SystemUserDetails details;
+
+    public int GET_BAL_TIMEOUT = 1000 * 3;
+
     protected void Page_Load(object sender, EventArgs e)
     {
         try
@@ -51,8 +54,33 @@ public partial class Main : System.Web.UI.MasterPage
 
     private void LoadData()
     {
-     //   LogoutLinkButton.Text = " Hi," + details.User.FullName;
-     
+
+        try
+        {
+            if (details.User.UserType != "SCHOOL_STUDENT")
+            {
+                divStudentBal.Visible = false;
+                return;
+            }
+
+            InterLinkClass.CbAPI.Service service = new InterLinkClass.CbAPI.Service();
+            service.Timeout = GET_BAL_TIMEOUT;
+            InterLinkClass.CbAPI.BankAccount account = service.GetById("BANKACCOUNT", details.User.Username, details.User.SchoolCode, Globals.SCHOOL_PASSWORD) as InterLinkClass.CbAPI.BankAccount;
+
+            if (account.StatusCode != Globals.SUCCESS_STATUS_CODE)
+            {
+                divStudentBal.Visible = false;
+                return;
+            }
+
+            divStudentBal.Visible = true;
+            lblStudentBal.Text = account.AccountBalance;
+        }
+        catch(Exception ex)
+        {
+            divStudentBal.Visible = true;
+            lblStudentBal.Text = "N/A";
+        }     
     }
 
     private void Logout()

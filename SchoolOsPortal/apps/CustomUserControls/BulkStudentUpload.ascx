@@ -6,34 +6,34 @@
     <asp:View ID="ConfirmView" runat="server">
         <div class="container">
 
-                    <%------------------------------------------ Message Label ----------------------------------------%>
-                    <div class="row">
-                        <div class="col-lg-1"></div>
-                        <div class="col-lg-10 text-center">
-                            <% 
-                                string IsError = Session["IsError"] as string;
-                                if (IsError == null)
-                                {
-                                    Response.Write("<div>");
+            <%------------------------------------------ Message Label ----------------------------------------%>
+            <div class="row">
+                <div class="col-lg-1"></div>
+                <div class="col-lg-10 text-center">
+                    <% 
+                        string IsError = Session["IsError"] as string;
+                        if (IsError == null)
+                        {
+                            Response.Write("<div>");
 
-                                }
-                                else if (IsError == "True")
-                                {
-                                    Response.Write("<div class=\"alert alert-danger\">");
+                        }
+                        else if (IsError == "True")
+                        {
+                            Response.Write("<div class=\"alert alert-danger\">");
 
-                                }
-                                else
-                                {
-                                    Response.Write("<div class=\"alert alert-success\">");
-                                }
-                            %>
-                            <strong>
-                                <asp:Label ID="lblmsg" runat="server"></asp:Label>
-                            </strong>
-                            <%Response.Write("</div>"); %>
-                        </div>
-                        <div class="col-lg-1"></div>
-                    </div>
+                        }
+                        else
+                        {
+                            Response.Write("<div class=\"alert alert-success\">");
+                        }
+                    %>
+                    <strong>
+                        <asp:Label ID="lblmsg" runat="server"></asp:Label>
+                    </strong>
+                    <%Response.Write("</div>"); %>
+                </div>
+                <div class="col-lg-1"></div>
+            </div>
             <div class="text-center">
                 <div class="row" style="padding-top: 70px;">
                     <div class="col-lg-2"></div>
@@ -72,6 +72,5 @@
             </div>
         </div>
         <hr />
-        </div>
     </asp:View>
 </asp:MultiView>

@@ -66,33 +66,40 @@
                                     <br />
                                     <div class="row">
                                         <div class="col-lg-6">
+                                            <label>Class</label>
+                                            <asp:DropDownList ID="ddClasses" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddClasses_SelectedIndexChanged" CssClass="form-control">
+                                                <asp:ListItem>True</asp:ListItem>
+                                                <asp:ListItem>False</asp:ListItem>
+                                            </asp:DropDownList>
+                                        </div>
+                                        <div class="col-lg-6">
                                             <label>Fee</label>
-                                            <asp:DropDownList ID="ddFees" runat="server" CssClass="form-control">
+                                            <asp:DropDownList ID="ddFees" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddFees_SelectedIndexChanged" CssClass="form-control">
                                                 <asp:ListItem>True</asp:ListItem>
                                                 <asp:ListItem>False</asp:ListItem>
                                             </asp:DropDownList>
                                             
                                         </div>
-                                        <div class="col-lg-6">
-                                            <label>Class</label>
-                                            <asp:DropDownList ID="ddClasses" runat="server" CssClass="form-control">
-                                                <asp:ListItem>True</asp:ListItem>
-                                                <asp:ListItem>False</asp:ListItem>
-                                            </asp:DropDownList>
-                                        </div>
                                     </div>
                                     <br />
                                     <div class="row">
                                          <div class="col-lg-6">
-                                            <label>Semester</label>
-                                            <asp:DropDownList ID="ddTerms" runat="server" CssClass="form-control">
+                                            <label>Amount</label>
+                                            <asp:TextBox ID="txtAmount" Enabled="false" Text="" runat="server" CssClass="form-control" />
+                                        </div>
+                                        <div class="col-lg-6" runat="server" id="divTranType">
+                                            <label>Tran Type</label>
+                                            <asp:TextBox ID="txtTranType" Enabled="false" Text="" runat="server" CssClass="form-control" />
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <label>Student ID</label>
+                                            <asp:DropDownList ID="ddStudents" runat="server" CssClass="form-control">
                                                 <asp:ListItem>True</asp:ListItem>
                                                 <asp:ListItem>False</asp:ListItem>
                                             </asp:DropDownList>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <label>Student ID</label>
-                                            <asp:TextBox ID="txtStudentId" Text="ALL" runat="server" CssClass="form-control" placeholder="Enter Specific Student Id or ALL" />
                                         </div>
                                     </div>
                                 </div>

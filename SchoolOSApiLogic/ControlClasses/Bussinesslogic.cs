@@ -24,6 +24,16 @@ namespace SchoolOSApiLogic.ControlClasses
                 return result;
             }
 
+            CB_BussinessLogic cbApi = new CB_BussinessLogic();
+            Result cbResult = cbApi.CreateSchoolBankIfNotExists(sch);
+
+            if (cbResult.StatusCode != Globals.SUCCESS_STATUS_CODE)
+            {
+                result.StatusCode = Globals.FAILURE_STATUS_CODE;
+                result.StatusDesc = cbResult.StatusDesc;
+                return result;
+            }
+
             result.StatusCode = Globals.SUCCESS_STATUS_CODE;
             result.StatusDesc = Globals.SUCCESS_STATUS_DESC;
             result.PegPayID = dt.Rows[0][0].ToString();
@@ -116,8 +126,8 @@ namespace SchoolOSApiLogic.ControlClasses
         public Result SaveSystemUser(SystemUser user)
         {
             Result result = new Result();
-            user.UserPassword = sharedCommons.GenearetHMACSha256Hash(user.SecretKey, user.UserPassword);
-            DataTable dt = dh.ExecuteDataSet("SaveSystemUser", new string[] { user.Username, user.UserPassword, user.UserType, user.UserCategory, user.SecretKey, user.ModifiedBy, user.ProfilePic, user.SchoolCode, user.FullName, user.IsActive, user.Email, user.PhoneNumber }).Tables[0];
+            user.UserPassword = GenearetHMACSha256Hash(user.SecretKey, user.UserPassword);
+            DataTable dt = dh.ExecuteDataSet("SaveSystemUser", new string[] { user.Username, user.UserPassword, user.UserType, user.UserCategory, user.SecretKey, user.ModifiedBy, user.ProfilePic, user.SchoolCode, user.FullName, user.IsActive, user.Email, user.PhoneNumber,user.ApprovedBy }).Tables[0];
 
             if (dt.Rows.Count == 0)
             {
@@ -134,15 +144,40 @@ namespace SchoolOSApiLogic.ControlClasses
             return result;
         }
 
+        public static string GenearetHMACSha256Hash(string secretPresharedKey, string message)
+        {
+            ASCIIEncoding encoding = new System.Text.ASCIIEncoding();
+            byte[] keyByte = encoding.GetBytes(secretPresharedKey);
+            byte[] messageBytes = encoding.GetBytes(message);
+            using (var hmacsha256 = new HMACSHA256(keyByte))
+            {
+                byte[] hashmessage = hmacsha256.ComputeHash(messageBytes);
+                string base64string = Convert.ToBase64String(hashmessage);
+                string HmacHash = ByteArrayToString(hashmessage);
+                return HmacHash;
+            }
+        }
+
         public Result SaveStudent(Student std)
         {
             Result result = new Result();
-            DataTable dt = dh.ExecuteDataSet("SaveStudent", new string[] { std.SchoolCode, std.StudentNumber, std.PegPayStudentNumber, std.StudentName, std.ClassCode, std.StreamCode, std.DateOfBirth, std.StudentCategory, std.ModifiedBy,std.ProfilePic }).Tables[0];
+            DataTable dt = dh.ExecuteDataSet("SaveStudent", new string[] { std.SchoolCode, std.StudentNumber, std.PegPayStudentNumber, std.StudentName, std.ClassCode, std.StreamCode, std.DateOfBirth, std.StudentCategory, std.ModifiedBy, std.ProfilePic, std.Email, std.Gender, std.PhoneNumber }).Tables[0];
 
             if (dt.Rows.Count == 0)
             {
                 result.StatusCode = Globals.FAILURE_STATUS_CODE;
                 result.StatusDesc = "NO ROWS AFFECTED";
+                return result;
+            }
+
+            std.PegPayStudentNumber = dt.Rows[0][2].ToString();
+            CB_BussinessLogic cbApi = new CB_BussinessLogic();
+            Result cbResult = cbApi.CreateStudentBankAccountIfNotExists(std);
+
+            if (cbResult.StatusCode != Globals.SUCCESS_STATUS_CODE)
+            {
+                result.StatusCode = Globals.FAILURE_STATUS_CODE;
+                result.StatusDesc = cbResult.StatusDesc;
                 return result;
             }
 
@@ -171,6 +206,89 @@ namespace SchoolOSApiLogic.ControlClasses
             result.StatusDesc = Globals.SUCCESS_STATUS_DESC;
             result.PegPayID = dt.Rows[0][0].ToString();
             result.RequestID = schcls.ClassCode;
+
+            return result;
+        }
+
+        public Result SaveDepartment(Department dept)
+        {
+            Result result = new Result();
+            DataTable dt = dh.ExecuteDataSet("saveschoolclass", new string[] { dept.SchoolCode, dept.DepartmentCode, dept.DepartmentName, dept.DepartmentCategory, dept.ModifiedBy }).Tables[0];
+
+            if (dt.Rows.Count == 0)
+            {
+                result.StatusCode = Globals.FAILURE_STATUS_CODE;
+                result.StatusDesc = "NO ROWS AFFECTED";
+                return result;
+            }
+
+            result.StatusCode = Globals.SUCCESS_STATUS_CODE;
+            result.StatusDesc = Globals.SUCCESS_STATUS_DESC;
+            result.PegPayID = dt.Rows[0][0].ToString();
+            result.RequestID = dept.DepartmentCode;
+
+            return result;
+        }
+
+        public Result SaveStudentSubject(StudentSubject dept)
+        {
+            Result result = new Result();
+            DataTable dt = dh.ExecuteDataSet("SaveStudentSubject", new string[] { dept.StudentId, dept.SubjectCode, dept.TermCode, dept.SchoolCode, dept.ModifiedBy }).Tables[0];
+
+            if (dt.Rows.Count == 0)
+            {
+                result.StatusCode = Globals.FAILURE_STATUS_CODE;
+                result.StatusDesc = "NO ROWS AFFECTED";
+                return result;
+            }
+
+            result.StatusCode = Globals.SUCCESS_STATUS_CODE;
+            result.StatusDesc = Globals.SUCCESS_STATUS_DESC;
+            result.PegPayID = dt.Rows[0][0].ToString();
+            result.RequestID = dept.StudentId;
+
+            return result;
+        }
+
+        public Result SaveUploadedFile(UploadedFile file)
+        {
+            Result result = new Result();
+            Byte[] array = Convert.FromBase64String(file.FileContents);
+            DataTable dt = dh.ExecuteDataSet("SaveUploadedFile", new object[] { file.SchoolCode, file.OperationCode, array, file.ModifiedBy, file.FileName,file.Email,file.Channel }).Tables[0];
+
+            if (dt.Rows.Count == 0)
+            {
+                result.StatusCode = Globals.FAILURE_STATUS_CODE;
+                result.StatusDesc = "NO ROWS AFFECTED";
+                return result;
+            }
+
+            result.StatusCode = Globals.SUCCESS_STATUS_CODE;
+            result.StatusDesc = Globals.SUCCESS_STATUS_DESC;
+            result.PegPayID = dt.Rows[0][0].ToString();
+            result.RequestID = file.ModifiedBy;
+
+            return result;
+        }
+
+
+
+        public Result SaveSubjectResult(SubjectResults dept)
+        {
+            Result result = new Result();
+            DataTable dt = dh.ExecuteDataSet("SaveSubjectResults", new string[] { dept.SchoolCode, dept.StudentId, dept.SubjectCode, dept.TermCode, dept.Mark, dept.Grade, dept.ModifiedBy }).Tables[0];
+
+            if (dt.Rows.Count == 0)
+            {
+                result.StatusCode = Globals.FAILURE_STATUS_CODE;
+                result.StatusDesc = "NO ROWS AFFECTED";
+                return result;
+            }
+
+            result.StatusCode = Globals.SUCCESS_STATUS_CODE;
+            result.StatusDesc = Globals.SUCCESS_STATUS_DESC;
+            result.PegPayID = dt.Rows[0][0].ToString();
+            result.RequestID = dept.StudentId;
 
             return result;
         }
@@ -451,19 +569,7 @@ namespace SchoolOSApiLogic.ControlClasses
             return user;
         }
 
-        public static string GenearetHMACSha256Hash(string secretPresharedKey, string message)
-        {
-            ASCIIEncoding encoding = new System.Text.ASCIIEncoding();
-            byte[] keyByte = encoding.GetBytes(secretPresharedKey);
-            byte[] messageBytes = encoding.GetBytes(message);
-            using (var hmacsha256 = new HMACSHA256(keyByte))
-            {
-                byte[] hashmessage = hmacsha256.ComputeHash(messageBytes);
-                string base64string = Convert.ToBase64String(hashmessage);
-                string HmacHash = ByteArrayToString(hashmessage);
-                return HmacHash;
-            }
-        }
+
 
         public static string ByteArrayToString(byte[] ba)
         {
@@ -548,9 +654,28 @@ namespace SchoolOSApiLogic.ControlClasses
             return dh.ExecuteDataSet(StoredProc, Parameters);
         }
 
-        public int ExecuteNonQuery(string StoredProc, params string[] Parameters)
+        public DataSet ExecuteDataSetOnCB(string StoredProc, params string[] Parameters)
+        {
+            CB_BussinessLogic bll = new CB_BussinessLogic();
+            return bll.ExecuteDataSetOnCB(StoredProc, Parameters);
+        }
+
+        public int ExecuteNonQuery(string StoredProc, params object[] Parameters)
         {
             return dh.ExecuteNonQuery(StoredProc, Parameters);
+        }
+
+        public Result ExecuteNonQueryOnCB(string StoredProc, params string[] Parameters)
+        {
+            Result result = new Result();
+            CB_BussinessLogic bll = new CB_BussinessLogic();
+            CBApi.Result cbResult = bll.ExecuteNonQueryOnCB(StoredProc, Parameters);
+            result.StatusCode = cbResult.StatusCode;
+            result.StatusDesc = cbResult.StatusDesc;
+            result.ThirdPartyID = cbResult.ThirdPartyId;
+            result.PegPayID = cbResult.PegPayId;
+            result.RequestID = cbResult.RequestId;
+            return result;
         }
 
 
@@ -576,7 +701,7 @@ namespace SchoolOSApiLogic.ControlClasses
         public Result SaveStudentFees(StudentFee fee)
         {
             Result result = new Result();
-            DataTable dt = dh.ExecuteDataSet("SaveStudentFees", new string[] { fee.StudentID, fee.FeeID, fee.SchoolCode, fee.ModifiedBy }).Tables[0];
+            DataTable dt = dh.ExecuteDataSet("SaveStudentFees", new string[] { fee.StudentID, fee.FeeID, fee.SchoolCode, fee.ModifiedBy, fee.ClassCode, fee.FeeType, fee.Amount, fee.Email, fee.TranID, fee.PaymentChannel }).Tables[0];
 
             if (dt.Rows.Count == 0)
             {
@@ -591,8 +716,5 @@ namespace SchoolOSApiLogic.ControlClasses
             result.RequestID = fee.FeeID;
             return result;
         }
-
-
-
     }
 }

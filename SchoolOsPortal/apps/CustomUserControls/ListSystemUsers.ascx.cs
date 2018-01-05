@@ -94,6 +94,29 @@ public partial class ListSystemUsers : System.Web.UI.UserControl
 
     protected void dataGridResults_RowCommand(object sender, GridViewCommandEventArgs e)
     {
+        try
+        {
+            GridView grid = sender as GridView;
+            int index = Convert.ToInt32(e.CommandArgument);
+            GridViewRow row = grid.Rows[index];
+            string studentID = row.Cells[1].Text;
+            string schoolCode = ddSchools.SelectedValue;
 
+            Result result = SaveSystemUsersControl.LoadEntityDataForEdit(studentID);
+
+            if (result.StatusCode != Globals.SUCCESS_STATUS_CODE)
+            {
+                string msg = "FAILED: " + result.StatusDesc;
+                bll.ShowMessage(lblmsg, msg, true);
+                return;
+            }
+
+            MultiView1.SetActiveView(EditView);
+        }
+        catch (Exception ex)
+        {
+            string msg = "FAILED: " + ex.Message;
+            bll.ShowMessage(lblmsg, msg, true);
+        }
     }
 }

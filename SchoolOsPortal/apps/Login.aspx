@@ -1,5 +1,7 @@
 <%@ Page Language="C#" AutoEventWireup="true" CodeFile="Login.aspx.cs" Inherits="Login" %>
 
+<%--<%@ Register TagPrefix="recaptcha" Namespace="Recaptcha" Assembly="Recaptcha" %>--%>
+<%@ Register Assembly="GoogleReCaptcha" Namespace="GoogleReCaptcha" TagPrefix="cc1" %>
 <!DOCTYPE html>
 <html>
 
@@ -10,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="Images/favicon.ico.png" />
     <link href="css/pegpay-login.css" rel="stylesheet" />
-      <script src='https://www.google.com/recaptcha/api.js'></script>
+    <script src='https://www.google.com/recaptcha/api.js'></script>
 
     <style>
         @import url("scripts/vendors/iCheck/css/minimal/_all.css");
@@ -115,15 +117,13 @@
                                     <label for="password" class="sr-only">Password</label>
                                     <asp:TextBox runat="server" TextMode="Password" class="form-control form-control-lg" ID="txtPassword" name="password" placeholder="Password"></asp:TextBox>
                                 </div>
-                                <div class="g-recaptcha" data-theme="dark" data-sitekey="6Le2u_wSAAAAAL_gETRxPdb5oU3p5if1cDLCasKT"></div>
-
-                                <div class='form-group'>
-                                   <div class="g-recaptcha" data-sitekey="6LdAfD0UAAAAAM_bf1xJN2Z279--f3DoI1EWzfux"></div>
+                                <div class="form-group text-center">
+                                    <cc1:GoogleReCaptcha ID="ctrlGoogleReCaptcha" runat="server" PublicKey="6Leefj0UAAAAAAb8CMhdkGZxmVVhKGxMGkUPqB6z" PrivateKey="6Leefj0UAAAAADCaJQmkGG4FHPoaLA7LvooEBdF5" />
                                 </div>
                                 <div class="form-group">
                                     <asp:Button runat="server" ID="btnLogin" Text="Sign In" class="btn btn-primary btn-block" OnClick="btnLogin_Click" />
                                 </div>
-                                <a href="forgot_password.aspx" id="forgot" class="forgot">Forgot Password ? </a>
+                                <a href="ForgotPassword.aspx" id="forgot" class="forgot">Forgot Password ? </a>
                             </form>
                         </div>
                     </div>
@@ -134,12 +134,12 @@
     <!-- global js -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  
+
     <!-- end of global js -->
     <!-- page level js -->
     <script type="text/javascript" src="scripts/vendors/iCheck/js/icheck.js.pagespeed.jm.mc8O_8_6ZX.js"></script>
     <script src="scripts/vendors/bootstrapvalidator/js/bootstrapValidator.min.js.pagespeed.jm.6svL6oFoHD.js" type="text/javascript"></script>
-    
+
 </body>
 
 </html>

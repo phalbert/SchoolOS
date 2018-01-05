@@ -20,6 +20,7 @@
     <![endif]-->
     <!-- global css -->
     <link type="text/css" rel="stylesheet" href="css/flexi1.css" />
+    <link type="text/css" rel="stylesheet" href="css/PutCustomCssHere.css" />
     <!-- end of global css -->
     <!--page level css -->
 
@@ -94,7 +95,10 @@
                                 <div class="content-profile">
                                     <h4 style="text-align: center" class="media-heading"><%=user.User.FullName %>
                                     </h4>
-
+                                </div>
+                                <div class="content-profile" id="divStudentBal" runat="server">
+                                    <h4 style="text-align: center" class="media-heading">Bal: <asp:Label ID="lblStudentBal" runat="server"></asp:Label>
+                                    </h4>
                                 </div>
                             </div>
                         </div>

@@ -27,7 +27,7 @@ public partial class Login : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            bll.ShowMessage(lblmsg, ex.Message, true, Session);
+            bll.ShowMessage2(lblmsg, ex.Message, true, Session);
         }
     }
 
@@ -41,6 +41,14 @@ public partial class Login : System.Web.UI.Page
     {
         try
         {
+            if (!ctrlGoogleReCaptcha.Validate())
+            {
+                //captcha challenge failed
+                string msg = "FAILED: Captcha Failed!!Please try again!!";
+                bll.ShowMessage2(lblmsg, msg, true, Session);
+                return;
+            }
+
             string Username = txtUsername.Text;
             string Password = txtPassword.Text;
             SystemUserDetails userDetails = schoolsApi.Login(Username, Password);
@@ -48,7 +56,7 @@ public partial class Login : System.Web.UI.Page
             if (userDetails.StatusCode != Globals.SUCCESS_STATUS_CODE)
             {
                 string msg = "FAILED: " + userDetails.StatusDesc;
-                bll.ShowMessage(lblmsg, msg, true, Session);
+                bll.ShowMessage2(lblmsg, msg, true, Session);
                 return;
             }
 
@@ -58,7 +66,7 @@ public partial class Login : System.Web.UI.Page
         catch (Exception ex)
         {
             string msg = "FAILED: " + ex.Message;
-            bll.ShowMessage(lblmsg, msg, true, Session);
+            bll.ShowMessage2(lblmsg, msg, true, Session);
         }
     }
 }

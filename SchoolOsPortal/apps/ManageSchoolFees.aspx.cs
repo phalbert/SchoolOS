@@ -51,11 +51,6 @@ public partial class ManageSchoolFees : System.Web.UI.Page
             SetActiveTab(ApproveFeesLink);
             return;
         }
-        if (MultiView.GetActiveView() == AssignFeesView)
-        {
-            SetActiveTab(AssignFeesLink);
-            return;
-        }
     }
 
     private void SetActiveTab(HtmlGenericControl control)
@@ -63,7 +58,6 @@ public partial class ManageSchoolFees : System.Web.UI.Page
         SaveFeeLink.Attributes["class"] = "";
         ListFeesLink.Attributes["class"] = "";
         ApproveFeesLink.Attributes["class"] = "";
-        AssignFeesLink.Attributes["class"] = "";
         control.Attributes["class"] = "active";
     }
 
@@ -100,11 +94,6 @@ public partial class ManageSchoolFees : System.Web.UI.Page
         if (link.ID == ApproveFeesLinkButton.ID)
         {
             MultiView.SetActiveView(ApproveFeesView);
-            return;
-        }
-        if (link.ID == AssignFeesLinkButton.ID)
-        {
-            MultiView.SetActiveView(AssignFeesView);
             return;
         }
     }

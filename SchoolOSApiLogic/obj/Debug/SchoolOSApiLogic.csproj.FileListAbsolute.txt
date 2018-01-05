@@ -22,3 +22,9 @@ E:\PePay\FlexiSchools\SchoolOS\SchoolOSApiLogic\bin\Debug\Microsoft.Practices.Ob
 E:\PePay\FlexiSchools\SchoolOS\SchoolOSApiLogic\obj\Debug\SchoolOSApiLogic.csprojResolveAssemblyReference.cache
 E:\PePay\FlexiSchools\SchoolOS\SchoolOSApiLogic\obj\Debug\SchoolOSApiLogic.dll
 E:\PePay\FlexiSchools\SchoolOS\SchoolOSApiLogic\obj\Debug\SchoolOSApiLogic.pdb
+D:\Work\PegPaySchools\SchoolOS\SchoolOSApiLogic\bin\Debug\SchoolOSApiLogic.dll.config
+D:\Work\PegPaySchools\SchoolOS\SchoolOSApiLogic\bin\Debug\SchoolOSApiLogic.dll
+D:\Work\PegPaySchools\SchoolOS\SchoolOSApiLogic\bin\Debug\SchoolOSApiLogic.pdb
+D:\Work\PegPaySchools\SchoolOS\SchoolOSApiLogic\obj\Debug\SchoolOSApiLogic.dll
+D:\Work\PegPaySchools\SchoolOS\SchoolOSApiLogic\obj\Debug\SchoolOSApiLogic.pdb
+D:\Work\PegPaySchools\SchoolOS\SchoolOSApiLogic\obj\Debug\SchoolOSApiLogic.csprojResolveAssemblyReference.cache

@@ -37,10 +37,22 @@ namespace SchoolOSApiLogic
             return bll.ExecuteDataSet(StoredProc, Parameters);
         }
 
-        public int ExecuteNonQuery(string StoredProc, params string[] Parameters)
+        public int ExecuteNonQuery(string StoredProc, params object[] Parameters)
         {
             Bussinesslogic bll = new Bussinesslogic();
             return bll.ExecuteNonQuery(StoredProc, Parameters);
+        }
+
+        public DataSet ExecuteDataSetOnCB(string StoredProc, params string[] Parameters)
+        {
+            Bussinesslogic bll = new Bussinesslogic();
+            return bll.ExecuteDataSetOnCB(StoredProc, Parameters);
+        }
+
+        public Result ExecuteNonQueryOnCB(string StoredProc, params string[] Parameters)
+        {
+            Bussinesslogic bll = new Bussinesslogic();
+            return bll.ExecuteNonQueryOnCB(StoredProc, Parameters);
         }
 
         public Result SaveSchool(School sch)
@@ -162,6 +174,106 @@ namespace SchoolOSApiLogic
             {
                 string msg = $"EXCEPTION: {ex.Message}";
                 DatabaseHandler.LogError(msg, ex.StackTrace, schcls.ClassCode);
+                result.StatusCode = Globals.FAILURE_STATUS_CODE;
+                result.StatusDesc = msg;//"{0} is an {1}",0,1
+            }
+            return result;
+        }
+
+        public Result SaveDepartment(Department dept)
+        {
+            Result result = new Result();
+            try
+            {
+                if (!dept.IsValid())
+                {
+                    result.StatusCode = dept.StatusCode;
+                    result.StatusDesc = dept.StatusDesc;
+                    return result;
+                }
+
+                Bussinesslogic bll = new Bussinesslogic();
+                result = bll.SaveDepartment(dept);
+            }
+            catch (Exception ex)
+            {
+                string msg = $"EXCEPTION: {ex.Message}";
+                DatabaseHandler.LogError(msg, ex.StackTrace, dept.DepartmentCode);
+                result.StatusCode = Globals.FAILURE_STATUS_CODE;
+                result.StatusDesc = msg;//"{0} is an {1}",0,1
+            }
+            return result;
+        }
+
+        public Result SaveUploadedFile(UploadedFile dept)
+        {
+            Result result = new Result();
+            try
+            {
+                if (!dept.IsValid())
+                {
+                    result.StatusCode = dept.StatusCode;
+                    result.StatusDesc = dept.StatusDesc;
+                    return result;
+                }
+
+                Bussinesslogic bll = new Bussinesslogic();
+                result = bll.SaveUploadedFile(dept);
+            }
+            catch (Exception ex)
+            {
+                string msg = $"EXCEPTION: {ex.Message}";
+                DatabaseHandler.LogError(msg, ex.StackTrace, dept.ModifiedBy);
+                result.StatusCode = Globals.FAILURE_STATUS_CODE;
+                result.StatusDesc = msg;//"{0} is an {1}",0,1
+            }
+            return result;
+        }
+
+        public Result SaveStudentSubject(StudentSubject dept)
+        {
+            Result result = new Result();
+            try
+            {
+                if (!dept.IsValid())
+                {
+                    result.StatusCode = dept.StatusCode;
+                    result.StatusDesc = dept.StatusDesc;
+                    return result;
+                }
+
+                Bussinesslogic bll = new Bussinesslogic();
+                result = bll.SaveStudentSubject(dept);
+            }
+            catch (Exception ex)
+            {
+                string msg = $"EXCEPTION: {ex.Message}";
+                DatabaseHandler.LogError(msg, ex.StackTrace, dept.StudentId);
+                result.StatusCode = Globals.FAILURE_STATUS_CODE;
+                result.StatusDesc = msg;//"{0} is an {1}",0,1
+            }
+            return result;
+        }
+
+        public Result SaveSubjectResult(SubjectResults dept)
+        {
+            Result result = new Result();
+            try
+            {
+                if (!dept.IsValid())
+                {
+                    result.StatusCode = dept.StatusCode;
+                    result.StatusDesc = dept.StatusDesc;
+                    return result;
+                }
+
+                Bussinesslogic bll = new Bussinesslogic();
+                result = bll.SaveSubjectResult(dept);
+            }
+            catch (Exception ex)
+            {
+                string msg = $"EXCEPTION: {ex.Message}";
+                DatabaseHandler.LogError(msg, ex.StackTrace, dept.StudentId);
                 result.StatusCode = Globals.FAILURE_STATUS_CODE;
                 result.StatusDesc = msg;//"{0} is an {1}",0,1
             }

@@ -9,7 +9,12 @@ namespace SchoolOSApiLogic.Entities
         public string StudentID = "";
         public string ClassCode = "";
         public string FeeID = "";
-        public string TermCode = "";
+        public string Email = "";
+        public string Amount = "";
+        public string FeeType = "";
+        public string TranID = "";
+        public string PaymentChannel = "";
+        public string PaymentDate = "";
 
         public override bool IsValid()
         {

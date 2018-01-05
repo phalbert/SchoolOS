@@ -1,0 +1,292 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0D50AF8E-C216-4E88-80CD-04E73A8816B9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CoreBankingLogic</RootNamespace>
+    <AssemblyName>CoreBankingLogic</AssemblyName>
+    <StartupObject>
+    </StartupObject>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Encryption, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\TestStaff\MerchantProject\PegpayAppApi\PegpayAppApi\Bin\Encryption.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Common, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\TestStaff\MessengerProject\Messenger\Bin\Microsoft.Practices.EnterpriseLibrary.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.EnterpriseLibrary.Data, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\TestStaff\MessengerProject\Messenger\Bin\Microsoft.Practices.EnterpriseLibrary.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ObjectBuilder, Version=1.0.51205.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\TestStaff\MessengerProject\Messenger\Bin\Microsoft.Practices.ObjectBuilder.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Messaging" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ChannelControls\CardValidator.cs" />
+    <Compile Include="ChannelControls\ChannelLogic.cs" />
+    <Compile Include="ChannelControls\DataLogic.cs" />
+    <Compile Include="ChannelControls\Logger.cs" />
+    <Compile Include="ChannelControls\PhoneValidator.cs" />
+    <Compile Include="ChannelControls\Response.cs" />
+    <Compile Include="ChannelControls\UtilityHandler.cs" />
+    <Compile Include="ChannelObjects\Customer.cs" />
+    <Compile Include="ChannelObjects\Defaults.cs" />
+    <Compile Include="ChannelObjects\KeyValuePair.cs" />
+    <Compile Include="ChannelObjects\MerchantTransaction.cs" />
+    <Compile Include="ChannelObjects\SearchFilters.cs" />
+    <Compile Include="ChannelObjects\SharedCommons.cs" />
+    <Compile Include="ChannelObjects\UtilityCredentials.cs" />
+    <Compile Include="ControlObjects\BussinessLogic.cs" />
+    <Compile Include="ControlObjects\CustomerInvoice.cs" />
+    <Compile Include="ControlObjects\DatabaseHandler.cs" />
+    <Compile Include="ControlObjects\Globals.cs" />
+    <Compile Include="ControlObjects\PhoneValidator.cs" />
+    <Compile Include="DB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DB.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ExposedObjects\AccessRule.cs" />
+    <Compile Include="ExposedObjects\AuditLog.cs" />
+    <Compile Include="ExposedObjects\BankAccount.cs" />
+    <Compile Include="ExposedObjects\Admin.cs" />
+    <Compile Include="ExposedObjects\BankBranch.cs" />
+    <Compile Include="ExposedObjects\BankCharge.cs" />
+    <Compile Include="ExposedObjects\BankCommissionAccount.cs" />
+    <Compile Include="ExposedObjects\BankCustomer.cs" />
+    <Compile Include="ExposedObjects\BankAccountStatement.cs" />
+    <Compile Include="ExposedObjects\AccountType.cs" />
+    <Compile Include="ExposedObjects\Bank.cs" />
+    <Compile Include="ExposedObjects\Beneficiary.cs" />
+    <Compile Include="ExposedObjects\ChargeType.cs" />
+    <Compile Include="ExposedObjects\Collateral.cs" />
+    <Compile Include="ExposedObjects\CollateralType.cs" />
+    <Compile Include="ExposedObjects\Currency.cs" />
+    <Compile Include="ExposedObjects\CustomerTerminal.cs" />
+    <Compile Include="ExposedObjects\CustomerType.cs" />
+    <Compile Include="ExposedObjects\CustomizedBankCharge.cs" />
+    <Compile Include="ExposedObjects\Email.cs" />
+    <Compile Include="ExposedObjects\GroupMember.cs" />
+    <Compile Include="ExposedObjects\Guarantor.cs" />
+    <Compile Include="ExposedObjects\GuarantorType.cs" />
+    <Compile Include="ExposedObjects\InterestRateType.cs" />
+    <Compile Include="ExposedObjects\LoanRepaymentRequest.cs" />
+    <Compile Include="ExposedObjects\LoanRequest.cs" />
+    <Compile Include="ExposedObjects\LoanType.cs" />
+    <Compile Include="ExposedObjects\MerchantCharge.cs" />
+    <Compile Include="ExposedObjects\MerchantChargeResponse.cs" />
+    <Compile Include="ExposedObjects\PaymentType.cs" />
+    <Compile Include="ExposedObjects\PaymentFrequency.cs" />
+    <Compile Include="ExposedObjects\Report.cs" />
+    <Compile Include="ExposedObjects\Result.cs" />
+    <Compile Include="ExposedObjects\SMS.cs" />
+    <Compile Include="ExposedObjects\Status.cs" />
+    <Compile Include="ExposedObjects\BankTeller.cs" />
+    <Compile Include="ExposedObjects\SystemSetting.cs" />
+    <Compile Include="ExposedObjects\TransactionRequest.cs" />
+    <Compile Include="ExposedObjects\BankUser.cs" />
+    <Compile Include="ExposedObjects\TransactionCategory.cs" />
+    <Compile Include="ExposedObjects\TransactionRule.cs" />
+    <Compile Include="ExposedObjects\UserType.cs" />
+    <Compile Include="ExposedObjects\Utility.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="app.config" />
+    <None Include="DB.xsc">
+      <DependentUpon>DB.xsd</DependentUpon>
+    </None>
+    <None Include="DB.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DB.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DB.xss">
+      <DependentUpon>DB.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\SharedCommonsAPI\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\SharedCommonsAPI\Service.wsdl" />
+    <None Include="Web References\Telecoms\AccountBalanceResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Telecoms\PegPayTelecomsApi.wsdl" />
+    <None Include="Web References\Telecoms\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\Telecoms\Response.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Telecoms\TelephoneNumberDetails.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Telecoms\TranDetailResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Utilities\BouquetDetails.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\Utilities\PegPay.wsdl" />
+    <None Include="Web References\Utilities\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\Utilities\Response.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Web References\SharedCommonsAPI\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\Telecoms\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\Utilities\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://192.168.34.13:8020/SharedCommonsAPI/Service.asmx%3fWSDL">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\SharedCommonsAPI\</RelPath>
+      <UpdateFromURL>http://192.168.34.13:8020/SharedCommonsAPI/Service.asmx%3fWSDL</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>CoreBankingLogic_SharedCommonsAPI_SharedCommonsAPI</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://192.168.0.13:8019/TestLevelOneApi/PegPay.asmx%3fWSDL">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Utilities\</RelPath>
+      <UpdateFromURL>https://192.168.0.13:8019/TestLevelOneApi/PegPay.asmx%3fWSDL</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>CoreBankingLogic_Utilities_PegPay</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://localhost:8002/LivePegPayTelecomsApi/PegPayTelecomsApi.asmx%3fWSDL">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\Telecoms\</RelPath>
+      <UpdateFromURL>https://localhost:8002/LivePegPayTelecomsApi/PegPayTelecomsApi.asmx%3fWSDL</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>CoreBankingLogic_Telecoms_PegPayTelecomsApi</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

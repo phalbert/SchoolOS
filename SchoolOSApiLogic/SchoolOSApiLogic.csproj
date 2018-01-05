@@ -57,9 +57,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ControlClasses\Bussinesslogic.cs" />
+    <Compile Include="ControlClasses\CB_BussinessLogic.cs" />
     <Compile Include="ControlClasses\DatabaseHandler.cs" />
     <Compile Include="ControlClasses\Globals.cs" />
     <Compile Include="Entities\ClassStream.cs" />
+    <Compile Include="Entities\Department.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\Fee.cs" />
     <Compile Include="Entities\MainLink.cs" />
@@ -74,11 +76,14 @@
     <Compile Include="Entities\Status.cs" />
     <Compile Include="Entities\Student.cs" />
     <Compile Include="Entities\StudentFee.cs" />
+    <Compile Include="Entities\StudentSubject.cs" />
     <Compile Include="Entities\Subject.cs" />
+    <Compile Include="Entities\SubjectResults.cs" />
     <Compile Include="Entities\SubLink.cs" />
     <Compile Include="Entities\SystemUser.cs" />
     <Compile Include="Entities\SystemUserDetails.cs" />
     <Compile Include="Entities\Teacher.cs" />
+    <Compile Include="Entities\UploadedFile.cs" />
     <Compile Include="Entities\UserType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Main\SchoolsInterfaceApi.cs" />
@@ -86,6 +91,11 @@
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\CBApi\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\SharedCommonsAPI\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -108,6 +118,17 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>SchoolOSApiLogic_SharedCommonsAPI_SharedCommonsAPI</CachedSettingsPropName>
     </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost:44122/Service.asmx%3fWSDL">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\CBApi\</RelPath>
+      <UpdateFromURL>http://localhost:44122/Service.asmx%3fWSDL</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>SchoolOSApiLogic_CBApi_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -115,6 +136,32 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Web References\CBApi\BankAccount.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\CBApi\BankAccountStatement.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\CBApi\BankCustomer.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\CBApi\BaseObject.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\CBApi\MerchantChargeResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\CBApi\PostResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\CBApi\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\CBApi\Result.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\CBApi\Service.wsdl" />
     <None Include="Web References\SharedCommonsAPI\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>

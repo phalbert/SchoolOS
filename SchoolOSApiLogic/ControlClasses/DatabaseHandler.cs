@@ -12,8 +12,8 @@ namespace SchoolOSApiLogic.ControlClasses
 
         Database db;
         private DbCommand command;
-        //public string ConnectionString = "KasoziTestPegPaySchools";
-        public string ConnectionString = "TestPegPaySchools";
+        public string ConnectionString = "KasoziTestPegPaySchools";
+        //public string ConnectionString = "TestPegPaySchools";
         //public string ConnectionString = "ElijahTestPegPaySchools";
 
         public DatabaseHandler()

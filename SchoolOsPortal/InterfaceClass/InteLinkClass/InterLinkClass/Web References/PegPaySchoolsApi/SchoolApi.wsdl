@@ -29,6 +29,85 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="ExecuteDataSetOnCB">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="storedProc" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="parameters" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ExecuteDataSetOnCBResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ExecuteDataSetOnCBResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExecuteNonQuery">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="storedProc" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="parameters" type="tns:ArrayOfAnyType" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExecuteNonQueryResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ExecuteNonQueryResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ExecuteNonQueryOnCB">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="storedProc" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="parameters" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Entity" />
+      <s:complexType name="Status">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Entity">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="StatusCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="StatusDesc" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:complexType name="Result">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Status">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="PegPayID" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ThirdPartyID" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="RequestID" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="ExecuteNonQueryOnCBResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ExecuteNonQueryOnCBResult" type="tns:Result" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="SaveSchool">
         <s:complexType>
           <s:sequence>
@@ -72,33 +151,6 @@
             </s:sequence>
           </s:extension>
         </s:complexContent>
-      </s:complexType>
-      <s:complexType name="Status">
-        <s:complexContent mixed="false">
-          <s:extension base="tns:Entity">
-            <s:sequence>
-              <s:element minOccurs="0" maxOccurs="1" name="StatusCode" type="s:string" />
-              <s:element minOccurs="0" maxOccurs="1" name="StatusDesc" type="s:string" />
-            </s:sequence>
-          </s:extension>
-        </s:complexContent>
-      </s:complexType>
-      <s:complexType name="Entity" />
-      <s:complexType name="Result">
-        <s:complexContent mixed="false">
-          <s:extension base="tns:Status">
-            <s:sequence>
-              <s:element minOccurs="0" maxOccurs="1" name="PegPayID" type="s:string" />
-              <s:element minOccurs="0" maxOccurs="1" name="ThirdPartyID" type="s:string" />
-              <s:element minOccurs="0" maxOccurs="1" name="RequestID" type="s:string" />
-            </s:sequence>
-          </s:extension>
-        </s:complexContent>
-      </s:complexType>
-      <s:complexType name="ArrayOfString">
-        <s:sequence>
-          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
-        </s:sequence>
       </s:complexType>
       <s:element name="SaveSchoolResponse">
         <s:complexType>
@@ -252,6 +304,31 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="SaveDepartment">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="dept" type="tns:Department" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Department">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Request">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="DepartmentCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="DepartmentName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="DepartmentCategory" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="SaveDepartmentResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SaveDepartmentResult" type="tns:Result" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="SaveSchoolSemester">
         <s:complexType>
           <s:sequence>
@@ -274,6 +351,87 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="SaveSchoolSemesterResult" type="tns:Result" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveSubjectResult">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="semester" type="tns:SubjectResults" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="SubjectResults">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Request">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="StudentId" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SubjectCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="TermCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Mark" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Grade" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="SaveSubjectResultResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SaveSubjectResultResult" type="tns:Result" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveUploadedFile">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="semester" type="tns:UploadedFile" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="UploadedFile">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Request">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="OperationCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="FileContents" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="FileName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Channel" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="SaveUploadedFileResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SaveUploadedFileResult" type="tns:Result" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveStudentSubject">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="semester" type="tns:StudentSubject" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="StudentSubject">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Request">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="ClassCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="StudentId" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SubjectCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="TermCode" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="SaveStudentSubjectResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SaveStudentSubjectResult" type="tns:Result" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -414,7 +572,12 @@
               <s:element minOccurs="0" maxOccurs="1" name="StudentID" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="ClassCode" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="FeeID" type="s:string" />
-              <s:element minOccurs="0" maxOccurs="1" name="TermCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Amount" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="FeeType" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="TranID" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PaymentChannel" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="PaymentDate" type="s:string" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
@@ -526,6 +689,24 @@
   <wsdl:message name="ExecuteDataSetSoapOut">
     <wsdl:part name="parameters" element="tns:ExecuteDataSetResponse" />
   </wsdl:message>
+  <wsdl:message name="ExecuteDataSetOnCBSoapIn">
+    <wsdl:part name="parameters" element="tns:ExecuteDataSetOnCB" />
+  </wsdl:message>
+  <wsdl:message name="ExecuteDataSetOnCBSoapOut">
+    <wsdl:part name="parameters" element="tns:ExecuteDataSetOnCBResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExecuteNonQuerySoapIn">
+    <wsdl:part name="parameters" element="tns:ExecuteNonQuery" />
+  </wsdl:message>
+  <wsdl:message name="ExecuteNonQuerySoapOut">
+    <wsdl:part name="parameters" element="tns:ExecuteNonQueryResponse" />
+  </wsdl:message>
+  <wsdl:message name="ExecuteNonQueryOnCBSoapIn">
+    <wsdl:part name="parameters" element="tns:ExecuteNonQueryOnCB" />
+  </wsdl:message>
+  <wsdl:message name="ExecuteNonQueryOnCBSoapOut">
+    <wsdl:part name="parameters" element="tns:ExecuteNonQueryOnCBResponse" />
+  </wsdl:message>
   <wsdl:message name="SaveSchoolSoapIn">
     <wsdl:part name="parameters" element="tns:SaveSchool" />
   </wsdl:message>
@@ -550,11 +731,35 @@
   <wsdl:message name="SaveSchoolClassSoapOut">
     <wsdl:part name="parameters" element="tns:SaveSchoolClassResponse" />
   </wsdl:message>
+  <wsdl:message name="SaveDepartmentSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveDepartment" />
+  </wsdl:message>
+  <wsdl:message name="SaveDepartmentSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveDepartmentResponse" />
+  </wsdl:message>
   <wsdl:message name="SaveSchoolSemesterSoapIn">
     <wsdl:part name="parameters" element="tns:SaveSchoolSemester" />
   </wsdl:message>
   <wsdl:message name="SaveSchoolSemesterSoapOut">
     <wsdl:part name="parameters" element="tns:SaveSchoolSemesterResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveSubjectResultSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveSubjectResult" />
+  </wsdl:message>
+  <wsdl:message name="SaveSubjectResultSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveSubjectResultResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveUploadedFileSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveUploadedFile" />
+  </wsdl:message>
+  <wsdl:message name="SaveUploadedFileSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveUploadedFileResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveStudentSubjectSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveStudentSubject" />
+  </wsdl:message>
+  <wsdl:message name="SaveStudentSubjectSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveStudentSubjectResponse" />
   </wsdl:message>
   <wsdl:message name="SaveSchoolStaffSoapIn">
     <wsdl:part name="parameters" element="tns:SaveSchoolStaff" />
@@ -627,6 +832,18 @@
       <wsdl:input message="tns:ExecuteDataSetSoapIn" />
       <wsdl:output message="tns:ExecuteDataSetSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="ExecuteDataSetOnCB">
+      <wsdl:input message="tns:ExecuteDataSetOnCBSoapIn" />
+      <wsdl:output message="tns:ExecuteDataSetOnCBSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteNonQuery">
+      <wsdl:input message="tns:ExecuteNonQuerySoapIn" />
+      <wsdl:output message="tns:ExecuteNonQuerySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteNonQueryOnCB">
+      <wsdl:input message="tns:ExecuteNonQueryOnCBSoapIn" />
+      <wsdl:output message="tns:ExecuteNonQueryOnCBSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="SaveSchool">
       <wsdl:input message="tns:SaveSchoolSoapIn" />
       <wsdl:output message="tns:SaveSchoolSoapOut" />
@@ -643,9 +860,25 @@
       <wsdl:input message="tns:SaveSchoolClassSoapIn" />
       <wsdl:output message="tns:SaveSchoolClassSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="SaveDepartment">
+      <wsdl:input message="tns:SaveDepartmentSoapIn" />
+      <wsdl:output message="tns:SaveDepartmentSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="SaveSchoolSemester">
       <wsdl:input message="tns:SaveSchoolSemesterSoapIn" />
       <wsdl:output message="tns:SaveSchoolSemesterSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveSubjectResult">
+      <wsdl:input message="tns:SaveSubjectResultSoapIn" />
+      <wsdl:output message="tns:SaveSubjectResultSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveUploadedFile">
+      <wsdl:input message="tns:SaveUploadedFileSoapIn" />
+      <wsdl:output message="tns:SaveUploadedFileSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveStudentSubject">
+      <wsdl:input message="tns:SaveStudentSubjectSoapIn" />
+      <wsdl:output message="tns:SaveStudentSubjectSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="SaveSchoolStaff">
       <wsdl:input message="tns:SaveSchoolStaffSoapIn" />
@@ -703,6 +936,33 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ExecuteDataSetOnCB">
+      <soap:operation soapAction="http://pegasus.co.ug/ExecuteDataSetOnCB" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteNonQuery">
+      <soap:operation soapAction="http://pegasus.co.ug/ExecuteNonQuery" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteNonQueryOnCB">
+      <soap:operation soapAction="http://pegasus.co.ug/ExecuteNonQueryOnCB" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="SaveSchool">
       <soap:operation soapAction="http://pegasus.co.ug/SaveSchool" style="document" />
       <wsdl:input>
@@ -739,8 +999,44 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="SaveDepartment">
+      <soap:operation soapAction="http://pegasus.co.ug/SaveDepartment" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="SaveSchoolSemester">
       <soap:operation soapAction="http://pegasus.co.ug/SaveSchoolSemester" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveSubjectResult">
+      <soap:operation soapAction="http://pegasus.co.ug/SaveSubjectResult" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveUploadedFile">
+      <soap:operation soapAction="http://pegasus.co.ug/SaveUploadedFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveStudentSubject">
+      <soap:operation soapAction="http://pegasus.co.ug/SaveStudentSubject" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -859,6 +1155,33 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="ExecuteDataSetOnCB">
+      <soap12:operation soapAction="http://pegasus.co.ug/ExecuteDataSetOnCB" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteNonQuery">
+      <soap12:operation soapAction="http://pegasus.co.ug/ExecuteNonQuery" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExecuteNonQueryOnCB">
+      <soap12:operation soapAction="http://pegasus.co.ug/ExecuteNonQueryOnCB" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="SaveSchool">
       <soap12:operation soapAction="http://pegasus.co.ug/SaveSchool" style="document" />
       <wsdl:input>
@@ -895,8 +1218,44 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="SaveDepartment">
+      <soap12:operation soapAction="http://pegasus.co.ug/SaveDepartment" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="SaveSchoolSemester">
       <soap12:operation soapAction="http://pegasus.co.ug/SaveSchoolSemester" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveSubjectResult">
+      <soap12:operation soapAction="http://pegasus.co.ug/SaveSubjectResult" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveUploadedFile">
+      <soap12:operation soapAction="http://pegasus.co.ug/SaveUploadedFile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveStudentSubject">
+      <soap12:operation soapAction="http://pegasus.co.ug/SaveStudentSubject" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1006,10 +1365,10 @@
   </wsdl:binding>
   <wsdl:service name="Service">
     <wsdl:port name="ServiceSoap" binding="tns:ServiceSoap">
-      <soap:address location="http://localhost:8020/FlexiSchoolsApi/SchoolApi.asmx" />
+      <soap:address location="http://localhost:2509/SchoolApi.asmx" />
     </wsdl:port>
     <wsdl:port name="ServiceSoap12" binding="tns:ServiceSoap12">
-      <soap12:address location="http://localhost:8020/FlexiSchoolsApi/SchoolApi.asmx" />
+      <soap12:address location="http://localhost:2509/SchoolApi.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>
