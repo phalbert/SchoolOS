@@ -71,7 +71,7 @@ public partial class CustomUserControls_BulkStudentPayments : System.Web.UI.User
             }
 
             string fileType = Path.GetExtension(fuStudentsFile.PostedFile.FileName);
-            if (fileType.ToUpper() != "CSV")
+            if (fileType.ToUpper() != ".CSV")
             {
                 msg = "PLEASE UPLOAD A VALID CSV FILE";
                 bll.ShowMessage(lblmsg, msg, true, Session);
@@ -81,7 +81,7 @@ public partial class CustomUserControls_BulkStudentPayments : System.Web.UI.User
             Result validationResult = ValidateUploadedFile();
             if (validationResult.StatusCode != Globals.SUCCESS_STATUS_CODE)
             {
-                msg = "PLEASE UPLOAD A VALID CSV FILE";
+                msg = "FAILED: "+validationResult.StatusDesc;
                 bll.ShowMessage(lblmsg, msg, true, Session);
                 return;
             }
@@ -97,7 +97,7 @@ public partial class CustomUserControls_BulkStudentPayments : System.Web.UI.User
             }
 
             msg = "FILE UPLOADED SUCCESSFULLY! EMAIL WILL BE SENT WITH RESULTS";
-            bll.ShowMessage(lblmsg, msg, true, Session);
+            bll.ShowMessage(lblmsg, msg, false, Session);
             return;
         }
         catch (Exception ex)
@@ -110,8 +110,8 @@ public partial class CustomUserControls_BulkStudentPayments : System.Web.UI.User
     private Result ValidateUploadedFile()
     {
         Result result = new Result();
-
-        string filePath = "";
+        string fileName = SharedCommons.SharedCommons.GenerateUniqueId("FILE") + "_" + fuStudentsFile.FileName;
+        string filePath = Server.MapPath("~/UploadedFiles/") + fileName;
         fuStudentsFile.SaveAs(filePath);
         IEnumerable<string> allLinesInFile = File.ReadLines(filePath);
 
@@ -141,6 +141,7 @@ public partial class CustomUserControls_BulkStudentPayments : System.Web.UI.User
             }
 
             string amount = parts[1];
+            amount = SharedCommons.SharedCommons.RemoveCommasFromMoneyString(amount);
 
             if (!SharedCommons.SharedCommons.IsNumericAndAboveZero(amount))
             {
@@ -157,6 +158,7 @@ public partial class CustomUserControls_BulkStudentPayments : System.Web.UI.User
 
     private UploadedFile ReadUploadedFile()
     {
+        string fileName = fuStudentsFile.FileName;
         BinaryReader br = new BinaryReader(fuStudentsFile.PostedFile.InputStream);
         Byte[] bytes = br.ReadBytes((int)fuStudentsFile.PostedFile.InputStream.Length);
         br.Close();
@@ -170,27 +172,14 @@ public partial class CustomUserControls_BulkStudentPayments : System.Web.UI.User
         uploadedFile.FileContents = base64String;
         uploadedFile.Email = user.User.Email;
         uploadedFile.Channel = GetChannelUsed();
+        uploadedFile.SPCode = ddServiceProvider.SelectedValue;
+        uploadedFile.FileName = fileName;
         return uploadedFile;
     }
 
     private string GetChannelUsed()
     {
-        string ChannelUsed = ddServiceProvider.SelectedValue + "_" + ddChannels.SelectedValue;
-        InterLinkClass.CbAPI.Service cbAPI = new InterLinkClass.CbAPI.Service();
-        InterLinkClass.CbAPI.PaymentType type = new InterLinkClass.CbAPI.PaymentType();
-        type.BankCode = ddSchools.SelectedValue;
-        type.IsActive = "TRUE";
-        type.ModifiedBy = user.User.ModifiedBy;
-        type.PaymentTypeCode = ChannelUsed;
-        type.PaymentTypeName = ddChannels.Text + " From " + ddServiceProvider.Text;
-        InterLinkClass.CbAPI.Result result = cbAPI.SavePaymentTypeDetails(type, ddSchools.SelectedValue, Globals.SCHOOL_PASSWORD);
-
-        if (result.StatusCode != "0")
-        {
-            throw new Exception("FAILED:" + result.StatusDesc);
-        }
-
-        return ChannelUsed;
+        return ddChannels.SelectedValue;
     }
 
     protected void btnCancel_Click(object sender, EventArgs e)

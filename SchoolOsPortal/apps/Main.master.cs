@@ -74,7 +74,7 @@ public partial class Main : System.Web.UI.MasterPage
             }
 
             divStudentBal.Visible = true;
-            lblStudentBal.Text = account.AccountBalance;
+            lblStudentBal.Text = account.AccountBalance.Split('.')[0];
         }
         catch(Exception ex)
         {

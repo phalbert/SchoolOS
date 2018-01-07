@@ -397,6 +397,8 @@
               <s:element minOccurs="0" maxOccurs="1" name="FileContents" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="FileName" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Channel" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SPCode" type="s:string" />
             </s:sequence>
           </s:extension>
         </s:complexContent>

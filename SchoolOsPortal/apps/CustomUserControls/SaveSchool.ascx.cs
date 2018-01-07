@@ -91,13 +91,15 @@ public partial class SaveSchool : System.Web.UI.UserControl
         return result;
     }
 
-    
+
 
     protected void btnEdit_Click(object sender, EventArgs e)
     {
         try
         {
             Save();
+
+
         }
         catch (Exception ex)
         {
@@ -141,7 +143,7 @@ public partial class SaveSchool : System.Web.UI.UserControl
         }
 
 
-        //SchoolLogo.Attributes["src"] = "../ImageHandler.ashx?Id=" + result.ThirdPartyID;
+
         msg = "DETAILS SAVED SUCCESSFULLY";
         bll.ShowMessage(lblmsg, msg, false, Session);
         MultiView1.SetActiveView(UploadPicView);
@@ -248,7 +250,14 @@ public partial class SaveSchool : System.Web.UI.UserControl
             }
 
             String Id = dt.Rows[0][0].ToString();
-            SchoolLogo.ImageUrl = "../ImageHandler.ashx?Id=" + Id;
+            string url = "../ImageHandler.ashx?Id=" + Id;
+            SchoolLogo.ImageUrl = url;
+
+            if (user.SchoolDetails.SchoolCode == txtSchoolCode.Text)
+            {
+                user.SchoolDetails.SchoolLogo = Id;
+            }
+
             MultiView1.SetActiveView(CaptureDetailsView);
         }
         catch (Exception ex)

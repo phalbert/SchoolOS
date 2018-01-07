@@ -161,7 +161,7 @@ namespace SchoolOSApiLogic.ControlClasses
         public Result SaveStudent(Student std)
         {
             Result result = new Result();
-            DataTable dt = dh.ExecuteDataSet("SaveStudent", new string[] { std.SchoolCode, std.StudentNumber, std.PegPayStudentNumber, std.StudentName, std.ClassCode, std.StreamCode, std.DateOfBirth, std.StudentCategory, std.ModifiedBy, std.ProfilePic, std.Email, std.Gender, std.PhoneNumber }).Tables[0];
+            DataTable dt = dh.ExecuteDataSet("SaveStudent", new string[] { std.SchoolCode, std.StudentNumber, std.PegPayStudentNumber, std.StudentName, std.ClassCode, std.StreamCode, std.DateOfBirth, std.StudentCategory, std.ModifiedBy, std.ProfilePic, std.Email, std.Gender, std.PhoneNumber,std.ParentsName1,std.ParentsName2,std.ParentsPhoneNumber1,std.ParentsPhoneNumber2 }).Tables[0];
 
             if (dt.Rows.Count == 0)
             {
@@ -254,7 +254,7 @@ namespace SchoolOSApiLogic.ControlClasses
         {
             Result result = new Result();
             Byte[] array = Convert.FromBase64String(file.FileContents);
-            DataTable dt = dh.ExecuteDataSet("SaveUploadedFile", new object[] { file.SchoolCode, file.OperationCode, array, file.ModifiedBy, file.FileName,file.Email,file.Channel }).Tables[0];
+            DataTable dt = dh.ExecuteDataSet("SaveUploadedFile", new object[] { file.SchoolCode, file.OperationCode, array, file.ModifiedBy, file.FileName,file.Email,file.Channel,file.SPCode }).Tables[0];
 
             if (dt.Rows.Count == 0)
             {
@@ -271,12 +271,32 @@ namespace SchoolOSApiLogic.ControlClasses
             return result;
         }
 
+        public Result SaveTeacherSubject(TeacherSubject tch)
+        {
+            Result result = new Result();
+            DataTable dt = dh.ExecuteDataSet("SaveTeacherSubject", new object[] { tch.TeacherId, tch.ClassCode, tch.StreamCode,tch.SubjectCode,tch.TermCode,tch.SchoolCode, tch.ModifiedBy}).Tables[0];
+
+            if (dt.Rows.Count == 0)
+            {
+                result.StatusCode = Globals.FAILURE_STATUS_CODE;
+                result.StatusDesc = "NO ROWS AFFECTED";
+                return result;
+            }
+
+            result.StatusCode = Globals.SUCCESS_STATUS_CODE;
+            result.StatusDesc = Globals.SUCCESS_STATUS_DESC;
+            result.PegPayID = dt.Rows[0][0].ToString();
+            result.RequestID = tch.ModifiedBy;
+
+            return result;
+        }
+
 
 
         public Result SaveSubjectResult(SubjectResults dept)
         {
             Result result = new Result();
-            DataTable dt = dh.ExecuteDataSet("SaveSubjectResults", new string[] { dept.SchoolCode, dept.StudentId, dept.SubjectCode, dept.TermCode, dept.Mark, dept.Grade, dept.ModifiedBy }).Tables[0];
+            DataTable dt = dh.ExecuteDataSet("SaveSubjectResults", new string[] { dept.SchoolCode, dept.SubjectCode, dept.StudentId, dept.TermCode, dept.Mark, dept.Grade, dept.ModifiedBy }).Tables[0];
 
             if (dt.Rows.Count == 0)
             {
@@ -599,6 +619,8 @@ namespace SchoolOSApiLogic.ControlClasses
             user.UserType = row["UserType"].ToString();
             user.ProfilePic = row["ProfilePic"].ToString();
             user.FullName = row["FullName"].ToString();
+            user.Email = row["Email"].ToString();
+            user.PhoneNumber = row["PhoneNumber"].ToString();
             user.StatusCode = Globals.SUCCESS_STATUS_CODE;
             user.StatusDesc = Globals.SUCCESS_STATUS_DESC;
             return user;

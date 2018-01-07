@@ -44,7 +44,7 @@ public partial class Login : System.Web.UI.Page
             if (!ctrlGoogleReCaptcha.Validate())
             {
                 //captcha challenge failed
-                string msg = "FAILED: Captcha Failed!!Please try again!!";
+                string msg = "FAILED: CAPTCHA CHALLENGE FAILED. PLEASE TRY AGAIN";
                 bll.ShowMessage2(lblmsg, msg, true, Session);
                 return;
             }

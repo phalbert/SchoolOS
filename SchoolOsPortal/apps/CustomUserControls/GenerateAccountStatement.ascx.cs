@@ -58,25 +58,23 @@ public partial class CustomUserControls_GenerateAccountStatement : System.Web.UI
 
     private void LoadAccountStatement(string Id, string BankCode)
     {
-        this.txtAccount.Text = Id;
+        //this.txtAccount.Text = Id;
         this.ddBank.SelectedValue = BankCode;
         this.ddBank.Enabled = false;
-        this.txtAccount.Enabled = false;
+        //this.txtAccount.Enabled = false;
         SearchDb();
     }
 
     private void LoadData()
     {
         bll.LoadSchoolsIntoDropDown(user, ddBank);
+        bll.LoadDataIntoDropDown("GetStudentsUsingPegPayStdNumberForDropDown", new string[] { ddBank.SelectedValue,"ALL"}, ddStudent);
+
         if (user.User.UserType == "SCHOOL_STUDENT")
         {
-            txtAccount.Text = user.User.Username;
-            txtAccount.Enabled = false;
-        }
-        else
-        {
-            txtAccount.Text = "UNKNOWN USER";
-            txtAccount.Enabled = false;
+            ddStudent.SelectedValue = user.User.Username;
+            ddStudent.Enabled = false;
+            return;
         }
     }
 
@@ -92,11 +90,6 @@ public partial class CustomUserControls_GenerateAccountStatement : System.Web.UI
             else if (txtToDate.Equals(""))
             {
                 string msg = "Select End Date";
-                bll.ShowMessage(lblmsg, msg, true, Session);
-            }
-            else if (txtAccount.Text.Equals(""))
-            {
-                string msg = "Specify Account Number";
                 bll.ShowMessage(lblmsg, msg, true, Session);
             }
             else if (ddBank.SelectedValue.Equals("0"))
@@ -168,11 +161,7 @@ public partial class CustomUserControls_GenerateAccountStatement : System.Web.UI
             string msg = "Select End Date";
             bll.ShowMessage(lblmsg, msg, true, Session);
         }
-        else if (txtAccount.Text.Equals(""))
-        {
-            string msg = "Specify Account Number";
-            bll.ShowMessage(lblmsg, msg, true, Session);
-        }
+        
         else if (ddBank.SelectedValue.Equals("0"))
         {
             string msg = "Specify Account Number";
@@ -207,7 +196,7 @@ public partial class CustomUserControls_GenerateAccountStatement : System.Web.UI
         string BankCode = ddBank.SelectedValue;
         string BranchCode = "ALL";
         string Teller = "";
-        string AccountNumber = txtAccount.Text;
+        string AccountNumber = ddStudent.SelectedValue;
         string CustomerName = "";
         string TransCategory = "ALL";
         string BankId = "";

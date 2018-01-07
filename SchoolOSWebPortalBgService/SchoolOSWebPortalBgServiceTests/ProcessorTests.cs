@@ -14,7 +14,6 @@ namespace SchoolOSWebPortalBgService.Tests
         [TestMethod()]
         public void ProcessStudentPaymentFileTest()
         {
-            Assert.Su();
         }
     }
 }

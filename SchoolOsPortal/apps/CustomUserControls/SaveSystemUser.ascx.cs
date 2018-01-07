@@ -191,6 +191,13 @@ public partial class SaveSystemUser : System.Web.UI.UserControl
 
             String Id = dt.Rows[0][0].ToString();
             UserPic.Attributes["src"] = "../ImageHandler.ashx?Id=" + Id;
+
+            //change profile pic now
+            if (user.User.ProfilePic == txtUserId.Text)
+            {
+                user.User.ProfilePic = Id;
+            }
+
             MultiView1.SetActiveView(CaptureDetailsView);
         }
         catch (Exception ex)

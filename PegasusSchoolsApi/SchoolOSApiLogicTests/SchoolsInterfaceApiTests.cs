@@ -62,6 +62,10 @@ namespace SchoolOSApiLogic.Tests
             std.PegPayStudentNumber = "s1000";
             std.VendorCode = "TEST";
             std.ModifiedBy = "Peter";
+            std.ParentsName1 = "Dad";
+            std.ParentsPhoneNumber1 = "0785975800";
+            std.ParentsPhoneNumber2 = "0785975800";
+            std.ParentsName2 = "Mom";
 
             Result result = stdApi.SaveStudent(std);
             Assert.AreEqual(Globals.SUCCESS_STATUS_DESC, result.StatusDesc);
@@ -86,7 +90,33 @@ namespace SchoolOSApiLogic.Tests
             Assert.AreEqual(Globals.FAILURE_STATUS_CODE, result.StatusCode);
         }
 
+        [TestMethod]
+        public void SaveTeacherSubjectTest()
+        {
+            SchoolsInterfaceApi schclsapi = new SchoolsInterfaceApi();
+            TeacherSubject schcls = new TeacherSubject();
 
+            schcls.SchoolCode = "TEST_SCHOOL";
+            schcls.ClassCode = "S4";
+            schcls.ModifiedBy = "admin";
+            schcls.StreamCode = "4c";
+            schcls.SubjectCode = "PHYSICS";
+            schcls.TeacherId = "Teacher";
+            schcls.TermCode = "TERM-1";
+            schcls.ModifiedBy = "Peter";
+
+            Result result = schclsapi.SaveTeacherSubject(schcls);
+            Assert.AreEqual(Globals.SUCCESS_STATUS_DESC, result.StatusDesc);
+        }
+
+        [TestMethod]
+        public void SaveTeacherSubjectTest_InvalidData()
+        {
+            SchoolsInterfaceApi schclsapi = new SchoolsInterfaceApi();
+            TeacherSubject schcls = new TeacherSubject();
+            Result result = schclsapi.SaveTeacherSubject(schcls);
+            Assert.AreEqual(Globals.SUCCESS_STATUS_DESC, result.StatusDesc);
+        }
 
         [TestMethod]
         public void SaveSchoolClassTest()

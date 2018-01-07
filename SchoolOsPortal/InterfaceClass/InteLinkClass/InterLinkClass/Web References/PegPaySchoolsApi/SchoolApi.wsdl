@@ -181,6 +181,10 @@
               <s:element minOccurs="0" maxOccurs="1" name="Gender" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="PhoneNumber" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ParentsName1" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ParentsName2" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ParentsPhoneNumber1" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ParentsPhoneNumber2" type="s:string" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
@@ -398,6 +402,7 @@
               <s:element minOccurs="0" maxOccurs="1" name="FileName" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="Channel" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SPCode" type="s:string" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
@@ -406,6 +411,33 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="SaveUploadedFileResult" type="tns:Result" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveTeacherSubject">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="tch" type="tns:TeacherSubject" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="TeacherSubject">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Request">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="TeacherId" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ClassCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="StreamCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SubjectCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="TermCode" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="SaveTeacherSubjectResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SaveTeacherSubjectResult" type="tns:Result" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -755,6 +787,12 @@
   <wsdl:message name="SaveUploadedFileSoapOut">
     <wsdl:part name="parameters" element="tns:SaveUploadedFileResponse" />
   </wsdl:message>
+  <wsdl:message name="SaveTeacherSubjectSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveTeacherSubject" />
+  </wsdl:message>
+  <wsdl:message name="SaveTeacherSubjectSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveTeacherSubjectResponse" />
+  </wsdl:message>
   <wsdl:message name="SaveStudentSubjectSoapIn">
     <wsdl:part name="parameters" element="tns:SaveStudentSubject" />
   </wsdl:message>
@@ -875,6 +913,10 @@
     <wsdl:operation name="SaveUploadedFile">
       <wsdl:input message="tns:SaveUploadedFileSoapIn" />
       <wsdl:output message="tns:SaveUploadedFileSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveTeacherSubject">
+      <wsdl:input message="tns:SaveTeacherSubjectSoapIn" />
+      <wsdl:output message="tns:SaveTeacherSubjectSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="SaveStudentSubject">
       <wsdl:input message="tns:SaveStudentSubjectSoapIn" />
@@ -1028,6 +1070,15 @@
     </wsdl:operation>
     <wsdl:operation name="SaveUploadedFile">
       <soap:operation soapAction="http://pegasus.co.ug/SaveUploadedFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveTeacherSubject">
+      <soap:operation soapAction="http://pegasus.co.ug/SaveTeacherSubject" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1247,6 +1298,15 @@
     </wsdl:operation>
     <wsdl:operation name="SaveUploadedFile">
       <soap12:operation soapAction="http://pegasus.co.ug/SaveUploadedFile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveTeacherSubject">
+      <soap12:operation soapAction="http://pegasus.co.ug/SaveTeacherSubject" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

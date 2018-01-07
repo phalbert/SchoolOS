@@ -90,6 +90,7 @@ public partial class ManageSubjectResults : System.Web.UI.Page
         }
         if (link.ID == SaveClassLinkButton.ID)
         {
+            SaveClassUserControl.LoadData();
             MultiView.SetActiveView(SaveClassView);
             return;
         }

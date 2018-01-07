@@ -96,32 +96,49 @@ public partial class ApproveSystemUsers : System.Web.UI.UserControl
         string SchoolCode = ddSchools.SelectedValue;
         string ApprovedBy = user.User.Username;
         string[] parameters = { UserId, SchoolCode, ApprovedBy };
+        string msg = "User(s) Approved Successfully";
 
+        //set the users password to something we know
+        SystemUser newUser = bll.GetSystemUserById2(UserId);
+        newUser.UserPassword = SharedCommons.SharedCommons.GeneratePassword();
+
+        string hashedNewPassword = SharedCommons.SharedCommons.GenearetHMACSha256Hash(newUser.SecretKey, newUser.UserPassword);
+        int rowsAffected = schoolsApi.ExecuteNonQuery("ChangePassword", new string[] { newUser.Username, hashedNewPassword });
+
+        //password update failed
+        if (rowsAffected == 0)
+        {
+            msg = "FAILED TO APPROVE SYSTEM USER";
+            bll.ShowMessage(lblmsg, msg, false, Session);
+            return;
+        }
+
+        //send and email with credentials to user
+        Result mailResult = bll.SendCredentialsToUser(newUser);
+
+        //failed to send email
+        if (mailResult.StatusCode != Globals.SUCCESS_STATUS_CODE)
+        {
+            msg = msg + ", FAILED TO SEND EMAIL FOR USER [" + newUser.Username + "] WITH CREDENTIALS: " + mailResult.StatusDesc;
+            bll.ShowMessage(lblmsg, msg, false, Session);
+            return;
+        }
+
+        //finally approve the user
         DataTable dt = schoolsApi.ExecuteDataSet("ApproveSystemUser", parameters).Tables[0];
-        if (dt.Rows.Count != 0)
+
+        //failed to approve
+        if (dt.Rows.Count == 0)
         {
-            SearchDB();
-            string msg = "User(s) Approved Successfully";
-            bll.ShowMessage(lblmsg, msg, false, Session);
-
-            SystemUser newUser = bll.GetSystemUserById2(UserId);
-            Result mailResult = bll.SendCredentialsToUser(newUser);
-
-            if (mailResult.StatusCode != Globals.SUCCESS_STATUS_CODE)
-            {
-                msg = msg + ", FAILED TO SEND EMAIL FOR USER [" + newUser.Username + "] WITH CREDENTIALS: " + mailResult.StatusDesc;
-                bll.ShowMessage(lblmsg, msg, false, Session);
-                return;
-            }
-
-            msg = "SYSTEM USER APPROVED SUCCESSFULLY, EMAIL WITH CREDENTIALS SENT SUCCSSFULLY";
-            bll.ShowMessage(lblmsg, msg, false, Session);
+            string msg1 = "FAILED TO APPROVE SYSTEM USER, No Rows Affected";
+            bll.ShowMessage(lblmsg, msg1, true, Session);
+            return;
         }
-        else
-        {
-            string msg = "No Rows Affected";
-            bll.ShowMessage(lblmsg, msg, true, Session);
-        }
+
+        //display success message
+        SearchDB();        
+        msg = "SYSTEM USER APPROVED SUCCESSFULLY, EMAIL WITH CREDENTIALS SENT SUCCSSFULLY";
+        bll.ShowMessage(lblmsg, msg, false, Session);
     }
 
     protected void btnReject_Click(object sender, EventArgs e)

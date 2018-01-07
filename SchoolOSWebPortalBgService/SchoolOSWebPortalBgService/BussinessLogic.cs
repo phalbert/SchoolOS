@@ -27,6 +27,8 @@ namespace SchoolOSWebPortalBgService
                     file.SchoolCode = dr["SchoolCode"].ToString();
                     file.OperationCode = dr["OperationCode"].ToString();
                     file.ID = dr["RecordId"].ToString();
+                    file.SPCode = dr["SPCode"].ToString();
+                    file.StatusDesc = ((DateTime)dr["CreatedOn"]).ToString("yyyy-MM-dd");
                     all.Add(file);
                 }
             }
@@ -71,15 +73,15 @@ namespace SchoolOSWebPortalBgService
                 foreach (DataRow dr in dt.Rows)
                 {
                     StudentFee file = new StudentFee();
-                    file.Amount= dr["Amount"].ToString();
-                    file.ClassCode= dr["ClassCode"].ToString();
-                    file.FeeID= dr["FeeID"].ToString();
-                    file.FeeType= dr["TranType"].ToString();
+                    file.Amount = dr["Amount"].ToString();
+                    file.ClassCode = dr["ClassCode"].ToString();
+                    file.FeeID = dr["FeeID"].ToString();
+                    file.FeeType = dr["TranType"].ToString();
                     file.Email = dr["Email"].ToString();
-                    file.PaymentChannel= dr["PaymentChannel"].ToString();
+                    file.PaymentChannel = dr["PaymentChannel"].ToString();
                     file.PaymentDate = ((DateTime)dr["CreatedOn"]).ToString("dd/MM/yyyy");
                     file.TranID = dr["TranID"].ToString();
-                    file.StudentID= dr["StudentId"].ToString();
+                    file.StudentID = dr["StudentId"].ToString();
                     file.ModifiedBy = dr["ModifiedBy"].ToString();
                     file.SchoolCode = dr["SchoolCode"].ToString();
                     all.Add(file);
@@ -144,7 +146,7 @@ namespace SchoolOSWebPortalBgService
         private CbApi.TransactionRequest GetTransactionRequestForStudent(StudentFee payment)
         {
             CbApi.TransactionRequest req = new CbApi.TransactionRequest();
-            DataTable dt = schoolsAPI.ExecuteDataSet("GetStudentById", new object[] { payment.StudentID,payment.SchoolCode }).Tables[0];
+            DataTable dt = schoolsAPI.ExecuteDataSet("GetStudentById", new object[] { payment.StudentID, payment.SchoolCode }).Tables[0];
             if (dt.Rows.Count == 0)
             {
                 req.StatusCode = Globals.FAILURE_STATUS_CODE;
@@ -161,8 +163,8 @@ namespace SchoolOSWebPortalBgService
         private CbApi.TransactionRequest[] GetTransactionRequestForClass(StudentFee payment)
         {
             List<CbApi.TransactionRequest> all = new List<CbApi.TransactionRequest>();
-            DataTable dt = schoolsAPI.ExecuteDataSet("GetStudentsInClass", new object[] { payment.ClassCode,payment.SchoolCode }).Tables[0];
-            foreach(DataRow dr in dt.Rows)
+            DataTable dt = schoolsAPI.ExecuteDataSet("GetStudentsInClass", new object[] { payment.ClassCode, payment.SchoolCode }).Tables[0];
+            foreach (DataRow dr in dt.Rows)
             {
                 CbApi.TransactionRequest req = new CbApi.TransactionRequest();
                 Student std = GetStudent(dr);
@@ -194,7 +196,7 @@ namespace SchoolOSWebPortalBgService
             req.TranCategory = GetTransactionCategory(payment);
             req.Narration = payment.PaymentChannel;
             req.PaymentDate = payment.PaymentDate;
-            req.PaymentType = payment.PaymentChannel;
+            req.PaymentType = GetPaymentType(payment);
             return req;
         }
 
@@ -207,13 +209,22 @@ namespace SchoolOSWebPortalBgService
             return "S2C_Credit";
         }
 
-        private string GetToAccount(StudentFee payment,Student std)
+        private string GetToAccount(StudentFee payment, Student std)
         {
             if (payment.FeeType == "Debit")
             {
-                return std.PegPayStudentNumber;
+                return GetAccountByName("SCHOOL_FEES_SUSPENSE_ACCOUNT", payment.SchoolCode);
             }
-            return GetAccountByName("SCHOOL_FEES_SUSPENSE_ACCOUNT", payment.SchoolCode);
+            return std.PegPayStudentNumber;
+        }
+
+        private string GetPaymentType(StudentFee payment)
+        {
+            if (payment.FeeType == "Debit")
+            {
+                return "SCHOOLS_WEB_PORTAL_PAYMENT";
+            }
+            return "SCHOOLS_WEB_PORTAL_PAYMENT";
         }
 
         private string GetAccountByName(string Name, string schoolCode)
@@ -252,13 +263,13 @@ namespace SchoolOSWebPortalBgService
             return std;
         }
 
-        private string GetFromAccount(StudentFee payment,Student std)
+        private string GetFromAccount(StudentFee payment, Student std)
         {
             if (payment.FeeType == "Debit")
             {
-                return GetAccountByName("SCHOOL_FEES_SUSPENSE_ACCOUNT", payment.SchoolCode);
+                return std.PegPayStudentNumber;
             }
-            return std.PegPayStudentNumber;
+            return GetAccountByName("SCHOOL_FEES_SUSPENSE_ACCOUNT", payment.SchoolCode);
         }
 
         private static void ReadLineInFile(UploadedFile file, List<StudentFee> all, string line)
@@ -268,15 +279,17 @@ namespace SchoolOSWebPortalBgService
             {
                 string[] parts = line.Split(',');
                 fee.Amount = parts[1];
-                fee.FeeID = SharedCommons.SharedCommons.GenerateUniqueId("UPLOADED");
+                fee.TranID = parts[2];
+                fee.FeeID = "FILE-UPLOAD-" + fee.TranID;
                 fee.FeeType = "Credit";
                 fee.ModifiedBy = file.ModifiedBy;
                 fee.PaymentChannel = parts[2];
                 fee.SchoolCode = file.SchoolCode;
                 fee.StudentID = parts[0];
                 fee.Email = file.Email;
-                fee.TranID = parts[3];
+
                 fee.ClassCode = "N/A";
+                fee.PaymentDate = file.StatusDesc;
                 fee.StatusCode = Globals.SUCCESS_STATUS_CODE;
                 fee.StatusDesc = Globals.SUCCESS_STATUS_TEXT;
             }
@@ -288,17 +301,89 @@ namespace SchoolOSWebPortalBgService
             all.Add(fee);
         }
 
-        internal void SendResultsEmail(string toEmail, List<StudentFee> successfullPayments, List<StudentFee> failedPayments)
+        internal void SendResultsToTheUploader(string toEmail, List<StudentFee> successfullPayments, List<StudentFee> failedPayments)
         {
-            string[] toEmails = { toEmail, "techsupport@pegasustechnologies.co.ug" };
-            string msg = "Hi " + toEmail + "<br/>" +
-                        "File Uploaded had " + (successfullPayments.Count + failedPayments.Count) + " Records. <br/>" +
-                        "SuccessFully Processed Payments = " + successfullPayments.Count + "<br/>" +
-                        "Failed Payments = " + failedPayments.Count + "<br/>" +
-                        "See attached documents for more information" + "<br/>" +
-                        "Thank you." +
-                        "Flexi-Schools Team";
+            string msg = string.Format("Hi {0} <br/>" +
+                        "File Uploaded had {1} Records. <br/>" +
+                        "SuccessFully Processed Payments = {2} <br/>" +
+                        "Failed Payments = {3} <br/>" +
+                        "See attached documents for more information <br/>" +
+                        "Thank you. <br/>" +
+                        "Flexi-Schools Team", toEmail, "" + (successfullPayments.Count + failedPayments.Count), "" + successfullPayments.Count, "" + failedPayments.Count);
 
+            SendResultsToUser(msg, toEmail);
+        }
+
+        public Result SendResultsToUser(string msg, string contact)
+        {
+            Result result = new Result();
+            try
+            {
+                MailApi.Result resp = new MailApi.Result();
+                if (SharedCommons.SharedCommons.IsValidEmail(contact))
+                {
+                    resp = SendEmailToUser(msg, contact);
+                    result.StatusCode = resp.StatusCode;
+                    result.StatusDesc = resp.StatusDesc;
+                    return result;
+                }
+                if (!string.IsNullOrEmpty(contact))
+                {
+                    resp = SendSMSToUser(msg, contact);
+                    result.StatusCode = resp.StatusCode;
+                    result.StatusDesc = resp.StatusDesc;
+                    return result;
+                }
+
+                result.StatusCode = resp.StatusCode;
+                result.StatusDesc = resp.StatusDesc;
+            }
+            catch (Exception ex)
+            {
+                result.StatusCode = Globals.FAILURE_STATUS_CODE;
+                result.StatusDesc = "EXCEPTION: " + ex.Message;
+            }
+            return result;
+        }
+
+        private static MailApi.Result SendSMSToUser(string msg, string toPhoneNumber)
+        {
+
+            MailApi.SMS sms = new MailApi.SMS();
+            sms.Mask = "Flexipay";
+            sms.Message = msg;
+            sms.Phone = toPhoneNumber;
+            sms.Reference = SharedCommons.SharedCommons.GenerateUniqueId("SMS");
+            sms.Sender = "Flexipay";
+            sms.VendorTranId = sms.Reference;
+
+            MailApi.MessengerSoapClient mapi = new MailApi.MessengerSoapClient();
+            MailApi.Result resp = mapi.SendSMS(sms);
+            return resp;
+        }
+
+        private static MailApi.Result SendEmailToUser(string msg, string toEmail)
+        {
+            MailApi.MessengerSoapClient mailApi = new MailApi.MessengerSoapClient();
+            MailApi.Email email = new MailApi.Email();
+            email.From = "Flexi-Schools";
+            email.Message = msg;
+            email.Subject = "Flexi-Schools Web Portal Credentials";
+
+            MailApi.EmailAddress addr = new MailApi.EmailAddress();
+            addr.Address = toEmail;
+            addr.Name = toEmail.Split('@')[0];
+            addr.AddressType = MailApi.EmailAddressType.To;
+
+            MailApi.EmailAddress techSupport = new MailApi.EmailAddress();
+            techSupport.Address = "techsupport@pegasustechnologies.co.ug";
+            techSupport.Name = "techsupport";
+            techSupport.AddressType = MailApi.EmailAddressType.CarbonCopy;
+
+            MailApi.EmailAddress[] addresses = { addr, techSupport };
+            email.MailAddresses = addresses;
+            MailApi.Result resp = mailApi.PostEmail(email);
+            return resp;
         }
     }
 }

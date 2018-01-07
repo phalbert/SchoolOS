@@ -17,6 +17,10 @@ namespace SchoolOSApiLogic.Entities
         public string Gender = "";
         public string Email = "";
         public string PhoneNumber = "";
+        public string ParentsName1= "";
+        public string ParentsName2 = "";
+        public string ParentsPhoneNumber1 = "";
+        public string ParentsPhoneNumber2 = "";
 
         public override bool IsValid()
         {
@@ -54,6 +58,24 @@ namespace SchoolOSApiLogic.Entities
             {
                 StatusCode = Globals.FAILURE_STATUS_CODE;
                 StatusDesc = "PLEASE SUPPLY STUDENT CATEGORY ";
+                return false;
+            }
+            if (string.IsNullOrEmpty(PhoneNumber))
+            {
+                StatusCode = Globals.FAILURE_STATUS_CODE;
+                StatusDesc = "PLEASE SUPPLY STUDENT's PHONE NUMBER. YOU CAN REUSE THE PARENTS NUMBER INCASE STUDENT HAS NO PHONE";
+                return false;
+            }
+            if (string.IsNullOrEmpty(ParentsName1)&& string.IsNullOrEmpty(ParentsName2))
+            {
+                StatusCode = Globals.FAILURE_STATUS_CODE;
+                StatusDesc = "PLEASE SUPPLY ATLEAST ONE PARENTS NAME ";
+                return false;
+            }
+            if (string.IsNullOrEmpty(ParentsPhoneNumber1)&& string.IsNullOrEmpty(ParentsPhoneNumber2))
+            {
+                StatusCode = Globals.FAILURE_STATUS_CODE;
+                StatusDesc = "PLEASE SUPPLY AT LEAST ONE PARENTS PHONE NUMBER. ";
                 return false;
             }
             return base.IsValid();

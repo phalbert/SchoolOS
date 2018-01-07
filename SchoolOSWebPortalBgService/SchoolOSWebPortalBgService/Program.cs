@@ -11,6 +11,7 @@ namespace SchoolOSWebPortalBgService
         public static void Main(string[] args)
         {
             Processor proc = new Processor();
+            proc.ProcessUploadedBulkStudentPaymentsFiles();
             proc.ProcessStudentPayments();
         }
     }

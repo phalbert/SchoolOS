@@ -81,6 +81,10 @@ public partial class SaveStudent : System.Web.UI.UserControl
         txtPhone.Text = std.PhoneNumber;
         txtStdName.Text = std.StudentName;
         txtStdNumber.Text = std.StudentNumber;
+        txtParentsName1.Text = std.ParentsName1;
+        txtParentsName2.Text = std.ParentsName2;
+        txtParentsPhoneNumber1.Text = std.ParentsPhoneNumber1;
+        txtParentsPhoneNumber2.Text = std.ParentsPhoneNumber2;
 
         ddSchools.SelectedValue = std.SchoolCode;
         ddSchools_SelectedIndexChanged(null, null);
@@ -188,6 +192,10 @@ public partial class SaveStudent : System.Web.UI.UserControl
         std.StudentName = txtStdName.Text;
         std.StudentNumber = txtStdNumber.Text;
         std.ModifiedBy = user.User.Username;
+        std.ParentsName1 = txtParentsName1.Text;
+        std.ParentsName2 = txtParentsName2.Text;
+        std.ParentsPhoneNumber1 = txtParentsPhoneNumber1.Text;
+        std.ParentsPhoneNumber2 = txtParentsPhoneNumber2.Text;
         return std;
     }
 
@@ -210,6 +218,8 @@ public partial class SaveStudent : System.Web.UI.UserControl
 
             String Id = dt.Rows[0][0].ToString();
             StudentPic.Attributes["src"] = "../ImageHandler.ashx?Id=" + Id;
+
+
             MultiView1.SetActiveView(CaptureDetailsView);
         }
         catch (Exception ex)

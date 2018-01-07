@@ -1648,6 +1648,10 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
         
         private string emailField;
         
+        private string channelField;
+        
+        private string sPCodeField;
+        
         /// <remarks/>
         public string ID {
             get {
@@ -1695,6 +1699,26 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
             }
             set {
                 this.emailField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Channel {
+            get {
+                return this.channelField;
+            }
+            set {
+                this.channelField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string SPCode {
+            get {
+                return this.sPCodeField;
+            }
+            set {
+                this.sPCodeField = value;
             }
         }
     }

@@ -137,6 +137,28 @@
                                 </div>
                             </div>
                             <br />
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label>Parents Names 1</label>
+                                    <asp:TextBox ID="txtParentsName1" runat="server" CssClass="form-control" placeholder="Enter text" />
+                                </div>
+                                <div class="col-lg-6">
+                                    <label>Parents Phone Number 1</label>
+                                    <asp:TextBox ID="txtParentsPhoneNumber1" runat="server" CssClass="form-control" placeholder="Enter text" />
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <label>Parents Names 2</label>
+                                    <asp:TextBox ID="txtParentsName2" runat="server" CssClass="form-control" placeholder="Enter text" />
+                                </div>
+                                <div class="col-lg-6">
+                                    <label>Parents Phone Number 2</label>
+                                    <asp:TextBox ID="txtParentsPhoneNumber2" runat="server" CssClass="form-control" placeholder="Enter text" />
+                                </div>
+                            </div>
+                            <br />
                         </div>
 
 

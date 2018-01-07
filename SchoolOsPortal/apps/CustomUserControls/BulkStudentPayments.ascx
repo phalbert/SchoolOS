@@ -39,7 +39,9 @@
                     <div class="col-lg-2"></div>
                     <div class="col-lg-8">
                         <div class="row alert alert-info">
-                            Pick a CSV File with columns STUDENT NUMBER, AMOUNT, PAYMENT CHANNEL, TRANSACTION ID
+                            Pick a CSV File with columns<br />
+                            StudentNumber, Amount, TransactionId, Credit/Debit<br />
+                            To download An example file, click <a href="../StudentPaymentsSample.csv">here</a><br />
                         </div>
                     </div>
                     <div class="col-lg-2"></div>

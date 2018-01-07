@@ -62,38 +62,54 @@
                                                 <asp:ListItem>False</asp:ListItem>
                                             </asp:DropDownList>
                                         </div>
+                                        
                                         <div class="col-lg-6">
                                             <label>Semester</label>
-                                             <asp:DropDownList ID="ddSemester" runat="server" CssClass="form-control">
+                                            <asp:DropDownList ID="ddSemester" AutoPostBack="true" OnSelectedIndexChanged="ddSemester_SelectedIndexChanged" runat="server" CssClass="form-control">
                                                 <asp:ListItem>True</asp:ListItem>
                                                 <asp:ListItem>False</asp:ListItem>
+                                            </asp:DropDownList>
+                                        </div>
+                                        
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <label>Teacher</label>
+                                            <asp:DropDownList ID="ddTeacher" AutoPostBack="true" OnSelectedIndexChanged="ddTeacher_SelectedIndexChanged"  runat="server" CssClass="form-control">
+                                               
+                                            </asp:DropDownList>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label>Class</label>
+                                            <asp:DropDownList ID="ddClasses" AutoPostBack="true" OnSelectedIndexChanged="ddClasses_SelectedIndexChanged" runat="server" CssClass="form-control">
+                                               
+                                            </asp:DropDownList>
+                                        </div>
+                                       
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                         <div class="col-lg-6">
+                                            <label>Subject</label>
+                                            <asp:DropDownList ID="ddSubjects" AutoPostBack="true" OnSelectedIndexChanged="ddSubjects_SelectedIndexChanged" runat="server" CssClass="form-control">
+                                               
+                                            </asp:DropDownList>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label>Student</label>
+                                            <asp:DropDownList ID="ddStudents" runat="server" CssClass="form-control">
+                                               
                                             </asp:DropDownList>
                                         </div>
                                     </div>
                                     <br />
                                     <div class="row">
                                         <div class="col-lg-6">
-                                            <label>Student</label>
-                                             <asp:DropDownList ID="ddStudents" runat="server" CssClass="form-control">
-                                                <asp:ListItem>True</asp:ListItem>
-                                                <asp:ListItem>False</asp:ListItem>
-                                            </asp:DropDownList>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <label>Subject</label>
-                                            <asp:DropDownList ID="ddSubjects" runat="server" CssClass="form-control">
-                                                <asp:ListItem>True</asp:ListItem>
-                                                <asp:ListItem>False</asp:ListItem>
-                                            </asp:DropDownList>
-                                        </div>
-                                    </div>
-                                    <br />
-                                     <div class="row">
-                                        <div class="col-lg-6">
                                             <label>Mark</label>
                                             <asp:TextBox ID="txtMark" runat="server" CssClass="form-control" placeholder="Enter text" />
                                         </div>
-                                         <div class="col-lg-6">
+                                        <div class="col-lg-6">
                                             <label>Grade</label>
                                             <asp:TextBox ID="txtGrade" runat="server" CssClass="form-control" placeholder="Enter text" />
                                         </div>

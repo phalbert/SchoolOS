@@ -1,0 +1,144 @@
+﻿
+using InterLinkClass.PegPaySchoolsApi;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+public partial class CustomUserControls_SaveTeacherSubject : System.Web.UI.UserControl
+{
+    public event EventHandler SaveCompleted;
+    Bussinesslogic bll = new Bussinesslogic();
+    SystemUserDetails user = new SystemUserDetails();
+    Service schoolApi = new Service();
+
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        try
+        {
+
+            user = Session["User"] as SystemUserDetails;
+            Session["IsError"] = null;
+            string Id = Request.QueryString["BankCode"];
+
+            //Session is invalid
+            if (user == null)
+            {
+                Response.Redirect("Default.aspx?Msg=SESSION HAS EXPIRED");
+            }
+            //Page posting back user request
+            else if (IsPostBack)
+            {
+
+            }
+            //Load Old details
+            else if (!string.IsNullOrEmpty(Id))
+            {
+                LoadEntityData(Id);
+            }
+            //First time Request
+            else
+            {
+                LoadData();
+            }
+        }
+        catch (Exception ex)
+        {
+            //something is wrong...show the error
+            bll.ShowMessage(lblmsg, ex.Message, true, Session);
+        }
+    }
+
+    private void LoadData()
+    {
+        btnSubmit.Visible = true;
+
+        bll.LoadSchoolsIntoDropDown(user, ddSchools);
+        bll.LoadDataIntoDropDown("GetTeachersForDropDown", new string[] {ddSchools.SelectedValue }, ddTeachers);
+        bll.LoadDataIntoDropDown("GetTermsForDropDown", new string[] { ddSchools.SelectedValue }, ddTerm);
+        bll.LoadDataIntoDropDown("GetClassesForDropDown", new string[] { ddSchools.SelectedValue }, ddClass);
+        bll.LoadDataIntoDropDown("GetStreamsForDropDown2", new string[] { ddSchools.SelectedValue,ddClass.SelectedValue }, ddStream);
+        bll.LoadDataIntoDropDown("GetSubjectsForDropDown", new string[] { ddSchools.SelectedValue }, ddSubjects);
+    }
+
+    private void LoadEntityData(string id)
+    {
+        btnSubmit.Visible = false;
+    }
+
+   
+
+    protected void btnSubmit_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            string msg = "";
+            TeacherSubject aclient = GetClient();
+            Result result = schoolApi.SaveTeacherSubject(aclient);
+
+            if (result.StatusCode != Globals.SUCCESS_STATUS_CODE)
+            {
+                msg = "FAILED: " + result.StatusDesc;
+                bll.ShowMessage(lblmsg, msg, false, Session);
+                return;
+            }
+
+            msg = "TEACHER-SUBJECT ASSOCIATION SAVED SUCCESSFULLY";
+            bll.ShowMessage(lblmsg, msg, false, Session);
+
+            if (SaveCompleted != null)
+            {
+                MyEventArgs eventArgs = new MyEventArgs();
+
+                //Pass on msg
+                Session["ExternalMsg"] = msg;
+
+                SaveCompleted(sender, eventArgs);
+            }
+        }
+        catch (Exception ex)
+        {
+            bll.LogError("SAVE-CLIENT", ex.StackTrace, "", ex.Message, "EXCEPTION");
+            bll.ShowMessage(lblmsg, ex.Message, true, Session);
+        }
+    }
+
+    private TeacherSubject GetClient()
+    {
+        TeacherSubject std = new TeacherSubject();
+        std.ClassCode = ddClass.SelectedValue;
+        std.StreamCode = ddStream.SelectedValue;
+        std.SubjectCode = ddSubjects.SelectedValue;
+        std.TeacherId = ddTeachers.SelectedValue;
+        std.TermCode = ddTerm.SelectedValue;
+        std.SchoolCode = ddSchools.SelectedValue;
+        std.ModifiedBy = user.User.Username;
+        return std;
+    }
+
+
+    protected void btnConfirm_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void btnCancel_Click(object sender, EventArgs e)
+    {
+
+    }
+
+    protected void ddClass_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        try
+        {
+            bll.LoadDataIntoDropDown("GetStreamsForDropDown2", new string[] { ddSchools.SelectedValue, ddClass.SelectedValue }, ddStream);
+        }
+        catch (Exception ex)
+        {
+            bll.LogError("SAVE-CLIENT", ex.StackTrace, "", ex.Message, "EXCEPTION");
+            bll.ShowMessage(lblmsg, ex.Message, true, Session);
+        }
+    }
+}

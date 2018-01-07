@@ -83,6 +83,7 @@
     <Compile Include="Entities\SystemUser.cs" />
     <Compile Include="Entities\SystemUserDetails.cs" />
     <Compile Include="Entities\Teacher.cs" />
+    <Compile Include="Entities\TeacherSubjects.cs" />
     <Compile Include="Entities\UploadedFile.cs" />
     <Compile Include="Entities\UserType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

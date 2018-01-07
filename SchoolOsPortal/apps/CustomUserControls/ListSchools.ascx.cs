@@ -43,6 +43,12 @@ public partial class ListSchools : System.Web.UI.UserControl
 
     private void LoadData()
     {
+        if (user.User.UserType != "ADMIN")
+        {
+            txtSchoolName.Text = user.SchoolDetails.SchoolName;
+            txtDistrict.Text = user.SchoolDetails.District;
+            txtSchoolName.Enabled = false;
+        }
     }
 
     protected void btnSubmit_Click(object sender, EventArgs e)

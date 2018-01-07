@@ -12,6 +12,7 @@ namespace SchoolOSApiLogic.Entities
         public string FileName = "";
         public string Email = "";
         public string Channel = "";
+        public string SPCode = "";
 
         public override bool IsValid()
         {

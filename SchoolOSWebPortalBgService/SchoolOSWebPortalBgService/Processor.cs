@@ -21,9 +21,9 @@ namespace SchoolOSWebPortalBgService
                 }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                Console.WriteLine("Exception: {0}", ex.Message);
             }
         }
 
@@ -53,8 +53,8 @@ namespace SchoolOSWebPortalBgService
                 successfullPayments.Add(payment);
             }
 
+            bll.SendResultsToTheUploader(file.Email, successfullPayments, failedPayments);
             bll.UpdateFileProcessedStatus(file);
-            bll.SendResultsEmail(file.Email, successfullPayments, failedPayments);
         }
 
         public void ProcessUploadedStudents()
@@ -96,8 +96,11 @@ namespace SchoolOSWebPortalBgService
                         successfullPayments.Add(payment);
                     }
 
-                    bll.UpdateFeesProcessedStatus(payment);
-                    bll.SendResultsEmail(payment.Email, successfullPayments, failedPayments);
+                    bll.SendResultsToTheUploader(payment.Email, successfullPayments, failedPayments);
+                    if (failedPayments.Count == 0)
+                    {
+                        bll.UpdateFeesProcessedStatus(payment);
+                    }
                 }
             }
             catch (Exception ex)

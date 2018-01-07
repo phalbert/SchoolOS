@@ -50,15 +50,17 @@ public partial class CustomUserControls_SaveStudentResults : System.Web.UI.UserC
         }
     }
 
-    private void LoadData()
+    public void LoadData()
     {
         btnSubmit.Visible = true;
         btnEdit.Visible = false;
 
         bll.LoadSchoolsIntoDropDown(user, ddSchools);
         bll.LoadDataIntoDropDown("GetTermsForDropDown", new string[] { ddSchools.SelectedValue }, ddSemester);
-        bll.LoadDataIntoDropDown("GetSubjectsForDropDown", new string[] { ddSchools.SelectedValue }, ddSubjects);
-        bll.LoadDataIntoDropDown("GetStudentsForDropDown", new string[] { ddSchools.SelectedValue , "ALL" }, ddStudents);
+        ddSemester_SelectedIndexChanged(null, null);
+        ddTeacher_SelectedIndexChanged(null, null);
+        ddClasses_SelectedIndexChanged(null, null);
+        ddSubjects_SelectedIndexChanged(null, null);
     }
 
     private void LoadEntityData(string id)
@@ -136,5 +138,59 @@ public partial class CustomUserControls_SaveStudentResults : System.Web.UI.UserC
     protected void btnCancel_Click(object sender, EventArgs e)
     {
 
+    }
+
+   
+
+    protected void ddSemester_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        try
+        {
+            bll.LoadDataIntoDropDown("GetTeachersWhoEnrolledForSemester", new string[] { ddSchools.SelectedValue,ddSemester.SelectedValue }, ddTeacher);
+        }
+        catch (Exception ex)
+        {
+            bll.LogError("SAVE-CLIENT", ex.StackTrace, "", ex.Message, "EXCEPTION");
+            bll.ShowMessage(lblmsg, ex.Message, true, Session);
+        }
+    }
+
+    protected void ddTeacher_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        try
+        {
+            bll.LoadDataIntoDropDown("GetClassesTaughtByTeacher", new string[] { ddSchools.SelectedValue, ddSemester.SelectedValue,ddTeacher.SelectedValue }, ddClasses);
+        }
+        catch (Exception ex)
+        {
+            bll.LogError("SAVE-CLIENT", ex.StackTrace, "", ex.Message, "EXCEPTION");
+            bll.ShowMessage(lblmsg, ex.Message, true, Session);
+        }
+    }
+
+    protected void ddClasses_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        try
+        {
+            bll.LoadDataIntoDropDown("GetSubjectsTaughtByTeacherInClass", new string[] { ddSchools.SelectedValue, ddSemester.SelectedValue,ddTeacher.SelectedValue,ddClasses.SelectedValue }, ddSubjects);
+        }
+        catch (Exception ex)
+        {
+            bll.LogError("SAVE-CLIENT", ex.StackTrace, "", ex.Message, "EXCEPTION");
+            bll.ShowMessage(lblmsg, ex.Message, true, Session);
+        }
+    }
+
+    protected void ddSubjects_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        try
+        {
+            bll.LoadDataIntoDropDown("GetStudentsInClassWhoEnrolledForSubject", new string[] { ddSchools.SelectedValue, ddSemester.SelectedValue, ddSubjects.SelectedValue }, ddStudents);
+        }
+        catch (Exception ex)
+        {
+            bll.LogError("SAVE-CLIENT", ex.StackTrace, "", ex.Message, "EXCEPTION");
+            bll.ShowMessage(lblmsg, ex.Message, true, Session);
+        }
     }
 }

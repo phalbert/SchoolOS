@@ -108,6 +108,13 @@ public class Service : System.Web.Services.WebService
     }
 
     [WebMethod]
+    public Result SaveTeacherSubject(TeacherSubject tch)
+    {
+        SchoolOSApiLogic.SchoolsInterfaceApi api = new SchoolOSApiLogic.SchoolsInterfaceApi();
+        return api.SaveTeacherSubject(tch);
+    }
+
+    [WebMethod]
     public Result SaveStudentSubject(StudentSubject semester)
     {
         SchoolOSApiLogic.SchoolsInterfaceApi api = new SchoolOSApiLogic.SchoolsInterfaceApi();

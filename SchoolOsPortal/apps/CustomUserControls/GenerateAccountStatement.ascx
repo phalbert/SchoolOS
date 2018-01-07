@@ -35,15 +35,18 @@
             <div class="row">
                 <div class="col-lg-2"></div>
                 <div class="col-lg-2">
-                    <label>Bank</label>
+                    <label>School</label>
                     <asp:DropDownList ID="ddBank" runat="server" CssClass="form-control" AutoPostBack="true" EnableViewState="true" OnSelectedIndexChanged="ddBank_SelectedIndexChanged">
                         <asp:ListItem>True</asp:ListItem>
                         <asp:ListItem>False</asp:ListItem>
                     </asp:DropDownList>
                 </div>
                 <div class="col-lg-2">
-                    <label>Student Number</label>
-                    <asp:TextBox ID="txtAccount" runat="server" CssClass="form-control" placeholder="Enter text" />
+                    <label>Student</label>
+                    <asp:DropDownList ID="ddStudent" runat="server" CssClass="form-control" AutoPostBack="true" EnableViewState="true" OnSelectedIndexChanged="ddBank_SelectedIndexChanged">
+                        <asp:ListItem>True</asp:ListItem>
+                        <asp:ListItem>False</asp:ListItem>
+                    </asp:DropDownList>
                 </div>
                 <div class="col-lg-2">
                     <label>From Date</label>

@@ -47,6 +47,8 @@ public class Bussinesslogic
         user.UserType = row["UserType"].ToString();
         user.ProfilePic = row["ProfilePic"].ToString();
         user.FullName = row["FullName"].ToString();
+        user.Email = row["Email"].ToString();
+        user.PhoneNumber = row["PhoneNumber"].ToString();
         user.StatusCode = Globals.SUCCESS_STATUS_CODE;
         user.StatusDesc = "SUCCESS";
         return user;
@@ -55,7 +57,7 @@ public class Bussinesslogic
     public InterLinkClass.PegPaySchoolsApi.SchoolStaff GetStaffById(string studentId, string schoolCode)
     {
         InterLinkClass.PegPaySchoolsApi.SchoolStaff user = new InterLinkClass.PegPaySchoolsApi.SchoolStaff();
-        DataTable dt = SchoolsApi.ExecuteDataSet("GetStaffById", new string[] { studentId,schoolCode }).Tables[0];
+        DataTable dt = SchoolsApi.ExecuteDataSet("GetStaffById", new string[] { studentId, schoolCode }).Tables[0];
         if (dt.Rows.Count == 0)
         {
             user.StatusCode = Globals.FAILURE_STATUS_CODE;
@@ -104,6 +106,7 @@ public class Bussinesslogic
         sch.SchoolName = row["SchoolName"].ToString();
         sch.SchoolPhone = row["SchoolPhone"].ToString();
         sch.SubCounty = row["SubCounty"].ToString();
+        sch.UnebCentreNumber = row["UnebCenterNumber"].ToString();
         sch.StatusCode = Globals.SUCCESS_STATUS_CODE;
         sch.StatusDesc = "SUCCESS";
         return sch;
@@ -112,7 +115,7 @@ public class Bussinesslogic
     public InterLinkClass.PegPaySchoolsApi.Student GetStudentById(string studentId, string schoolCode)
     {
         InterLinkClass.PegPaySchoolsApi.Student sch = new InterLinkClass.PegPaySchoolsApi.Student();
-        DataTable dt = SchoolsApi.ExecuteDataSet("GetStudentById", new string[] { studentId,schoolCode }).Tables[0];
+        DataTable dt = SchoolsApi.ExecuteDataSet("GetStudentById", new string[] { studentId, schoolCode }).Tables[0];
         if (dt.Rows.Count == 0)
         {
             sch.StatusCode = Globals.FAILURE_STATUS_CODE;
@@ -122,18 +125,22 @@ public class Bussinesslogic
 
         DataRow row = dt.Rows[0];
         sch.SchoolCode = row["SchoolCode"].ToString();
-        sch.ClassCode= row["ClassCode"].ToString();
-        sch.DateOfBirth= row["DateOfBirth"].ToString();
-        sch.Email= row["Email"].ToString();
-        sch.Gender= row["Gender"].ToString();
-        sch.ModifiedBy= row["ModifiedBy"].ToString();
-        sch.PegPayStudentNumber= row["PegPayStudentNumber"].ToString();
-        sch.PhoneNumber= row["PhoneNumber"].ToString();
-        sch.ProfilePic= row["StudentPic"].ToString();
-        sch.StreamCode= row["StreamCode"].ToString();
-        sch.StudentCategory= row["StudentCategory"].ToString();
-        sch.StudentName= row["StudentName"].ToString();
-        sch.StudentNumber= row["StudentNumber"].ToString();
+        sch.ClassCode = row["ClassCode"].ToString();
+        sch.DateOfBirth = row["DateOfBirth"].ToString();
+        sch.Email = row["Email"].ToString();
+        sch.Gender = row["Gender"].ToString();
+        sch.ModifiedBy = row["ModifiedBy"].ToString();
+        sch.PegPayStudentNumber = row["PegPayStudentNumber"].ToString();
+        sch.PhoneNumber = row["PhoneNumber"].ToString();
+        sch.ProfilePic = row["StudentPic"].ToString();
+        sch.StreamCode = row["StreamCode"].ToString();
+        sch.StudentCategory = row["StudentCategory"].ToString();
+        sch.StudentName = row["StudentName"].ToString();
+        sch.StudentNumber = row["StudentNumber"].ToString();
+        sch.ParentsName1 = row["ParentsName1"].ToString();
+        sch.ParentsName2 = row["ParentsName2"].ToString();
+        sch.ParentsPhoneNumber1 = row["ParentsPhoneNumber1"].ToString();
+        sch.ParentsPhoneNumber2 = row["ParentsPhoneNumber2"].ToString();
         sch.StatusCode = Globals.SUCCESS_STATUS_CODE;
         sch.StatusDesc = "SUCCESS";
         return sch;
@@ -341,24 +348,16 @@ public class Bussinesslogic
         InterLinkClass.PegPaySchoolsApi.Result result = new InterLinkClass.PegPaySchoolsApi.Result();
         try
         {
-            InterLinkClass.MailApi.Messenger mailApi = new InterLinkClass.MailApi.Messenger();
-            InterLinkClass.MailApi.Email email = new InterLinkClass.MailApi.Email();
-            email.From = "Flexi-Schools";
-            email.Message = "Hi<br/>" +
-                            "Your Credentials for The Flexipay School Management Portal are Below<br/>" +
-                            "UserId: " + user.Username + "<br/>" +
-                            "Password: " + user.UserPassword + "<br/>" +
-                            "Role: " + user.UserType + "<br/>" +
-                            "Thank you. <br/>";
-            email.Subject = "Flexi-Schools Web Portal Credentials";
-            InterLinkClass.MailApi.EmailAddress addr = new InterLinkClass.MailApi.EmailAddress();
-            addr.Address = user.Email;
-            addr.Name = user.FullName;
-            addr.AddressType = InterLinkClass.MailApi.EmailAddressType.To;
+            InterLinkClass.MailApi.Result resp = new InterLinkClass.MailApi.Result();
+            if (SharedCommons.SharedCommons.IsValidEmail(user.Email))
+            {
+                resp = SendEmailToUser(user);
+            }
+            if (!string.IsNullOrEmpty(user.PhoneNumber))
+            {
+                resp = SendSMSToUser(user);
+            }
 
-            InterLinkClass.MailApi.EmailAddress[] addresses = { addr };
-            email.MailAddresses = addresses;
-            InterLinkClass.MailApi.Result resp = mailApi.PostEmail(email);
             result.StatusCode = resp.StatusCode;
             result.StatusDesc = resp.StatusDesc;
         }
@@ -368,6 +367,48 @@ public class Bussinesslogic
             result.StatusDesc = "EXCEPTION: " + ex.Message;
         }
         return result;
+    }
+
+    private static InterLinkClass.MailApi.Result SendSMSToUser(InterLinkClass.PegPaySchoolsApi.SystemUser user)
+    {
+        string msg = string.Format("Your Credentials for The Flexi-Schools Web Portal are" +
+                                   "UserId:{0}, Password:{1}, Role: {2}", user.Username, user.UserPassword, user.UserType);
+
+
+        InterLinkClass.MailApi.SMS sms = new InterLinkClass.MailApi.SMS();
+        sms.Mask = "Flexipay";
+        sms.Message = msg;
+        sms.Phone = user.PhoneNumber;
+        sms.Reference = SharedCommons.SharedCommons.GenerateUniqueId("SMS");
+        sms.Sender = "Flexipay";
+        sms.VendorTranId = sms.Reference;
+
+        InterLinkClass.MailApi.Messenger mapi = new InterLinkClass.MailApi.Messenger();
+        InterLinkClass.MailApi.Result resp = mapi.SendSMS(sms);
+        return resp;
+    }
+
+    private static InterLinkClass.MailApi.Result SendEmailToUser(InterLinkClass.PegPaySchoolsApi.SystemUser user)
+    {
+        InterLinkClass.MailApi.Messenger mailApi = new InterLinkClass.MailApi.Messenger();
+        InterLinkClass.MailApi.Email email = new InterLinkClass.MailApi.Email();
+        email.From = "Flexi-Schools";
+        email.Message = string.Format("Hi<br/>" +
+                        "Your Credentials for The Flexi-Schools Web Portal are Below<br/>" +
+                        "UserId: {0}<br/>" +
+                        "Password: {1}<br/>" +
+                        "Role: {2}<br/>" +
+                        "Thank you. <br/>", user.Username, user.UserPassword, user.UserType);
+        email.Subject = "Flexi-Schools Web Portal Credentials";
+        InterLinkClass.MailApi.EmailAddress addr = new InterLinkClass.MailApi.EmailAddress();
+        addr.Address = user.Email;
+        addr.Name = user.FullName;
+        addr.AddressType = InterLinkClass.MailApi.EmailAddressType.To;
+
+        InterLinkClass.MailApi.EmailAddress[] addresses = { addr };
+        email.MailAddresses = addresses;
+        InterLinkClass.MailApi.Result resp = mailApi.PostEmail(email);
+        return resp;
     }
 
     public bool ObeysPasswordPolicy(string newPassword, string bankCode)
