@@ -116,9 +116,17 @@ public partial class RegisterSchool : System.Web.UI.Page
             return;
         }
 
+        //send alert email
+        string emailMsg = "Hi,<br/> School " + txtSchoolName.Text + " has signed up and Is Pending Approval. <br/> Thank you <br/>";
+        string subject = "School Self Sign Up Alert";
+        string toEmail = Globals.SELF_SIGNUP_NOTIFICATION_EMAIL;
+        bll.SendEmailMsg(emailMsg, subject, toEmail);
+
         //success
         string successMsg = "SUCCESS!! SCHOOL DETAILS SAVED SUCCESSFULLY, PENDING APPROVAL";
         bll.ShowMessage(lblmsg, successMsg, false, Session);
+
+        Response.Redirect("~/Default.aspx?Msg=" + successMsg);
     }
 
     private Result SaveSystemUser()

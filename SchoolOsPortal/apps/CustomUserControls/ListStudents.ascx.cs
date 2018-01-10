@@ -44,6 +44,7 @@ public partial class ListStudents : System.Web.UI.UserControl
     private void LoadData()
     {
         bll.LoadSchoolsIntoDropDown(user, ddSchools);
+        bll.LoadDataIntoDropDownALL("GetClassesForDropDown", new string[] { ddSchools.SelectedValue }, ddClasses);
         //SearchDb();
     }
 
@@ -88,6 +89,7 @@ public partial class ListStudents : System.Web.UI.UserControl
         string name = ddSchools.SelectedValue;
         string StudentId = txtStudentId.Text;
         all.Add(name);
+        all.Add(ddClasses.SelectedValue);
         all.Add(StudentId);
         return all.ToArray();
     }

@@ -33,12 +33,20 @@
 
         <!---------------------------------------------- Search Options --------------------------------->
         <div class="row">
-            <div class="col-lg-1"></div>
             <div class="col-lg-3">
                 <label>
                     School
                 </label>
                 <asp:DropDownList ID="ddSchools" runat="server" CssClass="form-control">
+                    <asp:ListItem>True</asp:ListItem>
+                    <asp:ListItem>False</asp:ListItem>
+                </asp:DropDownList>
+            </div>
+             <div class="col-lg-3">
+                <label>
+                    Classes
+                </label>
+                <asp:DropDownList ID="ddClasses" runat="server" CssClass="form-control">
                     <asp:ListItem>True</asp:ListItem>
                     <asp:ListItem>False</asp:ListItem>
                 </asp:DropDownList>
@@ -53,7 +61,6 @@
                 <asp:Button ID="btnSubmit" runat="server" Text="Search DB" CssClass="btn btn-success btn-lg"
                     OnClick="btnSubmit_Click" />
             </div>
-            <div class="col-lg-1"></div>
         </div>
 
         <hr />

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SchoolOSApiLogic.ControlClasses;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -24,23 +25,24 @@ namespace SchoolOSApiLogic.Entities
         public string LiquidationAccountNumber = "";
         public string SchoolLogo = "";
         internal string ApprovedBy = "";
+       
 
 
 
         public override bool IsValid()
         {
-            if (string.IsNullOrEmpty(SchoolCode))
+            SchoolLogo = string.IsNullOrEmpty(SchoolLogo) ? Globals.DEFAULT_PICTURE_ID : SchoolLogo;
+
+            string propertiesThatCanBeNull = "ApprovedBy|SchoolLocation|UnebCentreNumber|SchoolID";
+            Result nullCheckResult = Globals.CheckForNulls(this, propertiesThatCanBeNull);
+
+            if (nullCheckResult.StatusCode != Globals.SUCCESS_STATUS_CODE)
             {
                 StatusCode = Globals.FAILURE_STATUS_CODE;
-                StatusDesc = "PLEASE SUPPLY A SCHOOL CODE";
+                StatusDesc = nullCheckResult.StatusDesc;
                 return false;
             }
-            if (string.IsNullOrEmpty(SchoolName))
-            {
-                StatusCode = Globals.FAILURE_STATUS_CODE;
-                StatusDesc = "PLEASE SUPPLY A SCHOOL NAME";
-                return false;
-            }
+
             return base.IsValid();
         }
 

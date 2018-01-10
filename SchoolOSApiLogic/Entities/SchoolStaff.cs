@@ -18,19 +18,18 @@ namespace SchoolOSApiLogic.Entities
 
         public override bool IsValid()
         {
-            if (string.IsNullOrEmpty(SchoolCode))
+            ProfilePic = string.IsNullOrEmpty(ProfilePic) ? Globals.DEFAULT_PICTURE_ID : ProfilePic;
+
+            string propertiesThatCanBeNull = "StaffCategory|PegPayStaffIDNumber|Email";
+            Result nullCheckResult = Globals.CheckForNulls(this, propertiesThatCanBeNull);
+
+            if (nullCheckResult.StatusCode != Globals.SUCCESS_STATUS_CODE)
             {
                 StatusCode = Globals.FAILURE_STATUS_CODE;
-                StatusDesc = "PLEASE SUPPLY A SCHOOL CODE";
+                StatusDesc = nullCheckResult.StatusDesc;
                 return false;
             }
-            if (string.IsNullOrEmpty(StaffIDNumber))
-            {
-                StatusCode = Globals.FAILURE_STATUS_CODE;
-                StatusDesc = "PLEASE SUPPLY AN ID NUMBER";
-                return false;
-            }
-           
+
             return base.IsValid();
         }
     }

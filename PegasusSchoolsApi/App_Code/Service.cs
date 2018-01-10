@@ -84,14 +84,7 @@ public class Service : System.Web.Services.WebService
 
     }
 
-    [WebMethod]
-    public Result SaveSchoolSemester(SchoolSemester semester)
-    {
-
-        SchoolOSApiLogic.SchoolsInterfaceApi api = new SchoolOSApiLogic.SchoolsInterfaceApi();
-        return api.SaveSchoolSemester(semester);
-
-    }
+    
 
     [WebMethod]
     public Result SaveSubjectResult(SubjectResults semester)

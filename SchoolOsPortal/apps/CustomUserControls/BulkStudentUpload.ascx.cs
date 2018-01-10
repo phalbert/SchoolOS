@@ -52,7 +52,7 @@ public partial class BulkStudentUpload : System.Web.UI.UserControl
     private void LoadData()
     {   
         bll.LoadSchoolsIntoDropDown(user, ddSchools);
-        
+        bll.LoadDataIntoDropDown("GetClassesForDropDown", new string[] { ddSchools.SelectedValue }, ddClasses);
     }
 
 
@@ -70,7 +70,7 @@ public partial class BulkStudentUpload : System.Web.UI.UserControl
 
             string fileType = Path.GetExtension(fuStudentsFile.PostedFile.FileName);
 
-            if (fileType.ToUpper() != "CSV")
+            if (fileType.ToUpper() != ".CSV")
             {
                 msg = "PLEASE UPLOAD A VALID CSV FILE";
                 bll.ShowMessage(lblmsg, msg, true, Session);
@@ -96,7 +96,7 @@ public partial class BulkStudentUpload : System.Web.UI.UserControl
             }
 
             msg = "FILE UPLOADED SUCCESSFULLY! EMAIL WILL BE SENT WITH RESULTS";
-            bll.ShowMessage(lblmsg, msg, true, Session);
+            bll.ShowMessage(lblmsg, msg, false, Session);
             return;
         }
         catch (Exception ex)
@@ -109,8 +109,8 @@ public partial class BulkStudentUpload : System.Web.UI.UserControl
     private Result ValidateUploadedFile()
     {
         Result result = new Result();
-
-        string filePath = "";
+        string fileName = SharedCommons.SharedCommons.GenerateUniqueId("FILE") + "_" + fuStudentsFile.FileName;
+        string filePath = Server.MapPath("~/UploadedFiles/") + fileName; ;
         fuStudentsFile.SaveAs(filePath);
         IEnumerable<string> allLinesInFile = File.ReadLines(filePath);
 
@@ -146,6 +146,9 @@ public partial class BulkStudentUpload : System.Web.UI.UserControl
         uploadedFile.ModifiedBy = user.User.Username;
         uploadedFile.FileContents = base64String;
         uploadedFile.Email = user.User.Email;
+        uploadedFile.Channel = ddClasses.SelectedValue;
+        uploadedFile.FileName = fuStudentsFile.FileName;
+        //uploadedFile.SPCode=
         return uploadedFile;
     }
 

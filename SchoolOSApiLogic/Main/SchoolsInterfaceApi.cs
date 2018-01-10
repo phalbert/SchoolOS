@@ -305,30 +305,7 @@ namespace SchoolOSApiLogic
             return result;
         }
 
-        public Result SaveSchoolSemester(SchoolSemester sem)
-        {
-            Result result = new Result();
-            try
-            {
-                if (!sem.IsValid())
-                {
-                    result.StatusCode = sem.StatusCode;
-                    result.StatusDesc = sem.StatusDesc;
-                    return result;
-                }
-
-                Bussinesslogic bll = new Bussinesslogic();
-                result = bll.SaveSchoolSemester(sem);
-            }
-            catch (Exception ex)
-            {
-                string msg = $"EXCEPTION: {ex.Message}";
-                DatabaseHandler.LogError(msg, ex.StackTrace, sem.SemesterCode);
-                result.StatusCode = Globals.FAILURE_STATUS_CODE;
-                result.StatusDesc = msg;//"{0} is an {1}",0,1
-            }
-            return result;
-        }
+      
 
         public Result SaveSchoolStaff(SchoolStaff staff)
         {

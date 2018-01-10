@@ -20,11 +20,15 @@ namespace SchoolOSApiLogic.Entities
 
         public override bool IsValid()
         {
-            
-            if (string.IsNullOrEmpty(Username))
+            ProfilePic = string.IsNullOrEmpty(ProfilePic) ? Globals.DEFAULT_PICTURE_ID : ProfilePic;
+
+            string propertiesThatCanBeNull = "UserCategory|ApprovedBy|Email";
+            Result nullCheckResult = Globals.CheckForNulls(this, propertiesThatCanBeNull);
+
+            if (nullCheckResult.StatusCode != Globals.SUCCESS_STATUS_CODE)
             {
                 StatusCode = Globals.FAILURE_STATUS_CODE;
-                StatusDesc = "PLEASE SUPPLY A USERNAME";
+                StatusDesc = nullCheckResult.StatusDesc;
                 return false;
             }
 

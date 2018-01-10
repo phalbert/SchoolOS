@@ -7,7 +7,7 @@ namespace SchoolOSApiLogic.Entities
    public class SchoolClass:Request
     {
         public string ClassCode = "";
-        public string SchoolClassName = "";
+        public string ClassName = "";
 
         public override bool IsValid()
         {
@@ -23,7 +23,7 @@ namespace SchoolOSApiLogic.Entities
                 StatusDesc = "PLEASE SUPPLY A CLASS CODE";
                 return false;
             }
-            if (string.IsNullOrEmpty(SchoolClassName))
+            if (string.IsNullOrEmpty(ClassName))
             {
                 StatusCode = Globals.FAILURE_STATUS_CODE;
                 StatusDesc = "PLEASE SUPPLY A CLASS NAME ";

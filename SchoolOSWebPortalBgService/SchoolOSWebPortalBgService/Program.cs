@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SchoolOSWebPortalBgService
@@ -10,9 +11,13 @@ namespace SchoolOSWebPortalBgService
     {
         public static void Main(string[] args)
         {
-            Processor proc = new Processor();
-            proc.ProcessUploadedBulkStudentPaymentsFiles();
-            proc.ProcessStudentPayments();
+            while (true)
+            {
+                Processor proc = new Processor();
+                proc.ProcessUploadedBulkStudentPaymentsFiles();
+                proc.ProcessStudentPayments();
+                Thread.Sleep(new TimeSpan(0, 0, 5));
+            }
         }
     }
 }

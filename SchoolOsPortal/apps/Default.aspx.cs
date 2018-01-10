@@ -22,7 +22,23 @@ public partial class _Default : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        Response.Redirect("~/Start/Index.html");
+        try
+        {
+            string Msg = Request.QueryString["Msg"];
+
+            if (!string.IsNullOrEmpty(Msg))
+            {
+                Msg = Msg.ToUpper().Contains("THREAD") ? "You Have Been Logged Out" : Msg;
+                bll.ShowMessage2(lblmsg, Msg, true, Session);
+                return;
+            }
+
+            Response.Redirect("~/Start/Index.html");
+            return;
+        }
+        catch (Exception)
+        {
+        }
     }
 
     private void LoadData()
@@ -31,5 +47,15 @@ public partial class _Default : System.Web.UI.Page
     }
 
 
-   
+
+
+    protected void btnHome_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/Start/Index.html");
+    }
+
+    protected void btnLogin_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/Login.aspx");
+    }
 }

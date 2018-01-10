@@ -69,6 +69,10 @@
         .select2-container--bootstrap:hover .select2-selection {
             background-color: #fff;
         }
+
+       .MyTextBoxBg {
+            background-color: #e5bc4b;
+        }
     </style>
 </head>
 
@@ -120,15 +124,15 @@
                             <div data-row-span="4">
                                 <div data-field-span="2">
                                     <label>Name of the School</label>
-                                    <asp:TextBox ID="txtSchoolName" required="true" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtSchoolName" Style="background-color: #F9FEBD;" required="true" runat="server"></asp:TextBox>
                                 </div>
                                 <div data-field-span="1">
                                     <label>Prefered School Code</label>
-                                    <asp:TextBox ID="txtSchoolCode" MaxLength="10" required="true" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtSchoolCode" Style="background-color: #F9FEBD;" MaxLength="8" required="true" runat="server"></asp:TextBox>
                                 </div>
                                 <div data-field-span="1">
                                     <label>UNEB Centre Number <small>If applicable</small></label>
-                                    <asp:TextBox ID="txtUnebNumber" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtUnebNumber" Style="background-color: #F9FEBD;" runat="server"></asp:TextBox>
                                 </div>
 
                             </div>
@@ -136,18 +140,18 @@
                             <div data-row-span="4">
                                 <div data-field-span="2">
                                     <label>Schools Bank</label>
-                                    <asp:DropDownList ID="ddBanks" runat="server" CssClass="form-control">
+                                    <asp:DropDownList ID="ddBanks" Style="background-color: #F9FEBD;" runat="server" CssClass="form-control">
                                         <asp:ListItem>True</asp:ListItem>
                                         <asp:ListItem>False</asp:ListItem>
                                     </asp:DropDownList>
                                 </div>
                                 <div data-field-span="1">
                                     <label>Account Name</label>
-                                    <asp:TextBox ID="txtAccountName" required="true" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtAccountName" Style="background-color: #F9FEBD;" required="true" runat="server"></asp:TextBox>
                                 </div>
                                 <div data-field-span="1">
                                     <label>Account Number</label>
-                                    <asp:TextBox ID="txtAccountNumber" required="true" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtAccountNumber" Style="background-color: #F9FEBD;" required="true" runat="server"></asp:TextBox>
                                 </div>
 
                             </div>
@@ -165,40 +169,40 @@
                                 <div data-field-span="1">
                                     <label>Title</label>
                                     <label>
-                                        <asp:RadioButton GroupName="customer-title[]" ID="rdMr" runat="server" />
+                                        <asp:RadioButton Style="background-color: #F9FEBD;" GroupName="customer-title[]" ID="rdMr" runat="server" />
                                         Mr.</label>
                                     &nbsp;
                                    
                                     <label>
-                                        <asp:RadioButton GroupName="customer-title[]" ID="rdMrs" runat="server" />
+                                        <asp:RadioButton Style="background-color: #F9FEBD;" GroupName="customer-title[]" ID="rdMrs" runat="server" />
                                         Mrs.</label>
                                     &nbsp;
                                    
                                     <label>
-                                        <asp:RadioButton GroupName="customer-title[]" ID="rdMs" runat="server" />
+                                        <asp:RadioButton Style="background-color: #F9FEBD;" GroupName="customer-title[]" ID="rdMs" runat="server" />
                                         Ms.</label>
                                 </div>
                                 <div data-field-span="3">
                                     <label>Full Name</label>
-                                    <asp:TextBox ID="txtFullName" required="true" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtFullName" Style="background-color: #F9FEBD;" required="true" runat="server"></asp:TextBox>
                                 </div>
                             </div>
 
                             <div data-row-span="4">
                                 <div data-field-span="2" data-field-error="Please enter a valid email address">
                                     <label>E-mail</label>
-                                    <asp:TextBox ID="txtPrincipalEmail" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtPrincipalEmail" Style="background-color: #F9FEBD;" runat="server"></asp:TextBox>
                                 </div>
                                 <div data-field-span="2">
                                     <label>Mobile No.</label>
-                                    <asp:TextBox ID="txtPrincipalPhone" required="true" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtPrincipalPhone" Style="background-color: #F9FEBD;" required="true" runat="server"></asp:TextBox>
                                 </div>
                             </div>
 
                             <div data-row-span="4">
                                 <div data-field-span="2" data-field-error="Please enter prefered username">
                                     <label>UserId (for login)</label>
-                                    <asp:TextBox ID="txtUserId" required="true" runat="server"></asp:TextBox>
+                                    <asp:TextBox ID="txtUserId" Style="background-color: #F9FEBD;" required="true" runat="server"></asp:TextBox>
                                 </div>
                             </div>
                             <br>
@@ -207,35 +211,35 @@
                                 <div data-row-span="2">
                                     <div data-field-span="1">
                                         <label>Plot No.</label>
-                                        <asp:TextBox ID="txtPlotNumber" required="true" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="txtPlotNumber" Style="background-color: #F9FEBD;" required="true" runat="server"></asp:TextBox>
                                     </div>
                                     <div data-field-span="1">
                                         <label>Street / Road name</label>
-                                        <asp:TextBox ID="txtRoadName" required="true" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="txtRoadName" Style="background-color: #F9FEBD;" required="true" runat="server"></asp:TextBox>
                                     </div>
                                 </div>
                                 <div data-row-span="4">
                                     <div data-field-span="2">
                                         <label>Divison / Sub County</label>
-                                        <asp:TextBox ID="txtSubCounty" required="true" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="txtSubCounty" Style="background-color: #F9FEBD;" required="true" runat="server"></asp:TextBox>
                                     </div>
                                     <div data-field-span="2">
                                         <label>District</label>
-                                        <asp:TextBox ID="txtDistrict" required="true" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="txtDistrict" Style="background-color: #F9FEBD;" required="true" runat="server"></asp:TextBox>
                                     </div>
                                 </div>
                                 <div data-row-span="4">
                                     <div data-field-span="1">
                                         <label>Box Number</label>
-                                        <asp:TextBox ID="txtPostOfficeNumber" required="true" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="txtPostOfficeNumber" Style="background-color: #F9FEBD;" required="true" runat="server"></asp:TextBox>
                                     </div>
                                     <div data-field-span="1">
                                         <label>Office Phone</label>
-                                        <asp:TextBox ID="txtOfficePhone" required="true" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="txtOfficePhone" Style="background-color: #F9FEBD;" required="true" runat="server"></asp:TextBox>
                                     </div>
                                     <div data-field-span="1">
                                         <label>Email</label>
-                                        <asp:TextBox ID="txtSchoolEmail" required="true" runat="server"></asp:TextBox>
+                                        <asp:TextBox ID="txtSchoolEmail" Style="background-color: #F9FEBD;" required="true" runat="server"></asp:TextBox>
                                     </div>
                                 </div>
                             </fieldset>
@@ -249,7 +253,7 @@
                             </legend>
                             <div data-row-span="12">
                                 <div data-field-span="2">
-                                    <asp:CheckBox ID="chkDay" runat="server" />&nbsp;<label for="day">
+                                    <asp:CheckBox ID="chkDay"  runat="server" />&nbsp;<label for="day">
                                         Day</label>
                                 </div>
                                 <div data-field-span="2">
@@ -298,7 +302,7 @@
                                     <div data-field-span="1">
                                         <label></label>
                                         <label>
-                                            <asp:CheckBox ID="chkTerms" required="true" runat="server" />
+                                            <asp:CheckBox Style="background-color: #F9FEBD;" ID="chkTerms" required="true" runat="server" />
                                             I/We confirm having read and understood the account
                                         rules of Pegasus Technologies, and hereby agree to be
                                         bound by the terms and conditions and amendments governing this account as issued by Pegasus Technologies from time-to-time.</label>

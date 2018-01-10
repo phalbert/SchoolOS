@@ -10,23 +10,19 @@ namespace SchoolOSApiLogic.Entities
         public string FeeID = "";
         public string FeeAmount = "";
         public string CurrencyCode = "";
-        public string FeeCategory = "";
         public string FeeType = "";
         public string ApprovedBy = "";
 
 
         public override bool IsValid()
         {
-            if (string.IsNullOrEmpty(SchoolCode))
+            string propertiesThatCanBeNull = "ApprovedBy";
+            Result nullCheckResult = Globals.CheckForNulls(this, propertiesThatCanBeNull);
+
+            if (nullCheckResult.StatusCode != Globals.SUCCESS_STATUS_CODE)
             {
                 StatusCode = Globals.FAILURE_STATUS_CODE;
-                StatusDesc = "PLEASE SUPPLY A SCHOOL CODE";
-                return false;
-            }
-            if (string.IsNullOrEmpty(FeeID))
-            {
-                StatusCode = Globals.FAILURE_STATUS_CODE;
-                StatusDesc = "PLEASE SUPPLY A FEE ID";
+                StatusDesc = nullCheckResult.StatusDesc;
                 return false;
             }
 

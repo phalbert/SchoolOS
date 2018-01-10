@@ -106,12 +106,12 @@
                                     <br />
                                     <div class="row">
                                         <div class="col-lg-6">
-                                            <label>Mark</label>
-                                            <asp:TextBox ID="txtMark" runat="server" CssClass="form-control" placeholder="Enter text" />
-                                        </div>
-                                        <div class="col-lg-6">
                                             <label>Grade</label>
                                             <asp:TextBox ID="txtGrade" runat="server" CssClass="form-control" placeholder="Enter text" />
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label>Mark</label>
+                                            <asp:TextBox ID="txtMark" runat="server" CssClass="form-control" placeholder="Enter text" />
                                         </div>
                                     </div>
                                     <br />

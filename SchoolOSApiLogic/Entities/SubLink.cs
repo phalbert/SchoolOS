@@ -12,22 +12,13 @@ namespace SchoolOSApiLogic.Entities
 
         public override bool IsValid()
         {
-            if (string.IsNullOrEmpty(SubLinkName))
+            string propertiesThatCanBeNull = "";
+            Result nullCheckResult = Globals.CheckForNulls(this, propertiesThatCanBeNull);
+
+            if (nullCheckResult.StatusCode != Globals.SUCCESS_STATUS_CODE)
             {
                 StatusCode = Globals.FAILURE_STATUS_CODE;
-                StatusDesc = "PLEASE SUPPLY A SUBLINK TEXT";
-                return false;
-            }
-            if (string.IsNullOrEmpty(SubLinkCode))
-            {
-                StatusCode = Globals.FAILURE_STATUS_CODE;
-                StatusDesc = "PLEASE SUPPLY A SUBLINK CODE";
-                return false;
-            }
-            if (string.IsNullOrEmpty(URL))
-            {
-                StatusCode = Globals.FAILURE_STATUS_CODE;
-                StatusDesc = "PLEASE SUPPLY A URL";
+                StatusDesc = nullCheckResult.StatusDesc;
                 return false;
             }
 

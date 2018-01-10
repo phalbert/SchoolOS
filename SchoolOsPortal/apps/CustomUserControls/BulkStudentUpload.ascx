@@ -39,7 +39,10 @@
                     <div class="col-lg-2"></div>
                     <div class="col-lg-8">
                         <div class="row alert alert-info">
-                            Pick a CSV File with columns STUDENT NAME, CLASS, STUDENT NUMBER (Optional - will be auto generated if not supplied)
+                            Pick a CSV File with columns
+                           
+                            STUDENT NAME, STUDENT NUMBER (Optional - will be auto generated if not supplied)<br />
+                            To download An example file, click <a href="../StudentsFileSample.csv">here</a><br />
                         </div>
                     </div>
                     <div class="col-lg-2"></div>
@@ -47,8 +50,7 @@
             </div>
             <hr />
             <div class="row text-center">
-                <div class="col-lg-3"></div>
-                <div class="col-lg-3">
+                <div class="col-lg-4">
                     <label>
                         School
                     </label>
@@ -57,13 +59,21 @@
                         <asp:ListItem>False</asp:ListItem>
                     </asp:DropDownList>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-4">
+                     <label>
+                        Class
+                    </label>
+                    <asp:DropDownList ID="ddClasses" runat="server" CssClass="form-control">
+                        <asp:ListItem>True</asp:ListItem>
+                        <asp:ListItem>False</asp:ListItem>
+                    </asp:DropDownList>
+                </div>
+                <div class="col-lg-4">
                     <label>
                         CSV File
                     </label>
                     <asp:FileUpload ID="fuStudentsFile" runat="server" CssClass="form-control" />
                 </div>
-                <div class="col-lg-3"></div>
             </div>
             <hr />
             <div class="row text-center">

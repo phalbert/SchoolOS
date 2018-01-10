@@ -50,8 +50,6 @@ namespace InterLinkClass.PegPaySchoolsApi {
         
         private System.Threading.SendOrPostCallback SaveDepartmentOperationCompleted;
         
-        private System.Threading.SendOrPostCallback SaveSchoolSemesterOperationCompleted;
-        
         private System.Threading.SendOrPostCallback SaveSubjectResultOperationCompleted;
         
         private System.Threading.SendOrPostCallback SaveUploadedFileOperationCompleted;
@@ -146,9 +144,6 @@ namespace InterLinkClass.PegPaySchoolsApi {
         
         /// <remarks/>
         public event SaveDepartmentCompletedEventHandler SaveDepartmentCompleted;
-        
-        /// <remarks/>
-        public event SaveSchoolSemesterCompletedEventHandler SaveSchoolSemesterCompleted;
         
         /// <remarks/>
         public event SaveSubjectResultCompletedEventHandler SaveSubjectResultCompleted;
@@ -463,35 +458,6 @@ namespace InterLinkClass.PegPaySchoolsApi {
             if ((this.SaveDepartmentCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.SaveDepartmentCompleted(this, new SaveDepartmentCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
-            }
-        }
-        
-        /// <remarks/>
-        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://pegasus.co.ug/SaveSchoolSemester", RequestNamespace="http://pegasus.co.ug/", ResponseNamespace="http://pegasus.co.ug/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
-        public Result SaveSchoolSemester(SchoolSemester semester) {
-            object[] results = this.Invoke("SaveSchoolSemester", new object[] {
-                        semester});
-            return ((Result)(results[0]));
-        }
-        
-        /// <remarks/>
-        public void SaveSchoolSemesterAsync(SchoolSemester semester) {
-            this.SaveSchoolSemesterAsync(semester, null);
-        }
-        
-        /// <remarks/>
-        public void SaveSchoolSemesterAsync(SchoolSemester semester, object userState) {
-            if ((this.SaveSchoolSemesterOperationCompleted == null)) {
-                this.SaveSchoolSemesterOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSaveSchoolSemesterOperationCompleted);
-            }
-            this.InvokeAsync("SaveSchoolSemester", new object[] {
-                        semester}, this.SaveSchoolSemesterOperationCompleted, userState);
-        }
-        
-        private void OnSaveSchoolSemesterOperationCompleted(object arg) {
-            if ((this.SaveSchoolSemesterCompleted != null)) {
-                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.SaveSchoolSemesterCompleted(this, new SaveSchoolSemesterCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -963,7 +929,6 @@ namespace InterLinkClass.PegPaySchoolsApi {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(TeacherSubject))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(UploadedFile))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SubjectResults))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolSemester))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Department))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolClass))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SystemUser))]
@@ -995,7 +960,6 @@ namespace InterLinkClass.PegPaySchoolsApi {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(TeacherSubject))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(UploadedFile))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SubjectResults))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolSemester))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Department))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolClass))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SystemUser))]
@@ -1050,7 +1014,6 @@ namespace InterLinkClass.PegPaySchoolsApi {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(TeacherSubject))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(UploadedFile))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SubjectResults))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolSemester))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Department))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolClass))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SystemUser))]
@@ -1338,8 +1301,6 @@ namespace InterLinkClass.PegPaySchoolsApi {
         
         private string currencyCodeField;
         
-        private string feeCategoryField;
-        
         private string feeTypeField;
         
         private string approvedByField;
@@ -1381,16 +1342,6 @@ namespace InterLinkClass.PegPaySchoolsApi {
             }
             set {
                 this.currencyCodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string FeeCategory {
-            get {
-                return this.feeCategoryField;
-            }
-            set {
-                this.feeCategoryField = value;
             }
         }
         
@@ -1904,51 +1855,6 @@ namespace InterLinkClass.PegPaySchoolsApi {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://pegasus.co.ug/")]
-    public partial class SchoolSemester : Request {
-        
-        private string semesterCodeField;
-        
-        private string startDateField;
-        
-        private string enddateField;
-        
-        /// <remarks/>
-        public string SemesterCode {
-            get {
-                return this.semesterCodeField;
-            }
-            set {
-                this.semesterCodeField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string StartDate {
-            get {
-                return this.startDateField;
-            }
-            set {
-                this.startDateField = value;
-            }
-        }
-        
-        /// <remarks/>
-        public string Enddate {
-            get {
-                return this.enddateField;
-            }
-            set {
-                this.enddateField = value;
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
-    [System.SerializableAttribute()]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://pegasus.co.ug/")]
     public partial class Department : Request {
         
         private string departmentCodeField;
@@ -1998,7 +1904,7 @@ namespace InterLinkClass.PegPaySchoolsApi {
         
         private string classCodeField;
         
-        private string schoolClassNameField;
+        private string classNameField;
         
         /// <remarks/>
         public string ClassCode {
@@ -2011,12 +1917,12 @@ namespace InterLinkClass.PegPaySchoolsApi {
         }
         
         /// <remarks/>
-        public string SchoolClassName {
+        public string ClassName {
             get {
-                return this.schoolClassNameField;
+                return this.classNameField;
             }
             set {
-                this.schoolClassNameField = value;
+                this.classNameField = value;
             }
         }
     }
@@ -3011,32 +2917,6 @@ namespace InterLinkClass.PegPaySchoolsApi {
         private object[] results;
         
         internal SaveDepartmentCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        /// <remarks/>
-        public Result Result {
-            get {
-                this.RaiseExceptionIfNecessary();
-                return ((Result)(this.results[0]));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
-    public delegate void SaveSchoolSemesterCompletedEventHandler(object sender, SaveSchoolSemesterCompletedEventArgs e);
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class SaveSchoolSemesterCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        internal SaveSchoolSemesterCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

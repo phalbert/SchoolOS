@@ -56,6 +56,16 @@ public partial class ManageStudents : System.Web.UI.Page
             SetActiveTab(BulkStudentUploadLink);
             return;
         }
+        if (MultiView.GetActiveView() == PromoteStudentsView)
+        {
+            SetActiveTab(PromoteStudentsLink);
+            return;
+        }
+        if (MultiView.GetActiveView() == ListAlumniUserView)
+        {
+            SetActiveTab(ListAlumniUserLink);
+            return;
+        }
     }
 
     private void SetActiveTab(HtmlGenericControl control)
@@ -64,6 +74,8 @@ public partial class ManageStudents : System.Web.UI.Page
         ListStudentsLink.Attributes["class"] = "";
         AdmitStudentsLink.Attributes["class"] = "";
         BulkStudentUploadLink.Attributes["class"] = "";
+        ListAlumniUserLink.Attributes["class"] = "";
+        PromoteStudentsLink.Attributes["class"] = "";
         control.Attributes["class"] = "active";
     }
 
@@ -105,6 +117,16 @@ public partial class ManageStudents : System.Web.UI.Page
         if (link.ID == BulkStudentUploadLinkButton.ID)
         {
             MultiView.SetActiveView(BulkStudentUploadView);
+            return;
+        }
+        if (link.ID == PromoteStudentsLinkButton.ID)
+        {
+            MultiView.SetActiveView(PromoteStudentsView);
+            return;
+        }
+        if (link.ID == ListAlumniUserLinkButton.ID)
+        {
+            MultiView.SetActiveView(ListAlumniUserView);
             return;
         }
     }

@@ -127,7 +127,7 @@ namespace SchoolOSApiLogic.Tests
 
             schcls.SchoolCode = "TEST_SCHOOL";
             schcls.ClassCode = "S4";
-            schcls.SchoolClassName = "senior Four";
+            schcls.ClassName = "senior Four";
             schcls.ModifiedBy = "Peter";
 
 
@@ -150,16 +150,17 @@ namespace SchoolOSApiLogic.Tests
         {
             SchoolsInterfaceApi schclsapi = new SchoolsInterfaceApi();
 
-            SchoolSemester sem = new SchoolSemester();
+            SchoolTerm sem = new SchoolTerm();
 
             sem.SchoolCode = "TEST_SCHOOL";
-            sem.SemesterCode = "2017_Term3";
+            sem.TermCode = "2017_Term3";
+            sem.TermName = "Test Term";
             sem.StartDate = "2017-10-08";
-            sem.Enddate = "2017-12-16";
+            sem.EndDate = "2017-12-16";
             sem.ModifiedBy = "Peter.K";
 
 
-            Result result = schclsapi.SaveSchoolSemester(sem);
+            Result result = schclsapi.SaveSchoolTerm(sem);
             Assert.AreEqual(Globals.SUCCESS_STATUS_DESC, result.StatusDesc);
 
 
@@ -168,8 +169,8 @@ namespace SchoolOSApiLogic.Tests
         public void SaveSchoolSemesterTestInvalidData()
         {
             SchoolsInterfaceApi schApi = new SchoolsInterfaceApi();
-            SchoolSemester schsem = new SchoolSemester();
-            Result result = schApi.SaveSchoolSemester(schsem);
+            SchoolTerm schsem = new SchoolTerm();
+            Result result = schApi.SaveSchoolTerm(schsem);
             Assert.AreEqual(Globals.FAILURE_STATUS_CODE, result.StatusCode);
         }
 
@@ -367,7 +368,6 @@ namespace SchoolOSApiLogic.Tests
             std.SchoolCode = "TEST_SCHOOL";
             std.CurrencyCode = "UGX";
             std.FeeAmount = "1000";
-            std.FeeCategory = "TUITION";
             std.FeeID = "1234";
             std.FeeName = "Tuition Fees";
             std.FeeType = "";

@@ -107,6 +107,8 @@ public class Bussinesslogic
         sch.SchoolPhone = row["SchoolPhone"].ToString();
         sch.SubCounty = row["SubCounty"].ToString();
         sch.UnebCentreNumber = row["UnebCenterNumber"].ToString();
+        sch.SchoolCategories = row["SchoolCategory"].ToString().Split('_');
+        sch.SchoolType = row["SchoolType"].ToString().Split('_');
         sch.StatusCode = Globals.SUCCESS_STATUS_CODE;
         sch.StatusDesc = "SUCCESS";
         return sch;
@@ -371,43 +373,88 @@ public class Bussinesslogic
 
     private static InterLinkClass.MailApi.Result SendSMSToUser(InterLinkClass.PegPaySchoolsApi.SystemUser user)
     {
-        string msg = string.Format("Your Credentials for The Flexi-Schools Web Portal are" +
-                                   "UserId:{0}, Password:{1}, Role: {2}", user.Username, user.UserPassword, user.UserType);
+        InterLinkClass.MailApi.Result resp = new InterLinkClass.MailApi.Result();
+        try
+        {
+            string msg = string.Format("Your Credentials for The Flexi-Schools Web Portal are" +
+                           "UserId:{0}, Password:{1}, Role: {2}", user.Username, user.UserPassword, user.UserType);
 
 
-        InterLinkClass.MailApi.SMS sms = new InterLinkClass.MailApi.SMS();
-        sms.Mask = "Flexipay";
-        sms.Message = msg;
-        sms.Phone = user.PhoneNumber;
-        sms.Reference = SharedCommons.SharedCommons.GenerateUniqueId("SMS");
-        sms.Sender = "Flexipay";
-        sms.VendorTranId = sms.Reference;
+            InterLinkClass.MailApi.SMS sms = new InterLinkClass.MailApi.SMS();
+            sms.Mask = "Flexipay";
+            sms.Message = msg;
+            sms.Phone = user.PhoneNumber;
+            sms.Reference = SharedCommons.SharedCommons.GenerateUniqueId("SMS");
+            sms.Sender = "Flexipay";
+            sms.VendorTranId = sms.Reference;
 
-        InterLinkClass.MailApi.Messenger mapi = new InterLinkClass.MailApi.Messenger();
-        InterLinkClass.MailApi.Result resp = mapi.SendSMS(sms);
+            InterLinkClass.MailApi.Messenger mapi = new InterLinkClass.MailApi.Messenger();
+            resp = mapi.SendSMS(sms);
+        }
+        catch (Exception ex)
+        {
+            resp.StatusCode = Globals.FAILURE_STATUS_CODE;
+            resp.StatusDesc = "FAILED: " + ex.Message;
+        }
         return resp;
     }
 
     private static InterLinkClass.MailApi.Result SendEmailToUser(InterLinkClass.PegPaySchoolsApi.SystemUser user)
     {
-        InterLinkClass.MailApi.Messenger mailApi = new InterLinkClass.MailApi.Messenger();
-        InterLinkClass.MailApi.Email email = new InterLinkClass.MailApi.Email();
-        email.From = "Flexi-Schools";
-        email.Message = string.Format("Hi<br/>" +
-                        "Your Credentials for The Flexi-Schools Web Portal are Below<br/>" +
-                        "UserId: {0}<br/>" +
-                        "Password: {1}<br/>" +
-                        "Role: {2}<br/>" +
-                        "Thank you. <br/>", user.Username, user.UserPassword, user.UserType);
-        email.Subject = "Flexi-Schools Web Portal Credentials";
-        InterLinkClass.MailApi.EmailAddress addr = new InterLinkClass.MailApi.EmailAddress();
-        addr.Address = user.Email;
-        addr.Name = user.FullName;
-        addr.AddressType = InterLinkClass.MailApi.EmailAddressType.To;
+        InterLinkClass.MailApi.Result resp = new InterLinkClass.MailApi.Result();
+        try
+        {
+            InterLinkClass.MailApi.Messenger mailApi = new InterLinkClass.MailApi.Messenger();
+            InterLinkClass.MailApi.Email email = new InterLinkClass.MailApi.Email();
+            email.From = "Flexi-Schools";
+            email.Message = string.Format("Hi<br/>" +
+                            "Your Credentials for The Flexi-Schools Web Portal are Below<br/>" +
+                            "UserId: {0}<br/>" +
+                            "Password: {1}<br/>" +
+                            "Role: {2}<br/>" +
+                            "Thank you. <br/>", user.Username, user.UserPassword, user.UserType);
+            email.Subject = "Flexi-Schools Web Portal Credentials";
+            InterLinkClass.MailApi.EmailAddress addr = new InterLinkClass.MailApi.EmailAddress();
+            addr.Address = user.Email;
+            addr.Name = user.FullName;
+            addr.AddressType = InterLinkClass.MailApi.EmailAddressType.To;
 
-        InterLinkClass.MailApi.EmailAddress[] addresses = { addr };
-        email.MailAddresses = addresses;
-        InterLinkClass.MailApi.Result resp = mailApi.PostEmail(email);
+            InterLinkClass.MailApi.EmailAddress[] addresses = { addr };
+            email.MailAddresses = addresses;
+            resp = mailApi.PostEmail(email);
+        }
+        catch (Exception ex)
+        {
+            resp.StatusCode = Globals.FAILURE_STATUS_CODE;
+            resp.StatusDesc = "FAILED: " + ex.Message;
+        }
+        return resp;
+    }
+
+    public InterLinkClass.MailApi.Result SendEmailMsg(string Msg, string Subject, string toEmail)
+    {
+        InterLinkClass.MailApi.Result resp = new InterLinkClass.MailApi.Result();
+        try
+        {
+            InterLinkClass.MailApi.Messenger mailApi = new InterLinkClass.MailApi.Messenger();
+            InterLinkClass.MailApi.Email email = new InterLinkClass.MailApi.Email();
+            email.From = "Flexi-Schools";
+            email.Message = Msg;
+            email.Subject = Subject;
+            InterLinkClass.MailApi.EmailAddress addr = new InterLinkClass.MailApi.EmailAddress();
+            addr.Address = toEmail;
+            addr.Name = toEmail;
+            addr.AddressType = InterLinkClass.MailApi.EmailAddressType.To;
+
+            InterLinkClass.MailApi.EmailAddress[] addresses = { addr };
+            email.MailAddresses = addresses;
+            resp = mailApi.PostEmail(email);
+        }
+        catch (Exception ex)
+        {
+            resp.StatusCode = Globals.FAILURE_STATUS_CODE;
+            resp.StatusDesc = "FAILED: " + ex.Message;
+        }
         return resp;
     }
 

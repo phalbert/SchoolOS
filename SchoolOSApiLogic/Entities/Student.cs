@@ -24,6 +24,8 @@ namespace SchoolOSApiLogic.Entities
 
         public override bool IsValid()
         {
+            ProfilePic = string.IsNullOrEmpty(ProfilePic) ? Globals.DEFAULT_PICTURE_ID : ProfilePic;
+
             if (string.IsNullOrEmpty(SchoolCode))
             {
                 StatusCode = Globals.FAILURE_STATUS_CODE;

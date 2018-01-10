@@ -296,7 +296,7 @@
           <s:extension base="tns:Request">
             <s:sequence>
               <s:element minOccurs="0" maxOccurs="1" name="ClassCode" type="s:string" />
-              <s:element minOccurs="0" maxOccurs="1" name="SchoolClassName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ClassName" type="s:string" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
@@ -330,31 +330,6 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="SaveDepartmentResult" type="tns:Result" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="SaveSchoolSemester">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="semester" type="tns:SchoolSemester" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:complexType name="SchoolSemester">
-        <s:complexContent mixed="false">
-          <s:extension base="tns:Request">
-            <s:sequence>
-              <s:element minOccurs="0" maxOccurs="1" name="SemesterCode" type="s:string" />
-              <s:element minOccurs="0" maxOccurs="1" name="StartDate" type="s:string" />
-              <s:element minOccurs="0" maxOccurs="1" name="Enddate" type="s:string" />
-            </s:sequence>
-          </s:extension>
-        </s:complexContent>
-      </s:complexType>
-      <s:element name="SaveSchoolSemesterResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="SaveSchoolSemesterResult" type="tns:Result" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -576,7 +551,6 @@
               <s:element minOccurs="0" maxOccurs="1" name="FeeID" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="FeeAmount" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="CurrencyCode" type="s:string" />
-              <s:element minOccurs="0" maxOccurs="1" name="FeeCategory" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="FeeType" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="ApprovedBy" type="s:string" />
             </s:sequence>
@@ -769,12 +743,6 @@
   <wsdl:message name="SaveDepartmentSoapOut">
     <wsdl:part name="parameters" element="tns:SaveDepartmentResponse" />
   </wsdl:message>
-  <wsdl:message name="SaveSchoolSemesterSoapIn">
-    <wsdl:part name="parameters" element="tns:SaveSchoolSemester" />
-  </wsdl:message>
-  <wsdl:message name="SaveSchoolSemesterSoapOut">
-    <wsdl:part name="parameters" element="tns:SaveSchoolSemesterResponse" />
-  </wsdl:message>
   <wsdl:message name="SaveSubjectResultSoapIn">
     <wsdl:part name="parameters" element="tns:SaveSubjectResult" />
   </wsdl:message>
@@ -901,10 +869,6 @@
     <wsdl:operation name="SaveDepartment">
       <wsdl:input message="tns:SaveDepartmentSoapIn" />
       <wsdl:output message="tns:SaveDepartmentSoapOut" />
-    </wsdl:operation>
-    <wsdl:operation name="SaveSchoolSemester">
-      <wsdl:input message="tns:SaveSchoolSemesterSoapIn" />
-      <wsdl:output message="tns:SaveSchoolSemesterSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="SaveSubjectResult">
       <wsdl:input message="tns:SaveSubjectResultSoapIn" />
@@ -1043,15 +1007,6 @@
     </wsdl:operation>
     <wsdl:operation name="SaveDepartment">
       <soap:operation soapAction="http://pegasus.co.ug/SaveDepartment" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="SaveSchoolSemester">
-      <soap:operation soapAction="http://pegasus.co.ug/SaveSchoolSemester" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1271,15 +1226,6 @@
     </wsdl:operation>
     <wsdl:operation name="SaveDepartment">
       <soap12:operation soapAction="http://pegasus.co.ug/SaveDepartment" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="SaveSchoolSemester">
-      <soap12:operation soapAction="http://pegasus.co.ug/SaveSchoolSemester" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

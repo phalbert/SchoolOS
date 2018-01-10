@@ -114,7 +114,7 @@ public partial class SaveClass : System.Web.UI.UserControl
     {
         SchoolClass std = new SchoolClass();
         std.ClassCode = SharedCommons.SharedCommons.GenerateUniqueId("CLASS");
-        std.SchoolClassName = txtClassName.Text;
+        std.ClassName = txtClassName.Text;
         std.SchoolCode = ddSchools.SelectedValue;
         std.ModifiedBy = user.User.Username;
         return std;

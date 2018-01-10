@@ -4,6 +4,7 @@ using System.Text;
 using SchoolOSApiLogic.Entities;
 using System.Data;
 using System.Security.Cryptography;
+using System.Reflection;
 
 namespace SchoolOSApiLogic.ControlClasses
 {
@@ -12,10 +13,14 @@ namespace SchoolOSApiLogic.ControlClasses
         DatabaseHandler dh = new DatabaseHandler();
         SharedCommonsAPI.SharedCommonsAPI sharedCommons = new SharedCommonsAPI.SharedCommonsAPI();
 
+        
+
         public Result SaveSchool(School sch)
         {
             Result result = new Result();
-            DataTable dt = dh.ExecuteDataSet("SaveSchool", new string[] { sch.SchoolCode, sch.SchoolName, sch.SchoolLocation, sch.SchoolEmail, sch.SchoolPhone, sch.UnebCentreNumber, sch.ModifiedBy, sch.District, sch.SubCounty, sch.SchoolLogo, sch.RoadName, sch.PlotNo, sch.PostOfficeBox, sch.LiquidationBankName, sch.LiquidationAccountName, sch.LiquidationAccountNumber }).Tables[0];
+            string schoolType = GetArrayString(sch.SchoolType);
+            string schoolCategory= GetArrayString(sch.SchoolCategories);
+            DataTable dt = dh.ExecuteDataSet("SaveSchool", new string[] { sch.SchoolCode, sch.SchoolName, sch.SchoolLocation, sch.SchoolEmail, sch.SchoolPhone, sch.UnebCentreNumber, sch.ModifiedBy, sch.District, sch.SubCounty, sch.SchoolLogo, sch.RoadName, sch.PlotNo, sch.PostOfficeBox, sch.LiquidationBankName, sch.LiquidationAccountName, sch.LiquidationAccountNumber,schoolType,schoolCategory }).Tables[0];
 
             if (dt.Rows.Count == 0)
             {
@@ -41,6 +46,19 @@ namespace SchoolOSApiLogic.ControlClasses
             result.RequestID = sch.SchoolCode;
 
             return result;
+        }
+
+        private string GetArrayString(string[] list)
+        {
+            Array.Sort(list, (x, y) => String.Compare(x, y));
+            string returnString = "";
+            foreach(string item in list)
+            {
+                returnString += " " + item;
+            }
+            returnString = returnString.Trim();
+            returnString = returnString.Replace(' ', '_');
+            return returnString;
         }
 
         public Result SaveSchoolFee(SchoolFee fee)
@@ -193,7 +211,7 @@ namespace SchoolOSApiLogic.ControlClasses
         public Result SaveSchoolClass(SchoolClass schcls)
         {
             Result result = new Result();
-            DataTable dt = dh.ExecuteDataSet("saveschoolclass", new string[] { schcls.SchoolCode, schcls.ClassCode, schcls.SchoolClassName, schcls.ModifiedBy }).Tables[0];
+            DataTable dt = dh.ExecuteDataSet("saveschoolclass", new string[] { schcls.SchoolCode, schcls.ClassCode, schcls.ClassName, schcls.ModifiedBy }).Tables[0];
 
             if (dt.Rows.Count == 0)
             {
@@ -313,25 +331,7 @@ namespace SchoolOSApiLogic.ControlClasses
             return result;
         }
 
-        public Result SaveSchoolSemester(SchoolSemester sem)
-        {
-            Result result = new Result();
-            DataTable dt = dh.ExecuteDataSet("SaveSchoolSemester", new string[] { sem.SchoolCode, sem.SemesterCode, sem.StartDate, sem.Enddate, sem.ModifiedBy }).Tables[0];
-
-            if (dt.Rows.Count == 0)
-            {
-                result.StatusCode = Globals.FAILURE_STATUS_CODE;
-                result.StatusDesc = "NO ROWS AFFECTED";
-                return result;
-            }
-
-            result.StatusCode = Globals.SUCCESS_STATUS_CODE;
-            result.StatusDesc = Globals.SUCCESS_STATUS_DESC;
-            result.PegPayID = dt.Rows[0][0].ToString();
-            result.RequestID = sem.SemesterCode;
-
-            return result;
-        }
+      
 
         public Result SaveUserType(UserType type)
         {
@@ -441,22 +441,25 @@ namespace SchoolOSApiLogic.ControlClasses
                 return sch;
             }
 
-            DataRow dr = dt.Rows[0];
-            sch.ApprovedBy = dr["ApprovedBy"].ToString();
-            sch.LiquidationAccountName = dr["LiquidationAccountName"].ToString();
-            sch.District = dr["District"].ToString();
-            sch.LiquidationAccountNumber = dr["LiquidationAccountNumber"].ToString();
-            sch.LiquidationBankName = dr["LiquidationBankName"].ToString();
-            sch.PlotNo = dr["PlotNo"].ToString();
-            sch.PostOfficeBox = dr["PostOfficeBox"].ToString();
-            sch.RoadName = dr["RoadName"].ToString();
-            sch.SchoolCategories = null;
-            sch.SchoolCode = Id;
-            sch.SchoolEmail = dr["SchoolEmail"].ToString();
-            sch.SchoolLocation = dr["SchoolLocation"].ToString();
-            sch.SchoolLogo = dr["SchoolLogo"].ToString();
-            sch.SchoolName = dr["SchoolName"].ToString();
-            sch.SchoolType = null;
+            DataRow row = dt.Rows[0];
+            sch.SchoolCode = row["SchoolCode"].ToString();
+            sch.District = row["District"].ToString();
+            sch.LiquidationAccountName = row["LiquidationAccountName"].ToString();
+            sch.LiquidationAccountNumber = row["LiquidationAccountNumber"].ToString();
+            sch.LiquidationBankName = row["LiquidationBankName"].ToString();
+            sch.ModifiedBy = row["ModifiedBy"].ToString();
+            sch.PlotNo = row["PlotNo"].ToString();
+            sch.PostOfficeBox = row["PostOfficeBox"].ToString();
+            sch.RoadName = row["RoadName"].ToString();
+            sch.SchoolEmail = row["SchoolEmail"].ToString();
+            sch.SchoolLocation = row["SchoolLocation"].ToString();
+            sch.SchoolLogo = row["SchoolLogo"].ToString();
+            sch.SchoolName = row["SchoolName"].ToString();
+            sch.SchoolPhone = row["SchoolPhone"].ToString();
+            sch.SubCounty = row["SubCounty"].ToString();
+            sch.UnebCentreNumber = row["UnebCenterNumber"].ToString();
+            sch.SchoolCategories = row["SchoolCategory"].ToString().Split('_');
+            sch.SchoolType= row["SchoolType"].ToString().Split('_');
             sch.StatusCode = Globals.SUCCESS_STATUS_CODE;
             sch.StatusDesc = Globals.SUCCESS_STATUS_DESC;
             return sch;

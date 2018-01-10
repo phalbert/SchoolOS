@@ -115,7 +115,6 @@ public partial class SaveFee : System.Web.UI.UserControl
         SchoolFee std = new SchoolFee();
         std.CurrencyCode = Globals.UGX_CURRENCY_CODE;
         std.FeeAmount = txtAmount.Text;
-        std.FeeCategory = "FLAT_FEE";
         std.FeeID = SharedCommons.SharedCommons.GenerateUniqueId("FEE");
         std.FeeName = txtfeeName.Text;
         std.FeeType = "Debit";

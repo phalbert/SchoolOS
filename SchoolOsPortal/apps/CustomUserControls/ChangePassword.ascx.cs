@@ -32,11 +32,11 @@ public partial class CustomUserControls_ChangePassword : System.Web.UI.UserContr
             {
 
             }
-            //Load Old details
-            else if (!string.IsNullOrEmpty(Id))
-            {
-                LoadEntityData(Id);
-            }
+            ////Load Old details
+            //else if (!string.IsNullOrEmpty(Id))
+            //{
+            //    LoadEntityData(Id);
+            //}
             //First time Request
             else
             {
@@ -53,11 +53,20 @@ public partial class CustomUserControls_ChangePassword : System.Web.UI.UserContr
     private void LoadData()
     {
         btnSubmit.Visible = true;
+        bll.LoadDataIntoDropDown("GetSystemUsersForDropDown", new string[] { user.SchoolDetails.SchoolCode }, ddSystemUsers);
+        ddSystemUsers.SelectedValue = user.User.Username;
+        ddSystemUsers.Enabled = false;
     }
 
-    private void LoadEntityData(string id)
+    public Result LoadEntityData(string id)
     {
+        Result result = new Result();
         btnSubmit.Visible = false;
+        ddSystemUsers.SelectedValue = id;
+        ddSystemUsers.Enabled = false;
+        result.StatusCode = Globals.SUCCESS_STATUS_CODE;
+        result.StatusDesc = Globals.SUCCESS_STATUS_TEXT;
+        return result;
     }
 
     protected void btnEdit_Click(object sender, EventArgs e)
@@ -107,7 +116,7 @@ public partial class CustomUserControls_ChangePassword : System.Web.UI.UserContr
                 return;
             }
 
-            SystemUser oldUser = bll.GetSystemUserById2(user.User.Username);
+            SystemUser oldUser = bll.GetSystemUserById2(ddSystemUsers.SelectedValue);
 
             if (oldUser.StatusCode != Globals.SUCCESS_STATUS_CODE)
             {

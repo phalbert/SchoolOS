@@ -18,16 +18,13 @@ namespace SchoolOSApiLogic.Entities
 
         public override bool IsValid()
         {
-            if (string.IsNullOrEmpty(StudentID))
+            string propertiesThatCanBeNull = "PaymentChannel|Email|PaymentDate";
+            Result nullCheckResult = Globals.CheckForNulls(this, propertiesThatCanBeNull);
+
+            if (nullCheckResult.StatusCode != Globals.SUCCESS_STATUS_CODE)
             {
                 StatusCode = Globals.FAILURE_STATUS_CODE;
-                StatusDesc = "PLEASE SUPPLY A STUDENT ID";
-                return false;
-            }
-            if (string.IsNullOrEmpty(FeeID))
-            {
-                StatusCode = Globals.FAILURE_STATUS_CODE;
-                StatusDesc = "PLEASE SUPPLY A FEE ID";
+                StatusDesc = nullCheckResult.StatusDesc;
                 return false;
             }
 

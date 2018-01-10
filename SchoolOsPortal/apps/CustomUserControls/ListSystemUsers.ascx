@@ -2,6 +2,7 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <%@ Register TagPrefix="uc" TagName="SaveSystemUsersControl" Src="~/CustomUserControls/SaveSystemUser.ascx" %>
+<%@ Register TagPrefix="uc" TagName="ChangePasswordUserControl" Src="~/CustomUserControls/ChangePassword.ascx" %>
 
 
 <asp:MultiView ID="MultiView1" ActiveViewIndex="0" runat="server">
@@ -72,6 +73,7 @@
                                 <asp:TemplateField HeaderText="Details">
                                     <ItemTemplate>
                                         <asp:Button ID="btnedit" runat="server" Text="Edit" CommandName="EditEntity" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" />
+                                        <asp:Button ID="btnChangePassword" runat="server" Text="Change Password" CommandName="ChangePassword" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" />
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>
@@ -83,9 +85,14 @@
             </asp:View>
         </asp:MultiView>
 
-        <!------------------------------------------------- View2 -------------------------------------------------->
+        
     </asp:View>
+    <!------------------------------------------------- View2 -------------------------------------------------->
     <asp:View ID="EditView" runat="server">
         <uc:SaveSystemUsersControl ID="SaveSystemUsersControl" runat="server" />
+    </asp:View>
+      <!------------------------------------------------- View3 -------------------------------------------------->
+    <asp:View ID="ChangePasswordView" runat="server">
+        <uc:ChangePasswordUserControl ID="ChangePasswordUserControl" runat="server" />
     </asp:View>
 </asp:MultiView>

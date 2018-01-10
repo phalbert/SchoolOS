@@ -11,16 +11,13 @@ namespace SchoolOSApiLogic.Entities
 
         public override bool IsValid()
         {
-            if (string.IsNullOrEmpty(SchoolCode))
+            string propertiesThatCanBeNull = "";
+            Result nullCheckResult = Globals.CheckForNulls(this, propertiesThatCanBeNull);
+
+            if (nullCheckResult.StatusCode != Globals.SUCCESS_STATUS_CODE)
             {
                 StatusCode = Globals.FAILURE_STATUS_CODE;
-                StatusDesc = "PLEASE SUPPLY A SCHOOL CODE";
-                return false;
-            }
-            if (string.IsNullOrEmpty(SubjectCode))
-            {
-                StatusCode = Globals.FAILURE_STATUS_CODE;
-                StatusDesc = "PLEASE SUPPLY A SUBJECT CODE";
+                StatusDesc = nullCheckResult.StatusDesc;
                 return false;
             }
 

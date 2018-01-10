@@ -21,5 +21,7 @@ public static class Globals
     public static string EMPLOYEE_SUPPLIER_CATEGORY = "EMPLOYEE";
     public static string SCHOOL_PASSWORD= "T3rr1613";
     public static string SCHOOLS_WEB_PORTAL = "SCHOOLS_WEB_PORTAL_PAYMENT";
+
+    public static string SELF_SIGNUP_NOTIFICATION_EMAIL = "techsupport@pegasustechnologies.co.ug";
 }
 

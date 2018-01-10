@@ -96,27 +96,61 @@ public partial class ListSystemUsers : System.Web.UI.UserControl
     {
         try
         {
-            GridView grid = sender as GridView;
-            int index = Convert.ToInt32(e.CommandArgument);
-            GridViewRow row = grid.Rows[index];
-            string studentID = row.Cells[1].Text;
-            string schoolCode = ddSchools.SelectedValue;
-
-            Result result = SaveSystemUsersControl.LoadEntityDataForEdit(studentID);
-
-            if (result.StatusCode != Globals.SUCCESS_STATUS_CODE)
+            if (e.CommandName == "EditEntity")
             {
-                string msg = "FAILED: " + result.StatusDesc;
-                bll.ShowMessage(lblmsg, msg, true);
+                EditEntity(sender,e);
                 return;
             }
-
-            MultiView1.SetActiveView(EditView);
+            if (e.CommandName == "ChangePassword")
+            {
+                ChangePassword(sender, e);
+                return;
+            }
         }
         catch (Exception ex)
         {
             string msg = "FAILED: " + ex.Message;
             bll.ShowMessage(lblmsg, msg, true);
         }
+    }
+
+    private void ChangePassword(object sender, GridViewCommandEventArgs e)
+    {
+        GridView grid = sender as GridView;
+        int index = Convert.ToInt32(e.CommandArgument);
+        GridViewRow row = grid.Rows[index];
+        string userID = row.Cells[1].Text;
+       
+
+        Result result = ChangePasswordUserControl.LoadEntityData(userID);
+
+        if (result.StatusCode != Globals.SUCCESS_STATUS_CODE)
+        {
+            string msg = "FAILED: " + result.StatusDesc;
+            bll.ShowMessage(lblmsg, msg, true);
+            return;
+        }
+
+        MultiView1.SetActiveView(ChangePasswordView);
+    }
+
+    private void EditEntity(object sender, GridViewCommandEventArgs e)
+    {
+        GridView grid = sender as GridView;
+        int index = Convert.ToInt32(e.CommandArgument);
+        GridViewRow row = grid.Rows[index];
+        string studentID = row.Cells[1].Text;
+        string schoolCode = ddSchools.SelectedValue;
+
+        Result result = SaveSystemUsersControl.LoadEntityDataForEdit(studentID);
+
+        if (result.StatusCode != Globals.SUCCESS_STATUS_CODE)
+        {
+            string msg = "FAILED: " + result.StatusDesc;
+            bll.ShowMessage(lblmsg, msg, true);
+            return;
+        }
+
+        MultiView1.SetActiveView(EditView);
     }
 }
