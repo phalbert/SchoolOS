@@ -54,7 +54,7 @@ public partial class SaveSystemSetting : System.Web.UI.UserControl
     {
         btnSubmit.Visible = true;
         btnEdit.Visible = false;
-        bll.LoadCompaniesIntoDropDown(user, ddCompanies);
+        //bll.LoadCompaniesIntoDropDown(user, ddCompanies);
 
     }
 

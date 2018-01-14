@@ -123,4 +123,64 @@ public partial class ListStudents : System.Web.UI.UserControl
             bll.ShowMessage(lblmsg, msg, true);
         }
     }
+
+    protected void dataGridResults_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        try
+        {
+            CheckBox ChkBoxHeader = (CheckBox)dataGridResults.HeaderRow.FindControl("chkboxSelectAll");
+            foreach (GridViewRow row in dataGridResults.Rows)
+            {
+                CheckBox ChkBoxRows = (CheckBox)row.FindControl("CheckBox");
+                if (ChkBoxHeader.Checked == true)
+                {
+                    ChkBoxRows.Checked = true;
+                }
+                else
+                {
+                    ChkBoxRows.Checked = false;
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            string msg = "FAILED: " + ex.Message;
+            bll.ShowMessage(lblmsg, msg, true, Session);
+        }
+    }
+
+    protected void btnPrintIds_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            List<Student> IdsToPrint = new List<Student>();
+            //loop thru the rows
+            foreach (GridViewRow row in dataGridResults.Rows)
+            {
+                //for each row get the checkbox attached
+                CheckBox ChkBox = (CheckBox)row.FindControl("CheckBox");
+
+                //has user ticked the box
+                if (ChkBox.Checked)
+                {
+                    //if this row is not the header row
+                    if (row.RowType != DataControlRowType.Header)
+                    {
+                        Student std = new Student();
+                        std.SchoolCode = ddSchools.SelectedValue;
+                        std.StudentNumber = row.Cells[1].Text.Trim();
+                        IdsToPrint.Add(std);
+                    }
+                }
+            }
+
+            Session["IdsToPrint"] = IdsToPrint;
+            Response.Redirect("~/PrintStudentId.aspx");
+        }
+        catch (Exception ex)
+        {
+            string msg = "FAILED: " + ex.Message;
+            bll.ShowMessage(lblmsg, msg, true);
+        }
+    }
 }

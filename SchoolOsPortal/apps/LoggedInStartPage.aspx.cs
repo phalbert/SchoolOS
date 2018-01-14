@@ -20,14 +20,13 @@ public partial class Admin : System.Web.UI.Page
         try
         {
             user = Session["User"] as SystemUserDetails;
-            lblmsg.Text = "";
             Session["IsError"] = null;
 
             if (user == null)
             {
-                Response.Redirect("Default.aspx");
+                Response.Redirect("Default.aspx?Msg=SESSION HAS EXPIRED");
             }
-            else if (IsPostBack)
+            if (IsPostBack)
             {
 
             }
@@ -35,54 +34,24 @@ public partial class Admin : System.Web.UI.Page
             {
                 LoadData();
             }
-
-        }
-        catch (NullReferenceException exe)
-        {
-            Response.Redirect("Default.aspx?login=1", false);
         }
         catch (Exception ex)
         {
-            bll.ShowMessage(lblmsg, ex.Message, true);
+
         }
     }
 
     private void LoadData()
     {
-        lblmsg.Text = user.User.FullName;
-        UsersPic.Attributes["src"] = "ImageHandler.ashx?Id=" + user.SchoolDetails.SchoolLogo;
-
-        DataTable dt = bll.ExecuteDataTableOnSchoolsDB("GetDashBoardStatistics", new string[] { user.SchoolDetails.SchoolCode });
-
-        if (dt.Rows.Count == 0)
+        if (user.User.UserType == "SCHOOL_STUDENT")
         {
+            MultiView.SetActiveView(StudentProfileVew);
             return;
         }
 
-        DataRow dr = dt.Rows[0];
-        lblClassCount.Text = dr["ClassesCount"].ToString();
-        lblStudentCount.Text = dr["StudentCount"].ToString();
-        lblTeacherCount.Text = dr["TeacherCount"].ToString();
-        lblTranAmount.Text = dr["TransactionCount"].ToString();
+        MultiView.SetActiveView(DashboardView);
+        return;
     }
 
-    protected void btnSearch_Click(object sender, EventArgs e)
-    {
-        try
-        {
-            LoadReceipt();
-        }
-        catch (Exception ex)
-        {
-            string msg = "FAILED: " + ex.Message;
-        }
-    }
-    private void LoadReceipt()
-    {
-
-    }
-    protected void btnSetAsMainAccount_Click(object sender, EventArgs e)
-    {
-
-    }
+  
 }

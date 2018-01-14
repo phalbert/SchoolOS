@@ -4,11 +4,10 @@ using System.Drawing;
 using System.IO;
 using System.Web;
 using System.Web.UI.WebControls;
-using InterLinkClass.PegasusManagementApi;
+using InterLinkClass.PegPaySchoolsApi;
 
 public class Bussinesslogic
 {
-    MSystemService client = new MSystemService();
     InterLinkClass.PegPaySchoolsApi.Service SchoolsApi = new InterLinkClass.PegPaySchoolsApi.Service();
 
     public string GetImageById(string Id)
@@ -16,9 +15,12 @@ public class Bussinesslogic
         string base64String = "";
         DataSet ds = SchoolsApi.ExecuteDataSet("GetImageById", new string[] { Id });
         DataTable dt = ds.Tables[0];
+        
+        //no image found
         if (dt.Rows.Count == 0)
         {
-            return "";
+            ds = SchoolsApi.ExecuteDataSet("GetImageById", new string[] { "Default" });
+            dt = ds.Tables[0];
         }
 
         DataRow dr = dt.Rows[0];
@@ -52,6 +54,69 @@ public class Bussinesslogic
         user.StatusCode = Globals.SUCCESS_STATUS_CODE;
         user.StatusDesc = "SUCCESS";
         return user;
+    }
+
+    public TeacherSubject GetTeacherSubjectById(string id)
+    {
+        TeacherSubject tch = new TeacherSubject();
+
+        InterLinkClass.PegPaySchoolsApi.SystemUser user = new InterLinkClass.PegPaySchoolsApi.SystemUser();
+        DataTable dt = SchoolsApi.ExecuteDataSet("GetTeacherSubjectById", new string[] { id }).Tables[0];
+        if (dt.Rows.Count == 0)
+        {
+            tch.StatusCode = Globals.FAILURE_STATUS_CODE;
+            tch.StatusDesc = "NOT FOUND";
+            return tch;
+        }
+        DataRow row = dt.Rows[0];
+        tch.ClassCode = row["ClassCode"].ToString();
+        tch.SchoolCode= row["SchoolCode"].ToString();
+        tch.StreamCode= row["StreamCode"].ToString();
+        tch.SubjectCode= row["SubjectCode"].ToString();
+        tch.TeacherId= row["TeacherId"].ToString();
+        tch.TermCode= row["TermCode"].ToString();
+        
+        tch.StatusCode = Globals.SUCCESS_STATUS_CODE;
+        tch.StatusDesc = Globals.SUCCESS_STATUS_TEXT;
+        return tch;
+    }
+
+    public string InsertIntoAuditLog(string ActionType, string TableName, string schoolCode, string ModifiedBy, string Action)
+    {
+        try
+        {
+            DataTable datatable = SchoolsApi.ExecuteDataSet("InsertIntoAuditTrail",
+                                                           new string[]
+                                                           {
+                                                             ActionType,
+                                                             TableName,
+                                                             schoolCode,
+                                                             ModifiedBy,
+                                                             Action
+                                                           }).Tables[0];
+            return datatable.Rows[0][0].ToString();
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+    }
+
+    public Result LogError(string Identifier, string StackTrace, string CompanyCode, string Message, string ErrorType)
+    {
+        Result result = new Result();
+        try
+        {
+            int rowsAffected = SchoolsApi.ExecuteNonQuery("LogError",new string[] { Identifier, StackTrace, CompanyCode, Message, ErrorType });
+            result.StatusCode = Globals.SUCCESS_STATUS_CODE;
+            result.StatusDesc = Globals.SUCCESS_STATUS_TEXT;
+        }
+        catch (Exception ex)
+        {
+            result.StatusCode = Globals.FAILURE_STATUS_CODE;
+            result.StatusDesc = "EXCPTION: " + ex.Message;
+        }
+        return result;
     }
 
     public InterLinkClass.PegPaySchoolsApi.SchoolStaff GetStaffById(string studentId, string schoolCode)
@@ -204,84 +269,7 @@ public class Bussinesslogic
         }
     }
 
-    public string GetVATValueElseZero(string CompanyCode, string TranAmount, Label lblVAT)
-    {
-
-        try
-        {
-            SystemSetting vatSetting = new SystemSetting();
-            Entity result = client.GetById(CompanyCode, "SYSTEMSETTING", "VAT");
-
-            if (result.StatusCode != Globals.SUCCESS_STATUS_CODE)
-            {
-                vatSetting.SettingValue = "0";
-            }
-
-            if (string.IsNullOrEmpty(TranAmount))
-            {
-                TranAmount = "0";
-            }
-
-            vatSetting = result as SystemSetting;
-            decimal vat = decimal.Parse(vatSetting.SettingValue);
-            if (lblVAT != null)
-            {
-                lblVAT.Text = vatSetting.SettingValue;
-            }
-            decimal vatAmount = ((vat / 100) * (decimal.Parse(TranAmount)));
-            return vatAmount.ToString();
-        }
-        catch (Exception)
-        {
-            return "0";
-        }
-    }
-
-
-    public void LoadSupplierCatgoriesIntoDropDown(string CompanyCode, SystemUser user, DropDownList ddlst)
-    {
-        string[] parameters = { CompanyCode };
-        DataSet ds = client.ExecuteDataSet("GetSupplierCatgoriesForDropDown", parameters);
-        DataTable dt = ds.Tables[0];
-
-        ddlst.Items.Clear();
-        foreach (DataRow dr in dt.Rows)
-        {
-            string Text = dr["CategoryName"].ToString();
-            string Value = dr["CategoryCode"].ToString();
-            ddlst.Items.Add(new ListItem(Text, Value));
-        }
-    }
-
-    public void LoadEmployeesIntoDropDown(string CompanyCode, SystemUser user, DropDownList ddlst)
-    {
-        string[] parameters = { CompanyCode };
-        DataSet ds = client.ExecuteDataSet("GetEmployeesForDropDown", parameters);
-        DataTable dt = ds.Tables[0];
-
-        ddlst.Items.Clear();
-        foreach (DataRow dr in dt.Rows)
-        {
-            string Text = dr["SupplierName"].ToString();
-            string Value = dr["SupplierCode"].ToString();
-            ddlst.Items.Add(new ListItem(Text, Value));
-        }
-    }
-
-    public void LoadDepartmentsIntoDropDown(string CompanyCode, SystemUser user, DropDownList ddlst)
-    {
-        string[] parameters = { CompanyCode };
-        DataSet ds = client.ExecuteDataSet("GetDepartmentsForDropDown", parameters);
-        DataTable dt = ds.Tables[0];
-
-        ddlst.Items.Clear();
-        foreach (DataRow dr in dt.Rows)
-        {
-            string Text = dr["DepartmentName"].ToString();
-            string Value = dr["DepartmentCode"].ToString();
-            ddlst.Items.Add(new ListItem(Text, Value));
-        }
-    }
+  
 
     public void ShowExternalMessage(Label lblmsg, System.Web.SessionState.HttpSessionState Session)
     {
@@ -322,27 +310,7 @@ public class Bussinesslogic
         }
     }
 
-    public string InsertIntoAuditLog(string ActionType, string TableName, string BankCode, string ModifiedBy, string Action)
-    {
-        try
-        {
-            return "";
-            //DataTable datatable = client.ExecuteDataSet("InsertIntoAuditTrail",
-            //                                               new string[]
-            //                                               {
-            //                                                 ActionType,
-            //                                                 TableName,
-            //                                                 BankCode,
-            //                                                 ModifiedBy,
-            //                                                 Action
-            //                                               }).Tables[0];
-            //return datatable.Rows[0][0].ToString();
-        }
-        catch (Exception ex)
-        {
-            throw ex;
-        }
-    }
+    
 
 
     public InterLinkClass.PegPaySchoolsApi.Result SendCredentialsToUser(InterLinkClass.PegPaySchoolsApi.SystemUser user)
@@ -520,8 +488,7 @@ public class Bussinesslogic
     public UserType GetUserTypeById(string companyCode, string userType)
     {
         UserType user = new UserType();
-        MSystemService mSystem = new MSystemService();
-        DataTable dt = mSystem.ExecuteDataSet("GetUserTypeByUserTypeCode", new string[] { companyCode, userType }).Tables[0];
+        DataTable dt = SchoolsApi.ExecuteDataSet("GetUserTypeByUserTypeCode", new string[] { companyCode, userType }).Tables[0];
 
 
         if (dt.Rows.Count == 0)
@@ -534,65 +501,14 @@ public class Bussinesslogic
         DataRow dr = dt.Rows[0];
         user.UserTypeCode = dr["UserTypeCode"].ToString();
         user.UserTypeName = dr["UserTypeName"].ToString();
-        user.IsActive = dr["IsActive"].ToString();
         user.ModifiedBy = dr["ModifiedBy"].ToString();
-        user.CreatedBy = dr["CreatedBy"].ToString();
-        user.CompanyCode = dr["CompanyCode"].ToString();
-
-        if (user.IsActive.ToUpper() != "TRUE")
-        {
-            user.StatusCode = Globals.FAILURE_STATUS_CODE;
-            user.StatusDesc = "USERTYPES WITH ID [" + userType + "] ARE DEACTIVATED. ie Role Has Been Deactived. PLEASE CONTACT SYSTEM ADMINISTRATORS";
-            return user;
-        }
 
         user.StatusCode = Globals.SUCCESS_STATUS_CODE;
         user.StatusDesc = Globals.SUCCESS_STATUS_TEXT;
         return user;
     }
 
-    public void LoadCompaniesIntoDropDownALL(SystemUser user, DropDownList ddlst)
-    {
-        string[] parameters = { };
-        DataSet ds = client.ExecuteDataSet("GetCompaniesForDropDown", parameters);
-        DataTable dt = ds.Tables[0];
-
-        ddlst.Items.Clear();
-        ddlst.Items.Add(new ListItem("-- ALL --", ""));
-        foreach (DataRow dr in dt.Rows)
-        {
-            string Text = dr["CompanyName"].ToString();
-            string Value = dr["CompanyCode"].ToString();
-            ddlst.Items.Add(new ListItem(Value, Text));
-        }
-
-        if (user.UserType != "SYS_ADMIN")
-        {
-            ddlst.SelectedValue = user.CompanyCode;
-            ddlst.Enabled = false;
-        }
-    }
-
-    public void LoadCompaniesIntoDropDown(SystemUser user, DropDownList ddlst)
-    {
-        string[] parameters = { };
-        DataSet ds = client.ExecuteDataSet("GetCompaniesForDropDown", parameters);
-        DataTable dt = ds.Tables[0];
-
-        ddlst.Items.Clear();
-        foreach (DataRow dr in dt.Rows)
-        {
-            string Text = dr["CompanyName"].ToString();
-            string Value = dr["CompanyCode"].ToString();
-            ddlst.Items.Add(new ListItem(Text, Value));
-        }
-
-        if (user.UserType != "SYS_ADMIN")
-        {
-            ddlst.SelectedValue = user.CompanyCode;
-            ddlst.Enabled = false;
-        }
-    }
+  
 
     public void LoadSchoolsIntoDropDown(InterLinkClass.PegPaySchoolsApi.SystemUserDetails user, DropDownList ddlst)
     {
@@ -615,80 +531,7 @@ public class Bussinesslogic
         }
     }
 
-    public void LoadContractTypesIntoDropDown(string CompanyCode, SystemUser user, DropDownList ddlst)
-    {
-        string[] parameters = { CompanyCode };
-        DataSet ds = client.ExecuteDataSet("GetContractTypesForDropDown", parameters);
-        DataTable dt = ds.Tables[0];
-
-        ddlst.Items.Clear();
-        foreach (DataRow dr in dt.Rows)
-        {
-            string Text = dr["ContractTypeName"].ToString();
-            string Value = dr["ContractTypeCode"].ToString();
-            ddlst.Items.Add(new ListItem(Text, Value));
-        }
-    }
-
-    public void LoadUnpaidInvoicesIntoDropDown(string CompanyCode, SystemUser user, DropDownList ddlst)
-    {
-        string[] parameters = { CompanyCode };
-        DataSet ds = client.ExecuteDataSet("GetUnpaidInvoicesForDropDown", parameters);
-        DataTable dt = ds.Tables[0];
-
-        ddlst.Items.Clear();
-        foreach (DataRow dr in dt.Rows)
-        {
-            string Value = dr["InvoiceNumber"].ToString();
-            string Text = Value + " for " + dr["ClientCode"].ToString();
-            ddlst.Items.Add(new ListItem(Text, Value));
-        }
-    }
-
-    public void LoadUnpaidInvoicesForSupplierIntoDropDown(string CompanyCode, SystemUser user, DropDownList ddlst, string SupplierCode)
-    {
-        string[] parameters = { CompanyCode, SupplierCode };
-        DataSet ds = client.ExecuteDataSet("GetUnpaidInvoicesOfSupplierForDropDown", parameters);
-        DataTable dt = ds.Tables[0];
-
-        ddlst.Items.Clear();
-        foreach (DataRow dr in dt.Rows)
-        {
-            string Value = dr["InvoiceNumber"].ToString();
-            string Text = Value + " for " + dr["ClientCode"].ToString();
-            ddlst.Items.Add(new ListItem(Text, Value));
-        }
-    }
-
-    public void LoadSuppliersIntoDropDown(string CompanyCode, SystemUser user, DropDownList ddlst)
-    {
-        string[] parameters = { CompanyCode };
-        DataSet ds = client.ExecuteDataSet("GetSuppliersForDropDown", parameters);
-        DataTable dt = ds.Tables[0];
-
-        ddlst.Items.Clear();
-        foreach (DataRow dr in dt.Rows)
-        {
-            string Text = dr["SupplierName"].ToString();
-            string Value = dr["SupplierCode"].ToString();
-            ddlst.Items.Add(new ListItem(Text, Value));
-        }
-    }
-
-    public void LoadCurrenciesIntoDropDown(string CompanyCode, SystemUser user, DropDownList ddlst)
-    {
-        string[] parameters = { CompanyCode };
-        DataSet ds = client.ExecuteDataSet("GetCurrenciesForDropDown", parameters);
-        DataTable dt = ds.Tables[0];
-
-        ddlst.Items.Clear();
-        foreach (DataRow dr in dt.Rows)
-        {
-            string Text = dr["CurrencyName"].ToString();
-            string Value = dr["CurrencyCode"].ToString();
-            ddlst.Items.Add(new ListItem(Text, Value));
-        }
-    }
+  
 
     public void LoadDataIntoDropDown(string storedProcName, string[] parameters, DropDownList ddlst)
     {
@@ -750,275 +593,9 @@ public class Bussinesslogic
         }
     }
 
-    public void LoadClientsIntoDropDown(string CompanyCode, SystemUser user, DropDownList ddlst)
-    {
-        string[] parameters = { CompanyCode };
-        DataSet ds = client.ExecuteDataSet("GetClientsForDropDown", parameters);
-        DataTable dt = ds.Tables[0];
+   
 
-        ddlst.Items.Clear();
-        foreach (DataRow dr in dt.Rows)
-        {
-            string Text = dr["ClientName"].ToString();
-            string Value = dr["ClientCode"].ToString();
-            ddlst.Items.Add(new ListItem(Text, Value));
-        }
-    }
-
-    public void LoadClientsAndSuppliersIntoDropDown(string CompanyCode, SystemUser user, DropDownList ddlst)
-    {
-        string[] parameters = { CompanyCode };
-        DataSet ds = client.ExecuteDataSet("GetClientsAndSuppliersForDropDown", parameters);
-        DataTable dt = ds.Tables[0];
-
-        ddlst.Items.Clear();
-        foreach (DataRow dr in dt.Rows)
-        {
-            string Text = dr["Name"].ToString();
-            string Value = dr["Code"].ToString();
-            ddlst.Items.Add(new ListItem(Text, Value));
-        }
-    }
-
-    public void LoadContractCatgoriesIntoDropDown(string CompanyCode, SystemUser user, DropDownList ddlst)
-    {
-        string[] parameters = { CompanyCode };
-        DataSet ds = client.ExecuteDataSet("GetContractCatgoriesForDropDown", parameters);
-        DataTable dt = ds.Tables[0];
-
-        ddlst.Items.Clear();
-        foreach (DataRow dr in dt.Rows)
-        {
-            string Text = dr["CategoryName"].ToString();
-            string Value = dr["CategoryCode"].ToString();
-            ddlst.Items.Add(new ListItem(Text, Value));
-        }
-    }
-
-    public void LoadTranCatgoriesIntoDropDown(string CompanyCode, SystemUser user, DropDownList ddlst)
-    {
-        string[] parameters = { CompanyCode };
-        DataSet ds = client.ExecuteDataSet("GetTranCatgoriesForDropDown", parameters);
-        DataTable dt = ds.Tables[0];
-
-        ddlst.Items.Clear();
-        foreach (DataRow dr in dt.Rows)
-        {
-            string Text = dr["CategoryName"].ToString();
-            string Value = dr["CategoryCode"].ToString();
-            ddlst.Items.Add(new ListItem(Text, Value));
-        }
-    }
-
-    public void LoadTranCatgoriesIntoDropDownALL(string CompanyCode, SystemUser user, DropDownList ddlst)
-    {
-        string[] parameters = { CompanyCode };
-        DataSet ds = client.ExecuteDataSet("GetTranCatgoriesForDropDown", parameters);
-        DataTable dt = ds.Tables[0];
-
-        ddlst.Items.Clear();
-        ddlst.Items.Add(new ListItem("ALL", "ALL"));
-        foreach (DataRow dr in dt.Rows)
-        {
-            string Text = dr["CategoryName"].ToString();
-            string Value = dr["CategoryCode"].ToString();
-            ddlst.Items.Add(new ListItem(Text, Value));
-        }
-    }
-
-    public void LoadInvoiceCatgoriesIntoDropDown(string CompanyCode, SystemUser user, DropDownList ddlst)
-    {
-        string[] parameters = { CompanyCode };
-        DataSet ds = client.ExecuteDataSet("GetInvoiceCategoriesForDropDown", parameters);
-        DataTable dt = ds.Tables[0];
-
-        ddlst.Items.Clear();
-        foreach (DataRow dr in dt.Rows)
-        {
-            string Text = dr["CategoryName"].ToString();
-            string Value = dr["CategoryCode"].ToString();
-            ddlst.Items.Add(new ListItem(Text, Value));
-        }
-    }
-
-    public void LoadPaymentTypesIntoDropDown(string CompanyCode, SystemUser user, DropDownList ddlst)
-    {
-        string[] parameters = { CompanyCode };
-        DataSet ds = client.ExecuteDataSet("GetPaymentTypesForDropDown", parameters);
-        DataTable dt = ds.Tables[0];
-
-        ddlst.Items.Clear();
-        foreach (DataRow dr in dt.Rows)
-        {
-            string Text = dr["PaymentTypeName"].ToString();
-            string Value = dr["PaymentTypeCode"].ToString();
-            ddlst.Items.Add(new ListItem(Text, Value));
-        }
-    }
-
-    public void LoadRecieptCatgoriesIntoDropDown(string CompanyCode, SystemUser user, DropDownList ddlst)
-    {
-        string[] parameters = { CompanyCode };
-        DataSet ds = client.ExecuteDataSet("GetRecieptCategoriesForDropDown", parameters);
-        DataTable dt = ds.Tables[0];
-
-        ddlst.Items.Clear();
-        foreach (DataRow dr in dt.Rows)
-        {
-            string Text = dr["CategoryName"].ToString();
-            string Value = dr["CategoryCode"].ToString();
-            ddlst.Items.Add(new ListItem(Text, Value));
-        }
-    }
-
-    public void LoadUserTypesIntoDropDown(string CompanyCode, SystemUser user, DropDownList ddlst)
-    {
-        string[] parameters = { CompanyCode };
-        DataSet ds = client.ExecuteDataSet("GetUserTypesForDropDown", parameters);
-        DataTable dt = ds.Tables[0];
-
-        ddlst.Items.Clear();
-        foreach (DataRow dr in dt.Rows)
-        {
-            string Text = dr["UserTypeName"].ToString();
-            string Value = dr["UserTypeCode"].ToString();
-            ddlst.Items.Add(new ListItem(Text, Value));
-        }
-    }
-
-    public void LoadInvoicesForClient(string CompanyCode, SystemUser user, DropDownList ddlst, string ClientCode)
-    {
-        string[] parameters = { CompanyCode, ClientCode };
-        DataSet ds = client.ExecuteDataSet("GetInvoiceByClientCodeForDropDown", parameters);
-        DataTable dt = ds.Tables[0];
-
-        ddlst.Items.Clear();
-        foreach (DataRow dr in dt.Rows)
-        {
-            string Text = dr["Narration"].ToString();
-            string Value = dr["InvoiceNumber"].ToString();
-            ddlst.Items.Add(new ListItem(Text, Value));
-        }
-    }
-
-    public Result LogError(string Identifier, string StackTrace, string CompanyCode, string Message, string ErrorType)
-    {
-        Result result = new Result();
-        try
-        {
-            result = client.LogError(Identifier, StackTrace, CompanyCode, Message, ErrorType);
-        }
-        catch (Exception ex)
-        {
-            result.StatusCode = Globals.FAILURE_STATUS_CODE;
-            result.StatusDesc = "EXCPTION: " + ex.Message;
-        }
-        return result;
-    }
-
-    public SystemUser GetSystemUserByUserId(string UserId)
-    {
-        SystemUser user = new SystemUser();
-
-        DataTable dt = client.ExecuteDataSet("GetSystemUserByUserId", new string[] { UserId }).Tables[0];
-
-
-        if (dt.Rows.Count == 0)
-        {
-            user.StatusCode = Globals.FAILURE_STATUS_CODE;
-            user.StatusDesc = "USER WITH ID [" + UserId + "] NOT FOUND";
-            return user;
-        }
-
-        DataRow dr = dt.Rows[0];
-        user.Name = dr["Name"].ToString();
-        user.Password = dr["Password"].ToString();
-        user.IsActive = dr["IsActive"].ToString();
-        user.ModifiedBy = dr["ModifiedBy"].ToString();
-        user.CreatedBy = dr["CreatedBy"].ToString();
-        user.UserType = dr["UserType"].ToString();
-        user.CompanyCode = dr["CompanyCode"].ToString();
-        user.UserId = dr["UserId"].ToString();
-        user.Email = dr["Email"].ToString();
-
-        if (user.IsActive.ToUpper() != "TRUE")
-        {
-            user.StatusCode = Globals.FAILURE_STATUS_CODE;
-            user.StatusDesc = "USER WITH ID [" + UserId + "] IS DEACTIVATED. PLEASE CONTACT SYSTEM ADMINISTRATORS";
-            return user;
-        }
-
-        user.StatusCode = Globals.SUCCESS_STATUS_CODE;
-        user.StatusDesc = Globals.SUCCESS_STATUS_TEXT;
-        return user;
-
-    }
-
-    public Company GetCompanyByCompanyCode(string CompanyCode)
-    {
-        Company company = new Company();
-        MSystemService mSystem = new MSystemService();
-        DataTable dt = mSystem.ExecuteDataSet("GetCompanyByCompanyCode", new string[] { CompanyCode }).Tables[0];
-
-
-        if (dt.Rows.Count == 0)
-        {
-            company.StatusCode = Globals.FAILURE_STATUS_CODE;
-            company.StatusDesc = "COMPANY WITH ID [" + CompanyCode + "] NOT FOUND";
-            return company;
-        }
-
-        DataRow dr = dt.Rows[0];
-        company.CompanyName = dr["CompanyName"].ToString();
-        company.CompanyContactEmail = dr["CompanyContactEmail"].ToString();
-        company.IsActive = dr["IsActive"].ToString();
-        company.ModifiedBy = dr["ModifiedBy"].ToString();
-        company.CreatedBy = dr["CreatedBy"].ToString();
-        company.NavBarTextColor = dr["NavBarTextColor"].ToString();
-        company.PathToLogoImage = dr["PathToLogoImage"].ToString();
-        company.ThemeColor = dr["ThemeColor"].ToString();
-        company.CompanyCode = dr["CompanyCode"].ToString();
-
-        if (company.IsActive.ToUpper() != "TRUE")
-        {
-            company.StatusCode = Globals.FAILURE_STATUS_CODE;
-            company.StatusDesc = "COMPANY WITH ID [" + CompanyCode + "] IS DEACTIVATED. PLEASE CONTACT SYSTEM ADMINISTRATORS";
-            return company;
-        }
-
-        company.StatusCode = Globals.SUCCESS_STATUS_CODE;
-        company.StatusDesc = Globals.SUCCESS_STATUS_TEXT;
-        return company;
-
-    }
-
-    public string GetSaleItemsForNarration(string SaleID)
-    {
-        Company company = new Company();
-        MSystemService mSystem = new MSystemService();
-        DataTable dt = mSystem.ExecuteDataSet("GetSaleItemsBySaleId", new string[] { SaleID }).Tables[0];
-        string result = "";
-        foreach (DataRow dr in dt.Rows)
-        {
-            result += dr["ItemDesc"].ToString() + " - " + dr["SubTotal"].ToString() + "\n";
-        }
-        return result;
-
-    }
-
-    public DataTable SearchSuppliersTable(string[] searchParams)
-    {
-        DataSet ds = client.ExecuteDataSet("SearchSuppliersTable", searchParams);
-        DataTable dt = ds.Tables[0];
-        return dt;
-    }
-
-    public DataTable SearchClientsTable(string[] searchParams)
-    {
-        DataSet ds = client.ExecuteDataSet("SearchClientsTable", searchParams);
-        DataTable dt = ds.Tables[0];
-        return dt;
-    }
+   
 
     public DataTable SearchSchoolsTable(string[] searchParams)
     {
@@ -1043,35 +620,6 @@ public class Bussinesslogic
         return dt;
     }
 
-    public DataTable SearchPurchasesTable(string[] searchParams)
-    {
-        DataSet ds = client.ExecuteDataSet("SearchPurchasesTable", searchParams);
-        DataTable dt = ds.Tables[0];
-        return dt;
-    }
-
-    public DataTable SearchPaymentVouchersTable(string[] searchParams)
-    {
-        DataSet ds = client.ExecuteDataSet("SearchPaymentVouchersTable", searchParams);
-        DataTable dt = ds.Tables[0];
-        return dt;
-    }
-
-    public DataTable SearchInvoicesTable(string[] searchParams)
-    {
-        DataSet ds = client.ExecuteDataSet("SearchInvoicesTable", searchParams);
-        DataTable dt = ds.Tables[0];
-        return dt;
-    }
-
-    public DataTable SearchSalesTable(string[] searchParams)
-    {
-        DataSet ds = client.ExecuteDataSet("SearchSalesTable", searchParams);
-        DataTable dt = ds.Tables[0];
-        return dt;
-    }
-
-
     public DataTable SearchGeneralLedgerTable(string[] searchParams)
     {
         InterLinkClass.CbAPI.Service cbAPI = new InterLinkClass.CbAPI.Service();
@@ -1079,22 +627,6 @@ public class Bussinesslogic
         DataTable dt = ds.Tables[0];
         return dt;
     }
-
-    public DataTable SearchContractsTable(string[] searchParams)
-    {
-        DataSet ds = client.ExecuteDataSet("SearchContractsTable", searchParams);
-        DataTable dt = ds.Tables[0];
-        return dt;
-    }
-
-    public DataTable SearchSaleItemsTable(string[] searchParams)
-    {
-        DataSet ds = client.ExecuteDataSet("SearchSaleItemsTable", searchParams);
-        DataTable dt = ds.Tables[0];
-        return dt;
-    }
-
-
 
     public DataTable SearchAuditlogsTable(string[] parameters)
     {

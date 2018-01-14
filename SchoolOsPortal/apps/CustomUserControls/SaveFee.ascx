@@ -72,7 +72,7 @@
                                         </div>
                                         <div class="col-lg-6">
                                             <label>Amount (UGX)</label>
-                                            <asp:TextBox ID="txtAmount" runat="server" CssClass="form-control" placeholder="Enter text" />
+                                            <asp:TextBox ID="txtAmount" runat="server" CssClass="form-control" placeholder="Enter text" onkeyup="javascript:this.value=Comma(this.value);"  />
                                             
                                         </div>
                                     </div>

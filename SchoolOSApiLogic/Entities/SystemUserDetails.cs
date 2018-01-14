@@ -8,6 +8,7 @@ namespace SchoolOSApiLogic.Entities
     {
         public SystemUser User = null;
         public School SchoolDetails = null;
+        public string CurrentSemesterCode = "";
         public List<MenuItem> UserMenuOptions = null;
     }
 }

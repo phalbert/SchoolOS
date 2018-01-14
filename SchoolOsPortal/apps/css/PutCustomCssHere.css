@@ -4,6 +4,7 @@
 .cal_Theme1 .ajax__calendar_container {
     background-color: #DEF1F4;
     border: solid 1px #77D5F7;
+    z-index : 1000 ;
 }
 
 .cal_Theme1 .ajax__calendar_header {

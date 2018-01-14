@@ -104,7 +104,7 @@ namespace SchoolOSApiLogic.ControlClasses
         public Result SaveSchoolStaff(SchoolStaff staff)
         {
             Result result = new Result();
-            DataTable dt = dh.ExecuteDataSet("SaveSchoolStaff", new string[] { staff.SchoolCode, staff.FullName, staff.Gender, staff.StaffType, staff.StaffCategory, staff.StaffIDNumber, staff.PegPayStaffIDNumber, staff.ProfilePic, staff.ModifiedBy, staff.Email, staff.PhoneNumber }).Tables[0];
+            DataTable dt = dh.ExecuteDataSet("SaveSchoolStaff", new string[] { staff.SchoolCode, staff.FullName, staff.Gender, staff.StaffType, staff.StaffCategory, staff.StaffIDNumber, staff.PegPayStaffIDNumber, staff.ProfilePic, staff.ModifiedBy, staff.Email, staff.PhoneNumber,staff.ApprovedBy }).Tables[0];
 
             if (dt.Rows.Count == 0)
             {
@@ -393,6 +393,23 @@ namespace SchoolOSApiLogic.ControlClasses
             return result;
         }
 
+        public Result LogError(string Identifier, string StackTrace, string schoolCode, string Message, string ErrorType)
+        {
+            Result result = new Result();
+            try
+            {
+                int rowsAffected = dh.ExecuteNonQuery("LogError", new string[] { Identifier, StackTrace, schoolCode, Message, ErrorType });
+                result.StatusCode = Globals.SUCCESS_STATUS_CODE;
+                result.StatusDesc = Globals.SUCCESS_STATUS_DESC;
+            }
+            catch (Exception ex)
+            {
+                result.StatusCode = Globals.FAILURE_STATUS_CODE;
+                result.StatusDesc = "EXCPTION: " + ex.Message;
+            }
+            return result;
+        }
+
         public SystemUserDetails Login(string UserId, string Password)
         {
             SystemUserDetails result = new SystemUserDetails();
@@ -406,6 +423,7 @@ namespace SchoolOSApiLogic.ControlClasses
                 return result;
             }
 
+            string currentSchoolTerm = dh.ExecuteDataSet("GetCurrentSchoolTerm", user.SchoolCode).Tables[0].Rows[0][0].ToString();
             List<MenuItem> usersMenuOptions = GetUsersMenuItems(user);
             School sch = AuthenticateSchool(user.SchoolCode);
 
@@ -416,6 +434,7 @@ namespace SchoolOSApiLogic.ControlClasses
                 return result;
             }
 
+            result.CurrentSemesterCode = currentSchoolTerm;
             result.SchoolDetails = sch;
             result.User = user;
             result.UserMenuOptions = usersMenuOptions;

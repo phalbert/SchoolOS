@@ -38,6 +38,83 @@ namespace SchoolOSWebPortalBgService
             return all.ToArray();
         }
 
+        internal UploadedFile[] GetUnprocessedUploadedFiles(string OperationCode)
+        {
+            List<UploadedFile> all = new List<UploadedFile>();
+            try
+            {
+                DataTable dt = schoolsAPI.ExecuteDataSet("GetUnprocessedUploadedFiles", new object[] { OperationCode }).Tables[0];
+                foreach (DataRow dr in dt.Rows)
+                {
+                    UploadedFile file = new UploadedFile();
+                    file.Email = dr["Email"].ToString();
+                    file.FileContents = Convert.ToBase64String((byte[])dr["FileContents"]);
+                    file.FileName = dr["FileName"].ToString();
+                    file.ModifiedBy = dr["ModifiedBy"].ToString();
+                    file.SchoolCode = dr["SchoolCode"].ToString();
+                    file.OperationCode = dr["OperationCode"].ToString();
+                    file.ID = dr["RecordId"].ToString();
+                    file.SPCode = dr["SPCode"].ToString();
+                    file.StatusDesc = ((DateTime)dr["CreatedOn"]).ToString("yyyy-MM-dd");
+                    all.Add(file);
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+            return all.ToArray();
+        }
+
+        internal Student[] GetStudentsInUploadedFile(UploadedFile file)
+        {
+            List<Student> all = new List<Student>();
+
+            string filePath = Globals.UPLOAD_FILE_PATH + DateTime.Now.Ticks + "_" + file.FileName;
+            byte[] fileBytes = Convert.FromBase64String(file.FileContents);
+            File.WriteAllBytes(filePath, fileBytes);
+            string[] allLinesInFile = File.ReadAllLines(filePath);
+
+            foreach (string line in allLinesInFile)
+            {
+                ReadStudentsFromFile(file, all, line);
+            }
+
+            return all.ToArray();
+        }
+
+        private void ReadStudentsFromFile(UploadedFile file, List<Student> all, string line)
+        {
+            Student std = new Student();
+            try
+            {
+                string[] parts = line.Split(',');
+                std.ClassCode = Globals.NOT_AVAILABLE_TEXT;
+                std.DateOfBirth = DateTime.Now.ToString("dd/MM/yyyy");
+                std.Email = Globals.NOT_AVAILABLE_TEXT;
+                std.Gender = Globals.NOT_AVAILABLE_TEXT;
+                std.ModifiedBy = file.ModifiedBy;
+                std.ParentsName1 = Globals.NOT_AVAILABLE_TEXT;
+                std.ParentsName2 = Globals.NOT_AVAILABLE_TEXT;
+                std.ParentsPhoneNumber1 = Globals.NOT_AVAILABLE_TEXT;
+                std.ParentsPhoneNumber2 = Globals.NOT_AVAILABLE_TEXT;
+                std.PhoneNumber = Globals.NOT_AVAILABLE_TEXT;
+                std.ProfilePic = Globals.NOT_AVAILABLE_TEXT;
+                std.StreamCode = Globals.NOT_AVAILABLE_TEXT;
+                std.StudentCategory = Globals.NOT_AVAILABLE_TEXT;
+                std.StudentName = Globals.NOT_AVAILABLE_TEXT;
+                std.StudentNumber = Globals.NOT_AVAILABLE_TEXT;
+
+                std.StatusCode = Globals.SUCCESS_STATUS_CODE;
+                std.StatusDesc = Globals.SUCCESS_STATUS_TEXT;
+            }
+            catch (Exception ex)
+            {
+                std.StatusCode = Globals.FAILURE_STATUS_CODE;
+                std.StatusDesc = "ERROR PROCESSING LINE [" + line + "] IN FILE";
+            }
+            all.Add(std);
+        }
+
         internal Result SaveStudentPayment(StudentFee payment)
         {
             Result result = new Result();

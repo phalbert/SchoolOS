@@ -53,7 +53,6 @@ public partial class SaveClass : System.Web.UI.UserControl
     {
         btnSubmit.Visible = true;
         btnEdit.Visible = false;
-
         bll.LoadSchoolsIntoDropDown(user, ddSchools);
     }
 

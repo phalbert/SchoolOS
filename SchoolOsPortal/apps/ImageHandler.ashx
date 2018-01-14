@@ -16,7 +16,7 @@ public class ImageHandler : IHttpHandler
 
             if (string.IsNullOrEmpty(_imageId))
             {
-                return;
+                _imageId = "Default";
             }
 
             string base64string = bll.GetImageById(_imageId);

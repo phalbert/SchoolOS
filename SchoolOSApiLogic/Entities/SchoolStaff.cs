@@ -15,12 +15,13 @@ namespace SchoolOSApiLogic.Entities
         public string ProfilePic = "";
         public string PhoneNumber = "";
         public string Email = "";
+        public string ApprovedBy = "";
 
         public override bool IsValid()
         {
             ProfilePic = string.IsNullOrEmpty(ProfilePic) ? Globals.DEFAULT_PICTURE_ID : ProfilePic;
 
-            string propertiesThatCanBeNull = "StaffCategory|PegPayStaffIDNumber|Email";
+            string propertiesThatCanBeNull = "StaffCategory|PegPayStaffIDNumber|Email|ApprovedBy";
             Result nullCheckResult = Globals.CheckForNulls(this, propertiesThatCanBeNull);
 
             if (nullCheckResult.StatusCode != Globals.SUCCESS_STATUS_CODE)

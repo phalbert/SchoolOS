@@ -2663,6 +2663,8 @@ namespace InterLinkClass.PegPaySchoolsApi {
         
         private School schoolDetailsField;
         
+        private string currentSemesterCodeField;
+        
         private MenuItem[] userMenuOptionsField;
         
         /// <remarks/>
@@ -2682,6 +2684,16 @@ namespace InterLinkClass.PegPaySchoolsApi {
             }
             set {
                 this.schoolDetailsField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string CurrentSemesterCode {
+            get {
+                return this.currentSemesterCodeField;
+            }
+            set {
+                this.currentSemesterCodeField = value;
             }
         }
         

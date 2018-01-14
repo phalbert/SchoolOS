@@ -1,4 +1,5 @@
 ﻿using Microsoft.Practices.EnterpriseLibrary.Data;
+using SchoolOSApiLogic.Entities;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -61,9 +62,22 @@ namespace SchoolOSApiLogic.ControlClasses
             }
         }
 
-        public static void LogError(string message,string stackTrace,string Identifier)
+        public static Result LogError(string Message,string StackTrace,string Identifier)
         {
-
+            Result result = new Result();
+            try
+            {
+                DatabaseHandler dh = new DatabaseHandler();
+                int rowsAffected = dh.ExecuteNonQuery("LogError", new string[] { Identifier, StackTrace, "ALL", Message, "EXCEPTION" });
+                result.StatusCode = Globals.SUCCESS_STATUS_CODE;
+                result.StatusDesc = Globals.SUCCESS_STATUS_DESC;
+            }
+            catch (Exception ex)
+            {
+                result.StatusCode = Globals.FAILURE_STATUS_CODE;
+                result.StatusDesc = "EXCPTION: " + ex.Message;
+            }
+            return result;
         }
     }
 }

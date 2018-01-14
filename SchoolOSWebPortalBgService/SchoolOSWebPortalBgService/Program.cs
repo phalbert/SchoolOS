@@ -14,6 +14,7 @@ namespace SchoolOSWebPortalBgService
             while (true)
             {
                 Processor proc = new Processor();
+                proc.ProcessUploadedStudents();
                 proc.ProcessUploadedBulkStudentPaymentsFiles();
                 proc.ProcessStudentPayments();
                 Thread.Sleep(new TimeSpan(0, 0, 5));

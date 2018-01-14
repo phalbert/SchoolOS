@@ -99,6 +99,30 @@ public partial class CustomUserControls_ListTeacherSubject : System.Web.UI.UserC
 
     protected void dataGridResults_RowCommand(object sender, GridViewCommandEventArgs e)
     {
+        try
+        {
 
+            GridView grid = sender as GridView;
+            int index = Convert.ToInt32(e.CommandArgument);
+            GridViewRow row = grid.Rows[index];
+            string ID = row.Cells[1].Text;
+
+            Result result = SaveStudentResults.LoadDataUsingTeacherSubjectID(ID);
+
+            if (result.StatusCode != Globals.SUCCESS_STATUS_CODE)
+            {
+                string msg = "FAILED: " + result.StatusDesc;
+                bll.ShowMessage(lblmsg, msg, true);
+                return;
+            }
+
+            MultiView1.SetActiveView(EditStudentsView);
+
+        }
+        catch (Exception ex)
+        {
+            string msg = "FAILED: " + ex.Message;
+            bll.ShowMessage(lblmsg, msg, true);
+        }
     }
 }

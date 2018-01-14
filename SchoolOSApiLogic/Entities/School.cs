@@ -33,13 +33,27 @@ namespace SchoolOSApiLogic.Entities
         {
             SchoolLogo = string.IsNullOrEmpty(SchoolLogo) ? Globals.DEFAULT_PICTURE_ID : SchoolLogo;
 
-            string propertiesThatCanBeNull = "ApprovedBy|SchoolLocation|UnebCentreNumber|SchoolID";
+            string propertiesThatCanBeNull = "ApprovedBy|SchoolLocation|UnebCentreNumber|SchoolID|SchoolType|SchoolCategories";
             Result nullCheckResult = Globals.CheckForNulls(this, propertiesThatCanBeNull);
 
             if (nullCheckResult.StatusCode != Globals.SUCCESS_STATUS_CODE)
             {
                 StatusCode = Globals.FAILURE_STATUS_CODE;
                 StatusDesc = nullCheckResult.StatusDesc;
+                return false;
+            }
+
+            if (SchoolType.Length == 0)
+            {
+                StatusCode = Globals.FAILURE_STATUS_CODE;
+                StatusDesc = "PLEASE PICK A SCHOOL TYPE";
+                return false;
+            }
+
+            if (SchoolCategories.Length == 0)
+            {
+                StatusCode = Globals.FAILURE_STATUS_CODE;
+                StatusDesc = "PLEASE PICK A SCHOOL CATEGORY";
                 return false;
             }
 

@@ -63,8 +63,8 @@
                                             </asp:DropDownList>
                                         </div>
                                         <div class="col-lg-6">
-                                            <label>Student</label>
-                                            <asp:DropDownList ID="ddStudents" runat="server" CssClass="form-control">
+                                            <label>Class</label>
+                                            <asp:DropDownList ID="ddClasses" AutoPostBack="true" OnSelectedIndexChanged="ddClasses_SelectedIndexChanged" runat="server" CssClass="form-control">
                                                 <asp:ListItem>True</asp:ListItem>
                                                 <asp:ListItem>False</asp:ListItem>
                                             </asp:DropDownList>
@@ -79,9 +79,6 @@
                                                 <asp:ListItem>False</asp:ListItem>
                                             </asp:DropDownList>
                                         </div>
-                                    </div>
-                                    <br />
-                                    <div class="row">
                                         <div class="col-lg-6">
                                             <label>Subject</label>
                                             <asp:DropDownList ID="ddSubjects" runat="server" CssClass="form-control">
@@ -89,9 +86,12 @@
                                                 <asp:ListItem>False</asp:ListItem>
                                             </asp:DropDownList>
                                         </div>
+                                    </div>
+                                    <br />
+                                    <div class="row">
                                         <div class="col-lg-6">
-                                            <label>Class</label>
-                                            <asp:DropDownList ID="ddClasses" runat="server" CssClass="form-control">
+                                            <label>Student</label>
+                                            <asp:DropDownList ID="ddStudents1" runat="server" CssClass="form-control">
                                                 <asp:ListItem>True</asp:ListItem>
                                                 <asp:ListItem>False</asp:ListItem>
                                             </asp:DropDownList>

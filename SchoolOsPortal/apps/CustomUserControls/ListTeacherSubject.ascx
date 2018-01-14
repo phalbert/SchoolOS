@@ -1,5 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ListTeacherSubject.ascx.cs" Inherits="CustomUserControls_ListTeacherSubject" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
+<%@ Register TagPrefix="uc" TagName="SaveStudentResults" Src="~/CustomUserControls/SaveStudentResults.ascx" %>
 
 
 <asp:MultiView ID="MultiView1" ActiveViewIndex="0" runat="server">
@@ -32,6 +33,7 @@
 
         <!---------------------------------------------- Search Options --------------------------------->
         <div class="row">
+            <div class="col-lg-1"></div>
             <div class="col-lg-3">
                 <label>
                     School
@@ -64,6 +66,7 @@
                 <asp:Button ID="btnSubmit" runat="server" Text="Search DB" CssClass="btn btn-success btn-lg"
                     OnClick="btnSubmit_Click" />
             </div>
+            <div class="col-lg-1"></div>
         </div>
 
         <hr />
@@ -77,7 +80,13 @@
                             <AlternatingRowStyle BackColor="#BFE4FF" />
                             <HeaderStyle BackColor="#115E9B" Font-Bold="false" ForeColor="white" Font-Italic="False"
                                 Font-Overline="False" Font-Strikeout="False" Font-Underline="False" Height="30px" />
-                            
+                             <Columns>
+                                <asp:TemplateField HeaderText="Details">
+                                    <ItemTemplate>
+                                        <asp:Button ID="btnedit" runat="server" Text="Save Results" CommandName="EditEntity" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" />
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                            </Columns>
                         </asp:GridView>
                     </div>
                 </div>
@@ -88,6 +97,7 @@
 
         <!------------------------------------------------- View2 -------------------------------------------------->
     </asp:View>
-    <asp:View ID="View2" runat="server">
+    <asp:View ID="EditStudentsView" runat="server">
+        <uc:SaveStudentResults ID="SaveStudentResults" runat="server" />
     </asp:View>
 </asp:MultiView>

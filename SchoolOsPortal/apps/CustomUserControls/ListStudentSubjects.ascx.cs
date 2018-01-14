@@ -64,6 +64,7 @@ public partial class CustomUserControls_ListStudentSubjects : System.Web.UI.User
             throw new Exception("FAILED: " + std.StatusDesc);
         }
 
+        ddStudents.ClearSelection();
         ddStudents.SelectedValue = std.StudentNumber;
         ddStudents.Enabled = false;
     }

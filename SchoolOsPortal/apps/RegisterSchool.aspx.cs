@@ -123,7 +123,7 @@ public partial class RegisterSchool : System.Web.UI.Page
         bll.SendEmailMsg(emailMsg, subject, toEmail);
 
         //success
-        string successMsg = "SUCCESS!! SCHOOL DETAILS SAVED SUCCESSFULLY, PENDING APPROVAL";
+        string successMsg = "SUCCESS!! SCHOOL DETAILS SAVED SUCCESSFULLY, PENDING APPROVAL. PLEASE CONTACT flexiSchoolsInfo@pegasustechnologies.co.ug FOR ANY INQUIRIES";
         bll.ShowMessage(lblmsg, successMsg, false, Session);
 
         Response.Redirect("~/Default.aspx?Msg=" + successMsg);

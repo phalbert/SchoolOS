@@ -63,6 +63,32 @@ public partial class CustomUserControls_SaveStudentResults : System.Web.UI.UserC
         ddSubjects_SelectedIndexChanged(null, null);
     }
 
+    public Result LoadDataUsingTeacherSubjectID(string Id)
+    {
+        Result result = new Result();
+        try
+        {
+            TeacherSubject subject = bll.GetTeacherSubjectById(Id);
+            ddSemester.SelectedValue = subject.TermCode;
+            ddTeacher.SelectedValue = subject.TeacherId;
+            ddClasses.SelectedValue = subject.ClassCode;
+            ddSubjects.SelectedValue = subject.SubjectCode;
+            ddSemester_SelectedIndexChanged(null, null);
+            ddTeacher_SelectedIndexChanged(null, null);
+            ddClasses_SelectedIndexChanged(null, null);
+            ddSubjects_SelectedIndexChanged(null, null);
+            ddTeacher.Enabled = false;
+            result.StatusCode = Globals.SUCCESS_STATUS_CODE;
+            result.StatusDesc = Globals.SUCCESS_STATUS_TEXT;
+        }
+        catch(Exception ex)
+        {
+            result.StatusCode = Globals.FAILURE_STATUS_CODE;
+            result.StatusDesc = "FAILED: " + ex.Message;
+        }
+        return result;
+    }
+
     private void LoadEntityData(string id)
     {
         btnSubmit.Visible = false;

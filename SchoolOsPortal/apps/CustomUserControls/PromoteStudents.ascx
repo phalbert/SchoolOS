@@ -83,10 +83,10 @@
                             <Columns>
                                 <asp:TemplateField HeaderText="Select">
                                      <HeaderTemplate>
-                                        <asp:CheckBox ID="chkboxSelectAll" Checked="true"  Text="&nbsp;&nbsp;Select All" runat="server" AutoPostBack="true" OnCheckedChanged="dataGridResults_SelectedIndexChanged" />
+                                        <asp:CheckBox ID="chkboxSelectAll" Text="&nbsp;&nbsp;Select All" runat="server" AutoPostBack="true" OnCheckedChanged="dataGridResults_SelectedIndexChanged" />
                                     </HeaderTemplate>
                                     <ItemTemplate>
-                                        <asp:CheckBox ID="CheckBox" Checked="true"  runat="server" CommandName="EditEntity" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" />
+                                        <asp:CheckBox ID="CheckBox"  runat="server" CommandName="EditEntity" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" />
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>

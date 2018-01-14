@@ -176,17 +176,17 @@
                                 </label>
                                 <div data-row-span="12">
                                     <div data-field-span="2">
-                                        <asp:CheckBox ID="chkNusery" runat="server" />&nbsp;<label for="chkNusery">
+                                        <asp:RadioButton ID="chkNusery" GroupName="SchoolTypeGp" runat="server" />&nbsp;<label for="chkNusery">
                                             Nursery</label>
                                     </div>
                                     <div data-field-span="2">
-                                        <asp:CheckBox ID="chkPrimary" runat="server" />&nbsp;<label for="primary"> Primary</label>
+                                        <asp:RadioButton ID="chkPrimary" GroupName="SchoolTypeGp" runat="server" />&nbsp;<label for="primary"> Primary</label>
                                     </div>
                                     <div data-field-span="2">
-                                        <asp:CheckBox ID="chkSecondary" runat="server" />&nbsp;<label for="secondary"> Secondary</label>
+                                        <asp:RadioButton ID="chkSecondary" GroupName="SchoolTypeGp" runat="server" />&nbsp;<label for="secondary"> Secondary</label>
                                     </div>
                                     <div data-field-span="2">
-                                        <asp:CheckBox ID="chkTertiary" runat="server" />&nbsp;<label for="tertiary"> Tertiary</label>
+                                        <asp:RadioButton ID="chkTertiary" GroupName="SchoolTypeGp" runat="server" />&nbsp;<label for="tertiary"> Tertiary</label>
                                     </div>
 
                                 </div>

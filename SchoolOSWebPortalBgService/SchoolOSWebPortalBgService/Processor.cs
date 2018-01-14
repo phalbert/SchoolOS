@@ -61,11 +61,34 @@ namespace SchoolOSWebPortalBgService
         {
             try
             {
+                UploadedFile[] files = bll.GetUnprocessedUploadedFiles("STUDENTS");
+
+                foreach (UploadedFile file in files)
+                {
+                    ProcessStudentsFile(file);
+                }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Console.WriteLine("Exception: {0}", ex.Message);
+            }
+        }
 
+        private void ProcessStudentsFile(UploadedFile file)
+        {
+            Student[] all = bll.GetStudentsInUploadedFile(file);
+
+            foreach(Student std in all)
+            {
+                SchoolsAPI.Service schoolAPI = new Service();
+                Result result = schoolAPI.SaveStudent(std);
+
+                Console.WriteLine($"Save Student Finished. Status [{result.StatusDesc}]");
+                if (result.StatusCode != Globals.SUCCESS_STATUS_CODE)
+                {
+                    continue;
+                }
             }
         }
 

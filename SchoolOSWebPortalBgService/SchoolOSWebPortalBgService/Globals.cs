@@ -22,5 +22,7 @@ public static class Globals
     public static string SCHOOL_PASSWORD = "T3rr1613";
     public static string SCHOOLS_WEB_PORTAL = "SCHOOLS_WEB_PORTAL";
     public static string UPLOAD_FILE_PATH = @"D:\UploadedFiles\";
+
+    public static string NOT_AVAILABLE_TEXT = "N/A";
 }
 

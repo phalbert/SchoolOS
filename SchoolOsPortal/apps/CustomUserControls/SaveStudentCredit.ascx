@@ -75,7 +75,7 @@
                                     <div class="row">
                                         <div class="col-lg-6">
                                             <label>Amount</label>
-                                            <asp:TextBox ID="txtAmount" Text="" runat="server" CssClass="form-control"  />
+                                            <asp:TextBox ID="txtAmount" Text="" runat="server" CssClass="form-control" onkeyup="javascript:this.value=Comma(this.value);"   />
                                         </div>
                                         <div class="col-lg-6" runat="server" id="divTranType">
                                             <label>Tran Type</label>

@@ -54,7 +54,8 @@ public partial class CustomUserControls_SaveStudentSubjects : System.Web.UI.User
         bll.LoadDataIntoDropDown("GetClassesForDropDown", new string[] { ddSchools.SelectedValue }, ddClasses);
         bll.LoadDataIntoDropDown("GetTermsForDropDown", new string[] { ddSchools.SelectedValue }, ddTerms);
         bll.LoadDataIntoDropDown("GetSubjectsForDropDown", new string[] { ddSchools.SelectedValue }, ddSubjects);
-        bll.LoadDataIntoDropDown("GetStudentsForDropDown", new string[] { ddSchools.SelectedValue,ddClasses.SelectedValue }, ddStudents);
+        ddTerms.SelectedValue = user.CurrentSemesterCode;
+        ddClasses_SelectedIndexChanged(null, null);
 
         if (user.User.UserType == "SCHOOL_STUDENT")
         {
@@ -68,12 +69,13 @@ public partial class CustomUserControls_SaveStudentSubjects : System.Web.UI.User
 
         if (std.StatusCode != Globals.SUCCESS_STATUS_CODE)
         {
-            ddStudents.Items.Clear();
+            ddStudents1.Items.Clear();
             throw new Exception("FAILED: " + std.StatusDesc);
         }
 
-        ddStudents.SelectedValue = std.StudentNumber;
-        ddStudents.Enabled = false;
+        ddStudents1.ClearSelection();
+        ddStudents1.SelectedValue = std.StudentNumber;
+        ddStudents1.Enabled = false;
     }
 
     private void LoadEntityData(string id)
@@ -138,7 +140,7 @@ public partial class CustomUserControls_SaveStudentSubjects : System.Web.UI.User
     {
         StudentSubject std = new StudentSubject();
         std.ClassCode = ddClasses.SelectedValue;
-        std.StudentId = ddStudents.SelectedValue;
+        std.StudentId = ddStudents1.SelectedValue;
         std.SubjectCode = ddSubjects.SelectedValue;
         std.TermCode = ddTerms.SelectedValue;
         std.SchoolCode = ddSchools.SelectedValue;
@@ -155,5 +157,18 @@ public partial class CustomUserControls_SaveStudentSubjects : System.Web.UI.User
     protected void btnCancel_Click(object sender, EventArgs e)
     {
 
+    }
+
+    protected void ddClasses_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        try
+        {
+            bll.LoadDataIntoDropDownALL("GetStudentsForDropDown", new string[] { ddSchools.SelectedValue, ddClasses.SelectedValue }, ddStudents1);
+        }
+        catch (Exception ex)
+        {
+            bll.LogError("SAVE-CLIENT", ex.StackTrace, "", ex.Message, "EXCEPTION");
+            bll.ShowMessage(lblmsg, ex.Message, true, Session);
+        }
     }
 }

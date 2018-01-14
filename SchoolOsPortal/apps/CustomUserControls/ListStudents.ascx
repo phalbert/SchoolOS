@@ -42,7 +42,7 @@
                     <asp:ListItem>False</asp:ListItem>
                 </asp:DropDownList>
             </div>
-             <div class="col-lg-3">
+            <div class="col-lg-3">
                 <label>
                     Classes
                 </label>
@@ -67,6 +67,12 @@
         <%------------------------------------------- Search Results  -----------------------------------%>
         <asp:MultiView runat="server" ID="Multiview2">
             <asp:View runat="server" ID="resultView">
+                <hr />
+                <div class="row text-center">
+                    <asp:Button ID="btnPrintIds" runat="server" Text="Generate Id Card(s)" CssClass="btn btn-success btn-lg"
+                        OnClick="btnPrintIds_Click" />
+                </div>
+                <hr />
                 <div class="row">
                     <div class="table-responsive">
                         <asp:GridView runat="server" Width="100%" CssClass="table table-bordered table-hover"
@@ -76,7 +82,11 @@
                                 Font-Overline="False" Font-Strikeout="False" Font-Underline="False" Height="30px" />
                             <Columns>
                                 <asp:TemplateField HeaderText="Details">
+                                    <HeaderTemplate>
+                                        <asp:CheckBox ID="chkboxSelectAll" Text=" Select All" runat="server" AutoPostBack="true" OnCheckedChanged="dataGridResults_SelectedIndexChanged" />
+                                    </HeaderTemplate>
                                     <ItemTemplate>
+                                        <asp:CheckBox ID="CheckBox" runat="server" CommandName="Select" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" />
                                         <asp:Button ID="btnedit" runat="server" Text="Edit" CommandName="EditEntity" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" />
                                     </ItemTemplate>
                                 </asp:TemplateField>

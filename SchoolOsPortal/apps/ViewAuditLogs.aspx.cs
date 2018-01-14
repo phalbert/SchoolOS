@@ -44,7 +44,7 @@ public partial class ViewAuditLogs : System.Web.UI.Page
 
     private void LoadData()
     {
-        bll.LoadCompaniesIntoDropDownALL(user, ddBank);
+        //bll.LoadCompaniesIntoDropDownALL(user, ddBank);
     }
 
     protected void btnConvert_Click(object sender, EventArgs e)
