@@ -21,6 +21,8 @@ namespace SchoolOSApiLogic.Entities
         public string ParentsName2 = "";
         public string ParentsPhoneNumber1 = "";
         public string ParentsPhoneNumber2 = "";
+        public string IsActive = "";
+        public string Password = "";
 
         public override bool IsValid()
         {
@@ -30,7 +32,7 @@ namespace SchoolOSApiLogic.Entities
             ParentsPhoneNumber2 = string.IsNullOrEmpty(ParentsName1) ? Globals.NOT_AVAILABLE_STRING : ParentsPhoneNumber2;
             ProfilePic = string.IsNullOrEmpty(ProfilePic) ? Globals.DEFAULT_PICTURE_ID : ProfilePic;
 
-            string propertiesThatCanBeNull = "PegPayStudentNumber|StudentCategory";
+            string propertiesThatCanBeNull = "PegPayStudentNumber|StudentCategory|StreamCode";
             Result nullCheckResult = Globals.CheckForNulls(this, propertiesThatCanBeNull);
 
             if (nullCheckResult.StatusCode != Globals.SUCCESS_STATUS_CODE)

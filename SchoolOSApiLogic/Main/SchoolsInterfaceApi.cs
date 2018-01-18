@@ -31,6 +31,24 @@ namespace SchoolOSApiLogic
             return result;
         }
 
+        public SystemUserDetails StudentLogin(string Username, string Password,string SchoolCode)
+        {
+            SystemUserDetails result = new SystemUserDetails();
+            try
+            {
+                Bussinesslogic bll = new Bussinesslogic();
+                result = bll.StudentLogin(Username, Password,SchoolCode);
+            }
+            catch (Exception ex)
+            {
+                string msg = $"EXCEPTION: {ex.Message}";
+                DatabaseHandler.LogError(msg, ex.StackTrace, Username);
+                result.StatusCode = Globals.FAILURE_STATUS_CODE;
+                result.StatusDesc = msg;//"{0} is an {1}",0,1
+            }
+            return result;
+        }
+
         public DataSet ExecuteDataSet(string StoredProc, params object[] Parameters)
         {
             Bussinesslogic bll = new Bussinesslogic();
@@ -446,6 +464,31 @@ namespace SchoolOSApiLogic
 
                 Bussinesslogic bll = new Bussinesslogic();
                 result = bll.SaveMainLink(link);
+            }
+            catch (Exception ex)
+            {
+                string msg = $"EXCEPTION: {ex.Message}";
+                DatabaseHandler.LogError(msg, ex.StackTrace, link.SchoolCode);
+                result.StatusCode = Globals.FAILURE_STATUS_CODE;
+                result.StatusDesc = msg;//"{0} is an {1}",0,1
+            }
+            return result;
+        }
+
+        public Result SaveGrade(Grade link)
+        {
+            Result result = new Result();
+            try
+            {
+                if (!link.IsValid())
+                {
+                    result.StatusCode = link.StatusCode;
+                    result.StatusDesc = link.StatusDesc;
+                    return result;
+                }
+
+                Bussinesslogic bll = new Bussinesslogic();
+                result = bll.SaveGrade(link);
             }
             catch (Exception ex)
             {

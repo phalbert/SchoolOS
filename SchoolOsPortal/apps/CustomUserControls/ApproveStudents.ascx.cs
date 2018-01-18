@@ -161,29 +161,6 @@ public partial class ApproveStudents : System.Web.UI.UserControl
         string ApprovedBy = user.User.Username;
         string[] parameters = { Id, SchoolCode, ApprovedBy };
 
-        //save student as system user
-        SystemUser newUser = GetSystemUser(Id, SchoolCode);
-        Result result = schoolsApi.SaveSystemUser(newUser);
-
-        //saving student as system user has failed
-        if (result.StatusCode != Globals.SUCCESS_STATUS_CODE)
-        {
-            string msg = "FAILED: " + result.StatusDesc;
-            bll.ShowMessage(lblmsg, msg, true, Session);
-            return;
-        }
-
-        //send creds via email
-        Result sendResult = bll.SendCredentialsToUser(newUser);
-
-        //sending credentials email has failed
-        if (sendResult.StatusCode != Globals.SUCCESS_STATUS_CODE)
-        {
-            string msg = "FAILED: " + sendResult.StatusDesc;
-            bll.ShowMessage(lblmsg, msg, true, Session);
-            return;
-        }
-
         //approve student
         DataTable dt = schoolsApi.ExecuteDataSet("ApproveStudent", parameters).Tables[0];
         if (dt.Rows.Count == 0)
@@ -198,25 +175,7 @@ public partial class ApproveStudents : System.Web.UI.UserControl
         bll.ShowMessage(lblmsg, msg1, false, Session);
     }
 
-    private SystemUser GetSystemUser(string studentId, string schoolCode)
-    {
-        Student std = bll.GetStudentById(studentId, schoolCode);
-        SystemUser newUser = new SystemUser();
-        newUser.ApprovedBy = user.User.Username;
-        newUser.Email = std.Email;
-        newUser.FullName = std.StudentName;
-        newUser.IsActive = "TRUE";
-        newUser.ModifiedBy = user.User.Username;
-        newUser.Username = std.PegPayStudentNumber;
-        newUser.UserPassword = "T3rr1613";
-        newUser.UserType = "SCHOOL_STUDENT";
-        newUser.SchoolCode = schoolCode;
-        newUser.PhoneNumber = std.PhoneNumber;
-        newUser.SecretKey = "T3rr16132016";
-        newUser.UserCategory = newUser.UserType;
-        newUser.ProfilePic = std.ProfilePic;
-        return newUser;
-    }
+   
 
     protected void btnReject_Click(object sender, EventArgs e)
     {

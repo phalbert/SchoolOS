@@ -358,7 +358,7 @@ namespace SchoolOSWebPortalBgService
                 fee.Amount = parts[1];
                 fee.TranID = parts[2];
                 fee.FeeID = "FILE-UPLOAD-" + fee.TranID;
-                fee.FeeType = "Credit";
+                fee.FeeType = "Debit";
                 fee.ModifiedBy = file.ModifiedBy;
                 fee.PaymentChannel = parts[2];
                 fee.SchoolCode = file.SchoolCode;

@@ -2,6 +2,7 @@
 
 <%@ Register TagPrefix="uc" TagName="ListClassesUserControl" Src="~/CustomUserControls/ListSubjectResults.ascx" %>
 <%@ Register TagPrefix="uc" TagName="SaveClassUserControl" Src="~/CustomUserControls/SaveStudentResults.ascx" %>
+<%@ Register TagPrefix="uc" TagName="ListStudentsUserControl" Src="~/CustomUserControls/ListStudents.ascx" %>
 <%@ Register TagPrefix="uc" TagName="BulkSubjectResultsUploadUserControl" Src="~/CustomUserControls/CommingSoon.ascx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
@@ -32,6 +33,8 @@
             <!------------------------------------------------------- Main content --------------------------------------->
             <div class="row">
                 <ul class="nav nav-tabs" style="padding-top: 50px;">
+                    <li id="ListStudentsLink" runat="server" class="active">
+                        <asp:LinkButton ID="ListStudentsLinkButton" runat="server" OnClick="btnTabPane_Click">View Students</asp:LinkButton></li>
                     <li id="ListClassesLink" runat="server" class="active">
                         <asp:LinkButton ID="ListClassesLinkButton" runat="server" OnClick="btnTabPane_Click">View Results</asp:LinkButton></li>
                     <li id="SaveClassLink" runat="server" >
@@ -43,6 +46,9 @@
 
             <div class="container" style="margin-top: 30px;">
                 <asp:MultiView ActiveViewIndex="0" ID="MultiView" runat="server">
+                    <asp:View ID="ListStudentsView" runat="server">
+                        <uc:ListStudentsUserControl ID="ListStudentsUserControl" runat="server" />
+                    </asp:View>
                     <asp:View ID="ListClassesUserView" runat="server">
                         <uc:ListClassesUserControl ID="ListClassesUserControl" runat="server" />
                     </asp:View>

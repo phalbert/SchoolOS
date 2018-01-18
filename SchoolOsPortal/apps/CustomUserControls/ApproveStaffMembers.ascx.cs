@@ -167,12 +167,12 @@ public partial class CustomUserControls_ApproveStaffMembers : System.Web.UI.User
         newUser.FullName = std.FullName;
         newUser.IsActive = "TRUE";
         newUser.ModifiedBy = user.User.Username;
-        newUser.UserPassword = "T3rr1613";
+        newUser.UserPassword = SharedCommons.SharedCommons.GeneratePassword();
         newUser.UserType = "SCHOOL_TEACHER";
         newUser.SchoolCode = schoolCode;
         newUser.PhoneNumber = std.PhoneNumber;
-        newUser.Username = std.PegPayStaffIDNumber;
-        newUser.SecretKey = "T3rr16132016";
+        newUser.Username = std.PhoneNumber;
+        newUser.SecretKey = SharedCommons.SharedCommons.GenerateSecretKey();
         newUser.UserCategory = newUser.UserType;
         newUser.ProfilePic = std.ProfilePic;
         return newUser;

@@ -123,7 +123,7 @@ public partial class CustomUserControls_SaveStudentCredit : System.Web.UI.UserCo
         std.Email = user.User.Email;
         std.SchoolCode = ddSchools.SelectedValue;
         std.Amount = txtAmount.Text;
-        std.FeeType = "Credit";
+        std.FeeType = "Debit";
         std.TranID = SharedCommons.SharedCommons.GenerateUniqueId("PAY");
         std.ModifiedBy = user.User.Username;
         std.PaymentChannel = Globals.SCHOOLS_WEB_PORTAL;

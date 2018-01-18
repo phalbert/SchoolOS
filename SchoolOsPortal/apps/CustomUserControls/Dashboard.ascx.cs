@@ -35,7 +35,7 @@ public partial class CustomUserControls_Dashboard : System.Web.UI.UserControl
         }
         catch (NullReferenceException exe)
         {
-            Response.Redirect("Default.aspx?Msg="+exe.Message, false);
+            Response.Redirect("Default.aspx?Msg=" + exe.Message, false);
         }
         catch (Exception ex)
         {
@@ -59,5 +59,24 @@ public partial class CustomUserControls_Dashboard : System.Web.UI.UserControl
         lblStudentCount.Text = dr["StudentCount"].ToString();
         lblTeacherCount.Text = dr["TeacherCount"].ToString();
         lblTranAmount.Text = dr["TransactionCount"].ToString();
+
+        InterLinkClass.CbAPI.Service cbAPI = new InterLinkClass.CbAPI.Service();
+
+        dt = cbAPI.ExecuteDataSet("GetDashBoardStatistics", new string[] { user.SchoolDetails.SchoolCode }).Tables[0];
+
+        if (dt.Rows.Count == 0)
+        {
+            lblTranAmount.Text = "N/A";
+            return;
+        }
+
+        string amount = dt.Rows[0][0].ToString();
+        amount = string.IsNullOrEmpty(amount) ? "0" : amount;
+        lblTranAmount.Text = string.Format("{0:n0}", amount);
+    }
+
+    protected void btnFirstTime_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("~/FirstTime.aspx");
     }
 }

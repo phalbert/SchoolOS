@@ -71,6 +71,8 @@
                 <div class="row text-center">
                     <asp:Button ID="btnPrintIds" runat="server" Text="Generate Id Card(s)" CssClass="btn btn-success btn-lg"
                         OnClick="btnPrintIds_Click" />
+                     <asp:Button ID="btnSendLoginCredentials" runat="server" Text="Send Login Credentials" CssClass="btn btn-success btn-lg"
+                        OnClick="btnSendLoginCredentials_Click" />
                 </div>
                 <hr />
                 <div class="row">

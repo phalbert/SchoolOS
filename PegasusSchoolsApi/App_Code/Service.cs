@@ -68,6 +68,13 @@ public class Service : System.Web.Services.WebService
     }
 
     [WebMethod]
+    public SystemUserDetails StudentLogin(string Username, string Password,string SchoolCode)
+    {
+        SchoolOSApiLogic.SchoolsInterfaceApi api = new SchoolOSApiLogic.SchoolsInterfaceApi();
+        return api.StudentLogin(Username, Password,SchoolCode);
+    }
+
+    [WebMethod]
     public Result SaveSchoolClass(SchoolClass schcls)
     {
 
@@ -140,6 +147,13 @@ public class Service : System.Web.Services.WebService
     {
         SchoolOSApiLogic.SchoolsInterfaceApi api = new SchoolOSApiLogic.SchoolsInterfaceApi();
         return api.SaveSubject(sub);
+    }
+
+    [WebMethod]
+    public Result SaveGrade(Grade sub)
+    {
+        SchoolOSApiLogic.SchoolsInterfaceApi api = new SchoolOSApiLogic.SchoolsInterfaceApi();
+        return api.SaveGrade(sub);
     }
 
     [WebMethod]

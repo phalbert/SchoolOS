@@ -103,9 +103,9 @@ public partial class ListStudents : System.Web.UI.UserControl
             int index = Convert.ToInt32(e.CommandArgument);
             GridViewRow row = grid.Rows[index];
             string studentID = row.Cells[1].Text;
-            string schoolCode= ddSchools.SelectedValue;
+            string schoolCode = ddSchools.SelectedValue;
 
-            Result result = SaveStudentsUserControl.LoadEntityDataForEdit(studentID,schoolCode);
+            Result result = SaveStudentsUserControl.LoadEntityDataForEdit(studentID, schoolCode);
 
             if (result.StatusCode != Globals.SUCCESS_STATUS_CODE)
             {
@@ -182,5 +182,78 @@ public partial class ListStudents : System.Web.UI.UserControl
             string msg = "FAILED: " + ex.Message;
             bll.ShowMessage(lblmsg, msg, true);
         }
+    }
+
+    protected void btnSendLoginCredentials_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            //loop thru the rows
+            foreach (GridViewRow row in dataGridResults.Rows)
+            {
+                //for each row get the checkbox attached
+                CheckBox ChkBox = (CheckBox)row.FindControl("CheckBox");
+
+                //has user ticked the box
+                if (ChkBox.Checked)
+                {
+                    //if this row is not the header row
+                    if (row.RowType != DataControlRowType.Header)
+                    {
+                        string Id = row.Cells[1].Text.Trim();
+                        string SchoolCode = ddSchools.SelectedValue;
+
+                        SystemUser newUser = GetSystemUser(Id, SchoolCode);
+                        string[] parameters = { Id, SchoolCode, newUser.UserPassword, newUser.SecretKey };
+
+                        //save student creds
+                        DataTable dt = schoolsApi.ExecuteDataSet("SetStudentPassword", parameters).Tables[0];
+
+                        if (dt.Rows.Count == 0)
+                        {
+                            string msg = "Unable to Set Student Credentials";
+                            bll.ShowMessage(lblmsg, msg, true, Session);
+                            return;
+                        }
+
+                        Result result = bll.SendCredentialsToUser(newUser);
+
+                        if (result.StatusCode != Globals.SUCCESS_STATUS_CODE)
+                        {
+                            string msg = "FAILED: " + result.StatusDesc;
+                            bll.ShowMessage(lblmsg, msg, true, Session);
+                        }
+                    }
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            string msg = "FAILED: " + ex.Message;
+            bll.ShowMessage(lblmsg, msg, true);
+        }
+    }
+
+    private SystemUser GetSystemUser(string studentId, string schoolCode)
+    {
+        Student std = bll.GetStudentById(studentId, schoolCode);
+        SystemUser newUser = new SystemUser();
+        string SecretKey = SharedCommons.SharedCommons.GenerateSecretKey();
+        string Password = SharedCommons.SharedCommons.GeneratePassword();
+        string HashedPassword = SharedCommons.SharedCommons.GenearetHMACSha256Hash(SecretKey, Password);
+        newUser.ApprovedBy = user.User.Username;
+        newUser.Email = std.Email;
+        newUser.FullName = std.StudentName;
+        newUser.IsActive = "TRUE";
+        newUser.ModifiedBy = user.User.Username;
+        newUser.Username = std.StudentNumber;
+        newUser.UserPassword = Password;
+        newUser.UserType = "SCHOOL_STUDENT";
+        newUser.SchoolCode = schoolCode;
+        newUser.PhoneNumber = std.PhoneNumber;
+        newUser.SecretKey = SecretKey;
+        newUser.UserCategory = newUser.UserType;
+        newUser.ProfilePic = std.ProfilePic;
+        return newUser;
     }
 }

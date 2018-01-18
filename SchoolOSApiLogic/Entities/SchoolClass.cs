@@ -8,6 +8,7 @@ namespace SchoolOSApiLogic.Entities
     {
         public string ClassCode = "";
         public string ClassName = "";
+        public string ClassCategory = "";
 
         public override bool IsValid()
         {

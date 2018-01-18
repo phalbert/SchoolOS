@@ -48,6 +48,27 @@ namespace SchoolOSApiLogic.ControlClasses
             return result;
         }
 
+        public Result SaveGrade(Grade sch)
+        {
+            Result result = new Result();
+            DataTable dt = dh.ExecuteDataSet("SaveGrade", new string[] { sch.SchoolCode, sch.GradeName, sch.GradeCode, sch.MinimumMark, sch.MaximumMark, sch.ModifiedBy }).Tables[0];
+
+            if (dt.Rows.Count == 0)
+            {
+                result.StatusCode = Globals.FAILURE_STATUS_CODE;
+                result.StatusDesc = "NO ROWS AFFECTED";
+                return result;
+            }
+
+            result.StatusCode = Globals.SUCCESS_STATUS_CODE;
+            result.StatusDesc = Globals.SUCCESS_STATUS_DESC;
+            result.PegPayID = dt.Rows[0][0].ToString();
+            result.ThirdPartyID = "";
+            result.RequestID = sch.GradeCode;
+
+            return result;
+        }
+
         private string GetArrayString(string[] list)
         {
             Array.Sort(list, (x, y) => String.Compare(x, y));
@@ -251,7 +272,7 @@ namespace SchoolOSApiLogic.ControlClasses
         public Result SaveStudentSubject(StudentSubject dept)
         {
             Result result = new Result();
-            DataTable dt = dh.ExecuteDataSet("SaveStudentSubject", new string[] { dept.StudentId, dept.SubjectCode, dept.TermCode, dept.SchoolCode, dept.ModifiedBy }).Tables[0];
+            DataTable dt = dh.ExecuteDataSet("SaveStudentSubject", new string[] { dept.StudentId, dept.SubjectCode, dept.TermCode, dept.SchoolCode, dept.ModifiedBy,dept.ClassCode }).Tables[0];
 
             if (dt.Rows.Count == 0)
             {
@@ -411,6 +432,42 @@ namespace SchoolOSApiLogic.ControlClasses
         }
 
         public SystemUserDetails Login(string UserId, string Password)
+        {
+            SystemUserDetails result = new SystemUserDetails();
+
+            SystemUser user = AuthenticateSystemUser(UserId, Password);
+
+            if (user.StatusCode != Globals.SUCCESS_STATUS_CODE)
+            {
+                result.StatusCode = user.StatusCode;
+                result.StatusDesc = user.StatusDesc;
+                return result;
+            }
+
+            string currentSchoolTerm = dh.ExecuteDataSet("GetCurrentSchoolTerm", user.SchoolCode).Tables[0].Rows[0][0].ToString();
+            List<MenuItem> usersMenuOptions = GetUsersMenuItems(user);
+            School sch = AuthenticateSchool(user.SchoolCode);
+
+            if (sch.StatusCode != Globals.SUCCESS_STATUS_CODE)
+            {
+                result.StatusCode = sch.StatusCode;
+                result.StatusDesc = sch.StatusDesc;
+                return result;
+            }
+
+            result.CurrentSemesterCode = currentSchoolTerm;
+            result.SchoolDetails = sch;
+            result.User = user;
+            result.UserMenuOptions = usersMenuOptions;
+            result.StatusCode = Globals.SUCCESS_STATUS_CODE;
+            result.StatusDesc = Globals.SUCCESS_STATUS_DESC;
+            result.PegPayID = UserId;
+            result.RequestID = UserId;
+
+            return result;
+        }
+
+        public SystemUserDetails StudentLogin(string UserId, string Password,string SchoolCode)
         {
             SystemUserDetails result = new SystemUserDetails();
 

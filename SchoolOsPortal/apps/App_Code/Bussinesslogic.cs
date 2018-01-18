@@ -524,6 +524,8 @@ public class Bussinesslogic
             ddlst.Items.Add(new ListItem(Text, Value));
         }
 
+        if (user == null) { return; }
+
         if (user.User.UserType != "ADMIN")
         {
             ddlst.SelectedValue = user.SchoolDetails.SchoolCode;

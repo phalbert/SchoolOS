@@ -52,7 +52,11 @@ public partial class ManageSubjectResults : System.Web.UI.Page
             SetActiveTab(BulkSubjectResultsUploadLink);
             return;
         }
-
+        if (MultiView.GetActiveView() == ListStudentsView)
+        {
+            SetActiveTab(ListStudentsLink);
+            return;
+        }
     }
 
     private void SetActiveTab(HtmlGenericControl control)
@@ -60,6 +64,7 @@ public partial class ManageSubjectResults : System.Web.UI.Page
         SaveClassLink.Attributes["class"] = "";
         ListClassesLink.Attributes["class"] = "";
         BulkSubjectResultsUploadLink.Attributes["class"] = "";
+        ListStudentsLink.Attributes["class"] = "";
         control.Attributes["class"] = "active";
     }
 
@@ -97,6 +102,11 @@ public partial class ManageSubjectResults : System.Web.UI.Page
         if (link.ID == BulkSubjectResultsUploadLinkButton.ID)
         {
             MultiView.SetActiveView(BulkSubjectResultsUploadView);
+            return;
+        }
+        if (link.ID == ListStudentsLinkButton.ID)
+        {
+            MultiView.SetActiveView(ListStudentsView);
             return;
         }
     }

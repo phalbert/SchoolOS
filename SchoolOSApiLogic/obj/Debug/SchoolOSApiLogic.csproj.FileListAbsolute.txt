@@ -28,3 +28,5 @@ D:\Work\PegPaySchools\SchoolOS\SchoolOSApiLogic\bin\Debug\SchoolOSApiLogic.pdb
 D:\Work\PegPaySchools\SchoolOS\SchoolOSApiLogic\obj\Debug\SchoolOSApiLogic.dll
 D:\Work\PegPaySchools\SchoolOS\SchoolOSApiLogic\obj\Debug\SchoolOSApiLogic.pdb
 D:\Work\PegPaySchools\SchoolOS\SchoolOSApiLogic\obj\Debug\SchoolOSApiLogic.csprojResolveAssemblyReference.cache
+D:\Work\PegPaySchools\SchoolOS\SchoolOSApiLogic\bin\Debug\SharedCommons.dll
+D:\Work\PegPaySchools\SchoolOS\SchoolOSApiLogic\bin\Debug\SharedCommons.pdb

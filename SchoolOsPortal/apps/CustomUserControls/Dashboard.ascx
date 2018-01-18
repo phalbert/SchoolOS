@@ -11,7 +11,8 @@
                 <br />
                 <strong>Hi
                     <asp:Label ID="lblmsg" runat="server"></asp:Label>, Welcome to FlexiSchools.<br />
-                    Use the Links on the Left to navigate to different pages which will help you manage your school
+                    If it is your First Time Here click<br /> <br /><asp:Button ID="btnFirstTime" runat="server" OnClick="btnFirstTime_Click" Text="First Time SetUp Wizard" CssClass="btn btn-primary" />
+                    <br />
                 </strong>
             </div>
         </div>

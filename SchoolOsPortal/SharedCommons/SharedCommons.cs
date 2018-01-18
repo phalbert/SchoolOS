@@ -241,6 +241,13 @@ namespace SharedCommons
             return Password;
         }
 
+        public static string GenerateSecretKey()
+        {
+            string Password = "T3rr16132016";
+            return Password;
+        }
+
+
         public static string GeneratePin()
         {
             string Password = "13254";

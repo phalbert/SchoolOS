@@ -117,7 +117,7 @@ public partial class SaveFee : System.Web.UI.UserControl
         std.FeeAmount = txtAmount.Text;
         std.FeeID = SharedCommons.SharedCommons.GenerateUniqueId("FEE");
         std.FeeName = txtfeeName.Text;
-        std.FeeType = "Debit";
+        std.FeeType = "Credit";
         std.SchoolCode = ddSchools.SelectedValue;
         std.ApprovedBy = user.User.Username;
         std.ModifiedBy = user.User.Username;
