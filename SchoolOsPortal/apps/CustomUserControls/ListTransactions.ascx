@@ -94,26 +94,18 @@
 <hr />
 <asp:MultiView runat="server" ID="Multiview2">
     <asp:View runat="server" ID="resultView">
-        <div class="row">
-            <div class="col-lg-2"></div>
+        <div class="row text-center">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 form-inline">
+                <asp:DropDownList ID="ddExportType" runat="server" CssClass="form-control">
+                    <asp:ListItem>EXCEL</asp:ListItem>
+                    <asp:ListItem>WORD</asp:ListItem>
+                </asp:DropDownList>
 
-            <div class="col-sm-2">
-                <asp:RadioButton ID="rdPdf" runat="server" Font-Bold="True" GroupName="FileFormat"
-                    Text=" PDF" />
+                <asp:Button ID="btnExport" runat="server" Text="Export" CssClass="btn btn-primary btn-md"
+                    OnClick="btnExport_Click" />
             </div>
-            <div class="col-sm-2">
-                <asp:RadioButton ID="rdExcel" runat="server" Font-Bold="True" GroupName="FileFormat"
-                    Text=" EXCEL" />
-            </div>
-            <div class="col-sm-2">
-                <asp:Button ID="btnConvert" runat="server" OnClick="btnConvert_Click"
-                    CssClass="btn btn-primary" Text="Export As" />
-            </div>
-            <div class="col-lg-2">
-                <asp:Button ID="btnPrint" runat="server" OnClick="btnConvert_Click"
-                    CssClass="btn btn-success btn-block" Text="Print Statement" />
-            </div>
-            <div class="col-lg-2"></div>
+            <div class="col-md-4"></div>
         </div>
         <hr />
         <div class="row">

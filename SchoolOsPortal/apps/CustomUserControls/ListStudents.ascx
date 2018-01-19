@@ -62,16 +62,28 @@
                     OnClick="btnSubmit_Click" />
             </div>
         </div>
-
-        <hr />
         <%------------------------------------------- Search Results  -----------------------------------%>
         <asp:MultiView runat="server" ID="Multiview2">
             <asp:View runat="server" ID="resultView">
                 <hr />
                 <div class="row text-center">
-                    <asp:Button ID="btnPrintIds" runat="server" Text="Generate Id Card(s)" CssClass="btn btn-success btn-lg"
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4 form-inline">
+                        <asp:DropDownList  ID="ddExportType" runat="server" CssClass="form-control">
+                            <asp:ListItem>EXCEL</asp:ListItem>
+                            <asp:ListItem>WORD</asp:ListItem>
+                        </asp:DropDownList>
+                    
+                        <asp:Button ID="btnExport" runat="server" Text="Export" CssClass="btn btn-primary btn-md"
+                            OnClick="btnExport_Click" />
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
+                <hr />
+                <div class="row text-center">
+                    <asp:Button ID="btnPrintIds" runat="server" Text="Generate Id Card(s)" CssClass="btn btn-success btn-md"
                         OnClick="btnPrintIds_Click" />
-                     <asp:Button ID="btnSendLoginCredentials" runat="server" Text="Send Login Credentials" CssClass="btn btn-success btn-lg"
+                    <asp:Button ID="btnSendLoginCredentials" runat="server" Text="Send Login Credentials" CssClass="btn btn-danger btn-md"
                         OnClick="btnSendLoginCredentials_Click" />
                 </div>
                 <hr />

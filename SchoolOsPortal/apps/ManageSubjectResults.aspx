@@ -3,27 +3,10 @@
 <%@ Register TagPrefix="uc" TagName="ListClassesUserControl" Src="~/CustomUserControls/ListSubjectResults.ascx" %>
 <%@ Register TagPrefix="uc" TagName="SaveClassUserControl" Src="~/CustomUserControls/SaveStudentResults.ascx" %>
 <%@ Register TagPrefix="uc" TagName="ListStudentsUserControl" Src="~/CustomUserControls/ListStudents.ascx" %>
-<%@ Register TagPrefix="uc" TagName="BulkSubjectResultsUploadUserControl" Src="~/CustomUserControls/CommingSoon.ascx" %>
+<%@ Register TagPrefix="uc" TagName="BulkSubjectResultsUploadUserControl" Src="~/CustomUserControls/BulkStudentResultsUpload.ascx" %>
+<%@ Register TagPrefix="uc" TagName="ApproveStudentResultsUserControl" Src="~/CustomUserControls/ApproveStudentResults.ascx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-
-    <style>
-        .daterangepicker.opensleft:after {
-            display: none;
-        }
-
-        .date-picker-wrapper {
-            z-index: 2;
-        }
-
-        .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
-            background-color: #fff;
-        }
-
-        .daterangepicker.opensright:after {
-            content: none;
-        }
-    </style>
 
     <div class="wrapper row-offcanvas row-offcanvas-left">
         <!---------------------------------- Left side column. contains the logo and sidebar ---------------------------------------->
@@ -41,6 +24,8 @@
                         <asp:LinkButton ID="SaveClassLinkButton" runat="server" OnClick="btnTabPane_Click">Save Result</asp:LinkButton></li>
                     <li id="BulkSubjectResultsUploadLink" runat="server" >
                         <asp:LinkButton ID="BulkSubjectResultsUploadLinkButton" runat="server" OnClick="btnTabPane_Click">Bulk Subject Result Upload</asp:LinkButton></li>
+                     <li id="ApproveStudentResultsLink" runat="server" >
+                        <asp:LinkButton ID="ApproveStudentResultsLinkButton" runat="server" OnClick="btnTabPane_Click">Bulk Subject Result Upload</asp:LinkButton></li>
                 </ul>
             </div>
 
@@ -57,6 +42,9 @@
                     </asp:View>
                     <asp:View ID="BulkSubjectResultsUploadView" runat="server">
                         <uc:BulkSubjectResultsUploadUserControl ID="BulkSubjectResultsUploadUserControl" runat="server" />
+                    </asp:View>
+                    <asp:View ID="ApproveStudentResultsView" runat="server">
+                        <uc:ApproveStudentResultsUserControl ID="ApproveStudentResultsUserControl" runat="server" />
                     </asp:View>
                 </asp:MultiView>
             </div>

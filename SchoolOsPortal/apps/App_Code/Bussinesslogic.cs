@@ -5,6 +5,8 @@ using System.IO;
 using System.Web;
 using System.Web.UI.WebControls;
 using InterLinkClass.PegPaySchoolsApi;
+using System.Web.UI;
+using System.Text;
 
 public class Bussinesslogic
 {
@@ -211,6 +213,140 @@ public class Bussinesslogic
         sch.StatusCode = Globals.SUCCESS_STATUS_CODE;
         sch.StatusDesc = "SUCCESS";
         return sch;
+    }
+
+    public void ExportToCSV(DataTable dt, HttpResponse Response)
+    {
+        Response.Clear();
+        Response.Buffer = true;
+        Response.AddHeader("content-disposition", "attachment;filename=SearchResults.csv");
+        Response.Charset = "";
+        Response.ContentType = "application/text";
+
+        StringBuilder sb = new StringBuilder();
+
+        for (int k = 0; k < dt.Columns.Count; k++)
+        {
+            //add separator
+            sb.Append(dt.Columns[k].ColumnName + ',');
+
+        }
+
+        //append new line
+        sb.Append("\r\n");
+        for (int i = 0; i < dt.Rows.Count; i++)
+        {
+            for (int k = 0; k < dt.Columns.Count; k++)
+            {
+                //add separator
+                sb.Append(dt.Rows[i][k].ToString().Replace(",", ";") + ',');
+            }
+            //append new line
+            sb.Append("\r\n");
+        }
+        Response.Output.Write(sb.ToString());
+        Response.Flush();
+        Response.End();
+    }
+
+    public DataTable ConvertGridViewToDataTable(GridView GridView1)
+    {
+        DataTable dt = new DataTable();
+
+        // add the columns to the datatable            
+        if (GridView1.HeaderRow != null)
+        {
+
+            for (int i = 0; i < GridView1.HeaderRow.Cells.Count; i++)
+            {
+                dt.Columns.Add(GridView1.HeaderRow.Cells[i].Text);
+            }
+        }
+
+        //  add each of the data rows to the table
+        foreach (GridViewRow row in GridView1.Rows)
+        {
+            DataRow dr;
+            dr = dt.NewRow();
+
+            for (int i = 0; i < row.Cells.Count; i++)
+            {
+                dr[i] = row.Cells[i].Text.Replace("&nbsp;", "");
+            }
+            dt.Rows.Add(dr);
+        }
+
+        //  add the footer row to the table
+        if (GridView1.FooterRow != null)
+        {
+            DataRow dr;
+            dr = dt.NewRow();
+
+            for (int i = 0; i < GridView1.FooterRow.Cells.Count; i++)
+            {
+                dr[i] = GridView1.FooterRow.Cells[i].Text.Replace("&nbsp;", "");
+            }
+            dt.Rows.Add(dr);
+        }
+
+        return dt;
+    }
+
+    public void ExportToWord(DataTable dt, HttpResponse Response)
+    {
+        //Create a dummy GridView
+        GridView GridView1 = new GridView();
+        GridView1.AllowPaging = false;
+        GridView1.DataSource = dt;
+        GridView1.DataBind();
+
+        Response.Clear();
+        Response.Buffer = true;
+        Response.AddHeader("content-disposition","attachment;filename=DataTable.doc");
+        Response.Charset = "";
+        Response.ContentType = "application/vnd.ms-word ";
+
+        StringWriter sw = new StringWriter();
+        HtmlTextWriter hw = new HtmlTextWriter(sw);
+        GridView1.RenderControl(hw);
+   
+        Response.Output.Write(sw.ToString());
+        Response.Flush();
+        Response.End();
+    }
+
+    public void ExportToExcel(DataTable dt, HttpResponse Response)
+    {
+        //Create a dummy GridView
+
+        GridView GridView1 = new GridView();
+        GridView1.AllowPaging = false;
+        GridView1.DataSource = dt;
+        GridView1.DataBind();
+
+        Response.Clear();
+        Response.Buffer = true;
+        Response.AddHeader("content-disposition","attachment;filename=DataTable.xls");
+        Response.Charset = "";
+        Response.ContentType = "application/vnd.ms-excel";
+
+        StringWriter sw = new StringWriter();
+        HtmlTextWriter hw = new HtmlTextWriter(sw);
+
+        for (int i = 0; i < GridView1.Rows.Count; i++)
+        {
+            //Apply text style to each Row
+            GridView1.Rows[i].Attributes.Add("class", "textmode");
+        }
+
+        GridView1.RenderControl(hw);
+        //style to format numbers to string
+        string style = @"<style> .textmode { mso-number-format:\@; } </style>";
+
+        Response.Write(style);
+        Response.Output.Write(sw.ToString());
+        Response.Flush();
+        Response.End();
     }
 
     public DataTable SearchGeneralLedgerTableForStatement(string[] searchParams)

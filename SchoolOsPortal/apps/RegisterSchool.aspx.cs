@@ -51,9 +51,9 @@ public partial class RegisterSchool : System.Web.UI.Page
                 return;
             }
 
-            if (string.IsNullOrEmpty(txtUserId.Text))
+            if (string.IsNullOrEmpty(txtPrincipalPhone.Text))
             {
-                string msg = "FAILED: PLEASE SUPPLY A PREFERED USERNAME";
+                string msg = "FAILED: PLEASE SUPPLY A PHONE NUMBER FOR THE HEAD MASTER";
                 bll.ShowMessage(lblmsg, msg, true, Session);
                 return;
             }
@@ -67,7 +67,7 @@ public partial class RegisterSchool : System.Web.UI.Page
                 return;
             }
 
-            dt = bll.ExecuteDataTableOnSchoolsDB("GetSystemUserById", new string[] { txtUserId.Text });
+            dt = bll.ExecuteDataTableOnSchoolsDB("GetSystemUserById", new string[] { txtPrincipalPhone.Text });
 
             if (dt.Rows.Count != 0)
             {
@@ -146,7 +146,7 @@ public partial class RegisterSchool : System.Web.UI.Page
         user.SecretKey = "T3rr16132016";//SharedCommons.SharedCommons.GenerateUniqueId("");
         user.UserCategory = "SCHOOL_ADMIN";
         user.UserType = "SCHOOL_ADMIN";
-        user.Username = txtUserId.Text;
+        user.Username = txtPrincipalPhone.Text;
         user.IsActive = "TRUE";
         user.PhoneNumber = txtPrincipalPhone.Text;
         user.Email = txtPrincipalEmail.Text;

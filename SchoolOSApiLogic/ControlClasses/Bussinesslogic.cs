@@ -471,7 +471,7 @@ namespace SchoolOSApiLogic.ControlClasses
         {
             SystemUserDetails result = new SystemUserDetails();
 
-            SystemUser user = AuthenticateSystemUser(UserId, Password);
+            SystemUser user = AuthenticateStudent(UserId, Password,SchoolCode);
 
             if (user.StatusCode != Globals.SUCCESS_STATUS_CODE)
             {
@@ -503,7 +503,104 @@ namespace SchoolOSApiLogic.ControlClasses
             return result;
         }
 
+        private SystemUser AuthenticateStudent(string userId, string password, string schoolCode)
+        {
+            SystemUser user = new SystemUser();
 
+            if (string.IsNullOrEmpty(userId))
+            {
+                user.StatusCode = Globals.FAILURE_STATUS_CODE;
+                user.StatusDesc = "PLEASE SUPPLY A USER NAME";
+                return user;
+            }
+
+
+            if (string.IsNullOrEmpty(password))
+            {
+                user.StatusCode = Globals.FAILURE_STATUS_CODE;
+                user.StatusDesc = "PLEASE SUPPLY A PASSWORD";
+                return user;
+            }
+
+            Student std= GetStudentById(userId, schoolCode);
+            user = GetSystemUserFromStudent(std);
+
+            if (user.StatusCode != Globals.SUCCESS_STATUS_CODE)
+            {
+                user.StatusCode = Globals.FAILURE_STATUS_CODE;
+                user.StatusDesc = "INVALID USERNAME/PASSWORD!!";
+                return user;
+            }
+
+            string hashedPassword = GenearetHMACSha256Hash(user.SecretKey, password);
+
+            if (user.UserPassword != hashedPassword)
+            {
+                user.StatusCode = Globals.FAILURE_STATUS_CODE;
+                user.StatusDesc = "INVALID USERNAME/PASSWORD!";
+                return user;
+            }
+
+            
+
+            return user;
+        }
+
+        private SystemUser GetSystemUserFromStudent(Student std)
+        {
+            SystemUser user = new SystemUser();
+            user.ApprovedBy = "";
+            user.SchoolCode = std.SchoolCode;
+            user.SecretKey = std.SecretKey;
+            user.UserCategory = "SCHOOL_STUDENT";
+            user.Username = std.StudentNumber;
+            user.UserPassword = std.Password;
+            user.UserType = "SCHOOL_STUDENT";
+            user.ProfilePic = std.ProfilePic;
+            user.FullName = std.StudentName;
+            user.Email = std.Email;
+            user.PhoneNumber = std.PhoneNumber;
+            user.StatusCode = Globals.SUCCESS_STATUS_CODE;
+            user.StatusDesc = Globals.SUCCESS_STATUS_DESC;
+            return user;
+        }
+
+        public Student GetStudentById(string studentId, string schoolCode)
+        {
+            Student sch = new Student();
+            DataTable dt = dh.ExecuteDataSet("GetStudentById", new string[] { studentId, schoolCode }).Tables[0];
+            if (dt.Rows.Count == 0)
+            {
+                sch.StatusCode = Globals.FAILURE_STATUS_CODE;
+                sch.StatusDesc = "STUDENT [" + studentId + "] NOT FOUND";
+                return sch;
+            }
+
+            DataRow row = dt.Rows[0];
+            sch.SchoolCode = row["SchoolCode"].ToString();
+            sch.ClassCode = row["ClassCode"].ToString();
+            sch.DateOfBirth = row["DateOfBirth"].ToString();
+            sch.Email = row["Email"].ToString();
+            sch.Gender = row["Gender"].ToString();
+            sch.ModifiedBy = row["ModifiedBy"].ToString();
+            sch.PegPayStudentNumber = row["PegPayStudentNumber"].ToString();
+            sch.PhoneNumber = row["PhoneNumber"].ToString();
+            sch.ProfilePic = row["StudentPic"].ToString();
+            sch.StreamCode = row["StreamCode"].ToString();
+            sch.StudentCategory = row["StudentCategory"].ToString();
+            sch.StudentName = row["StudentName"].ToString();
+            sch.StudentNumber = row["StudentNumber"].ToString();
+            sch.ParentsName1 = row["ParentsName1"].ToString();
+            sch.ParentsName2 = row["ParentsName2"].ToString();
+            sch.ParentsPhoneNumber1 = row["ParentsPhoneNumber1"].ToString();
+            sch.ParentsPhoneNumber2 = row["ParentsPhoneNumber2"].ToString();
+            sch.Password = row["Password"].ToString();
+            sch.SecretKey = row["SecretKey"].ToString();
+            sch.IsActive = row["IsActive"].ToString();
+            sch.StatusCode = Globals.SUCCESS_STATUS_CODE;
+            sch.StatusDesc = "SUCCESS";
+            return sch;
+        }
 
         private School GetSchoolById(string Id)
         {

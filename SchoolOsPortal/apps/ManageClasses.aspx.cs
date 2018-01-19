@@ -11,7 +11,6 @@ public partial class ManageClasses : System.Web.UI.Page
     {
         try
         {
-
             Session["IsError"] = null;
             if (IsPostBack)
             {

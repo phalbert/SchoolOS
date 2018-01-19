@@ -50,6 +50,31 @@ public partial class CustomUserControls_ListTeacherSubject : System.Web.UI.UserC
        
     }
 
+    protected void btnExport_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            string ExportType = ddExportType.SelectedValue.ToUpper();
+            DataTable dt = bll.ConvertGridViewToDataTable(dataGridResults);
+
+            if (ExportType == "EXCEL")
+            {
+                bll.ExportToCSV(dt, Response);
+                return;
+            }
+            if (ExportType == "WORD")
+            {
+                bll.ExportToWord(dt, Response);
+                return;
+            }
+        }
+        catch (Exception ex)
+        {
+            string msg = "FAILED: " + ex.Message;
+            bll.ShowMessage(lblmsg, msg, true);
+        }
+    }
+
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
         try

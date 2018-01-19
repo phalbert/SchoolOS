@@ -23,6 +23,7 @@ namespace SchoolOSApiLogic.Entities
         public string ParentsPhoneNumber2 = "";
         public string IsActive = "";
         public string Password = "";
+        public string SecretKey = "";
 
         public override bool IsValid()
         {

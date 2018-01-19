@@ -199,12 +199,7 @@
                                 </div>
                             </div>
 
-                            <div data-row-span="4">
-                                <div data-field-span="2" data-field-error="Please enter prefered username">
-                                    <label>UserId (for login)</label>
-                                    <asp:TextBox ID="txtUserId" Style="background-color: #F9FEBD;" required="true" runat="server"></asp:TextBox>
-                                </div>
-                            </div>
+                           
                             <br>
                             <fieldset>
                                 <legend>School Address</legend>

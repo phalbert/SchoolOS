@@ -71,6 +71,20 @@
         <%------------------------------------------- Search Results  -----------------------------------%>
         <asp:MultiView runat="server" ID="Multiview2">
             <asp:View runat="server" ID="resultView">
+                <div class="row text-center">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4 form-inline">
+                        <asp:DropDownList  ID="ddExportType" runat="server" CssClass="form-control">
+                            <asp:ListItem>EXCEL</asp:ListItem>
+                            <asp:ListItem>WORD</asp:ListItem>
+                        </asp:DropDownList>
+                    
+                        <asp:Button ID="btnExport" runat="server" Text="Export" CssClass="btn btn-primary btn-md"
+                            OnClick="btnExport_Click" />
+                    </div>
+                    <div class="col-md-4"></div>
+                </div>
+                <hr />
                 <div class="row">
                     <div class="table-responsive">
                         <asp:GridView runat="server" Width="100%" CssClass="table table-bordered table-hover"
