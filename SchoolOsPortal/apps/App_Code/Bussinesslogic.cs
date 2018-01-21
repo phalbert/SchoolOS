@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using InterLinkClass.PegPaySchoolsApi;
 using System.Web.UI;
 using System.Text;
+using System.Threading.Tasks;
 
 public class Bussinesslogic
 {
@@ -29,6 +30,29 @@ public class Bussinesslogic
         base64String = dr["Image"].ToString();
         base64String = base64String.Replace(" ", string.Empty);
         return base64String;
+    }
+
+    private void SaveInAuditlog(string ActionType, string TableName, string BankCode, string ModifiedBy, string Action)
+    {
+        Task.Run(() => { 
+        try
+        {
+            
+            DataTable datatable = SchoolsApi.ExecuteDataSet("InsertIntoAuditTrail",
+                                                           new string[]
+                                                   {
+                                                             ActionType,
+                                                             TableName,
+                                                             BankCode,
+                                                             ModifiedBy,
+                                                             Action
+                                                   }).Tables[0];
+        }
+        catch (Exception ex)
+        {
+        }
+        });
+        return;
     }
 
     public InterLinkClass.PegPaySchoolsApi.SystemUser GetSystemUserById2(string userId)
@@ -168,7 +192,7 @@ public class Bussinesslogic
         sch.PostOfficeBox = row["PostOfficeBox"].ToString();
         sch.RoadName = row["RoadName"].ToString();
         sch.SchoolEmail = row["SchoolEmail"].ToString();
-        sch.SchoolLocation = row["SchoolLocation"].ToString();
+        sch.SchoolMoto = row["SchoolMoto"].ToString();
         sch.SchoolLogo = row["SchoolLogo"].ToString();
         sch.SchoolName = row["SchoolName"].ToString();
         sch.SchoolPhone = row["SchoolPhone"].ToString();
@@ -707,6 +731,21 @@ public class Bussinesslogic
 
         ddlst.Items.Clear();
         ddlst.Items.Add("ALL");
+        foreach (DataRow dr in dt.Rows)
+        {
+            string Text = dr["Name"].ToString();
+            string Value = dr["Code"].ToString();
+            ddlst.Items.Add(new ListItem(Text, Value));
+        }
+    }
+
+    public void LoadDataIntoDropDownNoSelect(string storedProcName, string[] parameters, DropDownList ddlst)
+    {
+        DataSet ds = SchoolsApi.ExecuteDataSet(storedProcName, parameters);
+        DataTable dt = ds.Tables[0];
+
+        ddlst.Items.Clear();
+        ddlst.Items.Add("");
         foreach (DataRow dr in dt.Rows)
         {
             string Text = dr["Name"].ToString();

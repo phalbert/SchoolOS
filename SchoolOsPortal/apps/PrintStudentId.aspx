@@ -8,6 +8,10 @@
 <head runat="server">
     <title></title>
     <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" />
+
+    <style type="text/css">
+        
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -41,8 +45,12 @@
         </div>
         <br />
         <div class="row text-center">
-            <asp:Button ID="btnHome" runat="server" CssClass="btn btn-primary" Text="Go Back" OnClick="btnHome_Click" />
-            <asp:Button ID="btnPrint" runat="server" CssClass="btn btn-success" Text="Print Id" />
+            <input id="Button3" accesskey="P" class="btn btn-success" onclick="printDocument();"
+                value="Print ID(s)" />
+            <a href="LoggedInStartPage.aspx">
+                <input id="Button4" accesskey="P" class="btn btn-primary"
+                    value="Return Home" />
+            </a>
         </div>
         <br />
         <div id="controlsDiv" runat="server">
@@ -57,6 +65,14 @@
     <!-- page level js -->
     <script type="text/javascript" src="scripts/vendors/iCheck/js/icheck.js.pagespeed.jm.mc8O_8_6ZX.js"></script>
     <script src="scripts/vendors/bootstrapvalidator/js/bootstrapValidator.min.js.pagespeed.jm.6svL6oFoHD.js" type="text/javascript"></script>
-
+    <script type="text/javascript">
+        function printDocument() {
+            document.getElementById('Button3').style.visibility = 'hidden';
+            document.getElementById('Button4').style.visibility = 'hidden';
+            window.print();
+            document.getElementById('Button3').style.visibility = 'visible';
+            document.getElementById('Button4').style.visibility = 'visible';
+        }
+    </script>
 </body>
 </html>

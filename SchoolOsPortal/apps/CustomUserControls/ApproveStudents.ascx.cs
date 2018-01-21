@@ -159,7 +159,7 @@ public partial class ApproveStudents : System.Web.UI.UserControl
         string Id = row.Cells[1].Text.Trim();
         string SchoolCode = ddSchools.SelectedValue;
         string ApprovedBy = user.User.Username;
-        string[] parameters = { Id, SchoolCode, ApprovedBy };
+        string[] parameters = { Id, SchoolCode, ApprovedBy,"APPROVED" };
 
         //approve student
         DataTable dt = schoolsApi.ExecuteDataSet("ApproveStudent", parameters).Tables[0];
@@ -209,10 +209,23 @@ public partial class ApproveStudents : System.Web.UI.UserControl
     private void Reject(GridViewRow row)
     {
         //get the Bank Transaction Id and the bank code
-        string SchoolCode = row.Cells[1].Text.Trim();
+        string Id = row.Cells[1].Text.Trim();
+        string SchoolCode = ddSchools.SelectedValue;
         string ApprovedBy = user.User.Username;
-        string[] parameters = { SchoolCode, ApprovedBy };
+        string[] parameters = { Id, SchoolCode, ApprovedBy, "REJECTED" };
 
+        //approve student
+        DataTable dt = schoolsApi.ExecuteDataSet("ApproveStudent", parameters).Tables[0];
+        if (dt.Rows.Count == 0)
+        {
+            string msg = "No Rows Affected";
+            bll.ShowMessage(lblmsg, msg, true, Session);
+            return;
+        }
+
+        SearchDB();
+        string msg1 = "Student(s) Rejected Successfully";
+        bll.ShowMessage(lblmsg, msg1, false, Session);
 
     }
 

@@ -70,7 +70,7 @@
             background-color: #fff;
         }
 
-       .MyTextBoxBg {
+        .MyTextBoxBg {
             background-color: #e5bc4b;
         }
     </style>
@@ -155,7 +155,12 @@
                                 </div>
 
                             </div>
-
+                            <div data-row-span="4">
+                                <div data-field-span="2">
+                                    <label>Schools Motto</label>
+                                    <asp:TextBox ID="txtSchoolMotto" Style="background-color: #F9FEBD;" required="true" runat="server"></asp:TextBox>
+                                </div>
+                            </div>
                         </fieldset>
 
                         <br />
@@ -199,7 +204,7 @@
                                 </div>
                             </div>
 
-                           
+
                             <br>
                             <fieldset>
                                 <legend>School Address</legend>
@@ -248,7 +253,7 @@
                             </legend>
                             <div data-row-span="12">
                                 <div data-field-span="2">
-                                    <asp:CheckBox ID="chkDay"   runat="server" />&nbsp;<label for="day">
+                                    <asp:CheckBox ID="chkDay" runat="server" />&nbsp;<label for="day">
                                         Day</label>
                                 </div>
                                 <div data-field-span="2">

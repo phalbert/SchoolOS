@@ -118,7 +118,7 @@ public partial class CustomUserControls_ApproveStudentResults : System.Web.UI.Us
         string UserId = row.Cells[1].Text.Trim();
         string SchoolCode = ddSchools.SelectedValue;
         string ApprovedBy = user.User.Username;
-        string[] parameters = { UserId, SchoolCode, ApprovedBy };
+        string[] parameters = { UserId, SchoolCode, ApprovedBy,"APPROVED" };
 
         DataTable dt = schoolsApi.ExecuteDataSet("ApproveSchoolFee", parameters).Tables[0];
         if (dt.Rows.Count != 0)
@@ -170,9 +170,20 @@ public partial class CustomUserControls_ApproveStudentResults : System.Web.UI.Us
         string SchoolCode = ddSchools.SelectedValue;
         string RejectedBy = user.User.Username;
 
-        string[] parameters = { UserId, SchoolCode, RejectedBy };
+        string[] parameters = { UserId, SchoolCode, RejectedBy,"REJECTED" };
 
-
+        DataTable dt = schoolsApi.ExecuteDataSet("ApproveSchoolFee", parameters).Tables[0];
+        if (dt.Rows.Count != 0)
+        {
+            SearchDB();
+            string msg = "Fee(s) Approved Successfully";
+            bll.ShowMessage(lblmsg, msg, false, Session);
+        }
+        else
+        {
+            string msg = "No Rows Affected";
+            bll.ShowMessage(lblmsg, msg, true, Session);
+        }
     }
 
     private string[] GetSearchParameters()

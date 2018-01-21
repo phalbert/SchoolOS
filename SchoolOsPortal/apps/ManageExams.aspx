@@ -1,7 +1,7 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Main.master" AutoEventWireup="true" CodeFile="ManageGrades.aspx.cs" Inherits="ManageGrades" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Main.master" AutoEventWireup="true" CodeFile="ManageExams.aspx.cs" Inherits="ManageExams" %>
 
-<%@ Register TagPrefix="uc" TagName="ListClassesUserControl" Src="~/CustomUserControls/ListGrades.ascx" %>
-<%@ Register TagPrefix="uc" TagName="SaveClassUserControl" Src="~/CustomUserControls/SaveGrades.ascx" %>
+<%@ Register TagPrefix="uc" TagName="ListClassesUserControl" Src="~/CustomUserControls/ListExams.ascx" %>
+<%@ Register TagPrefix="uc" TagName="SaveClassUserControl" Src="~/CustomUserControls/SaveExam.ascx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div class="wrapper row-offcanvas row-offcanvas-left">
@@ -13,9 +13,9 @@
             <div class="row">
                 <ul class="nav nav-tabs" style="padding-top: 50px;">
                     <li id="ListClassesLink" runat="server" class="active">
-                        <asp:LinkButton ID="ListClassesLinkButton" runat="server" OnClick="btnTabPane_Click">View Grades</asp:LinkButton></li>
+                        <asp:LinkButton ID="ListClassesLinkButton" runat="server" OnClick="btnTabPane_Click">View Exams</asp:LinkButton></li>
                     <li id="SaveClassLink" runat="server">
-                        <asp:LinkButton ID="SaveClassLinkButton" runat="server" OnClick="btnTabPane_Click">Save Grade</asp:LinkButton></li>
+                        <asp:LinkButton ID="SaveClassLinkButton" runat="server" OnClick="btnTabPane_Click">Save Exam</asp:LinkButton></li>
                 </ul>
             </div>
 

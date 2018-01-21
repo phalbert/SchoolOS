@@ -61,6 +61,10 @@
                                 <label>Name of the School</label>
                                 <asp:TextBox ID="txtSchoolName" CssClass="form-control" runat="server"></asp:TextBox>
                             </div>
+                            <div class="col-lg-6">
+                                <label>School Motto</label>
+                                <asp:TextBox ID="txtSchoolMoto" CssClass="form-control" runat="server"></asp:TextBox>
+                            </div>
                         </div>
                         <br />
 

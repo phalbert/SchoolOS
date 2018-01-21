@@ -70,6 +70,7 @@ public partial class SaveSchool : System.Web.UI.UserControl
         }
 
         txtSchoolCode.Text = sch.SchoolCode;
+        txtSchoolCode.Enabled = false;
         txtAccountName.Text = sch.LiquidationAccountName;
         txtAccountNumber.Text = sch.LiquidationAccountNumber;
         txtDistrict.Text = sch.District;
@@ -164,6 +165,7 @@ public partial class SaveSchool : System.Web.UI.UserControl
     {
         School sch = new School();
         sch.ModifiedBy = txtSchoolName.Text;
+        sch.SchoolMoto = txtSchoolMoto.Text;
         sch.VendorPassword = Globals.SCHOOL_PASSWORD;
         sch.VendorCode = Globals.SCHOOL_VENDOR_CODE;
         sch.SchoolName = txtSchoolName.Text;

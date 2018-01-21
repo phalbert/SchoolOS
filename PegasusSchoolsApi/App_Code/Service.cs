@@ -75,12 +75,17 @@ public class Service : System.Web.Services.WebService
     }
 
     [WebMethod]
+    public Result SaveExams(Exam exam)
+    {
+        SchoolOSApiLogic.SchoolsInterfaceApi api = new SchoolOSApiLogic.SchoolsInterfaceApi();
+        return api.SaveExam(exam);
+    }
+
+    [WebMethod]
     public Result SaveSchoolClass(SchoolClass schcls)
     {
-
         SchoolOSApiLogic.SchoolsInterfaceApi api = new SchoolOSApiLogic.SchoolsInterfaceApi();
         return api.SaveSchoolClass(schcls);
-
     }
 
     [WebMethod]

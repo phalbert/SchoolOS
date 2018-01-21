@@ -99,7 +99,8 @@
                 <br />
                 <div class="row text-center">
                     <asp:Button ID="btnHome" runat="server" CssClass="btn btn-danger" Text="Go Back Home" OnClick="btnHome_Click" />
-                     <asp:Button ID="btnLogin" runat="server" CssClass="btn btn-success" Text="Go to Login" OnClick="btnLogin_Click" />
+                    <asp:Button ID="btnStudentLogin" runat="server" CssClass="btn btn-primary" Text="Go to Student Login" OnClick="btnStudentLogin_Click" />
+                     <asp:Button ID="btnLogin" runat="server" CssClass="btn btn-success" Text="Go to School Login" OnClick="btnLogin_Click" />
                 </div>
                 <hr />
                 <%-------------------------------------------- Login Form ----------------------------------%>

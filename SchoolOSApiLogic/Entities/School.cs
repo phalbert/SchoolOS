@@ -10,7 +10,7 @@ namespace SchoolOSApiLogic.Entities
         public string SchoolID = "";
         public string SchoolName = "";
         public string UnebCentreNumber = "";
-        public string SchoolLocation = "";
+        public string SchoolMoto = "";
         public string SchoolEmail = "";
         public string SchoolPhone = "";
         public string[] SchoolType = { };
@@ -33,7 +33,7 @@ namespace SchoolOSApiLogic.Entities
         {
             SchoolLogo = string.IsNullOrEmpty(SchoolLogo) ? Globals.DEFAULT_PICTURE_ID : SchoolLogo;
 
-            string propertiesThatCanBeNull = "ApprovedBy|SchoolLocation|UnebCentreNumber|SchoolID|SchoolType|SchoolCategories";
+            string propertiesThatCanBeNull = "ApprovedBy|SchoolMoto|UnebCentreNumber|SchoolID|SchoolType|SchoolCategories";
             Result nullCheckResult = Globals.CheckForNulls(this, propertiesThatCanBeNull);
 
             if (nullCheckResult.StatusCode != Globals.SUCCESS_STATUS_CODE)

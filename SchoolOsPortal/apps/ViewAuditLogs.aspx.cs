@@ -1,5 +1,5 @@
 ﻿
-using InterLinkClass.PegasusManagementApi;
+using InterLinkClass.PegPaySchoolsApi;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -9,7 +9,7 @@ using System.Web.UI.WebControls;
 
 public partial class ViewAuditLogs : System.Web.UI.Page
 {
-    SystemUser user;
+    SystemUserDetails user;
     Bussinesslogic bll = new Bussinesslogic();
 
     protected void Page_Load(object sender, EventArgs e)
@@ -17,7 +17,7 @@ public partial class ViewAuditLogs : System.Web.UI.Page
         try
         {
 
-            user = Session["User"] as SystemUser;
+            user = Session["User"] as SystemUserDetails;
             Session["IsError"] = null;
 
             //Session is invalid
@@ -44,7 +44,7 @@ public partial class ViewAuditLogs : System.Web.UI.Page
 
     private void LoadData()
     {
-        //bll.LoadCompaniesIntoDropDownALL(user, ddBank);
+        bll.LoadSchoolsIntoDropDown(user, ddBank);
     }
 
     protected void btnConvert_Click(object sender, EventArgs e)
@@ -68,7 +68,7 @@ public partial class ViewAuditLogs : System.Web.UI.Page
     private void SearchDb()
     {
         string[] parameters = GetSearchParameters();
-        DataTable dt = bll.SearchAuditlogsTable(parameters);
+        DataTable dt = bll.ExecuteDataTableOnSchoolsDB("SearchAuditlogsTable", parameters);
         if (dt.Rows.Count > 0)
         {
             dataGridResults2.DataSource = dt;

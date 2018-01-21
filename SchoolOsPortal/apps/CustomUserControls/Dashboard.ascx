@@ -2,22 +2,36 @@
 
 <aside class="right-side" style="padding-left: 20px; padding-top: 50px;">
 
-    <%------------------------------------------ Message Label ----------------------------------------%>
-    <div class="row">
-        <div class="col-lg-1"></div>
-        <div class="col-lg-10 text-center">
-            <div class="alert">
-                <img src="ImageHandler.ashx?Id=Default" id="UsersPic" runat="server" class="img-thumbnail" style="width: 400px; height: 300px" /><br />
-                <br />
-                <strong>Hi
-                    <asp:Label ID="lblmsg" runat="server"></asp:Label>, Welcome to FlexiSchools.<br />
-                    If it is your First Time Here click<br /> <br /><asp:Button ID="btnFirstTime" runat="server" OnClick="btnFirstTime_Click" Text="First Time SetUp Wizard" CssClass="btn btn-primary" />
-                    <br />
-                </strong>
+    <section class="content">
+        <div style="padding: 10px;" class="row">
+            <div class="col-md-4" style="padding-top: 20px;">
+                <img src="ImageHandler.ashx?Id=Default" id="UsersPic" runat="server" class="img-thumbnail" style="width: 400px; height: 350px;" /><br />
+            </div>
+            <div class="col-md-8">
+                <h2 style="padding-left: 30px; text-transform: uppercase; line-height: 30px;"><asp:Label ID="lblSchoolName" runat="server">DEMO SECONDARY SCHOOL</asp:Label></h2>
+                <blockquote><i><asp:Label ID="lblMoto" runat="server">"Education brings prosperity"</asp:Label></i></blockquote>
+                <div style="margin: 30px;" class="panel">
+                    <div class="panel-heading">
+                        <div class="panel-title">
+                            <b>Information</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <asp:Button ID="btnFirstTime" runat="server" OnClick="btnFirstTime_Click" Text="First Time SetUp Wizard" CssClass="btn btn-primary" />
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <p style="font-size: 15px; line-height: 10px; margin-top: 10px; margin-bottom: 10px;"><b>UNEB Centre No:</b> <asp:Label ID="lblUnebNumber" runat="server"></asp:Label></p>
+                        <p style="font-size: 15px; line-height: 10px; margin-top: 10px; margin-bottom: 10px;"><b>Plot No:</b> <asp:Label ID="lblPlotNumber" runat="server"></asp:Label></p>
+                        <p style="font-size: 15px; line-height: 10px; margin-top: 10px; margin-bottom: 10px;"><b>Street/Road:</b> <asp:Label ID="lblRoad" runat="server"></asp:Label></p>
+                        <p style="font-size: 15px; line-height: 10px; margin-top: 10px; margin-bottom: 10px;"><b>District:</b> <asp:Label ID="lblDistrict" runat="server"></asp:Label></p>
+                        <p style="font-size: 15px; line-height: 10px; margin-top: 10px; margin-bottom: 10px;"><b>Box No:</b> <asp:Label ID="lblBoxNumber" runat="server"></asp:Label></p>
+                        <p style="font-size: 15px; line-height: 10px; margin-top: 10px; margin-bottom: 10px;"><b>Email:</b> <asp:Label ID="lblEmail" runat="server"></asp:Label></p>
+                        <p style="font-size: 15px; line-height: 10px; margin-top: 10px; margin-bottom: 10px;"><b>Phone Number:</b> <asp:Label ID="lblPhoneNumber" runat="server"></asp:Label></p>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="col-lg-1"></div>
-    </div>
+    </section>
+
+    <%------------------------------------------ Message Label ----------------------------------------%>
 
     <hr style="border-color: black;" />
     <div class="container">

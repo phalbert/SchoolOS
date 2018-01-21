@@ -1,5 +1,4 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ListSubjectResults.ascx.cs" Inherits="CustomUserControls_ListSubjectResults" %>
-
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ListExams.ascx.cs" Inherits="CustomUserControls_ListExams" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 
@@ -33,48 +32,29 @@
 
         <!---------------------------------------------- Search Options --------------------------------->
         <div class="row">
+            <div class="col-lg-1"></div>
             <div class="col-lg-3">
                 <label>
                     School
                 </label>
-                <asp:DropDownList ID="ddSchools" runat="server" CssClass="form-control">
+               <asp:DropDownList ID="ddSchools" runat="server" CssClass="form-control">
                     <asp:ListItem>True</asp:ListItem>
                     <asp:ListItem>False</asp:ListItem>
                 </asp:DropDownList>
             </div>
             <div class="col-lg-3">
                 <label>
-                    Semester
+                    Exam Name
                 </label>
-                <asp:DropDownList ID="ddSemester" runat="server" CssClass="form-control">
-                    <asp:ListItem>True</asp:ListItem>
-                    <asp:ListItem>False</asp:ListItem>
-                </asp:DropDownList>
+                <asp:TextBox ID="txtName" runat="server" CssClass="form-control" placeholder="Enter text" />
             </div>
-            <div class="col-lg-3">
-                <label>
-                    Exam
-                </label>
-                <asp:DropDownList ID="ddExams" runat="server" CssClass="form-control">
-                </asp:DropDownList>
+            <div class="col-lg-3" style="padding-top: 15px;">
+                <asp:Button ID="btnSubmit" runat="server" Text="Search DB" CssClass="btn btn-success btn-lg"
+                    OnClick="btnSubmit_Click" />
             </div>
-            <div class="col-lg-3">
-                <label>
-                    Student Name/Student Id
-                </label>
-                <asp:DropDownList ID="ddStudents" runat="server" CssClass="form-control">
-                    <asp:ListItem>True</asp:ListItem>
-                    <asp:ListItem>False</asp:ListItem>
-                </asp:DropDownList>
-            </div>
-
+            <div class="col-lg-1"></div>
         </div>
 
-        <hr />
-        <div class="row text-center">
-            <asp:Button ID="btnSubmit" runat="server" Text="Search DB" CssClass="btn btn-success btn-lg"
-                OnClick="btnSubmit_Click" />
-        </div>
         <hr />
         <%------------------------------------------- Search Results  -----------------------------------%>
         <asp:MultiView runat="server" ID="Multiview2">
@@ -82,11 +62,11 @@
                 <div class="row text-center">
                     <div class="col-md-4"></div>
                     <div class="col-md-4 form-inline">
-                        <asp:DropDownList ID="ddExportType" runat="server" CssClass="form-control">
+                        <asp:DropDownList  ID="ddExportType" runat="server" CssClass="form-control">
                             <asp:ListItem>EXCEL</asp:ListItem>
                             <asp:ListItem>WORD</asp:ListItem>
                         </asp:DropDownList>
-
+                    
                         <asp:Button ID="btnExport" runat="server" Text="Export" CssClass="btn btn-primary btn-md"
                             OnClick="btnExport_Click" />
                     </div>

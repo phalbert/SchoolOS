@@ -323,7 +323,30 @@ namespace SchoolOSApiLogic
             return result;
         }
 
-      
+        public Result SaveExam(Exam dept)
+        {
+            Result result = new Result();
+            try
+            {
+                if (!dept.IsValid())
+                {
+                    result.StatusCode = dept.StatusCode;
+                    result.StatusDesc = dept.StatusDesc;
+                    return result;
+                }
+
+                Bussinesslogic bll = new Bussinesslogic();
+                result = bll.SaveExams(dept);
+            }
+            catch (Exception ex)
+            {
+                string msg = $"EXCEPTION: {ex.Message}";
+                DatabaseHandler.LogError(msg, ex.StackTrace, dept.ExamCode);
+                result.StatusCode = Globals.FAILURE_STATUS_CODE;
+                result.StatusDesc = msg;//"{0} is an {1}",0,1
+            }
+            return result;
+        }
 
         public Result SaveSchoolStaff(SchoolStaff staff)
         {

@@ -79,5 +79,25 @@ namespace SchoolOSApiLogic.ControlClasses
             }
             return result;
         }
+
+        internal string InsertIntoAuditLog(AuditLog log)
+        {
+            try
+            {
+                command = db.GetStoredProcCommand("InsertIntoAuditTrail",
+                                                           log.ActionType,
+                                                           log.TableName,
+                                                           log.BankCode,
+                                                           log.ModifiedBy,
+                                                           log.Action
+                                                          );
+                DataTable datatable = db.ExecuteDataSet(command).Tables[0];
+                return datatable.Rows[0][0].ToString();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

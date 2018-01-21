@@ -1,4 +1,5 @@
-﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ListSubjectResults.ascx.cs" Inherits="CustomUserControls_ListSubjectResults" %>
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="SaveSubjectResults.ascx.cs" Inherits="CustomUserControls_SaveSubjectResults" %>
+
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
@@ -33,83 +34,86 @@
 
         <!---------------------------------------------- Search Options --------------------------------->
         <div class="row">
-            <div class="col-lg-3">
+            <div class="col-lg-2">
                 <label>
                     School
                 </label>
                 <asp:DropDownList ID="ddSchools" runat="server" CssClass="form-control">
-                    <asp:ListItem>True</asp:ListItem>
-                    <asp:ListItem>False</asp:ListItem>
                 </asp:DropDownList>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-2">
                 <label>
                     Semester
                 </label>
-                <asp:DropDownList ID="ddSemester" runat="server" CssClass="form-control">
-                    <asp:ListItem>True</asp:ListItem>
-                    <asp:ListItem>False</asp:ListItem>
+                <asp:DropDownList ID="ddSemesters" AutoPostBack="true" OnSelectedIndexChanged="ddSemester_SelectedIndexChanged" runat="server" CssClass="form-control">
                 </asp:DropDownList>
             </div>
-            <div class="col-lg-3">
+            <%-- exam,teacher,subject,class --%>
+            <div class="col-lg-2">
                 <label>
                     Exam
                 </label>
                 <asp:DropDownList ID="ddExams" runat="server" CssClass="form-control">
                 </asp:DropDownList>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-2">
                 <label>
-                    Student Name/Student Id
+                    Teacher
                 </label>
-                <asp:DropDownList ID="ddStudents" runat="server" CssClass="form-control">
-                    <asp:ListItem>True</asp:ListItem>
-                    <asp:ListItem>False</asp:ListItem>
+                <asp:DropDownList ID="ddTeachers" AutoPostBack="true" OnSelectedIndexChanged="ddTeacher_SelectedIndexChanged" runat="server" CssClass="form-control">
+                </asp:DropDownList>
+            </div>
+            <div class="col-lg-2">
+                <label>
+                    Class
+                </label>
+                <asp:DropDownList ID="ddClasses" AutoPostBack="true" OnSelectedIndexChanged="ddClasses_SelectedIndexChanged" runat="server" CssClass="form-control">
+                </asp:DropDownList>
+            </div>
+            <div class="col-lg-2">
+                <label>
+                    Subject
+                </label>
+                <asp:DropDownList ID="ddSubjects" runat="server" CssClass="form-control">
                 </asp:DropDownList>
             </div>
 
-        </div>
 
+        </div>
         <hr />
         <div class="row text-center">
             <asp:Button ID="btnSubmit" runat="server" Text="Search DB" CssClass="btn btn-success btn-lg"
                 OnClick="btnSubmit_Click" />
         </div>
+
         <hr />
         <%------------------------------------------- Search Results  -----------------------------------%>
         <asp:MultiView runat="server" ID="Multiview2">
             <asp:View runat="server" ID="resultView">
-                <div class="row text-center">
-                    <div class="col-md-4"></div>
-                    <div class="col-md-4 form-inline">
-                        <asp:DropDownList ID="ddExportType" runat="server" CssClass="form-control">
-                            <asp:ListItem>EXCEL</asp:ListItem>
-                            <asp:ListItem>WORD</asp:ListItem>
-                        </asp:DropDownList>
 
-                        <asp:Button ID="btnExport" runat="server" Text="Export" CssClass="btn btn-primary btn-md"
-                            OnClick="btnExport_Click" />
-                    </div>
-                    <div class="col-md-4"></div>
-                </div>
-                <hr />
                 <div class="row">
                     <div class="table-responsive">
-                        <asp:GridView runat="server" Width="100%" CssClass="table table-bordered table-hover"
+                        <asp:GridView runat="server" OnRowCreated="GridView1_RowCreated" Width="100%" CssClass="table table-bordered table-hover"
                             ID="dataGridResults" OnRowCommand="dataGridResults_RowCommand">
                             <AlternatingRowStyle BackColor="#BFE4FF" />
                             <HeaderStyle BackColor="#115E9B" Font-Bold="false" ForeColor="white" Font-Italic="False"
                                 Font-Overline="False" Font-Strikeout="False" Font-Underline="False" Height="30px" />
                             <Columns>
-                                <asp:TemplateField HeaderText="Details">
+                                <asp:TemplateField HeaderText="Marks">
                                     <ItemTemplate>
-                                        <asp:Button ID="btnedit" runat="server" Text="Edit" CommandName="EditEntity" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" />
+                                        <asp:TextBox ID="txtMark" runat="server" CommandName="SaveMark" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" />
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>
                         </asp:GridView>
                     </div>
                 </div>
+                <hr />
+                <div class="row text-center">
+                    <asp:Button ID="btnSaveMarks" runat="server" Text="Save Marks" CssClass="btn btn-primary btn-lg"
+                        OnClick="btnSaveMarks_Click" />
+                </div>
+                <hr />
             </asp:View>
             <asp:View runat="server" ID="EmptyView">
             </asp:View>

@@ -24,3 +24,6 @@ D:\Work\PegPaySchools\SchoolOS\PegasusSchoolsApi\SchoolOSApiLogicTests\bin\Debug
 D:\Work\PegPaySchools\SchoolOS\PegasusSchoolsApi\SchoolOSApiLogicTests\obj\Debug\SchoolOSApiLogicTests.csprojResolveAssemblyReference.cache
 D:\Work\PegPaySchools\SchoolOS\PegasusSchoolsApi\SchoolOSApiLogicTests\obj\Debug\SchoolOSApiLogicTests.dll
 D:\Work\PegPaySchools\SchoolOS\PegasusSchoolsApi\SchoolOSApiLogicTests\obj\Debug\SchoolOSApiLogicTests.pdb
+D:\Work\PegPaySchools\SchoolOS\PegasusSchoolsApi\SchoolOSApiLogicTests\bin\Debug\SharedCommons.dll
+D:\Work\PegPaySchools\SchoolOS\PegasusSchoolsApi\SchoolOSApiLogicTests\bin\Debug\Encryption.dll
+D:\Work\PegPaySchools\SchoolOS\PegasusSchoolsApi\SchoolOSApiLogicTests\bin\Debug\SharedCommons.pdb

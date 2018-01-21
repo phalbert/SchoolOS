@@ -144,7 +144,7 @@ public partial class ApproveSchools : System.Web.UI.UserControl
         //get the Bank User Id and the bank code
         string SchoolCode = row.Cells[1].Text.Trim();
         string ApprovedBy = user.User.Username;
-        string[] parameters = {  SchoolCode, ApprovedBy };
+        string[] parameters = {  SchoolCode, ApprovedBy,"APPROVED" };
 
         DataTable dt = schoolsApi.ExecuteDataSet("ApproveSchool", parameters).Tables[0];
         if (dt.Rows.Count != 0)
@@ -194,8 +194,19 @@ public partial class ApproveSchools : System.Web.UI.UserControl
         //get the Bank Transaction Id and the bank code
         string SchoolCode = row.Cells[1].Text.Trim();
         string ApprovedBy = user.User.Username;
-        string[] parameters = { SchoolCode, ApprovedBy };
+        string[] parameters = { SchoolCode, ApprovedBy,"REJECTED" };
 
-
+        DataTable dt = schoolsApi.ExecuteDataSet("ApproveSchool", parameters).Tables[0];
+        if (dt.Rows.Count != 0)
+        {
+            SearchDB();
+            string msg = "School(s) Rejected Successfully";
+            bll.ShowMessage(lblmsg, msg, false, Session);
+        }
+        else
+        {
+            string msg = "No Rows Affected";
+            bll.ShowMessage(lblmsg, msg, true, Session);
+        }
     }
 }

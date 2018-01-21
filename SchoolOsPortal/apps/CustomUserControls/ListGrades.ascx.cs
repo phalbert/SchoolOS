@@ -89,7 +89,7 @@ public partial class CustomUserControls_ListGrades : System.Web.UI.UserControl
     private void SearchDB()
     {
         string[] searchParams = GetSearchParameters();
-        DataTable dt = bll.SearchTable("SearchStreamsTable", searchParams);
+        DataTable dt = bll.SearchTable("SearchGradesTable", searchParams);
         if (dt.Rows.Count > 0)
         {
             dataGridResults.DataSource = dt;

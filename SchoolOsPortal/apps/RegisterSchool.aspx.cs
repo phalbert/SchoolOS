@@ -203,6 +203,7 @@ public partial class RegisterSchool : System.Web.UI.Page
         sch.SubCounty = txtSubCounty.Text;
         sch.UnebCentreNumber = txtUnebNumber.Text;
         sch.SchoolPhone = txtOfficePhone.Text;
+        sch.SchoolMoto = txtSchoolMotto.Text;
         sch.PlotNo = txtPlotNumber.Text;
         sch.PostOfficeBox = txtPostOfficeNumber.Text;
         sch.RoadName = txtRoadName.Text;

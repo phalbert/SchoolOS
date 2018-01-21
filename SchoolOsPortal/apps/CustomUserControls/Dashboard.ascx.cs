@@ -16,7 +16,7 @@ public partial class CustomUserControls_Dashboard : System.Web.UI.UserControl
         try
         {
             user = Session["User"] as SystemUserDetails;
-            lblmsg.Text = "";
+            //lblmsg.Text = "";
             Session["IsError"] = null;
 
             if (user == null)
@@ -44,7 +44,16 @@ public partial class CustomUserControls_Dashboard : System.Web.UI.UserControl
 
     private void LoadData()
     {
-        lblmsg.Text = user.User.FullName;
+        //lblmsg.Text = user.User.FullName;
+        lblBoxNumber.Text = string.IsNullOrEmpty(user.SchoolDetails.PostOfficeBox) ? "N/A" : user.SchoolDetails.PostOfficeBox;
+        lblDistrict.Text = string.IsNullOrEmpty(user.SchoolDetails.District) ? "N/A" : user.SchoolDetails.District;
+        lblEmail.Text = string.IsNullOrEmpty(user.SchoolDetails.SchoolEmail) ? "N/A" : user.SchoolDetails.SchoolEmail;
+        lblMoto.Text = string.IsNullOrEmpty(user.SchoolDetails.SchoolMoto) ? "N/A" : user.SchoolDetails.SchoolMoto;
+        lblPlotNumber.Text = string.IsNullOrEmpty(user.SchoolDetails.PlotNo) ? "N/A" : user.SchoolDetails.PlotNo;
+        lblRoad.Text = string.IsNullOrEmpty(user.SchoolDetails.RoadName) ? "N/A" : user.SchoolDetails.RoadName;
+        lblSchoolName.Text = string.IsNullOrEmpty(user.SchoolDetails.SchoolName) ? "N/A" : user.SchoolDetails.SchoolName;
+        lblUnebNumber.Text = string.IsNullOrEmpty(user.SchoolDetails.UnebCentreNumber)?"N/A": user.SchoolDetails.UnebCentreNumber;
+        lblPhoneNumber.Text= string.IsNullOrEmpty(user.SchoolDetails.SchoolPhone) ? "N/A" : user.SchoolDetails.SchoolPhone;
         UsersPic.Attributes["src"] = "../ImageHandler.ashx?Id=" + user.SchoolDetails.SchoolLogo;
 
         DataTable dt = bll.ExecuteDataTableOnSchoolsDB("GetDashBoardStatistics", new string[] { user.SchoolDetails.SchoolCode });

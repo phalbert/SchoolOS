@@ -95,7 +95,7 @@ public partial class ApproveSystemUsers : System.Web.UI.UserControl
         string UserId = row.Cells[1].Text.Trim();
         string SchoolCode = ddSchools.SelectedValue;
         string ApprovedBy = user.User.Username;
-        string[] parameters = { UserId, SchoolCode, ApprovedBy };
+        string[] parameters = { UserId, SchoolCode, ApprovedBy,"APPROVED" };
         string msg = "User(s) Approved Successfully";
 
         //set the users password to something we know
@@ -176,10 +176,24 @@ public partial class ApproveSystemUsers : System.Web.UI.UserControl
         string UserId = row.Cells[1].Text.Trim();
         string SchoolCode = ddSchools.SelectedValue;
         string RejectedBy = user.User.Username;
+        string msg = "";
+        string[] parameters = { UserId, SchoolCode, RejectedBy, "REJECTED" };
 
-        string[] parameters = { UserId, SchoolCode, RejectedBy };
+        //finally approve the user
+        DataTable dt = schoolsApi.ExecuteDataSet("ApproveSystemUser", parameters).Tables[0];
 
+        //failed to approve
+        if (dt.Rows.Count == 0)
+        {
+            string msg1 = "FAILED TO APPROVE SYSTEM USER, No Rows Affected";
+            bll.ShowMessage(lblmsg, msg1, true, Session);
+            return;
+        }
 
+        //display success message
+        SearchDB();
+        msg = "SYSTEM USER APPROVED SUCCESSFULLY, EMAIL WITH CREDENTIALS SENT SUCCSSFULLY";
+        bll.ShowMessage(lblmsg, msg, false, Session);
     }
 
     private void SearchDB()

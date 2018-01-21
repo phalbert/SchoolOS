@@ -13,14 +13,15 @@ namespace SchoolOSApiLogic.ControlClasses
         DatabaseHandler dh = new DatabaseHandler();
         SharedCommonsAPI.SharedCommonsAPI sharedCommons = new SharedCommonsAPI.SharedCommonsAPI();
 
-        
+
 
         public Result SaveSchool(School sch)
         {
             Result result = new Result();
+            LogChangesInAuditLog(sch, sch.SchoolCode, sch.SchoolCode, sch.ModifiedBy);
             string schoolType = GetArrayString(sch.SchoolType);
-            string schoolCategory= GetArrayString(sch.SchoolCategories);
-            DataTable dt = dh.ExecuteDataSet("SaveSchool", new string[] { sch.SchoolCode, sch.SchoolName, sch.SchoolLocation, sch.SchoolEmail, sch.SchoolPhone, sch.UnebCentreNumber, sch.ModifiedBy, sch.District, sch.SubCounty, sch.SchoolLogo, sch.RoadName, sch.PlotNo, sch.PostOfficeBox, sch.LiquidationBankName, sch.LiquidationAccountName, sch.LiquidationAccountNumber,schoolType,schoolCategory }).Tables[0];
+            string schoolCategory = GetArrayString(sch.SchoolCategories);
+            DataTable dt = dh.ExecuteDataSet("SaveSchool", new string[] { sch.SchoolCode, sch.SchoolName, sch.SchoolMoto, sch.SchoolEmail, sch.SchoolPhone, sch.UnebCentreNumber, sch.ModifiedBy, sch.District, sch.SubCounty, sch.SchoolLogo, sch.RoadName, sch.PlotNo, sch.PostOfficeBox, sch.LiquidationBankName, sch.LiquidationAccountName, sch.LiquidationAccountNumber, schoolType, schoolCategory }).Tables[0];
 
             if (dt.Rows.Count == 0)
             {
@@ -41,16 +42,35 @@ namespace SchoolOSApiLogic.ControlClasses
 
             result.StatusCode = Globals.SUCCESS_STATUS_CODE;
             result.StatusDesc = Globals.SUCCESS_STATUS_DESC;
-            result.PegPayID = dt.Rows[0][0].ToString();
-            result.ThirdPartyID = dt.Rows[0][1].ToString();
+            result.PegPayID = sch.SchoolCode;//dt.Rows[dt.Rows.Count-1][0].ToString();
+            result.ThirdPartyID = dt.Rows[dt.Rows.Count - 1][1].ToString();
             result.RequestID = sch.SchoolCode;
 
+            return result;
+        }
+
+        internal Result GetStudentGrade(string studentId, string schoolCode, string mark)
+        {
+            Result result = new Result();
+            DataTable dt = dh.ExecuteDataSet("GetStudentGrade", new string[] { studentId, schoolCode, mark }).Tables[0];
+
+            if (dt.Rows.Count == 0)
+            {
+                result.StatusCode = Globals.FAILURE_STATUS_CODE;
+                result.StatusDesc = $"UNABLE TO DETERMINE GRADE FOR MARK [{mark}] GIVEN TO STUDENT [{studentId}]";
+                return result;
+            }
+
+            result.ThirdPartyID = dt.Rows[0][0].ToString();
+            result.StatusCode = Globals.SUCCESS_STATUS_CODE;
+            result.StatusDesc = Globals.SUCCESS_STATUS_DESC;
             return result;
         }
 
         public Result SaveGrade(Grade sch)
         {
             Result result = new Result();
+            LogChangesInAuditLog(sch, sch.GradeCode, sch.SchoolCode, sch.ModifiedBy);
             DataTable dt = dh.ExecuteDataSet("SaveGrade", new string[] { sch.SchoolCode, sch.GradeName, sch.GradeCode, sch.MinimumMark, sch.MaximumMark, sch.ModifiedBy }).Tables[0];
 
             if (dt.Rows.Count == 0)
@@ -73,7 +93,7 @@ namespace SchoolOSApiLogic.ControlClasses
         {
             Array.Sort(list, (x, y) => String.Compare(x, y));
             string returnString = "";
-            foreach(string item in list)
+            foreach (string item in list)
             {
                 returnString += " " + item;
             }
@@ -85,6 +105,7 @@ namespace SchoolOSApiLogic.ControlClasses
         public Result SaveSchoolFee(SchoolFee fee)
         {
             Result result = new Result();
+            LogChangesInAuditLog(fee, fee.FeeID, fee.SchoolCode, fee.ModifiedBy);
             DataTable dt = dh.ExecuteDataSet("SaveSchoolFees", new string[] { fee.FeeID, fee.FeeName, fee.FeeAmount, fee.CurrencyCode, fee.SchoolCode, fee.ModifiedBy }).Tables[0];
 
             if (dt.Rows.Count == 0)
@@ -105,6 +126,7 @@ namespace SchoolOSApiLogic.ControlClasses
         public Result SaveSubject(Subject sub)
         {
             Result result = new Result();
+            LogChangesInAuditLog(sub, sub.SubjectCode, sub.SchoolCode, sub.ModifiedBy);
             DataTable dt = dh.ExecuteDataSet("SaveSubject", new string[] { sub.SchoolCode, sub.SubjectName, sub.SubjectCode, sub.ModifiedBy }).Tables[0];
 
             if (dt.Rows.Count == 0)
@@ -125,7 +147,8 @@ namespace SchoolOSApiLogic.ControlClasses
         public Result SaveSchoolStaff(SchoolStaff staff)
         {
             Result result = new Result();
-            DataTable dt = dh.ExecuteDataSet("SaveSchoolStaff", new string[] { staff.SchoolCode, staff.FullName, staff.Gender, staff.StaffType, staff.StaffCategory, staff.StaffIDNumber, staff.PegPayStaffIDNumber, staff.ProfilePic, staff.ModifiedBy, staff.Email, staff.PhoneNumber,staff.ApprovedBy }).Tables[0];
+            LogChangesInAuditLog(staff, staff.StaffIDNumber, staff.SchoolCode, staff.ModifiedBy);
+            DataTable dt = dh.ExecuteDataSet("SaveSchoolStaff", new string[] { staff.SchoolCode, staff.FullName, staff.Gender, staff.StaffType, staff.StaffCategory, staff.StaffIDNumber, staff.PegPayStaffIDNumber, staff.ProfilePic, staff.ModifiedBy, staff.Email, staff.PhoneNumber, staff.ApprovedBy }).Tables[0];
 
             if (dt.Rows.Count == 0)
             {
@@ -145,6 +168,7 @@ namespace SchoolOSApiLogic.ControlClasses
         public Result SaveClassStream(ClassStream stream)
         {
             Result result = new Result();
+            LogChangesInAuditLog(stream, stream.StreamCode, stream.SchoolCode, stream.ModifiedBy);
             DataTable dt = dh.ExecuteDataSet("SaveClassStream", new string[] { stream.SchoolCode, stream.StreamName, stream.StreamCode, stream.ClassCode, stream.ModifiedBy }).Tables[0];
 
             if (dt.Rows.Count == 0)
@@ -165,8 +189,9 @@ namespace SchoolOSApiLogic.ControlClasses
         public Result SaveSystemUser(SystemUser user)
         {
             Result result = new Result();
+            LogChangesInAuditLog(user, user.Username, user.SchoolCode, user.ModifiedBy);
             user.UserPassword = GenearetHMACSha256Hash(user.SecretKey, user.UserPassword);
-            DataTable dt = dh.ExecuteDataSet("SaveSystemUser", new string[] { user.Username, user.UserPassword, user.UserType, user.UserCategory, user.SecretKey, user.ModifiedBy, user.ProfilePic, user.SchoolCode, user.FullName, user.IsActive, user.Email, user.PhoneNumber,user.ApprovedBy }).Tables[0];
+            DataTable dt = dh.ExecuteDataSet("SaveSystemUser", new string[] { user.Username, user.UserPassword, user.UserType, user.UserCategory, user.SecretKey, user.ModifiedBy, user.ProfilePic, user.SchoolCode, user.FullName, user.IsActive, user.Email, user.PhoneNumber, user.ApprovedBy }).Tables[0];
 
             if (dt.Rows.Count == 0)
             {
@@ -200,7 +225,8 @@ namespace SchoolOSApiLogic.ControlClasses
         public Result SaveStudent(Student std)
         {
             Result result = new Result();
-            DataTable dt = dh.ExecuteDataSet("SaveStudent", new string[] { std.SchoolCode, std.StudentNumber, std.PegPayStudentNumber, std.StudentName, std.ClassCode, std.StreamCode, std.DateOfBirth, std.StudentCategory, std.ModifiedBy, std.ProfilePic, std.Email, std.Gender, std.PhoneNumber,std.ParentsName1,std.ParentsName2,std.ParentsPhoneNumber1,std.ParentsPhoneNumber2 }).Tables[0];
+            LogChangesInAuditLog(std, std.StudentNumber, std.SchoolCode, std.ModifiedBy);
+            DataTable dt = dh.ExecuteDataSet("SaveStudent", new string[] { std.SchoolCode, std.StudentNumber, std.PegPayStudentNumber, std.StudentName, std.ClassCode, std.StreamCode, std.DateOfBirth, std.StudentCategory, std.ModifiedBy, std.ProfilePic, std.Email, std.Gender, std.PhoneNumber, std.ParentsName1, std.ParentsName2, std.ParentsPhoneNumber1, std.ParentsPhoneNumber2 }).Tables[0];
 
             if (dt.Rows.Count == 0)
             {
@@ -232,6 +258,7 @@ namespace SchoolOSApiLogic.ControlClasses
         public Result SaveSchoolClass(SchoolClass schcls)
         {
             Result result = new Result();
+            LogChangesInAuditLog(schcls, schcls.ClassCode, schcls.SchoolCode, schcls.ModifiedBy);
             DataTable dt = dh.ExecuteDataSet("saveschoolclass", new string[] { schcls.SchoolCode, schcls.ClassCode, schcls.ClassName, schcls.ModifiedBy }).Tables[0];
 
             if (dt.Rows.Count == 0)
@@ -252,7 +279,8 @@ namespace SchoolOSApiLogic.ControlClasses
         public Result SaveDepartment(Department dept)
         {
             Result result = new Result();
-            DataTable dt = dh.ExecuteDataSet("saveschoolclass", new string[] { dept.SchoolCode, dept.DepartmentCode, dept.DepartmentName, dept.DepartmentCategory, dept.ModifiedBy }).Tables[0];
+            LogChangesInAuditLog(dept, dept.DepartmentCode, dept.SchoolCode, dept.ModifiedBy);
+            DataTable dt = dh.ExecuteDataSet("SaveDepartment", new string[] { dept.SchoolCode, dept.DepartmentCode, dept.DepartmentName, dept.DepartmentCategory, dept.ModifiedBy }).Tables[0];
 
             if (dt.Rows.Count == 0)
             {
@@ -269,10 +297,74 @@ namespace SchoolOSApiLogic.ControlClasses
             return result;
         }
 
+        public Result SaveExams(Exam dept)
+        {
+            Result result = new Result();
+            LogChangesInAuditLog(dept, dept.ExamCode, dept.SchoolCode, dept.ModifiedBy);
+            DataTable dt = dh.ExecuteDataSet("SaveExam", new string[] { dept.SchoolCode, dept.ExamCode, dept.ExamName, dept.ModifiedBy }).Tables[0];
+
+            if (dt.Rows.Count == 0)
+            {
+                result.StatusCode = Globals.FAILURE_STATUS_CODE;
+                result.StatusDesc = "NO ROWS AFFECTED";
+                return result;
+            }
+
+            result.StatusCode = Globals.SUCCESS_STATUS_CODE;
+            result.StatusDesc = Globals.SUCCESS_STATUS_DESC;
+            result.PegPayID = dt.Rows[0][0].ToString();
+            result.RequestID = dept.ExamCode;
+
+            return result;
+        }
+
+        private void LogChangesInAuditLog(Request baseObj, string objectId, string BankCode, string modifiedBy)
+        {
+            try
+            {
+                //we use reflection to 
+                //1. get the class of object passed
+                //2.loop thru all properties of that class and get changes made
+                AuditLog log = new AuditLog();
+                //BaseObject type = GetById(baseObj.GetType().Name, objectId, BankCode, "");
+                string changesMade = "";
+
+                //this is an Update
+
+                changesMade += "Saved " + baseObj.GetType().Name + " with ";
+                log.ActionType = "UPDATE";
+                FieldInfo[] newFields = baseObj.GetType().GetFields();
+
+                foreach (FieldInfo newField in newFields)
+                {
+                    string newFieldName = newField.Name;
+                    object obj = baseObj.GetType().GetField(newFieldName).GetValue(baseObj);
+                    if (obj != null)
+                    {
+                        string newFieldValue =
+                        changesMade += newFieldName + " = " + obj.ToString() + ", ";
+                    }
+                }
+
+
+
+                log.BankCode = BankCode;
+                log.Action = changesMade;
+                log.ModifiedBy = modifiedBy;
+                log.TableName = baseObj.GetType().Name;
+                dh.InsertIntoAuditLog(log);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public Result SaveStudentSubject(StudentSubject dept)
         {
             Result result = new Result();
-            DataTable dt = dh.ExecuteDataSet("SaveStudentSubject", new string[] { dept.StudentId, dept.SubjectCode, dept.TermCode, dept.SchoolCode, dept.ModifiedBy,dept.ClassCode }).Tables[0];
+            LogChangesInAuditLog(dept, dept.StudentId, dept.SchoolCode, dept.ModifiedBy);
+            DataTable dt = dh.ExecuteDataSet("SaveStudentSubject", new string[] { dept.StudentId, dept.SubjectCode, dept.TermCode, dept.SchoolCode, dept.ModifiedBy, dept.ClassCode }).Tables[0];
 
             if (dt.Rows.Count == 0)
             {
@@ -292,8 +384,9 @@ namespace SchoolOSApiLogic.ControlClasses
         public Result SaveUploadedFile(UploadedFile file)
         {
             Result result = new Result();
+            LogChangesInAuditLog(file, file.FileName, file.SchoolCode, file.ModifiedBy);
             Byte[] array = Convert.FromBase64String(file.FileContents);
-            DataTable dt = dh.ExecuteDataSet("SaveUploadedFile", new object[] { file.SchoolCode, file.OperationCode, array, file.ModifiedBy, file.FileName,file.Email,file.Channel,file.SPCode }).Tables[0];
+            DataTable dt = dh.ExecuteDataSet("SaveUploadedFile", new object[] { file.SchoolCode, file.OperationCode, array, file.ModifiedBy, file.FileName, file.Email, file.Channel, file.SPCode }).Tables[0];
 
             if (dt.Rows.Count == 0)
             {
@@ -313,7 +406,8 @@ namespace SchoolOSApiLogic.ControlClasses
         public Result SaveTeacherSubject(TeacherSubject tch)
         {
             Result result = new Result();
-            DataTable dt = dh.ExecuteDataSet("SaveTeacherSubject", new object[] { tch.TeacherId, tch.ClassCode, tch.StreamCode,tch.SubjectCode,tch.TermCode,tch.SchoolCode, tch.ModifiedBy}).Tables[0];
+            LogChangesInAuditLog(tch, tch.TeacherId, tch.SchoolCode, tch.ModifiedBy);
+            DataTable dt = dh.ExecuteDataSet("SaveTeacherSubject", new object[] { tch.TeacherId, tch.ClassCode, tch.StreamCode, tch.SubjectCode, tch.TermCode, tch.SchoolCode, tch.ModifiedBy }).Tables[0];
 
             if (dt.Rows.Count == 0)
             {
@@ -335,7 +429,8 @@ namespace SchoolOSApiLogic.ControlClasses
         public Result SaveSubjectResult(SubjectResults dept)
         {
             Result result = new Result();
-            DataTable dt = dh.ExecuteDataSet("SaveSubjectResults", new string[] { dept.SchoolCode, dept.SubjectCode, dept.StudentId, dept.TermCode, dept.Mark, dept.Grade, dept.ModifiedBy }).Tables[0];
+            LogChangesInAuditLog(dept, dept.SubjectCode, dept.SchoolCode, dept.ModifiedBy);
+            DataTable dt = dh.ExecuteDataSet("SaveSubjectResults", new string[] { dept.SchoolCode, dept.SubjectCode, dept.StudentId, dept.TermCode, dept.Mark, dept.Grade, dept.ModifiedBy, dept.ExamCode }).Tables[0];
 
             if (dt.Rows.Count == 0)
             {
@@ -352,11 +447,12 @@ namespace SchoolOSApiLogic.ControlClasses
             return result;
         }
 
-      
+
 
         public Result SaveUserType(UserType type)
         {
             Result result = new Result();
+            LogChangesInAuditLog(type, type.UserTypeCode, type.SchoolCode, type.ModifiedBy);
             DataTable dt = dh.ExecuteDataSet("SaveUserType", new string[] { type.SchoolCode, type.UserTypeCode, type.UserTypeName, type.ModifiedBy }).Tables[0];
 
             if (dt.Rows.Count == 0)
@@ -377,6 +473,7 @@ namespace SchoolOSApiLogic.ControlClasses
         public Result SaveMainLink(MainLink mainLink)
         {
             Result result = new Result();
+            LogChangesInAuditLog(mainLink, mainLink.MainLinkCode, mainLink.SchoolCode, mainLink.ModifiedBy);
             DataTable dt = dh.ExecuteDataSet("SaveMainLink", new string[] { mainLink.SchoolCode, mainLink.MainLinkCode, mainLink.MainLinkName, mainLink.ModifiedBy }).Tables[0];
 
             if (dt.Rows.Count == 0)
@@ -397,6 +494,7 @@ namespace SchoolOSApiLogic.ControlClasses
         public Result SaveSchoolTerm(SchoolTerm term)
         {
             Result result = new Result();
+            LogChangesInAuditLog(term, term.TermCode, term.SchoolCode, term.ModifiedBy);
             DataTable dt = dh.ExecuteDataSet("SaveSchoolTerm", new string[] { term.TermName, term.TermCode, term.StartDate, term.EndDate, term.SchoolCode, term.ModifiedBy }).Tables[0];
 
             if (dt.Rows.Count == 0)
@@ -434,7 +532,7 @@ namespace SchoolOSApiLogic.ControlClasses
         public SystemUserDetails Login(string UserId, string Password)
         {
             SystemUserDetails result = new SystemUserDetails();
-
+            SaveInAuditlog("LOGIN", "", "ALL", UserId, "Login Attempt");
             SystemUser user = AuthenticateSystemUser(UserId, Password);
 
             if (user.StatusCode != Globals.SUCCESS_STATUS_CODE)
@@ -463,15 +561,38 @@ namespace SchoolOSApiLogic.ControlClasses
             result.StatusDesc = Globals.SUCCESS_STATUS_DESC;
             result.PegPayID = UserId;
             result.RequestID = UserId;
-
+            SaveInAuditlog("LOGIN", "", "ALL", UserId, "Successfull Login");
             return result;
         }
 
-        public SystemUserDetails StudentLogin(string UserId, string Password,string SchoolCode)
+        private void SaveInAuditlog(string ActionType, string TableName, string BankCode, string ModifiedBy, string Action)
+        {
+
+            try
+            {
+                DataTable datatable = dh.ExecuteDataSet("InsertIntoAuditTrail",
+                                                               new string[]
+                                                       {
+                                                             ActionType,
+                                                             TableName,
+                                                             BankCode,
+                                                             ModifiedBy,
+                                                             Action
+                                                       }).Tables[0];
+                //return datatable.Rows[0][0].ToString();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+
+        public SystemUserDetails StudentLogin(string UserId, string Password, string SchoolCode)
         {
             SystemUserDetails result = new SystemUserDetails();
 
-            SystemUser user = AuthenticateStudent(UserId, Password,SchoolCode);
+            SystemUser user = AuthenticateStudent(UserId, Password, SchoolCode);
 
             if (user.StatusCode != Globals.SUCCESS_STATUS_CODE)
             {
@@ -511,6 +632,7 @@ namespace SchoolOSApiLogic.ControlClasses
             {
                 user.StatusCode = Globals.FAILURE_STATUS_CODE;
                 user.StatusDesc = "PLEASE SUPPLY A USER NAME";
+                SaveInAuditlog("LOGIN", "", schoolCode, userId, "Failed Login Attempt:" + user.StatusDesc);
                 return user;
             }
 
@@ -519,14 +641,16 @@ namespace SchoolOSApiLogic.ControlClasses
             {
                 user.StatusCode = Globals.FAILURE_STATUS_CODE;
                 user.StatusDesc = "PLEASE SUPPLY A PASSWORD";
+                SaveInAuditlog("LOGIN", "", schoolCode, userId, "Failed Login Attempt:" + user.StatusDesc);
                 return user;
             }
 
-            Student std= GetStudentById(userId, schoolCode);
+            Student std = GetStudentById(userId, schoolCode);
             user = GetSystemUserFromStudent(std);
 
             if (user.StatusCode != Globals.SUCCESS_STATUS_CODE)
             {
+                SaveInAuditlog("LOGIN", "", schoolCode, userId, "Failed Login Attempt:" + user.StatusDesc);
                 user.StatusCode = Globals.FAILURE_STATUS_CODE;
                 user.StatusDesc = "INVALID USERNAME/PASSWORD!!";
                 return user;
@@ -538,10 +662,9 @@ namespace SchoolOSApiLogic.ControlClasses
             {
                 user.StatusCode = Globals.FAILURE_STATUS_CODE;
                 user.StatusDesc = "INVALID USERNAME/PASSWORD!";
+                SaveInAuditlog("LOGIN", "", schoolCode, userId, "Failed Login Attempt:INVALID PASSWORD SUPPLIED");
                 return user;
             }
-
-            
 
             return user;
         }
@@ -615,6 +738,7 @@ namespace SchoolOSApiLogic.ControlClasses
             }
 
             DataRow row = dt.Rows[0];
+            sch.ApprovedBy = row["ApprovedBy"].ToString();
             sch.SchoolCode = row["SchoolCode"].ToString();
             sch.District = row["District"].ToString();
             sch.LiquidationAccountName = row["LiquidationAccountName"].ToString();
@@ -625,14 +749,14 @@ namespace SchoolOSApiLogic.ControlClasses
             sch.PostOfficeBox = row["PostOfficeBox"].ToString();
             sch.RoadName = row["RoadName"].ToString();
             sch.SchoolEmail = row["SchoolEmail"].ToString();
-            sch.SchoolLocation = row["SchoolLocation"].ToString();
+            sch.SchoolMoto = row["SchoolMoto"].ToString();
             sch.SchoolLogo = row["SchoolLogo"].ToString();
             sch.SchoolName = row["SchoolName"].ToString();
             sch.SchoolPhone = row["SchoolPhone"].ToString();
             sch.SubCounty = row["SubCounty"].ToString();
             sch.UnebCentreNumber = row["UnebCenterNumber"].ToString();
             sch.SchoolCategories = row["SchoolCategory"].ToString().Split('_');
-            sch.SchoolType= row["SchoolType"].ToString().Split('_');
+            sch.SchoolType = row["SchoolType"].ToString().Split('_');
             sch.StatusCode = Globals.SUCCESS_STATUS_CODE;
             sch.StatusDesc = Globals.SUCCESS_STATUS_DESC;
             return sch;
@@ -696,14 +820,16 @@ namespace SchoolOSApiLogic.ControlClasses
             {
                 sch.StatusCode = Globals.FAILURE_STATUS_CODE;
                 sch.StatusDesc = "NO SCHOOL ID FOUND";
+                SaveInAuditlog("LOGIN", "", "ALL", schoolId, "Failed Login Attempt:" + sch.StatusDesc);
                 return sch;
             }
 
             sch = GetSchoolById(schoolId);
 
             //not found
-            if (sch.SchoolCode != Globals.SUCCESS_STATUS_CODE)
+            if (sch.StatusCode != Globals.SUCCESS_STATUS_CODE)
             {
+                SaveInAuditlog("LOGIN", "", "ALL", schoolId, "Failed Login Attempt:" + sch.StatusDesc);
                 return sch;
             }
 
@@ -711,7 +837,8 @@ namespace SchoolOSApiLogic.ControlClasses
             if (string.IsNullOrEmpty(sch.ApprovedBy))
             {
                 sch.StatusCode = Globals.FAILURE_STATUS_CODE;
-                sch.StatusDesc = $"SCHOOL [{sch.ApprovedBy}] HAS NOT YET BEEN APPROVED";
+                sch.StatusDesc = $"SCHOOL [{sch.SchoolCode}] HAS NOT YET BEEN APPROVED";
+                SaveInAuditlog("LOGIN", "", "ALL", schoolId, "Failed Login Attempt:" + sch.StatusDesc);
                 return sch;
             }
 
@@ -741,6 +868,7 @@ namespace SchoolOSApiLogic.ControlClasses
 
             if (user.StatusCode != Globals.SUCCESS_STATUS_CODE)
             {
+                SaveInAuditlog("LOGIN", "", "ALL", userId, "Failed Login Attempt:"+user.StatusDesc);
                 user.StatusCode = Globals.FAILURE_STATUS_CODE;
                 user.StatusDesc = "INVALID USERNAME/PASSWORD!!";
                 return user;
@@ -750,6 +878,7 @@ namespace SchoolOSApiLogic.ControlClasses
 
             if (user.UserPassword != hashedPassword)
             {
+                SaveInAuditlog("LOGIN", "", "ALL", userId, "Failed Login Attempt:INVALID PASSWORD SUPPLIED");
                 user.StatusCode = Globals.FAILURE_STATUS_CODE;
                 user.StatusDesc = "INVALID USERNAME/PASSWORD!";
                 return user;
@@ -759,6 +888,7 @@ namespace SchoolOSApiLogic.ControlClasses
             {
                 user.StatusCode = Globals.FAILURE_STATUS_CODE;
                 user.StatusDesc = "YOUR ACCOUNT HAS NOT YET BEEN APPROVED. PLEASE CONTACT ADMINISTRATOR";
+                SaveInAuditlog("LOGIN", "", "ALL", userId, "Failed Login Attempt:" + user.StatusDesc);
                 return user;
             }
 
@@ -805,6 +935,7 @@ namespace SchoolOSApiLogic.ControlClasses
         public Result SaveSubLink(SubLink sublink)
         {
             Result result = new Result();
+            LogChangesInAuditLog(sublink, sublink.SubLinkCode, sublink.SchoolCode, sublink.ModifiedBy);
             DataTable dt = dh.ExecuteDataSet("SaveSubLink", new string[] { sublink.SchoolCode, sublink.SubLinkCode, sublink.SubLinkName, sublink.ModifiedBy, sublink.URL }).Tables[0];
 
             if (dt.Rows.Count == 0)
@@ -880,6 +1011,7 @@ namespace SchoolOSApiLogic.ControlClasses
         public Result SaveSchoolFees(SchoolFee fee)
         {
             Result result = new Result();
+            LogChangesInAuditLog(fee, fee.FeeID, fee.SchoolCode, fee.ModifiedBy);
             DataTable dt = dh.ExecuteDataSet("SaveSchoolFees", new string[] { fee.FeeID, fee.FeeName, fee.FeeAmount, fee.CurrencyCode, fee.SchoolCode, fee.ModifiedBy }).Tables[0];
 
             if (dt.Rows.Count == 0)
@@ -899,6 +1031,7 @@ namespace SchoolOSApiLogic.ControlClasses
         public Result SaveStudentFees(StudentFee fee)
         {
             Result result = new Result();
+            LogChangesInAuditLog(fee, fee.TranID, fee.SchoolCode, fee.ModifiedBy);
             DataTable dt = dh.ExecuteDataSet("SaveStudentFees", new string[] { fee.StudentID, fee.FeeID, fee.SchoolCode, fee.ModifiedBy, fee.ClassCode, fee.FeeType, fee.Amount, fee.Email, fee.TranID, fee.PaymentChannel }).Tables[0];
 
             if (dt.Rows.Count == 0)

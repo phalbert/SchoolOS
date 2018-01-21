@@ -118,7 +118,7 @@ public partial class CustomUserControls_ApproveStaffMembers : System.Web.UI.User
         string StaffID = row.Cells[1].Text.Trim();
         string SchoolCode = ddSchools.SelectedValue;
         string ApprovedBy = user.User.Username;
-        string[] parameters = { StaffID, SchoolCode, ApprovedBy };
+        string[] parameters = { StaffID, SchoolCode, ApprovedBy,"APPROVED" };
 
         //save student as system user
         SystemUser newUser = GetSystemUser(StaffID, SchoolCode);
@@ -214,9 +214,21 @@ public partial class CustomUserControls_ApproveStaffMembers : System.Web.UI.User
         string SchoolCode = ddSchools.SelectedValue;
         string RejectedBy = user.User.Username;
 
-        string[] parameters = { UserId, SchoolCode, RejectedBy };
+        string[] parameters = { UserId, SchoolCode, RejectedBy,"REJECTED" };
 
-
+        //approve staff member
+        DataTable dt = schoolsApi.ExecuteDataSet("ApproveStaffMember", parameters).Tables[0];
+        if (dt.Rows.Count != 0)
+        {
+            SearchDB();
+            string msg = "Staff(s) Rejected Successfully";
+            bll.ShowMessage(lblmsg, msg, false, Session);
+        }
+        else
+        {
+            string msg = "No Rows Affected";
+            bll.ShowMessage(lblmsg, msg, true, Session);
+        }
     }
 
     private string[] GetSearchParameters()

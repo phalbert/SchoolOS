@@ -4,13 +4,10 @@ using System.Text;
 
 namespace SchoolOSApiLogic.Entities
 {
-    public class Grade : Request
+    public class Exam:Request
     {
-        public string GradeCode = "";
-        public string GradeName = "";
-        public string MinimumMark = "";
-        public string MaximumMark = "";
-        public string GradeSchemeCode = "";
+        public string ExamCode = "";
+        public string ExamName = "";
 
         public override bool IsValid()
         {
@@ -21,13 +18,6 @@ namespace SchoolOSApiLogic.Entities
             {
                 StatusCode = Globals.FAILURE_STATUS_CODE;
                 StatusDesc = nullCheckResult.StatusDesc;
-                return false;
-            }
-
-            if (!(SharedCommons.SharedCommons.GetIntFromStringDefaultsToZero(MinimumMark) < (SharedCommons.SharedCommons.GetIntFromStringDefaultsToZero(MaximumMark))))
-            {
-                StatusCode = Globals.FAILURE_STATUS_CODE;
-                StatusDesc = "MINIMUM MARK MUST BE LESS THAN THE MAXIMUM MARK";
                 return false;
             }
 

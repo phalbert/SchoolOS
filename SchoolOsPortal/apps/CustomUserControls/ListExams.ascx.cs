@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class CustomUserControls_ListSubjectResults : System.Web.UI.UserControl
+public partial class CustomUserControls_ListExams : System.Web.UI.UserControl
 {
     public event EventHandler EditEvent;
     SystemUserDetails user;
@@ -45,15 +45,7 @@ public partial class CustomUserControls_ListSubjectResults : System.Web.UI.UserC
     private void LoadData()
     {
         bll.LoadSchoolsIntoDropDown(user, ddSchools);
-
-        bll.LoadDataIntoDropDownALL("GetTermsForDropDown", new string[] { ddSchools.SelectedValue }, ddSemester);
-        bll.LoadDataIntoDropDownALL("GetStudentsForDropDown", new string[] { ddSchools.SelectedValue,"ALL" }, ddStudents);
-
-        if (user.User.UserType == "SCHOOL_STUDENT")
-        {
-            ddStudents.SelectedValue = user.User.Username;
-            ddStudents.Enabled = false;
-        }
+        //SearchDb();
     }
 
     protected void btnExport_Click(object sender, EventArgs e)
@@ -81,13 +73,6 @@ public partial class CustomUserControls_ListSubjectResults : System.Web.UI.UserC
         }
     }
 
-    public void LoadDataForStudent()
-    {
-        bll.LoadSchoolsIntoDropDown(user, ddSchools);
-        bll.LoadDataIntoDropDownALL("GetTermsForDropDown", new string[] { ddSchools.SelectedValue }, ddSemester);
-        bll.LoadDataIntoDropDownALL("GetStudentsForDropDown", new string[] { ddSchools.SelectedValue, "ALL" }, ddStudents);
-    }
-
     protected void btnSubmit_Click(object sender, EventArgs e)
     {
         try
@@ -104,7 +89,7 @@ public partial class CustomUserControls_ListSubjectResults : System.Web.UI.UserC
     private void SearchDB()
     {
         string[] searchParams = GetSearchParameters();
-        DataTable dt = bll.SearchTable("SearchSubjectResultsTable", searchParams);
+        DataTable dt = bll.SearchTable("SearchExamsTable", searchParams);
         if (dt.Rows.Count > 0)
         {
             dataGridResults.DataSource = dt;
@@ -127,13 +112,9 @@ public partial class CustomUserControls_ListSubjectResults : System.Web.UI.UserC
     {
         List<string> all = new List<string>();
         string name = ddSchools.SelectedValue;
-        string StudentId = ddStudents.SelectedValue;
-        string Semester = ddSemester.SelectedValue;
-        string Exam = ddExams.SelectedValue;
+        string StudentId = txtName.Text;
         all.Add(name);
         all.Add(StudentId);
-        all.Add(Semester);
-        all.Add(Exam);
         return all.ToArray();
     }
 

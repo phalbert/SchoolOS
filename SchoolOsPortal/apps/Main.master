@@ -58,12 +58,12 @@
         <header class="header">
             <nav class="navbar navbar-static-top" role="navigation">
 
-                <a href="index.html" class="logo">
+                <a href="LoggedInStartPage.aspx" class="logo">
                     <h3 style="color: #fff;">FlexiSchools</h3>
                 </a>
 
                 <div>
-                    <a href="index.html#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <a href="LoggedInStartPage.aspx#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
                         <i class="fa fa-fw ti-menu"></i>
                     </a>
                 </div>

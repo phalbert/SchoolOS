@@ -60,10 +60,12 @@
     <Compile Include="ControlClasses\CB_BussinessLogic.cs" />
     <Compile Include="ControlClasses\DatabaseHandler.cs" />
     <Compile Include="ControlClasses\Globals.cs" />
+    <Compile Include="Entities\AuditLog.cs" />
     <Compile Include="Entities\ClassGrades.cs" />
     <Compile Include="Entities\ClassStream.cs" />
     <Compile Include="Entities\Department.cs" />
     <Compile Include="Entities\Entity.cs" />
+    <Compile Include="Entities\Exam.cs" />
     <Compile Include="Entities\Fee.cs" />
     <Compile Include="Entities\Grade.cs" />
     <Compile Include="Entities\MainLink.cs" />

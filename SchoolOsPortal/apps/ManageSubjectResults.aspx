@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" MasterPageFile="~/Main.master" CodeFile="ManageSubjectResults.aspx.cs" Inherits="ManageSubjectResults" %>
 
 <%@ Register TagPrefix="uc" TagName="ListClassesUserControl" Src="~/CustomUserControls/ListSubjectResults.ascx" %>
-<%@ Register TagPrefix="uc" TagName="SaveClassUserControl" Src="~/CustomUserControls/SaveStudentResults.ascx" %>
+<%@ Register TagPrefix="uc" TagName="SaveClassUserControl" Src="~/CustomUserControls/SaveSubjectResults.ascx" %>
 <%@ Register TagPrefix="uc" TagName="ListStudentsUserControl" Src="~/CustomUserControls/ListStudents.ascx" %>
 <%@ Register TagPrefix="uc" TagName="BulkSubjectResultsUploadUserControl" Src="~/CustomUserControls/BulkStudentResultsUpload.ascx" %>
 <%@ Register TagPrefix="uc" TagName="ApproveStudentResultsUserControl" Src="~/CustomUserControls/ApproveStudentResults.ascx" %>
@@ -25,7 +25,7 @@
                     <li id="BulkSubjectResultsUploadLink" runat="server" >
                         <asp:LinkButton ID="BulkSubjectResultsUploadLinkButton" runat="server" OnClick="btnTabPane_Click">Bulk Subject Result Upload</asp:LinkButton></li>
                      <li id="ApproveStudentResultsLink" runat="server" >
-                        <asp:LinkButton ID="ApproveStudentResultsLinkButton" runat="server" OnClick="btnTabPane_Click">Bulk Subject Result Upload</asp:LinkButton></li>
+                        <asp:LinkButton ID="ApproveStudentResultsLinkButton" runat="server" OnClick="btnTabPane_Click">Approve Results</asp:LinkButton></li>
                 </ul>
             </div>
 

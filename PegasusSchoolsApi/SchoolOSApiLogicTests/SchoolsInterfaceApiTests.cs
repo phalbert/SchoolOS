@@ -25,7 +25,7 @@ namespace SchoolOSApiLogic.Tests
             sch.SchoolCode = "TEST_SCHOOL";
             sch.SchoolEmail = "nsubugak@yahoo.com";
             sch.SchoolID = "";
-            sch.SchoolLocation = "pegasus tech";
+            sch.SchoolMoto = "pegasus tech";
             sch.SchoolPhone = "0785975800";
             sch.UnebCentreNumber = "123444";
             sch.VendorCode = "TEST";
