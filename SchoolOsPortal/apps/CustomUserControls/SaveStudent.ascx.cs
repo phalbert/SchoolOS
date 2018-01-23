@@ -186,6 +186,9 @@ public partial class SaveStudent : System.Web.UI.UserControl
         std.PegPayStudentNumber = SharedCommons.SharedCommons.GenerateUniqueId("STD");
         std.PhoneNumber = txtPhone.Text;
         std.ProfilePic = "";
+        std.IsActive = "TRUE";
+        std.Password = SharedCommons.SharedCommons.GeneratePassword();
+        std.SecretKey = SharedCommons.SharedCommons.GenerateSecretKey();
         std.SchoolCode = ddSchools.SelectedValue;
         std.StreamCode = ddStream.SelectedValue;
         std.StudentCategory = ddStdCategory.SelectedValue;

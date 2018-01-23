@@ -12,7 +12,7 @@
     <link rel="shortcut icon" href="Images/favicon.ico.png" />
     <link href="css/pegpay-login.css" rel="stylesheet" />
     <script src='https://www.google.com/recaptcha/api.js'></script>
-
+    <link href="css/sumoselect.min.css" rel="stylesheet" />
     <style>
         @import url("scripts/vendors/iCheck/css/minimal/_all.css");
         @import url("scripts/vendors/iCheck/css/square/_all.css");
@@ -110,7 +110,7 @@
                             <form runat="server" id="authentication" method="post" class="login_validator">
                                 <div class="form-group">
                                     <label for="email" class="sr-only">School</label>
-                                    <asp:DropDownList ID="ddSchools" runat="server" CssClass="form-control">
+                                    <asp:DropDownList ID="ddSchools" runat="server" CssClass="form-control text-center DropDownSearchBox" style="width:330px">
                                         <asp:ListItem>True</asp:ListItem>
                                         <asp:ListItem>False</asp:ListItem>
                                     </asp:DropDownList>
@@ -140,12 +140,20 @@
     <!-- global js -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="scripts/jquery.sumoselect.min.js"></script>
 
     <!-- end of global js -->
     <!-- page level js -->
     <script type="text/javascript" src="scripts/vendors/iCheck/js/icheck.js.pagespeed.jm.mc8O_8_6ZX.js"></script>
     <script src="scripts/vendors/bootstrapvalidator/js/bootstrapValidator.min.js.pagespeed.jm.6svL6oFoHD.js" type="text/javascript"></script>
-
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.DropDownSearchBox').SumoSelect({
+                search: true,
+                searchText:'Type to Search'
+            });
+        });
+    </script>
 </body>
 
 </html>

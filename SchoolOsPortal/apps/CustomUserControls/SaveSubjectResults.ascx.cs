@@ -51,6 +51,14 @@ public partial class CustomUserControls_SaveSubjectResults : System.Web.UI.UserC
         bll.LoadDataIntoDropDownNoSelect("GetTeachersForDropDown", new string[] { ddSchools.SelectedValue }, ddTeachers);
     }
 
+    public Result LoadDataUsingTeacherSubjectID(string TeacherID)
+    {
+        Result result = new Result();
+        result.StatusCode = Globals.SUCCESS_STATUS_CODE;
+        result.StatusDesc = Globals.SUCCESS_STATUS_TEXT;
+        return result;
+    }
+
     protected void ddTeacher_SelectedIndexChanged(object sender, EventArgs e)
     {
         try

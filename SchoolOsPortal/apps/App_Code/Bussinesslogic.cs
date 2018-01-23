@@ -227,6 +227,8 @@ public class Bussinesslogic
         sch.PhoneNumber = row["PhoneNumber"].ToString();
         sch.ProfilePic = row["StudentPic"].ToString();
         sch.StreamCode = row["StreamCode"].ToString();
+        sch.Password = row["Password"].ToString();
+        sch.SecretKey = row["SecretKey"].ToString();
         sch.StudentCategory = row["StudentCategory"].ToString();
         sch.StudentName = row["StudentName"].ToString();
         sch.StudentNumber = row["StudentNumber"].ToString();
@@ -745,7 +747,7 @@ public class Bussinesslogic
         DataTable dt = ds.Tables[0];
 
         ddlst.Items.Clear();
-        ddlst.Items.Add("");
+        ddlst.Items.Add(new ListItem("-- Please Select an Option --", ""));
         foreach (DataRow dr in dt.Rows)
         {
             string Text = dr["Name"].ToString();

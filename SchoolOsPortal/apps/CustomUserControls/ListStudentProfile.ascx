@@ -16,7 +16,7 @@
                                 <asp:Label ID="lblStudentName" runat="server">Collin Rukundo</asp:Label></h3>
                             <p>Student Number: <span style="font-weight: 700;">
                                 <asp:Label ID="lblStudentNumber" runat="server">SC0345/17</asp:Label></span></p>
-                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#generate">Manage Your Profile</button>
+                            <a href="../ManageStudentUserProfile.aspx"><button type="button" class="btn btn-info" data-toggle="modal" data-target="#generate">Manage Your Profile</button></a>
                         </div>
                     </div>
                     <div class="col-md-8">
@@ -112,18 +112,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <%--<!-- tab-pane -->
-                                        <div class="tab-pane fadeInRight fade in" id="academics">
-                                        </div>
-                                        <div class="tab-pane fadeInRight fade in" id="payments">
-                                        </div>
-                                        <!-- tab-pane -->
-                                        <div class="tab-pane fadeInRight fade in" id="health">
-                                        </div>
-                                        <!-- tab-pane -->
-                                        <div class="tab-pane fadeInRight fade in" id="discipline">
-                                        </div>
-                                        <!-- tab-pane -->--%>
+                              
                             </div>
                         </div>
                     </div>

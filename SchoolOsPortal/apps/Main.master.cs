@@ -63,9 +63,17 @@ public partial class Main : System.Web.UI.MasterPage
                 return;
             }
 
+            Student std = bll.GetStudentById(details.User.Username, details.User.SchoolCode);
+
+            if (std.StatusCode!=Globals.SUCCESS_STATUS_CODE)
+            {
+                divStudentBal.Visible = false;
+                return;
+            }
+
             InterLinkClass.CbAPI.Service service = new InterLinkClass.CbAPI.Service();
             service.Timeout = GET_BAL_TIMEOUT;
-            InterLinkClass.CbAPI.BankAccount account = service.GetById("BANKACCOUNT", details.User.Username, details.User.SchoolCode, Globals.SCHOOL_PASSWORD) as InterLinkClass.CbAPI.BankAccount;
+            InterLinkClass.CbAPI.BankAccount account = service.GetById("BANKACCOUNT", std.PegPayStudentNumber, std.SchoolCode, Globals.SCHOOL_PASSWORD) as InterLinkClass.CbAPI.BankAccount;
 
             if (account.StatusCode != Globals.SUCCESS_STATUS_CODE)
             {
@@ -74,7 +82,7 @@ public partial class Main : System.Web.UI.MasterPage
             }
 
             divStudentBal.Visible = true;
-            lblStudentBal.Text = account.AccountBalance.Split('.')[0];
+            lblStudentBal.Text = SharedCommons.SharedCommons.PutCommaInMoneyString(account.AccountBalance.Split('.')[0]);
         }
         catch(Exception ex)
         {

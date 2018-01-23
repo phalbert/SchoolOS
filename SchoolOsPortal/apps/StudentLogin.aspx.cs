@@ -34,7 +34,7 @@ public partial class StudentLogin : System.Web.UI.Page
     private void LoadData()
     {
         Session["IsError"] = null;
-        bll.LoadSchoolsIntoDropDown(null, ddSchools);
+        bll.LoadDataIntoDropDownNoSelect("GetSchoolsForDropDown",new string[] { }, ddSchools);
     }
 
 

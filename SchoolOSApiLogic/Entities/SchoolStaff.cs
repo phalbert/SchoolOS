@@ -31,6 +31,13 @@ namespace SchoolOSApiLogic.Entities
                 return false;
             }
 
+            if (!SharedCommons.SharedCommons.IsValidUgPhoneNumber(PhoneNumber))
+            {
+                StatusCode = Globals.FAILURE_STATUS_CODE;
+                StatusDesc = $"INVALID PHONE NUMBER SUPPLIED IN field {nameof(PhoneNumber)}";
+                return false;
+            }
+
             return base.IsValid();
         }
     }

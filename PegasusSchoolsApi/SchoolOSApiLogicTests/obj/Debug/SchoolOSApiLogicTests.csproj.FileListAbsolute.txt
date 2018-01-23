@@ -17,13 +17,13 @@ D:\Work\PegPaySchools\SchoolOS\PegasusSchoolsApi\SchoolOSApiLogicTests\bin\Debug
 D:\Work\PegPaySchools\SchoolOS\PegasusSchoolsApi\SchoolOSApiLogicTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
 D:\Work\PegPaySchools\SchoolOS\PegasusSchoolsApi\SchoolOSApiLogicTests\bin\Debug\SchoolOSApiLogic.dll
 D:\Work\PegPaySchools\SchoolOS\PegasusSchoolsApi\SchoolOSApiLogicTests\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Data.dll
+D:\Work\PegPaySchools\SchoolOS\PegasusSchoolsApi\SchoolOSApiLogicTests\bin\Debug\SharedCommons.dll
 D:\Work\PegPaySchools\SchoolOS\PegasusSchoolsApi\SchoolOSApiLogicTests\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
 D:\Work\PegPaySchools\SchoolOS\PegasusSchoolsApi\SchoolOSApiLogicTests\bin\Debug\Microsoft.Practices.ObjectBuilder.dll
+D:\Work\PegPaySchools\SchoolOS\PegasusSchoolsApi\SchoolOSApiLogicTests\bin\Debug\Encryption.dll
 D:\Work\PegPaySchools\SchoolOS\PegasusSchoolsApi\SchoolOSApiLogicTests\bin\Debug\SchoolOSApiLogic.pdb
 D:\Work\PegPaySchools\SchoolOS\PegasusSchoolsApi\SchoolOSApiLogicTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.xml
+D:\Work\PegPaySchools\SchoolOS\PegasusSchoolsApi\SchoolOSApiLogicTests\bin\Debug\SharedCommons.pdb
 D:\Work\PegPaySchools\SchoolOS\PegasusSchoolsApi\SchoolOSApiLogicTests\obj\Debug\SchoolOSApiLogicTests.csprojResolveAssemblyReference.cache
 D:\Work\PegPaySchools\SchoolOS\PegasusSchoolsApi\SchoolOSApiLogicTests\obj\Debug\SchoolOSApiLogicTests.dll
 D:\Work\PegPaySchools\SchoolOS\PegasusSchoolsApi\SchoolOSApiLogicTests\obj\Debug\SchoolOSApiLogicTests.pdb
-D:\Work\PegPaySchools\SchoolOS\PegasusSchoolsApi\SchoolOSApiLogicTests\bin\Debug\SharedCommons.dll
-D:\Work\PegPaySchools\SchoolOS\PegasusSchoolsApi\SchoolOSApiLogicTests\bin\Debug\Encryption.dll
-D:\Work\PegPaySchools\SchoolOS\PegasusSchoolsApi\SchoolOSApiLogicTests\bin\Debug\SharedCommons.pdb

@@ -122,7 +122,7 @@
               <s:element minOccurs="0" maxOccurs="1" name="SchoolID" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="SchoolName" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="UnebCentreNumber" type="s:string" />
-              <s:element minOccurs="0" maxOccurs="1" name="SchoolLocation" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SchoolMoto" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="SchoolEmail" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="SchoolPhone" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="SchoolType" type="tns:ArrayOfString" />
@@ -185,6 +185,9 @@
               <s:element minOccurs="0" maxOccurs="1" name="ParentsName2" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="ParentsPhoneNumber1" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="ParentsPhoneNumber2" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="IsActive" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="SecretKey" type="s:string" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
@@ -260,6 +263,7 @@
             <s:sequence>
               <s:element minOccurs="0" maxOccurs="1" name="User" type="tns:SystemUser" />
               <s:element minOccurs="0" maxOccurs="1" name="SchoolDetails" type="tns:School" />
+              <s:element minOccurs="0" maxOccurs="1" name="CurrentSemesterCode" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="UserMenuOptions" type="tns:ArrayOfMenuItem" />
             </s:sequence>
           </s:extension>
@@ -284,6 +288,46 @@
           </s:extension>
         </s:complexContent>
       </s:complexType>
+      <s:element name="StudentLogin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SchoolCode" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="StudentLoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="StudentLoginResult" type="tns:SystemUserDetails" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveExams">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="exam" type="tns:Exam" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Exam">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Request">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="ExamCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ExamName" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="SaveExamsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SaveExamsResult" type="tns:Result" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="SaveSchoolClass">
         <s:complexType>
           <s:sequence>
@@ -297,6 +341,7 @@
             <s:sequence>
               <s:element minOccurs="0" maxOccurs="1" name="ClassCode" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="ClassName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ClassCategory" type="s:string" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
@@ -347,6 +392,7 @@
               <s:element minOccurs="0" maxOccurs="1" name="StudentId" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="SubjectCode" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="TermCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ExamCode" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="Mark" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="Grade" type="s:string" />
             </s:sequence>
@@ -462,6 +508,7 @@
               <s:element minOccurs="0" maxOccurs="1" name="ProfilePic" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="PhoneNumber" type="s:string" />
               <s:element minOccurs="0" maxOccurs="1" name="Email" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="ApprovedBy" type="s:string" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
@@ -533,6 +580,33 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="SaveSubjectResult" type="tns:Result" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveGrade">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="sub" type="tns:Grade" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Grade">
+        <s:complexContent mixed="false">
+          <s:extension base="tns:Request">
+            <s:sequence>
+              <s:element minOccurs="0" maxOccurs="1" name="GradeCode" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="GradeName" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="MinimumMark" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="MaximumMark" type="s:string" />
+              <s:element minOccurs="0" maxOccurs="1" name="GradeSchemeCode" type="s:string" />
+            </s:sequence>
+          </s:extension>
+        </s:complexContent>
+      </s:complexType>
+      <s:element name="SaveGradeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SaveGradeResult" type="tns:Result" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -731,6 +805,18 @@
   <wsdl:message name="LoginSoapOut">
     <wsdl:part name="parameters" element="tns:LoginResponse" />
   </wsdl:message>
+  <wsdl:message name="StudentLoginSoapIn">
+    <wsdl:part name="parameters" element="tns:StudentLogin" />
+  </wsdl:message>
+  <wsdl:message name="StudentLoginSoapOut">
+    <wsdl:part name="parameters" element="tns:StudentLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveExamsSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveExams" />
+  </wsdl:message>
+  <wsdl:message name="SaveExamsSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveExamsResponse" />
+  </wsdl:message>
   <wsdl:message name="SaveSchoolClassSoapIn">
     <wsdl:part name="parameters" element="tns:SaveSchoolClass" />
   </wsdl:message>
@@ -790,6 +876,12 @@
   </wsdl:message>
   <wsdl:message name="SaveSubjectSoapOut">
     <wsdl:part name="parameters" element="tns:SaveSubjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveGradeSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveGrade" />
+  </wsdl:message>
+  <wsdl:message name="SaveGradeSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveGradeResponse" />
   </wsdl:message>
   <wsdl:message name="SaveSchoolFeesSoapIn">
     <wsdl:part name="parameters" element="tns:SaveSchoolFees" />
@@ -862,6 +954,14 @@
       <wsdl:input message="tns:LoginSoapIn" />
       <wsdl:output message="tns:LoginSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="StudentLogin">
+      <wsdl:input message="tns:StudentLoginSoapIn" />
+      <wsdl:output message="tns:StudentLoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveExams">
+      <wsdl:input message="tns:SaveExamsSoapIn" />
+      <wsdl:output message="tns:SaveExamsSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="SaveSchoolClass">
       <wsdl:input message="tns:SaveSchoolClassSoapIn" />
       <wsdl:output message="tns:SaveSchoolClassSoapOut" />
@@ -901,6 +1001,10 @@
     <wsdl:operation name="SaveSubject">
       <wsdl:input message="tns:SaveSubjectSoapIn" />
       <wsdl:output message="tns:SaveSubjectSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveGrade">
+      <wsdl:input message="tns:SaveGradeSoapIn" />
+      <wsdl:output message="tns:SaveGradeSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="SaveSchoolFees">
       <wsdl:input message="tns:SaveSchoolFeesSoapIn" />
@@ -996,6 +1100,24 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="StudentLogin">
+      <soap:operation soapAction="http://pegasus.co.ug/StudentLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveExams">
+      <soap:operation soapAction="http://pegasus.co.ug/SaveExams" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="SaveSchoolClass">
       <soap:operation soapAction="http://pegasus.co.ug/SaveSchoolClass" style="document" />
       <wsdl:input>
@@ -1079,6 +1201,15 @@
     </wsdl:operation>
     <wsdl:operation name="SaveSubject">
       <soap:operation soapAction="http://pegasus.co.ug/SaveSubject" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveGrade">
+      <soap:operation soapAction="http://pegasus.co.ug/SaveGrade" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1215,6 +1346,24 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="StudentLogin">
+      <soap12:operation soapAction="http://pegasus.co.ug/StudentLogin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveExams">
+      <soap12:operation soapAction="http://pegasus.co.ug/SaveExams" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="SaveSchoolClass">
       <soap12:operation soapAction="http://pegasus.co.ug/SaveSchoolClass" style="document" />
       <wsdl:input>
@@ -1298,6 +1447,15 @@
     </wsdl:operation>
     <wsdl:operation name="SaveSubject">
       <soap12:operation soapAction="http://pegasus.co.ug/SaveSubject" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveGrade">
+      <soap12:operation soapAction="http://pegasus.co.ug/SaveGrade" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

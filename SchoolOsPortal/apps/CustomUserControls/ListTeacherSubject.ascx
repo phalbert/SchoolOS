@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeFile="ListTeacherSubject.ascx.cs" Inherits="CustomUserControls_ListTeacherSubject" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
-<%@ Register TagPrefix="uc" TagName="SaveStudentResults" Src="~/CustomUserControls/SaveStudentResults.ascx" %>
+<%@ Register TagPrefix="uc" TagName="SaveStudentResults" Src="~/CustomUserControls/SaveSubjectResults.ascx" %>
 
 
 <asp:MultiView ID="MultiView1" ActiveViewIndex="0" runat="server">

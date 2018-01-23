@@ -4,6 +4,7 @@
 <%@ Register TagPrefix="uc" TagName="ListStudentFeesUserControl" Src="~/CustomUserControls/ListStudentFees.ascx" %>
 <%@ Register TagPrefix="uc" TagName="BulkStudentPaymentsUserControl" Src="~/CustomUserControls/BulkStudentPayments.ascx" %>
 <%@ Register TagPrefix="uc" TagName="ApproveStudentFeesUserControl" Src="~/CustomUserControls/ApproveStudentFees.ascx" %>
+<%@ Register TagPrefix="uc" TagName="ListPaymentLogsUserControl" Src="~/CustomUserControls/ListPaymentLogs.ascx" %>
 
 
 
@@ -26,6 +27,9 @@
         <li id="ApproveStudentFeesLink" runat="server">
             <asp:LinkButton ID="ApproveStudentFeesLinkButton" runat="server" OnClick="btnTabPane_Click">Approve Assigned Student Fees</asp:LinkButton>
         </li>
+         <li id="ListPaymentLogsLink" runat="server">
+            <asp:LinkButton ID="ListPaymentLogsLinkButton" runat="server" OnClick="btnTabPane_Click">View Payment Logs</asp:LinkButton>
+        </li>
     </ul>
 </div>
 
@@ -45,6 +49,9 @@
         </asp:View>
         <asp:View ID="ApproveStudentFeesView" runat="server">
             <uc:ApproveStudentFeesUserControl ID="ApproveStudentFeesUserControl" runat="server" />
+        </asp:View>
+        <asp:View ID="ListPaymentLogsView" runat="server">
+            <uc:ListPaymentLogsUserControl ID="ListPaymentLogsUserControl" runat="server" />
         </asp:View>
     </asp:MultiView>
 </div>

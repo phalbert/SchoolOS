@@ -14,7 +14,7 @@ public static class Globals
     public const string PENDING_STATUS_CODE = "1000";
     public const string DEFAULT_PICTURE_ID = "Default";
 
-    public static string NOT_AVAILABLE_STRING = "";
+    public static string NOT_AVAILABLE_STRING = "N/A";
 
     public static Result CheckForNulls(object obj, string nullableProperties)
     {

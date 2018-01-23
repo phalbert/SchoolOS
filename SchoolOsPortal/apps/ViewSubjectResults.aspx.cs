@@ -31,9 +31,10 @@ public partial class ViewSubjectResults : System.Web.UI.Page
 
     private void LoadData()
     {
-        HighLightCorrectTab();
+        ListClassesUserControl.LoadDataForStudent();
+        MultiView.SetActiveView(ListClassesUserView);
+        return;
 
-        
     }
 
 
@@ -75,6 +76,7 @@ public partial class ViewSubjectResults : System.Web.UI.Page
 
         if (link.ID == ListClassesLinkButton.ID)
         {
+            ListClassesUserControl.LoadDataForStudent();
             MultiView.SetActiveView(ListClassesUserView);
             return;
         }

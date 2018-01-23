@@ -32,11 +32,6 @@ public partial class CustomUserControls_ChangePassword : System.Web.UI.UserContr
             {
 
             }
-            ////Load Old details
-            //else if (!string.IsNullOrEmpty(Id))
-            //{
-            //    LoadEntityData(Id);
-            //}
             //First time Request
             else
             {

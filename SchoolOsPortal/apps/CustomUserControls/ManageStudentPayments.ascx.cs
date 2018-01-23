@@ -62,6 +62,12 @@ public partial class CustomUserControls_ManageStudentPayments : System.Web.UI.Us
             SetActiveTab(ApproveStudentFeesLink);
             return;
         }
+
+        if (MultiView.GetActiveView() == ListPaymentLogsView)
+        {
+            SetActiveTab(ListPaymentLogsLink);
+            return;
+        }
     }
 
     private void SetActiveTab(HtmlGenericControl control)
@@ -70,6 +76,7 @@ public partial class CustomUserControls_ManageStudentPayments : System.Web.UI.Us
         SaveStudentCreditLink.Attributes["class"] = "";
         ListStudentFeesLink.Attributes["class"] = "";
         ApproveStudentFeesLink.Attributes["class"] = "";
+        ListPaymentLogsLink.Attributes["class"] = "";
         control.Attributes["class"] = "active";
     }
 
@@ -116,6 +123,11 @@ public partial class CustomUserControls_ManageStudentPayments : System.Web.UI.Us
         if (link.ID == ApproveStudentFeesLinkButton.ID)
         {
             MultiView.SetActiveView(ApproveStudentFeesView);
+            return;
+        }
+        if (link.ID == ListPaymentLogsLinkButton.ID)
+        {
+            MultiView.SetActiveView(ListPaymentLogsView);
             return;
         }
     }

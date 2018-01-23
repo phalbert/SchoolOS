@@ -118,6 +118,13 @@ namespace SharedCommons
             return false;
         }
 
+        public static string PutCommaInMoneyString(string amount)
+        {
+            amount = string.IsNullOrEmpty(amount) ? "0" : amount;
+            double amountInt = Convert.ToDouble(amount);
+            return amountInt.ToString("#,##0");
+        }
+
         public static string FormatUgPhoneNumber(string Phone)
         {
             if (string.IsNullOrEmpty(Phone))

@@ -117,9 +117,10 @@ public partial class RegisterSchool : System.Web.UI.Page
         }
 
         //send alert email
-        string emailMsg = "Hi,<br/> School " + txtSchoolName.Text + " has signed up and Is Pending Approval. <br/> Thank you <br/>";
+        string emailMsg = "Hi,<br/> School [" + txtSchoolName.Text + "] and SchoolCode ["+txtSchoolCode.Text+"] has signed up and Is Pending Approval. <br/> Thank you <br/>";
         string subject = "School Self Sign Up Alert";
         string toEmail = Globals.SELF_SIGNUP_NOTIFICATION_EMAIL;
+
         bll.SendEmailMsg(emailMsg, subject, toEmail);
 
         //success

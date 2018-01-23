@@ -141,6 +141,28 @@ namespace SchoolOSWebPortalBgService
             }
         }
 
+        internal void SavePaymentLog(string TranID, string FeeID, string StudentID, string Status, string Reason, string ModifiedBy)
+        {
+            try
+            {
+                int rowsAffected = schoolsAPI.ExecuteNonQuery("SavePaymentLog", new object[] {  TranID,  FeeID,  StudentID,  Status,  Reason,  ModifiedBy });
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        internal void LogFileUploadStatus(string fileID,string status,string Reason,string ModifiedBy,string rowId="N/A")
+        {
+            try
+            {
+                int rowsAffected = schoolsAPI.ExecuteNonQuery("LogFileUploadStatus", new object[] { fileID,rowId,status,Reason,ModifiedBy });
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
         internal StudentFee[] GetUnprocessedStudentPayments()
         {
             List<StudentFee> all = new List<StudentFee>();
@@ -384,7 +406,7 @@ namespace SchoolOSWebPortalBgService
                         "File Uploaded had {1} Records. <br/>" +
                         "SuccessFully Processed Payments = {2} <br/>" +
                         "Failed Payments = {3} <br/>" +
-                        "See attached documents for more information <br/>" +
+                        "Check the Flexi-Schools Web Portal for more information <br/>" +
                         "Thank you. <br/>" +
                         "Flexi-Schools Team", toEmail, "" + (successfullPayments.Count + failedPayments.Count), "" + successfullPayments.Count, "" + failedPayments.Count);
 

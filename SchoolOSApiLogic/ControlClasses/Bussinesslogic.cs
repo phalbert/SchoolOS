@@ -21,8 +21,8 @@ namespace SchoolOSApiLogic.ControlClasses
             LogChangesInAuditLog(sch, sch.SchoolCode, sch.SchoolCode, sch.ModifiedBy);
             string schoolType = GetArrayString(sch.SchoolType);
             string schoolCategory = GetArrayString(sch.SchoolCategories);
-            DataTable dt = dh.ExecuteDataSet("SaveSchool", new string[] { sch.SchoolCode, sch.SchoolName, sch.SchoolMoto, sch.SchoolEmail, sch.SchoolPhone, sch.UnebCentreNumber, sch.ModifiedBy, sch.District, sch.SubCounty, sch.SchoolLogo, sch.RoadName, sch.PlotNo, sch.PostOfficeBox, sch.LiquidationBankName, sch.LiquidationAccountName, sch.LiquidationAccountNumber, schoolType, schoolCategory }).Tables[0];
-
+            DataSet ds = dh.ExecuteDataSet("SaveSchool", new string[] { sch.SchoolCode, sch.SchoolName, sch.SchoolMoto, sch.SchoolEmail, sch.SchoolPhone, sch.UnebCentreNumber, sch.ModifiedBy, sch.District, sch.SubCounty, sch.SchoolLogo, sch.RoadName, sch.PlotNo, sch.PostOfficeBox, sch.LiquidationBankName, sch.LiquidationAccountName, sch.LiquidationAccountNumber, schoolType, schoolCategory });
+            DataTable dt = ds.Tables[ds.Tables.Count - 1];
             if (dt.Rows.Count == 0)
             {
                 result.StatusCode = Globals.FAILURE_STATUS_CODE;
@@ -226,7 +226,7 @@ namespace SchoolOSApiLogic.ControlClasses
         {
             Result result = new Result();
             LogChangesInAuditLog(std, std.StudentNumber, std.SchoolCode, std.ModifiedBy);
-            DataTable dt = dh.ExecuteDataSet("SaveStudent", new string[] { std.SchoolCode, std.StudentNumber, std.PegPayStudentNumber, std.StudentName, std.ClassCode, std.StreamCode, std.DateOfBirth, std.StudentCategory, std.ModifiedBy, std.ProfilePic, std.Email, std.Gender, std.PhoneNumber, std.ParentsName1, std.ParentsName2, std.ParentsPhoneNumber1, std.ParentsPhoneNumber2 }).Tables[0];
+            DataTable dt = dh.ExecuteDataSet("SaveStudent", new string[] { std.SchoolCode, std.StudentNumber, std.PegPayStudentNumber, std.StudentName, std.ClassCode, std.StreamCode, std.DateOfBirth, std.StudentCategory, std.ModifiedBy, std.ProfilePic, std.Email, std.Gender, std.PhoneNumber, std.ParentsName1, std.ParentsName2, std.ParentsPhoneNumber1, std.ParentsPhoneNumber2, std.Password, std.SecretKey }).Tables[0];
 
             if (dt.Rows.Count == 0)
             {
@@ -868,7 +868,7 @@ namespace SchoolOSApiLogic.ControlClasses
 
             if (user.StatusCode != Globals.SUCCESS_STATUS_CODE)
             {
-                SaveInAuditlog("LOGIN", "", "ALL", userId, "Failed Login Attempt:"+user.StatusDesc);
+                SaveInAuditlog("LOGIN", "", "ALL", userId, "Failed Login Attempt:" + user.StatusDesc);
                 user.StatusCode = Globals.FAILURE_STATUS_CODE;
                 user.StatusDesc = "INVALID USERNAME/PASSWORD!!";
                 return user;

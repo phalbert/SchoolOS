@@ -47,6 +47,7 @@ public partial class CustomUserControls_ListStudentSubjects : System.Web.UI.User
         bll.LoadSchoolsIntoDropDown(user, ddSchools);
         bll.LoadDataIntoDropDownALL("GetTermsForDropDown", new string[] { ddSchools.SelectedValue }, ddSemesters);
         bll.LoadDataIntoDropDownALL("GetStudentsForDropDown", new string[] { ddSchools.SelectedValue, "ALL" }, ddStudents);
+        bll.LoadDataIntoDropDown("GetClassesForDropDown", new string[] { ddSchools.SelectedValue }, ddClasses);
 
         if (user.User.UserType == "SCHOOL_STUDENT")
         {
@@ -92,6 +93,8 @@ public partial class CustomUserControls_ListStudentSubjects : System.Web.UI.User
         ddStudents.ClearSelection();
         ddStudents.SelectedValue = std.StudentNumber;
         ddStudents.Enabled = false;
+        ddClasses.SelectedValue = std.ClassCode;
+        ddClasses.Enabled = false;
     }
 
     protected void btnSubmit_Click(object sender, EventArgs e)
@@ -133,11 +136,13 @@ public partial class CustomUserControls_ListStudentSubjects : System.Web.UI.User
     {
         List<string> all = new List<string>();
         string name = ddSchools.SelectedValue;
-        string StudentId = ddStudents.Text;
-        string Semester = ddSemesters.Text;
+        string StudentId = ddStudents.SelectedValue;
+        string Semester = ddSemesters.SelectedValue;
+        string Class = ddClasses.SelectedValue;
         all.Add(name);
         all.Add(StudentId);
         all.Add(Semester);
+        all.Add(Class);
         return all.ToArray();
     }
 

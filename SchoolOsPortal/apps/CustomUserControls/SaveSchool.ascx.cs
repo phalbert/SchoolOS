@@ -71,6 +71,7 @@ public partial class SaveSchool : System.Web.UI.UserControl
 
         txtSchoolCode.Text = sch.SchoolCode;
         txtSchoolCode.Enabled = false;
+        txtSchoolMoto.Text = sch.SchoolMoto;
         txtAccountName.Text = sch.LiquidationAccountName;
         txtAccountNumber.Text = sch.LiquidationAccountNumber;
         txtDistrict.Text = sch.District;

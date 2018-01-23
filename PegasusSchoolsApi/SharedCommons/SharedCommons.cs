@@ -53,7 +53,7 @@ namespace SharedCommons
             {
                 return false;
             }
-            if (Phone.Length != 10 || Phone.Length != 12)
+            if (Phone.Length != 10 && Phone.Length != 12)
             {
                 return false;
             }

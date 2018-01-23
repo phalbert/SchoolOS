@@ -122,6 +122,7 @@ public partial class CustomUserControls_ApproveStaffMembers : System.Web.UI.User
 
         //save student as system user
         SystemUser newUser = GetSystemUser(StaffID, SchoolCode);
+
         Result result = schoolsApi.SaveSystemUser(newUser);
 
         //saving student as system user has failed
@@ -136,24 +137,24 @@ public partial class CustomUserControls_ApproveStaffMembers : System.Web.UI.User
         Result sendResult = bll.SendCredentialsToUser(newUser);
 
         //sending credentials email has failed
-        if (sendResult.StatusCode != Globals.SUCCESS_STATUS_CODE)
-        {
-            string msg = "FAILED: " + sendResult.StatusDesc;
-            bll.ShowMessage(lblmsg, msg, true, Session);
-            return;
-        }
+        //if (sendResult.StatusCode != Globals.SUCCESS_STATUS_CODE)
+        //{
+        //    string msg = "FAILED: " + sendResult.StatusDesc;
+        //    bll.ShowMessage(lblmsg, msg, true, Session);
+        //    return;
+        //}
 
         //approve staff member
         DataTable dt = schoolsApi.ExecuteDataSet("ApproveStaffMember", parameters).Tables[0];
         if (dt.Rows.Count != 0)
         {
             SearchDB();
-            string msg = "Staff(s) Approved Successfully";
+            string msg = "Staff(s) Approved Successfully. Sending of Credentials Email Status: "+sendResult.StatusDesc+", Reason:"+sendResult.StatusDesc;
             bll.ShowMessage(lblmsg, msg, false, Session);
         }
         else
         {
-            string msg = "No Rows Affected";
+            string msg = "Failed to Approve. Please Try Again";
             bll.ShowMessage(lblmsg, msg, true, Session);
         }
     }

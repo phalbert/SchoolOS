@@ -24,7 +24,7 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="ServiceSoap", Namespace="http://pegasus.co.ug/")]
@@ -46,6 +46,10 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
         
         private System.Threading.SendOrPostCallback LoginOperationCompleted;
         
+        private System.Threading.SendOrPostCallback StudentLoginOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback SaveExamsOperationCompleted;
+        
         private System.Threading.SendOrPostCallback SaveSchoolClassOperationCompleted;
         
         private System.Threading.SendOrPostCallback SaveDepartmentOperationCompleted;
@@ -65,6 +69,8 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
         private System.Threading.SendOrPostCallback SaveSystemUserOperationCompleted;
         
         private System.Threading.SendOrPostCallback SaveSubjectOperationCompleted;
+        
+        private System.Threading.SendOrPostCallback SaveGradeOperationCompleted;
         
         private System.Threading.SendOrPostCallback SaveSchoolFeesOperationCompleted;
         
@@ -140,6 +146,12 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
         public event LoginCompletedEventHandler LoginCompleted;
         
         /// <remarks/>
+        public event StudentLoginCompletedEventHandler StudentLoginCompleted;
+        
+        /// <remarks/>
+        public event SaveExamsCompletedEventHandler SaveExamsCompleted;
+        
+        /// <remarks/>
         public event SaveSchoolClassCompletedEventHandler SaveSchoolClassCompleted;
         
         /// <remarks/>
@@ -168,6 +180,9 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
         
         /// <remarks/>
         public event SaveSubjectCompletedEventHandler SaveSubjectCompleted;
+        
+        /// <remarks/>
+        public event SaveGradeCompletedEventHandler SaveGradeCompleted;
         
         /// <remarks/>
         public event SaveSchoolFeesCompletedEventHandler SaveSchoolFeesCompleted;
@@ -400,6 +415,68 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
             if ((this.LoginCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
                 this.LoginCompleted(this, new LoginCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://pegasus.co.ug/StudentLogin", RequestNamespace="http://pegasus.co.ug/", ResponseNamespace="http://pegasus.co.ug/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public SystemUserDetails StudentLogin(string Username, string Password, string SchoolCode) {
+            object[] results = this.Invoke("StudentLogin", new object[] {
+                        Username,
+                        Password,
+                        SchoolCode});
+            return ((SystemUserDetails)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void StudentLoginAsync(string Username, string Password, string SchoolCode) {
+            this.StudentLoginAsync(Username, Password, SchoolCode, null);
+        }
+        
+        /// <remarks/>
+        public void StudentLoginAsync(string Username, string Password, string SchoolCode, object userState) {
+            if ((this.StudentLoginOperationCompleted == null)) {
+                this.StudentLoginOperationCompleted = new System.Threading.SendOrPostCallback(this.OnStudentLoginOperationCompleted);
+            }
+            this.InvokeAsync("StudentLogin", new object[] {
+                        Username,
+                        Password,
+                        SchoolCode}, this.StudentLoginOperationCompleted, userState);
+        }
+        
+        private void OnStudentLoginOperationCompleted(object arg) {
+            if ((this.StudentLoginCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.StudentLoginCompleted(this, new StudentLoginCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://pegasus.co.ug/SaveExams", RequestNamespace="http://pegasus.co.ug/", ResponseNamespace="http://pegasus.co.ug/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Result SaveExams(Exam exam) {
+            object[] results = this.Invoke("SaveExams", new object[] {
+                        exam});
+            return ((Result)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void SaveExamsAsync(Exam exam) {
+            this.SaveExamsAsync(exam, null);
+        }
+        
+        /// <remarks/>
+        public void SaveExamsAsync(Exam exam, object userState) {
+            if ((this.SaveExamsOperationCompleted == null)) {
+                this.SaveExamsOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSaveExamsOperationCompleted);
+            }
+            this.InvokeAsync("SaveExams", new object[] {
+                        exam}, this.SaveExamsOperationCompleted, userState);
+        }
+        
+        private void OnSaveExamsOperationCompleted(object arg) {
+            if ((this.SaveExamsCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.SaveExamsCompleted(this, new SaveExamsCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -694,6 +771,35 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
         }
         
         /// <remarks/>
+        [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://pegasus.co.ug/SaveGrade", RequestNamespace="http://pegasus.co.ug/", ResponseNamespace="http://pegasus.co.ug/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
+        public Result SaveGrade(Grade sub) {
+            object[] results = this.Invoke("SaveGrade", new object[] {
+                        sub});
+            return ((Result)(results[0]));
+        }
+        
+        /// <remarks/>
+        public void SaveGradeAsync(Grade sub) {
+            this.SaveGradeAsync(sub, null);
+        }
+        
+        /// <remarks/>
+        public void SaveGradeAsync(Grade sub, object userState) {
+            if ((this.SaveGradeOperationCompleted == null)) {
+                this.SaveGradeOperationCompleted = new System.Threading.SendOrPostCallback(this.OnSaveGradeOperationCompleted);
+            }
+            this.InvokeAsync("SaveGrade", new object[] {
+                        sub}, this.SaveGradeOperationCompleted, userState);
+        }
+        
+        private void OnSaveGradeOperationCompleted(object arg) {
+            if ((this.SaveGradeCompleted != null)) {
+                System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
+                this.SaveGradeCompleted(this, new SaveGradeCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+            }
+        }
+        
+        /// <remarks/>
         [System.Web.Services.Protocols.SoapDocumentMethodAttribute("http://pegasus.co.ug/SaveSchoolFees", RequestNamespace="http://pegasus.co.ug/", ResponseNamespace="http://pegasus.co.ug/", Use=System.Web.Services.Description.SoapBindingUse.Literal, ParameterStyle=System.Web.Services.Protocols.SoapParameterStyle.Wrapped)]
         public Result SaveSchoolFees(SchoolFee fee) {
             object[] results = this.Invoke("SaveSchoolFees", new object[] {
@@ -922,6 +1028,7 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolTerm))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(StudentFee))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolFee))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Grade))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Subject))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(ClassStream))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolStaff))]
@@ -931,6 +1038,7 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SubjectResults))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Department))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolClass))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Exam))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SystemUser))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(MainLink))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(MenuItem))]
@@ -939,7 +1047,7 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(School))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Result))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SystemUserDetails))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -953,6 +1061,7 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolTerm))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(StudentFee))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolFee))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Grade))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Subject))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(ClassStream))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolStaff))]
@@ -962,6 +1071,7 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SubjectResults))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Department))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolClass))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Exam))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SystemUser))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(MainLink))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(MenuItem))]
@@ -970,7 +1080,7 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(School))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Result))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SystemUserDetails))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1007,6 +1117,7 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolTerm))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(StudentFee))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolFee))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Grade))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Subject))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(ClassStream))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolStaff))]
@@ -1016,13 +1127,14 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SubjectResults))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Department))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SchoolClass))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(Exam))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SystemUser))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(MainLink))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(MenuItem))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SubLink))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Student))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(School))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1079,7 +1191,7 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1112,7 +1224,7 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1169,7 +1281,7 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1286,7 +1398,7 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1367,7 +1479,76 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://pegasus.co.ug/")]
+    public partial class Grade : Request {
+        
+        private string gradeCodeField;
+        
+        private string gradeNameField;
+        
+        private string minimumMarkField;
+        
+        private string maximumMarkField;
+        
+        private string gradeSchemeCodeField;
+        
+        /// <remarks/>
+        public string GradeCode {
+            get {
+                return this.gradeCodeField;
+            }
+            set {
+                this.gradeCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string GradeName {
+            get {
+                return this.gradeNameField;
+            }
+            set {
+                this.gradeNameField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string MinimumMark {
+            get {
+                return this.minimumMarkField;
+            }
+            set {
+                this.minimumMarkField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string MaximumMark {
+            get {
+                return this.maximumMarkField;
+            }
+            set {
+                this.maximumMarkField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string GradeSchemeCode {
+            get {
+                return this.gradeSchemeCodeField;
+            }
+            set {
+                this.gradeSchemeCodeField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1400,7 +1581,7 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1445,7 +1626,7 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1469,6 +1650,8 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
         private string phoneNumberField;
         
         private string emailField;
+        
+        private string approvedByField;
         
         /// <remarks/>
         public string FullName {
@@ -1559,10 +1742,20 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
                 this.emailField = value;
             }
         }
+        
+        /// <remarks/>
+        public string ApprovedBy {
+            get {
+                return this.approvedByField;
+            }
+            set {
+                this.approvedByField = value;
+            }
+        }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1619,7 +1812,7 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1688,7 +1881,7 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1781,7 +1974,7 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1793,6 +1986,8 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
         private string subjectCodeField;
         
         private string termCodeField;
+        
+        private string examCodeField;
         
         private string markField;
         
@@ -1829,6 +2024,16 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
         }
         
         /// <remarks/>
+        public string ExamCode {
+            get {
+                return this.examCodeField;
+            }
+            set {
+                this.examCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
         public string Mark {
             get {
                 return this.markField;
@@ -1850,7 +2055,7 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1895,7 +2100,7 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -1905,6 +2110,8 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
         private string classCodeField;
         
         private string classNameField;
+        
+        private string classCategoryField;
         
         /// <remarks/>
         public string ClassCode {
@@ -1925,10 +2132,53 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
                 this.classNameField = value;
             }
         }
+        
+        /// <remarks/>
+        public string ClassCategory {
+            get {
+                return this.classCategoryField;
+            }
+            set {
+                this.classCategoryField = value;
+            }
+        }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://pegasus.co.ug/")]
+    public partial class Exam : Request {
+        
+        private string examCodeField;
+        
+        private string examNameField;
+        
+        /// <remarks/>
+        public string ExamCode {
+            get {
+                return this.examCodeField;
+            }
+            set {
+                this.examCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ExamName {
+            get {
+                return this.examNameField;
+            }
+            set {
+                this.examNameField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2069,7 +2319,7 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2102,7 +2352,7 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2159,7 +2409,7 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2204,7 +2454,7 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2240,6 +2490,12 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
         private string parentsPhoneNumber1Field;
         
         private string parentsPhoneNumber2Field;
+        
+        private string isActiveField;
+        
+        private string passwordField;
+        
+        private string secretKeyField;
         
         /// <remarks/>
         public string StudentNumber {
@@ -2390,10 +2646,40 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
                 this.parentsPhoneNumber2Field = value;
             }
         }
+        
+        /// <remarks/>
+        public string IsActive {
+            get {
+                return this.isActiveField;
+            }
+            set {
+                this.isActiveField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string Password {
+            get {
+                return this.passwordField;
+            }
+            set {
+                this.passwordField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string SecretKey {
+            get {
+                return this.secretKeyField;
+            }
+            set {
+                this.secretKeyField = value;
+            }
+        }
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2406,7 +2692,7 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
         
         private string unebCentreNumberField;
         
-        private string schoolLocationField;
+        private string schoolMotoField;
         
         private string schoolEmailField;
         
@@ -2465,12 +2751,12 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
         }
         
         /// <remarks/>
-        public string SchoolLocation {
+        public string SchoolMoto {
             get {
-                return this.schoolLocationField;
+                return this.schoolMotoField;
             }
             set {
-                this.schoolLocationField = value;
+                this.schoolMotoField = value;
             }
         }
         
@@ -2607,7 +2893,7 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     
     /// <remarks/>
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(SystemUserDetails))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2652,7 +2938,7 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.6.1064.2")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.7.2102.0")]
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
@@ -2662,6 +2948,8 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
         private SystemUser userField;
         
         private School schoolDetailsField;
+        
+        private string currentSemesterCodeField;
         
         private MenuItem[] userMenuOptionsField;
         
@@ -2686,6 +2974,16 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
         }
         
         /// <remarks/>
+        public string CurrentSemesterCode {
+            get {
+                return this.currentSemesterCodeField;
+            }
+            set {
+                this.currentSemesterCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
         public MenuItem[] UserMenuOptions {
             get {
                 return this.userMenuOptionsField;
@@ -2697,11 +2995,11 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     public delegate void ExecuteDataSetCompletedEventHandler(object sender, ExecuteDataSetCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ExecuteDataSetCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2723,11 +3021,11 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     public delegate void ExecuteDataSetOnCBCompletedEventHandler(object sender, ExecuteDataSetOnCBCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ExecuteDataSetOnCBCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2749,11 +3047,11 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     public delegate void ExecuteNonQueryCompletedEventHandler(object sender, ExecuteNonQueryCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ExecuteNonQueryCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2775,11 +3073,11 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     public delegate void ExecuteNonQueryOnCBCompletedEventHandler(object sender, ExecuteNonQueryOnCBCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class ExecuteNonQueryOnCBCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2801,11 +3099,11 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     public delegate void SaveSchoolCompletedEventHandler(object sender, SaveSchoolCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SaveSchoolCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2827,11 +3125,11 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     public delegate void SaveStudentCompletedEventHandler(object sender, SaveStudentCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SaveStudentCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2853,11 +3151,11 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     public delegate void LoginCompletedEventHandler(object sender, LoginCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class LoginCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2879,11 +3177,63 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    public delegate void StudentLoginCompletedEventHandler(object sender, StudentLoginCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class StudentLoginCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal StudentLoginCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public SystemUserDetails Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((SystemUserDetails)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    public delegate void SaveExamsCompletedEventHandler(object sender, SaveExamsCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class SaveExamsCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal SaveExamsCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Result Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Result)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     public delegate void SaveSchoolClassCompletedEventHandler(object sender, SaveSchoolClassCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SaveSchoolClassCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2905,11 +3255,11 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     public delegate void SaveDepartmentCompletedEventHandler(object sender, SaveDepartmentCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SaveDepartmentCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2931,11 +3281,11 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     public delegate void SaveSubjectResultCompletedEventHandler(object sender, SaveSubjectResultCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SaveSubjectResultCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2957,11 +3307,11 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     public delegate void SaveUploadedFileCompletedEventHandler(object sender, SaveUploadedFileCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SaveUploadedFileCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -2983,11 +3333,11 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     public delegate void SaveTeacherSubjectCompletedEventHandler(object sender, SaveTeacherSubjectCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SaveTeacherSubjectCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -3009,11 +3359,11 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     public delegate void SaveStudentSubjectCompletedEventHandler(object sender, SaveStudentSubjectCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SaveStudentSubjectCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -3035,11 +3385,11 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     public delegate void SaveSchoolStaffCompletedEventHandler(object sender, SaveSchoolStaffCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SaveSchoolStaffCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -3061,11 +3411,11 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     public delegate void SaveClassStreamCompletedEventHandler(object sender, SaveClassStreamCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SaveClassStreamCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -3087,11 +3437,11 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     public delegate void SaveSystemUserCompletedEventHandler(object sender, SaveSystemUserCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SaveSystemUserCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -3113,11 +3463,11 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     public delegate void SaveSubjectCompletedEventHandler(object sender, SaveSubjectCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SaveSubjectCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -3139,11 +3489,37 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    public delegate void SaveGradeCompletedEventHandler(object sender, SaveGradeCompletedEventArgs e);
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    public partial class SaveGradeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        internal SaveGradeCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        /// <remarks/>
+        public Result Result {
+            get {
+                this.RaiseExceptionIfNecessary();
+                return ((Result)(this.results[0]));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     public delegate void SaveSchoolFeesCompletedEventHandler(object sender, SaveSchoolFeesCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SaveSchoolFeesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -3165,11 +3541,11 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     public delegate void SaveStudentFeesCompletedEventHandler(object sender, SaveStudentFeesCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SaveStudentFeesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -3191,11 +3567,11 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     public delegate void SaveMainLinkCompletedEventHandler(object sender, SaveMainLinkCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SaveMainLinkCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -3217,11 +3593,11 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     public delegate void SaveSubLinkCompletedEventHandler(object sender, SaveSubLinkCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SaveSubLinkCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -3243,11 +3619,11 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     public delegate void SaveSchoolTermCompletedEventHandler(object sender, SaveSchoolTermCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SaveSchoolTermCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -3269,11 +3645,11 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     public delegate void SaveUserTypeCompletedEventHandler(object sender, SaveUserTypeCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SaveUserTypeCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
@@ -3295,11 +3671,11 @@ namespace SchoolOSWebPortalBgService.SchoolsAPI {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     public delegate void SaveMenuCompletedEventHandler(object sender, SaveMenuCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.6.1038.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.7.2046.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class SaveMenuCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {

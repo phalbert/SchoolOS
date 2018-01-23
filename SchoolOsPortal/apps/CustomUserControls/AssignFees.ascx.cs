@@ -124,7 +124,7 @@ public partial class AssignFees : System.Web.UI.UserControl
         std.Email = user.User.Email;
         std.SchoolCode = ddSchools.SelectedValue;
         std.Amount = txtAmount.Text;
-        std.FeeType = txtTranType.Text;
+        std.FeeType = "Credit";//txtTranType.Text;
         std.ModifiedBy = user.User.Username;
         std.TranID = SharedCommons.SharedCommons.GenerateUniqueId("PAY");
         std.PaymentChannel = Globals.SCHOOLS_WEB_PORTAL;

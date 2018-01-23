@@ -81,7 +81,12 @@ public partial class CustomUserControls_Dashboard : System.Web.UI.UserControl
 
         string amount = dt.Rows[0][0].ToString();
         amount = string.IsNullOrEmpty(amount) ? "0" : amount;
-        lblTranAmount.Text = string.Format("{0:n0}", amount);
+        lblTranAmount.Text = SharedCommons.SharedCommons.PutCommaInMoneyString(amount);
+        if (!user.User.UserType.Contains("ADMIN"))
+        {
+            btnFirstTime.Visible = false;
+            btnFirstTime.Enabled = false;
+        }
     }
 
     protected void btnFirstTime_Click(object sender, EventArgs e)

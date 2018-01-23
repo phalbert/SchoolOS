@@ -104,8 +104,18 @@ public partial class CustomUserControls_SaveStaffMembers : System.Web.UI.UserCon
 
             if (dt.Rows.Count != 0)
             {
-                msg = "FAILED: SCHOOL CODE ALREADY IN USE. PLEASE PICK ANOTHER ONE";
+                msg = "FAILED: STAFF ID ALREADY IN USE. PLEASE PICK ANOTHER ONE";
                 bll.ShowMessage(lblmsg, msg, false, Session);
+                return;
+            }
+
+            //see if the username is taken
+            SystemUser oldUser = bll.GetSystemUserById2(txtPhone.Text);
+
+            if (oldUser.StatusCode == Globals.SUCCESS_STATUS_CODE)
+            {
+                msg = "FAILED: PHONE NUMBER IS ALREADY ATTACHED TO EXISTING STAFF MEMBER";
+                bll.ShowMessage(lblmsg, msg, true, Session);
                 return;
             }
 
