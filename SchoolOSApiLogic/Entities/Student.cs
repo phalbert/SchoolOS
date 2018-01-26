@@ -44,7 +44,21 @@ namespace SchoolOSApiLogic.Entities
                 return false;
             }
 
-            if(ParentsPhoneNumber1!=Globals.NOT_AVAILABLE_STRING && !SharedCommons.SharedCommons.IsValidUgPhoneNumber(ParentsPhoneNumber1))
+            if (!string.IsNullOrEmpty(PhoneNumber) && !SharedCommons.SharedCommons.IsValidUgPhoneNumber(PhoneNumber))
+            {
+                StatusCode = Globals.FAILURE_STATUS_CODE;
+                StatusDesc = $"INVALID Student PHONE NUMBER SUPPLIED";
+                return false;
+            }
+
+            if (!string.IsNullOrEmpty(Email) && !SharedCommons.SharedCommons.IsValidEmail(Email))
+            {
+                StatusCode = Globals.FAILURE_STATUS_CODE;
+                StatusDesc = $"INVALID Student EMAIL SUPPLIED";
+                return false;
+            }
+
+            if (ParentsPhoneNumber1!=Globals.NOT_AVAILABLE_STRING && !SharedCommons.SharedCommons.IsValidUgPhoneNumber(ParentsPhoneNumber1))
             {
                 StatusCode = Globals.FAILURE_STATUS_CODE;
                 StatusDesc = $"INVALID PHONE NUMBER SUPPLIED IN {nameof(ParentsPhoneNumber1)}";

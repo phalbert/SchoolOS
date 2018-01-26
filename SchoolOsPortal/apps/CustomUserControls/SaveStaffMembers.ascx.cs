@@ -99,6 +99,7 @@ public partial class CustomUserControls_SaveStaffMembers : System.Web.UI.UserCon
         try
         {
             string msg = "";
+            txtPhone.Text = SharedCommons.SharedCommons.FormatUgPhoneNumber(txtPhone.Text);
             
             DataTable dt = bll.ExecuteDataTableOnSchoolsDB("GetStaffById", new string[] { txtIDNumber.Text, ddSchools.SelectedValue });
 
@@ -106,6 +107,13 @@ public partial class CustomUserControls_SaveStaffMembers : System.Web.UI.UserCon
             {
                 msg = "FAILED: STAFF ID ALREADY IN USE. PLEASE PICK ANOTHER ONE";
                 bll.ShowMessage(lblmsg, msg, false, Session);
+                return;
+            }
+
+            if (string.IsNullOrEmpty(txtPhone.Text))
+            {
+                msg = "FAILED: PLEASE SUPPLY A PHONE NUMBER FOR STAFF";
+                bll.ShowMessage(lblmsg, msg, true, Session);
                 return;
             }
 

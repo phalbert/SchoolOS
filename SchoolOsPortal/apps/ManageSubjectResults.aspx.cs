@@ -31,6 +31,7 @@ public partial class ManageSubjectResults : System.Web.UI.Page
 
     private void LoadData()
     {
+        ListStudentsUserControl.LoadRestrictedView();
         HighLightCorrectTab();
     }
 
@@ -57,6 +58,11 @@ public partial class ManageSubjectResults : System.Web.UI.Page
             SetActiveTab(ListStudentsLink);
             return;
         }
+        if (MultiView.GetActiveView() == ApproveStudentResultsView)
+        {
+            SetActiveTab(ApproveStudentResultsLink);
+            return;
+        }
     }
 
     private void SetActiveTab(HtmlGenericControl control)
@@ -65,6 +71,7 @@ public partial class ManageSubjectResults : System.Web.UI.Page
         ListClassesLink.Attributes["class"] = "";
         BulkSubjectResultsUploadLink.Attributes["class"] = "";
         ListStudentsLink.Attributes["class"] = "";
+        ApproveStudentResultsLink.Attributes["class"] = "";
         control.Attributes["class"] = "active";
     }
 
@@ -107,6 +114,11 @@ public partial class ManageSubjectResults : System.Web.UI.Page
         if (link.ID == ListStudentsLinkButton.ID)
         {
             MultiView.SetActiveView(ListStudentsView);
+            return;
+        }
+        if (link.ID == ApproveStudentResultsLinkButton.ID)
+        {
+            MultiView.SetActiveView(ApproveStudentResultsView);
             return;
         }
     }

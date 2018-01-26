@@ -49,10 +49,12 @@ public partial class CustomUserControls_ListSubjectResults : System.Web.UI.UserC
         bll.LoadDataIntoDropDownALL("GetTermsForDropDown", new string[] { ddSchools.SelectedValue }, ddSemester);
         bll.LoadDataIntoDropDownALL("GetStudentsForDropDown", new string[] { ddSchools.SelectedValue,"ALL" }, ddStudents);
         bll.LoadDataIntoDropDown("GetExamsForDropDown", new string[] { ddSchools.SelectedValue }, ddExams);
+
         if (user.User.UserType == "SCHOOL_STUDENT")
         {
             ddStudents.SelectedValue = user.User.Username;
             ddStudents.Enabled = false;
+            bll.RemoveFirstColumn(dataGridResults);
         }
     }
 

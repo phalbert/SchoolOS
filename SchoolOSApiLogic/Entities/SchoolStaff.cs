@@ -38,6 +38,20 @@ namespace SchoolOSApiLogic.Entities
                 return false;
             }
 
+            if (!string.IsNullOrEmpty(PhoneNumber) && !SharedCommons.SharedCommons.IsValidUgPhoneNumber(PhoneNumber))
+            {
+                StatusCode = Globals.FAILURE_STATUS_CODE;
+                StatusDesc = $"INVALID Student PHONE NUMBER SUPPLIED";
+                return false;
+            }
+
+            if (!string.IsNullOrEmpty(Email) && !SharedCommons.SharedCommons.IsValidEmail(Email))
+            {
+                StatusCode = Globals.FAILURE_STATUS_CODE;
+                StatusDesc = $"INVALID Staff EMAIL SUPPLIED";
+                return false;
+            }
+
             return base.IsValid();
         }
     }

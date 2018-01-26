@@ -78,11 +78,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
-    <Compile Include="Web References\PegasusManagementApi\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
-    </Compile>
     <Compile Include="Web References\PegPaySchoolsApi\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -124,20 +119,6 @@
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\CbAPI\Service.wsdl" />
-    <None Include="Web References\PegasusManagementApi\Entity.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\PegasusManagementApi\MSystemService.wsdl" />
-    <None Include="Web References\PegasusManagementApi\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Web References\PegasusManagementApi\Result.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\PegasusManagementApi\SystemUser.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
     <None Include="Web References\PegPaySchoolsApi\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -161,17 +142,6 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>InterLinkClass_PegPaySchoolsApi_Service</CachedSettingsPropName>
-    </WebReferenceUrl>
-    <WebReferenceUrl Include="http://localhost:34322/MSystemService.asmx">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\PegasusManagementApi\</RelPath>
-      <UpdateFromURL>http://localhost:34322/MSystemService.asmx</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>InterLinkClass_PegasusManagementApi_Service</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="http://192.168.23.15:5099/MailApi/Messenger.asmx%3fWSDL">
       <UrlBehavior>Dynamic</UrlBehavior>
@@ -225,9 +195,6 @@
       <ProductName>Windows Installer 3.1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Web References\PegasusManagementApi\MSystemService.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

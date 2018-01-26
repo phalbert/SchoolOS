@@ -45,7 +45,7 @@ public partial class CustomUserControls_ApproveStudentResults : System.Web.UI.Us
     private void LoadData()
     {
         bll.LoadSchoolsIntoDropDown(user, ddSchools);
-        //SearchDb();
+        bll.LoadDataIntoDropDownALL("GetTeachersForDropDown", new string[] { ddSchools.SelectedValue }, ddTeachers);
     }
 
     protected void btnSubmit_Click(object sender, EventArgs e)
@@ -64,7 +64,7 @@ public partial class CustomUserControls_ApproveStudentResults : System.Web.UI.Us
     private void SearchDB()
     {
         string[] searchParams = GetSearchParameters();
-        DataTable dt = bll.SearchTable("SearchSchoolFeesTableForUnapproved", searchParams);
+        DataTable dt = bll.SearchTable("SearchSubjectResultsTableForUnapproved", searchParams);
         if (dt.Rows.Count > 0)
         {
             dataGridResults.DataSource = dt;
@@ -115,16 +115,16 @@ public partial class CustomUserControls_ApproveStudentResults : System.Web.UI.Us
     private void Approve(GridViewRow row)
     {
         //get the Bank User Id and the bank code
-        string UserId = row.Cells[1].Text.Trim();
+        string Id = row.Cells[1].Text.Trim();
         string SchoolCode = ddSchools.SelectedValue;
         string ApprovedBy = user.User.Username;
-        string[] parameters = { UserId, SchoolCode, ApprovedBy,"APPROVED" };
+        string[] parameters = { Id, SchoolCode, ApprovedBy,"APPROVED" };
 
-        DataTable dt = schoolsApi.ExecuteDataSet("ApproveSchoolFee", parameters).Tables[0];
+        DataTable dt = schoolsApi.ExecuteDataSet("ApproveSubjectResult", parameters).Tables[0];
         if (dt.Rows.Count != 0)
         {
             SearchDB();
-            string msg = "Fee(s) Approved Successfully";
+            string msg = "Result(s) Approved Successfully";
             bll.ShowMessage(lblmsg, msg, false, Session);
         }
         else
@@ -166,17 +166,17 @@ public partial class CustomUserControls_ApproveStudentResults : System.Web.UI.Us
     private void Reject(GridViewRow row)
     {
         //get the Bank Transaction Id and the bank code
-        string UserId = row.Cells[1].Text.Trim();
+        string Id = row.Cells[1].Text.Trim();
         string SchoolCode = ddSchools.SelectedValue;
         string RejectedBy = user.User.Username;
 
-        string[] parameters = { UserId, SchoolCode, RejectedBy,"REJECTED" };
+        string[] parameters = { Id, SchoolCode, RejectedBy,"REJECTED" };
 
-        DataTable dt = schoolsApi.ExecuteDataSet("ApproveSchoolFee", parameters).Tables[0];
+        DataTable dt = schoolsApi.ExecuteDataSet("RejectSubjectResult", parameters).Tables[0];
         if (dt.Rows.Count != 0)
         {
             SearchDB();
-            string msg = "Fee(s) Approved Successfully";
+            string msg = "Result(s) Rejected Successfully";
             bll.ShowMessage(lblmsg, msg, false, Session);
         }
         else
@@ -191,8 +191,10 @@ public partial class CustomUserControls_ApproveStudentResults : System.Web.UI.Us
         List<string> all = new List<string>();
         string name = ddSchools.SelectedValue;
         string StudentId = txtStudentId.Text;
+        string TeacherId = ddTeachers.SelectedValue;
         all.Add(name);
         all.Add(StudentId);
+        all.Add(TeacherId);
         return all.ToArray();
     }
 

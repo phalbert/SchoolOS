@@ -45,7 +45,13 @@ public partial class ListStudents : System.Web.UI.UserControl
     {
         bll.LoadSchoolsIntoDropDown(user, ddSchools);
         bll.LoadDataIntoDropDownALL("GetClassesForDropDown", new string[] { ddSchools.SelectedValue }, ddClasses);
-        //SearchDb();
+    }
+
+    public void LoadRestrictedView()
+    {
+        LoadData();
+        moreFunctions.Visible = false;
+        dataGridResults.Columns.RemoveAt(0);
     }
 
     protected void btnSubmit_Click(object sender, EventArgs e)
@@ -204,14 +210,22 @@ public partial class ListStudents : System.Web.UI.UserControl
                         string SchoolCode = ddSchools.SelectedValue;
 
                         SystemUser newUser = GetSystemUser(Id, SchoolCode);
-                        string[] parameters = { Id, SchoolCode, newUser.UserPassword, newUser.SecretKey };
+                        string HashedPassword = SharedCommons.SharedCommons.GenearetHMACSha256Hash(newUser.SecretKey, newUser.UserPassword);
+                        string[] parameters = { Id, SchoolCode, HashedPassword, newUser.SecretKey };
 
                         //save student creds
                         DataTable dt = schoolsApi.ExecuteDataSet("SetStudentPassword", parameters).Tables[0];
 
                         if (dt.Rows.Count == 0)
                         {
-                            string msg = "Unable to Set Student Credentials";
+                            string msg = "FAILED: Unable to Set Student Credentials";
+                            bll.ShowMessage(lblmsg, msg, true, Session);
+                            return;
+                        }
+
+                        if (string.IsNullOrEmpty(newUser.Email) && string.IsNullOrEmpty(newUser.PhoneNumber))
+                        {
+                            string msg = "FAILED: Unable to Send Student Credentials to [" + newUser.Username + "], Reason: They have no Email or Phone Number configured";
                             bll.ShowMessage(lblmsg, msg, true, Session);
                             return;
                         }
@@ -240,7 +254,7 @@ public partial class ListStudents : System.Web.UI.UserControl
         SystemUser newUser = new SystemUser();
         string SecretKey = SharedCommons.SharedCommons.GenerateSecretKey();
         string Password = SharedCommons.SharedCommons.GeneratePassword();
-        string HashedPassword = SharedCommons.SharedCommons.GenearetHMACSha256Hash(SecretKey, Password);
+
         newUser.ApprovedBy = user.User.Username;
         newUser.Email = std.Email;
         newUser.FullName = std.StudentName;

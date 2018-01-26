@@ -45,6 +45,7 @@ public partial class CustomUserControls_ListPaymentLogs : System.Web.UI.UserCont
     private void LoadData()
     {
         bll.LoadSchoolsIntoDropDown(user, ddSchools);
+        bll.LoadDataIntoDropDownALL("GetSystemUsersForDropDown", new string[] { ddSchools.SelectedValue}, ddUsers);
         //SearchDb();
     }
 

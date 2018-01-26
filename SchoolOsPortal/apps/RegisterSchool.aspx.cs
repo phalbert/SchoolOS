@@ -43,6 +43,8 @@ public partial class RegisterSchool : System.Web.UI.Page
         try
         {
 
+            txtPrincipalPhone.Text = SharedCommons.SharedCommons.FormatUgPhoneNumber(txtPrincipalPhone.Text);
+            txtOfficePhone.Text = SharedCommons.SharedCommons.FormatUgPhoneNumber(txtOfficePhone.Text);
 
             if (string.IsNullOrEmpty(txtSchoolCode.Text))
             {

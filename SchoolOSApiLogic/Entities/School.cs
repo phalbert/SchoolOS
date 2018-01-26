@@ -56,7 +56,19 @@ namespace SchoolOSApiLogic.Entities
                 StatusDesc = "PLEASE PICK A SCHOOL CATEGORY";
                 return false;
             }
+            if (!string.IsNullOrEmpty(SchoolPhone) && !SharedCommons.SharedCommons.IsValidUgPhoneNumber(SchoolPhone))
+            {
+                StatusCode = Globals.FAILURE_STATUS_CODE;
+                StatusDesc = $"INVALID School PHONE NUMBER SUPPLIED";
+                return false;
+            }
 
+            if (!string.IsNullOrEmpty(SchoolEmail) && !SharedCommons.SharedCommons.IsValidEmail(SchoolEmail))
+            {
+                StatusCode = Globals.FAILURE_STATUS_CODE;
+                StatusDesc = $"INVALID School EMAIL SUPPLIED";
+                return false;
+            }
             return base.IsValid();
         }
 

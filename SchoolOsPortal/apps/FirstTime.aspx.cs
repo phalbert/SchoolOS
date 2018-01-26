@@ -69,6 +69,7 @@ public partial class FirstTime : System.Web.UI.Page
         }
         if (MultiView.GetActiveView() == ManageStudentPaymentsView)
         {
+            ManageStudentPaymentsUserControl.LoadData();
             SetActiveTab(ManageStudentPaymentsLink);
             return;
         }

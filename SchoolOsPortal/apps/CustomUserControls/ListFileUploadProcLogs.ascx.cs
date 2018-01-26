@@ -45,7 +45,7 @@ public partial class CustomUserControls_ListFileUploadProcLogs : System.Web.UI.U
     private void LoadData()
     {
         bll.LoadSchoolsIntoDropDown(user, ddSchools);
-        //SearchDb();
+        bll.LoadDataIntoDropDownALL("GetSystemUsersForDropDown", new string[] { ddSchools.SelectedValue }, ddUsers);
     }
 
     protected void btnExport_Click(object sender, EventArgs e)

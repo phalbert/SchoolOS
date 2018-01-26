@@ -29,8 +29,9 @@ public partial class CustomUserControls_ManageStudentPayments : System.Web.UI.Us
         }
     }
 
-    private void LoadData()
+    public void LoadData()
     {
+        AssignFeesUserControl.LoadData();
         HighLightCorrectTab();
     }
 

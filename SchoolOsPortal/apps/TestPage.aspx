@@ -1,6 +1,7 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="TestPage.aspx.cs" Inherits="TestPage" %>
 
-<%@ Reference Control="~/CustomUserControls/GenerateStudentId.ascx" %>
+<%@ Reference Control="~/CustomUserControls/PrintStudentReport.ascx" %>
+<%@ Register TagPrefix="uc" TagName="ChangePasswordUserControl" Src="~/CustomUserControls/PrintStudentReport.ascx" %>
 
 <!DOCTYPE html>
 
@@ -12,15 +13,14 @@
 <body>
     <form id="form1" runat="server">
         <div id="controlsDiv" runat="server">
-            <asp:PlaceHolder ID="placeholde1" runat="server" />
+             <uc:ChangePasswordUserControl ID="ChangePasswordUserControl" runat="server" />
         </div>
     </form>
     <!-- global js -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <!-- end of global js -->
-    <!-- page level js -->
+
     <script type="text/javascript" src="scripts/vendors/iCheck/js/icheck.js.pagespeed.jm.mc8O_8_6ZX.js"></script>
     <script src="scripts/vendors/bootstrapvalidator/js/bootstrapValidator.min.js.pagespeed.jm.6svL6oFoHD.js" type="text/javascript"></script>
 

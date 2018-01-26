@@ -65,6 +65,31 @@ public partial class CustomUserControls_GenerateAccountStatement : System.Web.UI
         SearchDb();
     }
 
+    protected void btnExport_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            string ExportType = ddExportType.SelectedValue.ToUpper();
+            DataTable dt = bll.ConvertGridViewToDataTable(dataGridResults);
+
+            if (ExportType == "EXCEL")
+            {
+                bll.ExportToCSV(dt, Response);
+                return;
+            }
+            if (ExportType == "WORD")
+            {
+                bll.ExportToWord(dt, Response);
+                return;
+            }
+        }
+        catch (Exception ex)
+        {
+            string msg = "FAILED: " + ex.Message;
+            bll.ShowMessage(lblmsg, msg, true);
+        }
+    }
+
     private void LoadData()
     {
         bll.LoadSchoolsIntoDropDown(user, ddBank);

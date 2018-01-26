@@ -138,7 +138,7 @@ public partial class CustomUserControls_SaveSubjectResults : System.Web.UI.UserC
     private void SearchDB()
     {
         string[] searchParams = GetSearchParameters();
-        DataTable dt = bll.SearchTable("SearchForStudentsInClassWhoEnrolledForSubject", new string[] { ddSchools.SelectedValue, ddSemesters.SelectedValue, ddSubjects.SelectedValue });
+        DataTable dt = bll.SearchTable("SearchForStudentsInClassWhoEnrolledForSubject", new string[] { ddSchools.SelectedValue, ddSemesters.SelectedValue, ddSubjects.SelectedValue,ddClasses.SelectedValue,ddExams.SelectedValue });
         if (dt.Rows.Count > 0)
         {
             dataGridResults.DataSource = dt;

@@ -5,9 +5,6 @@
     <Setting Name="InterLinkClass_MailApi_Messenger" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://192.168.23.15:5099/MailApi/Messenger.asmx</Value>
     </Setting>
-    <Setting Name="InterLinkClass_PegasusManagementApi_Service" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://localhost:34322/MSystemService.asmx</Value>
-    </Setting>
     <Setting Name="InterLinkClass_PegPaySchoolsApi_Service" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://localhost:2509/SchoolApi.asmx</Value>
     </Setting>

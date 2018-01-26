@@ -8,6 +8,7 @@ using InterLinkClass.PegPaySchoolsApi;
 using System.Web.UI;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 public class Bussinesslogic
 {
@@ -32,6 +33,23 @@ public class Bussinesslogic
         return base64String;
     }
 
+    public MySubjectResults[] GetStudentSubjectResults(string studentId, string schoolCode)
+    {
+        List<MySubjectResults> all = new List<MySubjectResults>();
+
+        DataSet ds = SchoolsApi.ExecuteDataSet("GetStudentSubjectResults", new string[] {  });
+        DataTable dt = ds.Tables[0];
+
+        if (dt.Rows.Count == 0)
+        {
+            return all.ToArray();
+        }
+
+        DataRow row = dt.Rows[0];
+
+        return all.ToArray();
+    }
+
     private void SaveInAuditlog(string ActionType, string TableName, string BankCode, string ModifiedBy, string Action)
     {
         Task.Run(() => { 
@@ -53,6 +71,17 @@ public class Bussinesslogic
         }
         });
         return;
+    }
+
+    public void RemoveFirstColumn(GridView dataGridResults)
+    {
+        try
+        {
+            dataGridResults.Columns.RemoveAt(0);
+        }
+        catch (Exception)
+        {
+        }
     }
 
     public InterLinkClass.PegPaySchoolsApi.SystemUser GetSystemUserById2(string userId)
@@ -642,10 +671,7 @@ public class Bussinesslogic
         return null;
     }
 
-    public InterLinkClass.PegasusManagementApi.Result ChangeUsersPassword(string id, string bankCode, string password, string usertype, bool v1, string v2)
-    {
-        throw new NotImplementedException();
-    }
+ 
 
     public UserType GetUserTypeById(string companyCode, string userType)
     {

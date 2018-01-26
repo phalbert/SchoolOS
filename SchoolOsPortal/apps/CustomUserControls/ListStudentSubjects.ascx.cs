@@ -95,6 +95,7 @@ public partial class CustomUserControls_ListStudentSubjects : System.Web.UI.User
         ddStudents.Enabled = false;
         ddClasses.SelectedValue = std.ClassCode;
         ddClasses.Enabled = false;
+        bll.RemoveFirstColumn(dataGridResults);
     }
 
     protected void btnSubmit_Click(object sender, EventArgs e)

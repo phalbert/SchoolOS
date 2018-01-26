@@ -189,8 +189,8 @@ namespace SchoolOSApiLogic.ControlClasses
         public Result SaveSystemUser(SystemUser user)
         {
             Result result = new Result();
-            LogChangesInAuditLog(user, user.Username, user.SchoolCode, user.ModifiedBy);
             user.UserPassword = GenearetHMACSha256Hash(user.SecretKey, user.UserPassword);
+            LogChangesInAuditLog(user, user.Username, user.SchoolCode, user.ModifiedBy);
             DataTable dt = dh.ExecuteDataSet("SaveSystemUser", new string[] { user.Username, user.UserPassword, user.UserType, user.UserCategory, user.SecretKey, user.ModifiedBy, user.ProfilePic, user.SchoolCode, user.FullName, user.IsActive, user.Email, user.PhoneNumber, user.ApprovedBy }).Tables[0];
 
             if (dt.Rows.Count == 0)
@@ -225,7 +225,9 @@ namespace SchoolOSApiLogic.ControlClasses
         public Result SaveStudent(Student std)
         {
             Result result = new Result();
+            std.Password = GenearetHMACSha256Hash(std.SecretKey, std.Password);
             LogChangesInAuditLog(std, std.StudentNumber, std.SchoolCode, std.ModifiedBy);
+
             DataTable dt = dh.ExecuteDataSet("SaveStudent", new string[] { std.SchoolCode, std.StudentNumber, std.PegPayStudentNumber, std.StudentName, std.ClassCode, std.StreamCode, std.DateOfBirth, std.StudentCategory, std.ModifiedBy, std.ProfilePic, std.Email, std.Gender, std.PhoneNumber, std.ParentsName1, std.ParentsName2, std.ParentsPhoneNumber1, std.ParentsPhoneNumber2, std.Password, std.SecretKey }).Tables[0];
 
             if (dt.Rows.Count == 0)

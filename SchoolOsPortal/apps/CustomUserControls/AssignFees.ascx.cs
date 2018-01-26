@@ -50,7 +50,7 @@ public partial class AssignFees : System.Web.UI.UserControl
         }
     }
 
-    private void LoadData()
+    public void LoadData()
     {
         btnSubmit.Visible = true;
         btnEdit.Visible = false;

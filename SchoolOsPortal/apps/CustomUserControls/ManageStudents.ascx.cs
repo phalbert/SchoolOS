@@ -29,8 +29,11 @@ public partial class CustomUserControls_ManageStudents : System.Web.UI.UserContr
         }
     }
 
-    private void LoadData()
+  
+
+    public void LoadData()
     {
+        
         HighLightCorrectTab();
     }
 

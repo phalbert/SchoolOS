@@ -127,6 +127,7 @@ namespace SharedCommons
 
         public static string FormatUgPhoneNumber(string Phone)
         {
+            Phone = Phone.Replace("+", string.Empty);
             if (string.IsNullOrEmpty(Phone))
             {
                 return Phone;

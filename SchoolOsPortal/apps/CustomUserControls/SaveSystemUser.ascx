@@ -69,8 +69,7 @@
                             <div class="col-lg-6">
                                 <label>UserType</label>
                                 <asp:DropDownList ID="ddUserTypes" runat="server" CssClass="form-control">
-                                    <asp:ListItem Value="TRUE">YES</asp:ListItem>
-                                    <asp:ListItem Value="FALSE">NO</asp:ListItem>
+                                 
                                 </asp:DropDownList>
                             </div>
                         </div>

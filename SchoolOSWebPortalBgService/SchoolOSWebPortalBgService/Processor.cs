@@ -54,7 +54,7 @@ namespace SchoolOSWebPortalBgService
                     continue;
                 }
 
-                bll.LogFileUploadStatus(file.ID, "SUCCESS", "SUCCESS"c, file.ModifiedBy, count.ToString());
+                bll.LogFileUploadStatus(file.ID, "SUCCESS", "SUCCESS", file.ModifiedBy, count.ToString());
                 successfullPayments.Add(payment);
                 count++;
             }

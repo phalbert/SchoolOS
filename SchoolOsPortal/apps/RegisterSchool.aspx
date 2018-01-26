@@ -312,7 +312,7 @@
                             <br />
                             <div class="row">
                                 <div class="col-sm-offset-3 col-sm-9">
-                                    <asp:Button runat="server" Text="Submit" ID="btnEdit" class="btn-lg btn-primary" OnClick="btnEdit_Click" />
+                                    <asp:Button runat="server" Text="Submit" ID="btnEdit" class="btn-lg btn-primary" OnClick="btnSubmit_Click" />
 
                                     &nbsp;
                                     <asp:Button runat="server" Text="Submit" ID="btnSubmit" class="btn-lg btn-primary" OnClick="btnSubmit_Click" />

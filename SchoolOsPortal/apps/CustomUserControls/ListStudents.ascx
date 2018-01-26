@@ -80,7 +80,7 @@
                     <div class="col-md-4"></div>
                 </div>
                 <hr />
-                <div class="row text-center">
+                <div class="row text-center" id="moreFunctions" runat="server">
                     <asp:Button ID="btnPrintIds" runat="server" Text="Generate Id Card(s)" CssClass="btn btn-success btn-md"
                         OnClick="btnPrintIds_Click" />
                     <asp:Button ID="btnSendLoginCredentials" runat="server" Text="Send Login Credentials" CssClass="btn btn-danger btn-md"

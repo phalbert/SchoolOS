@@ -101,7 +101,7 @@
                             <Columns>
                                 <asp:TemplateField HeaderText="Marks">
                                     <ItemTemplate>
-                                        <asp:TextBox ID="txtMark" runat="server" CommandName="SaveMark" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" />
+                                        <asp:TextBox ID="txtMark" runat="server" CommandName="SaveMark" Text='<%# Eval("Mark") %>' />
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>
