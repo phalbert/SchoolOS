@@ -32,8 +32,7 @@
 
         <!---------------------------------------------- Search Options --------------------------------->
         <div class="row">
-            <div class="col-lg-1"></div>
-            <div class="col-lg-3">
+            <div class="col-lg-2">
                 <label>
                     School
                 </label>
@@ -51,11 +50,26 @@
                     <asp:ListItem>False</asp:ListItem>
                 </asp:DropDownList>
             </div>
+            <div class="col-lg-2">
+                <label>
+                   Status
+                </label>
+               <asp:DropDownList ID="ddStatus" runat="server" CssClass="form-control">
+                    <asp:ListItem>ALL</asp:ListItem>
+                    <asp:ListItem>FAILED</asp:ListItem>
+                    <asp:ListItem>SUCCESS</asp:ListItem>
+                </asp:DropDownList>
+            </div>
+             <div class="col-lg-2">
+                <label>
+                   Date
+                </label>
+                <asp:TextBox ID="txtDate" runat="server" CssClass="form-control" placeholder="Enter text" />
+            </div>
             <div class="col-lg-3" style="padding-top: 15px;">
                 <asp:Button ID="btnSubmit" runat="server" Text="Search DB" CssClass="btn btn-success btn-lg"
                     OnClick="btnSubmit_Click" />
             </div>
-            <div class="col-lg-1"></div>
         </div>
 
         <hr />
@@ -91,7 +105,9 @@
             <asp:View runat="server" ID="EmptyView">
             </asp:View>
         </asp:MultiView>
-
+        <ajaxToolkit:CalendarExtender ID="CalendarExtender1" runat="server" CssClass="cal_Theme1"
+                Format="yyyy-MM-dd" PopupPosition="BottomRight" TargetControlID="txtDate">
+            </ajaxToolkit:CalendarExtender>
         <!------------------------------------------------- View2 -------------------------------------------------->
     </asp:View>
     <asp:View ID="View2" runat="server">

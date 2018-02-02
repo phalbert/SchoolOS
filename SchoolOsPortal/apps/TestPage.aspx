@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="TestPage.aspx.cs" Inherits="TestPage" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" Title="Print" CodeFile="TestPage.aspx.cs" Inherits="TestPage" %>
 
 <%@ Reference Control="~/CustomUserControls/PrintStudentReport.ascx" %>
 <%@ Register TagPrefix="uc" TagName="ChangePasswordUserControl" Src="~/CustomUserControls/PrintStudentReport.ascx" %>

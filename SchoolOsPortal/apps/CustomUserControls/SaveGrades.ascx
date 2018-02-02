@@ -58,8 +58,6 @@
                                         <div class="col-lg-6">
                                             <label>School</label>
                                             <asp:DropDownList ID="ddSchools" runat="server" CssClass="form-control">
-                                                <asp:ListItem>True</asp:ListItem>
-                                                <asp:ListItem>False</asp:ListItem>
                                             </asp:DropDownList>
                                         </div>
 
@@ -86,23 +84,37 @@
                                             <label>Grade Code</label>
                                             <asp:TextBox ID="txtCode" runat="server" CssClass="form-control" placeholder="Enter text" />
                                         </div>
-                                    </div>
-                                    <br />
-                                    <div class="panel-footer">
-                                        <div class="text-center">
-                                            <asp:Button ID="btnSubmit" runat="server" Text="Save" Width="200px" CssClass="btn btn-success btn-lg" OnClick="btnSubmit_Click" />
-                                            <asp:Button ID="btnEdit" runat="server" Text="Save" Width="200px" CssClass="btn btn-success btn-lg" OnClick="btnEdit_Click" />
+                                        <div class="col-lg-6">
+                                            <label>Grade Scheme Code</label>
+                                            <asp:DropDownList ID="ddGradeSchemes" runat="server" CssClass="form-control">
+                                                <asp:ListItem>DIVISIONS</asp:ListItem>
+                                                <asp:ListItem Value="ALPHABET">A level</asp:ListItem>
+                                            </asp:DropDownList>
                                         </div>
                                     </div>
-
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <label>Grade Points</label>
+                                            <asp:TextBox ID="txtGradePoints" runat="server" CssClass="form-control" placeholder="Enter text" />
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
+                                <br />
+                                <div class="panel-footer">
+                                    <div class="text-center">
+                                        <asp:Button ID="btnSubmit" runat="server" Text="Save" Width="200px" CssClass="btn btn-success btn-lg" OnClick="btnSubmit_Click" />
+                                        <asp:Button ID="btnEdit" runat="server" Text="Save" Width="200px" CssClass="btn btn-success btn-lg" OnClick="btnEdit_Click" />
+                                    </div>
+                                </div>
 
-                            <div class="col-lg-2"></div>
+                            </div>
                         </div>
+
+                        <div class="col-lg-2"></div>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </asp:View>
 

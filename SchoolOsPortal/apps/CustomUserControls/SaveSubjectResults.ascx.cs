@@ -138,7 +138,7 @@ public partial class CustomUserControls_SaveSubjectResults : System.Web.UI.UserC
     private void SearchDB()
     {
         string[] searchParams = GetSearchParameters();
-        DataTable dt = bll.SearchTable("SearchForStudentsInClassWhoEnrolledForSubject", new string[] { ddSchools.SelectedValue, ddSemesters.SelectedValue, ddSubjects.SelectedValue,ddClasses.SelectedValue,ddExams.SelectedValue });
+        DataTable dt = bll.SearchTable("SearchForStudentsInClassWhoEnrolledForSubject", new string[] { ddSchools.SelectedValue, ddSemesters.SelectedValue, ddSubjects.SelectedValue, ddClasses.SelectedValue, ddExams.SelectedValue });
         if (dt.Rows.Count > 0)
         {
             dataGridResults.DataSource = dt;
@@ -146,6 +146,7 @@ public partial class CustomUserControls_SaveSubjectResults : System.Web.UI.UserC
             string msg = "Found " + dt.Rows.Count + " Records Matching Search Criteria";
             Multiview2.SetActiveView(resultView);
             bll.ShowMessage(lblmsg, msg, false, Session);
+            //dataGridResults.Columns.RemoveAt(2);
         }
         else
         {
@@ -179,8 +180,18 @@ public partial class CustomUserControls_SaveSubjectResults : System.Web.UI.UserC
             TableCell cell = row.Cells[0];
             row.Cells.Remove(cell);
             columns.Add(cell);
+
         }
+
         row.Cells.AddRange(columns.ToArray());
+
+        foreach (DataControlField column in dataGridResults.Columns)
+        {
+            TableCell cell = row.Cells[2];
+            //TableCell cell2 = row.Cells[3];
+            row.Cells.Remove(cell);
+            //row.Cells.Remove(cell2);
+        }
     }
 
 
@@ -193,6 +204,7 @@ public partial class CustomUserControls_SaveSubjectResults : System.Web.UI.UserC
             {
                 //for each row get the checkbox attached
                 TextBox txtMark = (TextBox)row.FindControl("txtMark");
+                TextBox txtComments = (TextBox)row.FindControl("txtComments");
                 string StudentNumber = row.Cells[1].Text.Trim();
 
                 SubjectResults result = new SubjectResults();
@@ -203,6 +215,8 @@ public partial class CustomUserControls_SaveSubjectResults : System.Web.UI.UserC
                 result.StudentId = StudentNumber;
                 result.SubjectCode = ddSubjects.SelectedValue;
                 result.TermCode = ddSemesters.SelectedValue;
+                result.ClassCode = ddClasses.SelectedValue;
+                result.TeachersComments = txtComments.Text;
                 Result saveResult = schoolsApi.SaveSubjectResult(result);
 
                 if (saveResult.StatusCode != Globals.SUCCESS_STATUS_CODE)
@@ -215,6 +229,20 @@ public partial class CustomUserControls_SaveSubjectResults : System.Web.UI.UserC
 
             string msg1 = "RESULTS SAVED SUCCESSFULLY";
             bll.ShowMessage(lblmsg, msg1, false);
+        }
+        catch (Exception ex)
+        {
+            string msg = "FAILED: " + ex.Message;
+            bll.ShowMessage(lblmsg, msg, true);
+        }
+    }
+
+    protected void dataGridResults_DataBound(object sender, EventArgs e)
+    {
+        try
+        {
+            dataGridResults.Columns.RemoveAt(2);
+
         }
         catch (Exception ex)
         {

@@ -44,7 +44,7 @@ public partial class ListStudents : System.Web.UI.UserControl
     private void LoadData()
     {
         bll.LoadSchoolsIntoDropDown(user, ddSchools);
-        bll.LoadDataIntoDropDownALL("GetClassesForDropDown", new string[] { ddSchools.SelectedValue }, ddClasses);
+        bll.LoadDataIntoDropDown("GetClassesForDropDown", new string[] { ddSchools.SelectedValue }, ddClasses);
     }
 
     public void LoadRestrictedView()
@@ -288,6 +288,44 @@ public partial class ListStudents : System.Web.UI.UserControl
                 bll.ExportToWord(dt, Response);
                 return;
             }
+        }
+        catch (Exception ex)
+        {
+            string msg = "FAILED: " + ex.Message;
+            bll.ShowMessage(lblmsg, msg, true);
+        }
+    }
+
+    protected void btnPrintReport_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            foreach (GridViewRow row in dataGridResults.Rows)
+            {
+                //for each row get the checkbox attached
+                CheckBox ChkBox = (CheckBox)row.FindControl("CheckBox");
+
+                //has user ticked the box
+                if (ChkBox.Checked)
+                {
+                    //if this row is not the header row
+                    if (row.RowType != DataControlRowType.Header)
+                    {
+                        string studentId = row.Cells[1].Text.Trim();
+                        string SchoolCode = ddSchools.SelectedValue;
+                        string classCode = ddClasses.SelectedValue;
+                        string TermCode = user.CurrentSemesterCode;
+
+                        Session["StudentId"] = studentId;
+                        Session["SchoolCode"] = SchoolCode;
+                        Session["ClassCode"] = classCode;
+                        Session["TermCode"] = TermCode;
+
+                        Response.Redirect("~/PrintStudentsReport.aspx");
+                        return;
+                    }   
+                }       
+            }           
         }
         catch (Exception ex)
         {

@@ -83,7 +83,7 @@
         <hr />
         <div class="row text-center">
             <asp:Button ID="btnSubmit" runat="server" Text="Search DB" CssClass="btn btn-success btn-lg"
-                OnClick="btnSubmit_Click" />
+                OnClick="btnSubmit_Click" formnovalidate/>
         </div>
 
         <hr />
@@ -94,14 +94,21 @@
                 <div class="row">
                     <div class="table-responsive">
                         <asp:GridView runat="server" OnRowCreated="GridView1_RowCreated" Width="100%" CssClass="table table-bordered table-hover"
-                            ID="dataGridResults" OnRowCommand="dataGridResults_RowCommand">
+                            ID="dataGridResults" OnRowCommand="dataGridResults_RowCommand" >
                             <AlternatingRowStyle BackColor="#BFE4FF" />
                             <HeaderStyle BackColor="#115E9B" Font-Bold="false" ForeColor="white" Font-Italic="False"
                                 Font-Overline="False" Font-Strikeout="False" Font-Underline="False" Height="30px" />
                             <Columns>
-                                <asp:TemplateField HeaderText="Marks">
+                                <asp:TemplateField HeaderText="Mark">
                                     <ItemTemplate>
-                                        <asp:TextBox ID="txtMark" runat="server" CommandName="SaveMark" Text='<%# Eval("Mark") %>' />
+                                        <asp:TextBox ID="txtMark" required="true" runat="server" CommandName="SaveMark" Text='<%# Eval("Mark") %>' />
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                            </Columns>
+                            <Columns>
+                                <asp:TemplateField HeaderText="Comments">
+                                    <ItemTemplate>
+                                        <asp:TextBox ID="txtComments"  runat="server" CommandName="SaveMark" Text='<%# Eval("Comments") %>' />
                                     </ItemTemplate>
                                 </asp:TemplateField>
                             </Columns>

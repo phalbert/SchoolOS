@@ -11,6 +11,7 @@ namespace SchoolOSApiLogic.Entities
         public string MinimumMark = "";
         public string MaximumMark = "";
         public string GradeSchemeCode = "";
+        public string GradePoints = "";
 
         public override bool IsValid()
         {
@@ -21,6 +22,27 @@ namespace SchoolOSApiLogic.Entities
             {
                 StatusCode = Globals.FAILURE_STATUS_CODE;
                 StatusDesc = nullCheckResult.StatusDesc;
+                return false;
+            }
+
+            if (!SharedCommons.SharedCommons.IsNumeric(MinimumMark))
+            {
+                StatusCode = Globals.FAILURE_STATUS_CODE;
+                StatusDesc = "MINIMUM MARK MUST BE NUMERIC";
+                return false;
+            }
+
+            if (!SharedCommons.SharedCommons.IsNumeric(MaximumMark))
+            {
+                StatusCode = Globals.FAILURE_STATUS_CODE;
+                StatusDesc = "MAXIMUM MARK MUST BE NUMERIC";
+                return false;
+            }
+
+            if (!SharedCommons.SharedCommons.IsNumeric(GradePoints))
+            {
+                StatusCode = Globals.FAILURE_STATUS_CODE;
+                StatusDesc = "GRADE POINTS MUST BE NUMERIC";
                 return false;
             }
 

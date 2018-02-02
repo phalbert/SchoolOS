@@ -367,6 +367,18 @@ namespace SharedCommons
             }
         }
 
+        public static double GetDoubleFromStringDefaultsToZero(string text)
+        {
+            try
+            {
+                return Convert.ToDouble(text);
+            }
+            catch (Exception ex)
+            {
+                return 0;
+            }
+        }
+
         public static string GetDigitalSignature(string dataToSign, string PathToPrivateKey)
         {
             // path to your private key

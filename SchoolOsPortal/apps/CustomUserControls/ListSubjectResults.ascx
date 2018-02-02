@@ -44,11 +44,17 @@
             </div>
             <div class="col-lg-3">
                 <label>
+                    Class
+                </label>
+                <asp:DropDownList ID="ddClasses" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddClasses_SelectedIndexChanged" CssClass="form-control">
+                </asp:DropDownList>
+            </div>
+            <div class="col-lg-3">
+                <label>
                     Semester
                 </label>
                 <asp:DropDownList ID="ddSemester" runat="server" CssClass="form-control">
-                    <asp:ListItem>True</asp:ListItem>
-                    <asp:ListItem>False</asp:ListItem>
+                   
                 </asp:DropDownList>
             </div>
             <div class="col-lg-3">

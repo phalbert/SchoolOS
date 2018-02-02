@@ -1494,6 +1494,10 @@ namespace InterLinkClass.PegPaySchoolsApi {
         
         private string maximumMarkField;
         
+        private string gradeSchemeCodeField;
+        
+        private string gradePointsField;
+        
         /// <remarks/>
         public string GradeCode {
             get {
@@ -1531,6 +1535,26 @@ namespace InterLinkClass.PegPaySchoolsApi {
             }
             set {
                 this.maximumMarkField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string GradeSchemeCode {
+            get {
+                return this.gradeSchemeCodeField;
+            }
+            set {
+                this.gradeSchemeCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string GradePoints {
+            get {
+                return this.gradePointsField;
+            }
+            set {
+                this.gradePointsField = value;
             }
         }
     }
@@ -1981,6 +2005,10 @@ namespace InterLinkClass.PegPaySchoolsApi {
         
         private string gradeField;
         
+        private string classCodeField;
+        
+        private string teachersCommentsField;
+        
         /// <remarks/>
         public string StudentId {
             get {
@@ -2038,6 +2066,26 @@ namespace InterLinkClass.PegPaySchoolsApi {
             }
             set {
                 this.gradeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string ClassCode {
+            get {
+                return this.classCodeField;
+            }
+            set {
+                this.classCodeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        public string TeachersComments {
+            get {
+                return this.teachersCommentsField;
+            }
+            set {
+                this.teachersCommentsField = value;
             }
         }
     }

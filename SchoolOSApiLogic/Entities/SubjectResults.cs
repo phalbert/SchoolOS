@@ -13,11 +13,13 @@ namespace SchoolOSApiLogic.Entities
         public string ExamCode = "";
         public string Mark = "";
         public string Grade= "";
+        public string ClassCode = "";
+        public string TeachersComments = "";
 
         public override bool IsValid()
         {
             
-            string propertiesThatCanBeNull = "Grade";
+            string propertiesThatCanBeNull = "TeachersComments|Grade";
             Result nullCheckResult = Globals.CheckForNulls(this, propertiesThatCanBeNull);
 
             if (nullCheckResult.StatusCode != Globals.SUCCESS_STATUS_CODE)

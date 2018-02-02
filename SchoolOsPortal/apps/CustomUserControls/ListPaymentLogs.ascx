@@ -32,30 +32,40 @@
 
         <!---------------------------------------------- Search Options --------------------------------->
         <div class="row">
-            <div class="col-lg-1"></div>
-            <div class="col-lg-3">
+            <div class="col-lg-2">
                 <label>
                     School
                 </label>
-               <asp:DropDownList ID="ddSchools" runat="server" CssClass="form-control">
-                    <asp:ListItem>True</asp:ListItem>
-                    <asp:ListItem>False</asp:ListItem>
+                <asp:DropDownList ID="ddSchools" runat="server" CssClass="form-control">
                 </asp:DropDownList>
             </div>
             <div class="col-lg-3">
                 <label>
                     System User
                 </label>
-               <asp:DropDownList ID="ddUsers" runat="server" CssClass="form-control">
-                    <asp:ListItem>True</asp:ListItem>
-                    <asp:ListItem>False</asp:ListItem>
+                <asp:DropDownList ID="ddUsers" runat="server" CssClass="form-control">
                 </asp:DropDownList>
+            </div>
+            <div class="col-lg-2">
+                <label>
+                    Status
+                </label>
+                <asp:DropDownList ID="ddStatus" runat="server" CssClass="form-control">
+                    <asp:ListItem>ALL</asp:ListItem>
+                    <asp:ListItem>FAILED</asp:ListItem>
+                    <asp:ListItem>SUCCESS</asp:ListItem>
+                </asp:DropDownList>
+            </div>
+            <div class="col-lg-2">
+                <label>
+                    Date
+                </label>
+                <asp:TextBox ID="txtDate" runat="server" CssClass="form-control" placeholder="Enter text" />
             </div>
             <div class="col-lg-3" style="padding-top: 15px;">
                 <asp:Button ID="btnSubmit" runat="server" Text="Search DB" CssClass="btn btn-success btn-lg"
                     OnClick="btnSubmit_Click" />
             </div>
-            <div class="col-lg-1"></div>
         </div>
 
         <hr />
@@ -65,11 +75,11 @@
                 <div class="row text-center">
                     <div class="col-md-4"></div>
                     <div class="col-md-4 form-inline">
-                        <asp:DropDownList  ID="ddExportType" runat="server" CssClass="form-control">
+                        <asp:DropDownList ID="ddExportType" runat="server" CssClass="form-control">
                             <asp:ListItem>EXCEL</asp:ListItem>
                             <asp:ListItem>WORD</asp:ListItem>
                         </asp:DropDownList>
-                    
+
                         <asp:Button ID="btnExport" runat="server" Text="Export" CssClass="btn btn-primary btn-md"
                             OnClick="btnExport_Click" />
                     </div>
@@ -83,7 +93,7 @@
                             <AlternatingRowStyle BackColor="#BFE4FF" />
                             <HeaderStyle BackColor="#115E9B" Font-Bold="false" ForeColor="white" Font-Italic="False"
                                 Font-Overline="False" Font-Strikeout="False" Font-Underline="False" Height="30px" />
-                            
+
                         </asp:GridView>
                     </div>
                 </div>
@@ -91,7 +101,9 @@
             <asp:View runat="server" ID="EmptyView">
             </asp:View>
         </asp:MultiView>
-
+         <ajaxToolkit:CalendarExtender ID="CalendarExtender1" runat="server" CssClass="cal_Theme1"
+                Format="yyyy-MM-dd" PopupPosition="BottomRight" TargetControlID="txtDate">
+            </ajaxToolkit:CalendarExtender>
         <!------------------------------------------------- View2 -------------------------------------------------->
     </asp:View>
     <asp:View ID="View2" runat="server">

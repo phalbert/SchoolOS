@@ -19,7 +19,7 @@ public class Bussinesslogic
         string base64String = "";
         DataSet ds = SchoolsApi.ExecuteDataSet("GetImageById", new string[] { Id });
         DataTable dt = ds.Tables[0];
-        
+
         //no image found
         if (dt.Rows.Count == 0)
         {
@@ -33,42 +33,54 @@ public class Bussinesslogic
         return base64String;
     }
 
-    public MySubjectResults[] GetStudentSubjectResults(string studentId, string schoolCode)
+
+
+    public MySubjectResults[] GetStudentSubjectResults(string studentId, string schoolCode, string termCode,string classCode)
     {
         List<MySubjectResults> all = new List<MySubjectResults>();
 
-        DataSet ds = SchoolsApi.ExecuteDataSet("GetStudentSubjectResults", new string[] {  });
-        DataTable dt = ds.Tables[0];
+        DataSet ds = SchoolsApi.ExecuteDataSet("GetStudentsReport", new string[] { schoolCode, studentId, termCode,classCode });
+        DataTable dt = ds.Tables[ds.Tables.Count - 1];
 
-        if (dt.Rows.Count == 0)
+
+        foreach (DataRow dr in dt.Rows)
         {
-            return all.ToArray();
+            MySubjectResults subResult = new MySubjectResults();
+            subResult.Average = dr["Average"].ToString();
+            subResult.BOT = dr["BOT"].ToString();
+            subResult.EOT = dr["EOT"].ToString();
+            subResult.Grade = dr["Grade"].ToString();
+            subResult.MOT = dr["MOT"].ToString();
+            subResult.SubjectCode = dr["SubjectCode"].ToString();
+            subResult.SubjectName = dr["SubjectName"].ToString();
+            subResult.Comments = dr["Comments"].ToString();
+            subResult.GradePoints = dr["GradePoints"].ToString();
+            all.Add(subResult);
         }
-
-        DataRow row = dt.Rows[0];
 
         return all.ToArray();
     }
 
     private void SaveInAuditlog(string ActionType, string TableName, string BankCode, string ModifiedBy, string Action)
     {
-        Task.Run(() => { 
-        try
+        Task.Run(() =>
         {
-            
-            DataTable datatable = SchoolsApi.ExecuteDataSet("InsertIntoAuditTrail",
-                                                           new string[]
-                                                   {
+            try
+            {
+
+                DataTable datatable = SchoolsApi.ExecuteDataSet("InsertIntoAuditTrail",
+                                                               new string[]
+                                                       {
                                                              ActionType,
                                                              TableName,
                                                              BankCode,
                                                              ModifiedBy,
                                                              Action
-                                                   }).Tables[0];
-        }
-        catch (Exception ex)
-        {
-        }
+                                                       }).Tables[0];
+            }
+            catch (Exception ex)
+            {
+            }
         });
         return;
     }
@@ -125,12 +137,12 @@ public class Bussinesslogic
         }
         DataRow row = dt.Rows[0];
         tch.ClassCode = row["ClassCode"].ToString();
-        tch.SchoolCode= row["SchoolCode"].ToString();
-        tch.StreamCode= row["StreamCode"].ToString();
-        tch.SubjectCode= row["SubjectCode"].ToString();
-        tch.TeacherId= row["TeacherId"].ToString();
-        tch.TermCode= row["TermCode"].ToString();
-        
+        tch.SchoolCode = row["SchoolCode"].ToString();
+        tch.StreamCode = row["StreamCode"].ToString();
+        tch.SubjectCode = row["SubjectCode"].ToString();
+        tch.TeacherId = row["TeacherId"].ToString();
+        tch.TermCode = row["TermCode"].ToString();
+
         tch.StatusCode = Globals.SUCCESS_STATUS_CODE;
         tch.StatusDesc = Globals.SUCCESS_STATUS_TEXT;
         return tch;
@@ -162,7 +174,7 @@ public class Bussinesslogic
         Result result = new Result();
         try
         {
-            int rowsAffected = SchoolsApi.ExecuteNonQuery("LogError",new string[] { Identifier, StackTrace, CompanyCode, Message, ErrorType });
+            int rowsAffected = SchoolsApi.ExecuteNonQuery("LogError", new string[] { Identifier, StackTrace, CompanyCode, Message, ErrorType });
             result.StatusCode = Globals.SUCCESS_STATUS_CODE;
             result.StatusDesc = Globals.SUCCESS_STATUS_TEXT;
         }
@@ -357,14 +369,14 @@ public class Bussinesslogic
 
         Response.Clear();
         Response.Buffer = true;
-        Response.AddHeader("content-disposition","attachment;filename=DataTable.doc");
+        Response.AddHeader("content-disposition", "attachment;filename=DataTable.doc");
         Response.Charset = "";
         Response.ContentType = "application/vnd.ms-word ";
 
         StringWriter sw = new StringWriter();
         HtmlTextWriter hw = new HtmlTextWriter(sw);
         GridView1.RenderControl(hw);
-   
+
         Response.Output.Write(sw.ToString());
         Response.Flush();
         Response.End();
@@ -381,7 +393,7 @@ public class Bussinesslogic
 
         Response.Clear();
         Response.Buffer = true;
-        Response.AddHeader("content-disposition","attachment;filename=DataTable.xls");
+        Response.AddHeader("content-disposition", "attachment;filename=DataTable.xls");
         Response.Charset = "";
         Response.ContentType = "application/vnd.ms-excel";
 
@@ -460,7 +472,7 @@ public class Bussinesslogic
         }
     }
 
-  
+
 
     public void ShowExternalMessage(Label lblmsg, System.Web.SessionState.HttpSessionState Session)
     {
@@ -501,7 +513,12 @@ public class Bussinesslogic
         }
     }
 
-    
+    public void ShowMessageNoColorChange(Label lblmsg, string msg, bool IsError)
+    {
+        lblmsg.Text = msg;
+    }
+
+
 
 
     public InterLinkClass.PegPaySchoolsApi.Result SendCredentialsToUser(InterLinkClass.PegPaySchoolsApi.SystemUser user)
@@ -671,7 +688,7 @@ public class Bussinesslogic
         return null;
     }
 
- 
+
 
     public UserType GetUserTypeById(string companyCode, string userType)
     {
@@ -696,7 +713,7 @@ public class Bussinesslogic
         return user;
     }
 
-  
+
 
     public void LoadSchoolsIntoDropDown(InterLinkClass.PegPaySchoolsApi.SystemUserDetails user, DropDownList ddlst)
     {
@@ -721,7 +738,7 @@ public class Bussinesslogic
         }
     }
 
-  
+
 
     public void LoadDataIntoDropDown(string storedProcName, string[] parameters, DropDownList ddlst)
     {
@@ -798,9 +815,9 @@ public class Bussinesslogic
         }
     }
 
-   
 
-   
+
+
 
     public DataTable SearchSchoolsTable(string[] searchParams)
     {

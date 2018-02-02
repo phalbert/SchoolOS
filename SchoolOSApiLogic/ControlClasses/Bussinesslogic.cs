@@ -71,7 +71,7 @@ namespace SchoolOSApiLogic.ControlClasses
         {
             Result result = new Result();
             LogChangesInAuditLog(sch, sch.GradeCode, sch.SchoolCode, sch.ModifiedBy);
-            DataTable dt = dh.ExecuteDataSet("SaveGrade", new string[] { sch.SchoolCode, sch.GradeName, sch.GradeCode, sch.MinimumMark, sch.MaximumMark, sch.ModifiedBy }).Tables[0];
+            DataTable dt = dh.ExecuteDataSet("SaveGrade", new string[] { sch.SchoolCode, sch.GradeName, sch.GradeCode, sch.MinimumMark, sch.MaximumMark, sch.ModifiedBy,sch.GradeSchemeCode,sch.GradePoints }).Tables[0];
 
             if (dt.Rows.Count == 0)
             {
@@ -432,7 +432,7 @@ namespace SchoolOSApiLogic.ControlClasses
         {
             Result result = new Result();
             LogChangesInAuditLog(dept, dept.SubjectCode, dept.SchoolCode, dept.ModifiedBy);
-            DataTable dt = dh.ExecuteDataSet("SaveSubjectResults", new string[] { dept.SchoolCode, dept.SubjectCode, dept.StudentId, dept.TermCode, dept.Mark, dept.Grade, dept.ModifiedBy, dept.ExamCode }).Tables[0];
+            DataTable dt = dh.ExecuteDataSet("SaveSubjectResults", new string[] { dept.SchoolCode, dept.SubjectCode, dept.StudentId, dept.TermCode, dept.Mark, dept.Grade, dept.ModifiedBy, dept.ExamCode,dept.ClassCode,dept.TeachersComments }).Tables[0];
 
             if (dt.Rows.Count == 0)
             {

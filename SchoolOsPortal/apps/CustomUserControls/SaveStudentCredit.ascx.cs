@@ -50,7 +50,7 @@ public partial class CustomUserControls_SaveStudentCredit : System.Web.UI.UserCo
         }
     }
 
-    private void LoadData()
+    public void LoadData()
     {
         btnSubmit.Visible = true;
         btnEdit.Visible = false;

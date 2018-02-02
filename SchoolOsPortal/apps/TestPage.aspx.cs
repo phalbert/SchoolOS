@@ -18,5 +18,6 @@ public partial class TestPage : System.Web.UI.Page
 
         //    controlsDiv.Controls.Add(d);
         //}
+        ChangePasswordUserControl.LoadStudentReport("210000270", "SMACK01", "FIRST-TERM","PRIMARY-1");
     }
 }

@@ -56,6 +56,7 @@ public partial class CustomUserControls_SaveGrades : System.Web.UI.UserControl
         btnEdit.Visible = false;
 
         bll.LoadSchoolsIntoDropDown(user, ddSchools);
+        ///bll.LoadDataIntoDropDown("GetGradeSchemesForDropDown", new string[] { ddSchools.SelectedValue }, ddGradeSchemes);
     }
 
     private void LoadEntityData(string id)
@@ -120,6 +121,8 @@ public partial class CustomUserControls_SaveGrades : System.Web.UI.UserControl
         std.MinimumMark = txtMinMark.Text;
         std.SchoolCode = ddSchools.SelectedValue;
         std.ModifiedBy = user.User.Username;
+        std.GradeSchemeCode = ddGradeSchemes.SelectedValue;
+        std.GradePoints = txtGradePoints.Text;
         return std;
     }
 

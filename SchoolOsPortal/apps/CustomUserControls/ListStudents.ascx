@@ -38,8 +38,7 @@
                     School
                 </label>
                 <asp:DropDownList ID="ddSchools" runat="server" CssClass="form-control">
-                    <asp:ListItem>True</asp:ListItem>
-                    <asp:ListItem>False</asp:ListItem>
+                   
                 </asp:DropDownList>
             </div>
             <div class="col-lg-3">
@@ -47,8 +46,7 @@
                     Classes
                 </label>
                 <asp:DropDownList ID="ddClasses" runat="server" CssClass="form-control">
-                    <asp:ListItem>True</asp:ListItem>
-                    <asp:ListItem>False</asp:ListItem>
+                    
                 </asp:DropDownList>
             </div>
             <div class="col-lg-3">
@@ -85,6 +83,8 @@
                         OnClick="btnPrintIds_Click" />
                     <asp:Button ID="btnSendLoginCredentials" runat="server" Text="Send Login Credentials" CssClass="btn btn-danger btn-md"
                         OnClick="btnSendLoginCredentials_Click" />
+                    <asp:Button ID="btnPrintReport" runat="server" Text="Print Academic Report" CssClass="btn btn-warning btn-md"
+                        OnClick="btnPrintReport_Click" />
                 </div>
                 <hr />
                 <div class="row">

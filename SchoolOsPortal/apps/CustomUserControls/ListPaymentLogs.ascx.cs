@@ -114,8 +114,12 @@ public partial class CustomUserControls_ListPaymentLogs : System.Web.UI.UserCont
         List<string> all = new List<string>();
         string name = ddSchools.SelectedValue;
         string StudentId = ddUsers.SelectedValue;
+        string status = ddStatus.SelectedValue;
+        string Date = txtDate.Text;
         all.Add(name);
         all.Add(StudentId);
+        all.Add(status);
+        all.Add(Date);
         return all.ToArray();
     }
 

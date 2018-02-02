@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="BussinessLogic.cs" />
     <Compile Include="Globals.cs" />
+    <Compile Include="PaymentsProcessor.cs" />
     <Compile Include="Processor.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -15,6 +15,8 @@ public class MySubjectResults
     public string EOT = "";
     public string Average = "";
     public string Grade = "";
+    public string Comments = "";
+    public string GradePoints = "";
 
     public MySubjectResults()
     {

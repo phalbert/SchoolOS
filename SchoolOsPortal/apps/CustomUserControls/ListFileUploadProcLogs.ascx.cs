@@ -46,6 +46,12 @@ public partial class CustomUserControls_ListFileUploadProcLogs : System.Web.UI.U
     {
         bll.LoadSchoolsIntoDropDown(user, ddSchools);
         bll.LoadDataIntoDropDownALL("GetSystemUsersForDropDown", new string[] { ddSchools.SelectedValue }, ddUsers);
+
+        if (user.User.UserType != "ADMIN")
+        {
+            ddUsers.SelectedValue = user.User.Username;
+            ddUsers.Enabled = false;
+        }
     }
 
     protected void btnExport_Click(object sender, EventArgs e)
@@ -113,8 +119,12 @@ public partial class CustomUserControls_ListFileUploadProcLogs : System.Web.UI.U
         List<string> all = new List<string>();
         string name = ddSchools.SelectedValue;
         string StudentId = ddUsers.SelectedValue;
+        string status = ddStatus.SelectedValue;
+        string Date = txtDate.Text;
         all.Add(name);
         all.Add(StudentId);
+        all.Add(status);
+        all.Add(Date);
         return all.ToArray();
     }
 

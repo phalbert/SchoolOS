@@ -69,7 +69,7 @@ public partial class FirstTime : System.Web.UI.Page
         }
         if (MultiView.GetActiveView() == ManageStudentPaymentsView)
         {
-            ManageStudentPaymentsUserControl.LoadData();
+            
             SetActiveTab(ManageStudentPaymentsLink);
             return;
         }
@@ -139,6 +139,7 @@ public partial class FirstTime : System.Web.UI.Page
         }
         if (link.ID == ManageStudentPaymentsLinkButton.ID)
         {
+            ManageStudentPaymentsUserControl.ReloadData();
             MultiView.SetActiveView(ManageStudentPaymentsView);
             return;
         }

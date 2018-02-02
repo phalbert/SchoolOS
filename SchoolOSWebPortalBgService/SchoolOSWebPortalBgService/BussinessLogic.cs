@@ -4,7 +4,6 @@ using System.Text;
 using SchoolOSWebPortalBgService.SchoolsAPI;
 using System.Data;
 using System.IO;
-
 namespace SchoolOSWebPortalBgService
 {
     public class BussinessLogic
@@ -82,6 +81,24 @@ namespace SchoolOSWebPortalBgService
             return all.ToArray();
         }
 
+        internal Result SaveStudent(Student std)
+        {
+            Result result = new Result();
+           
+            //error when reading the student from file
+            if (std.StatusCode != Globals.SUCCESS_STATUS_CODE)
+            {
+                result.StatusCode = std.StatusCode;
+                result.StatusDesc = std.StatusDesc;
+                return result;
+            }
+
+            //save student in SchoolOS
+            Service schoolAPI = new Service();
+            result = schoolAPI.SaveStudent(std);
+            return result;
+        }
+
         private void ReadStudentsFromFile(UploadedFile file, List<Student> all, string line)
         {
             Student std = new Student();
@@ -115,6 +132,28 @@ namespace SchoolOSWebPortalBgService
             all.Add(std);
         }
 
+        internal Result SendToSchoolsCB(CbApi.TransactionRequest tr)
+        {
+            Result result = new Result();
+            try
+            {
+                CbApi.Service cbAPI = new CbApi.Service();
+                CbApi.Result cbResult = cbAPI.Transact(tr);
+
+                result.StatusCode = cbResult.StatusCode;
+                result.StatusDesc = cbResult.StatusDesc;
+                result.PegPayID = cbResult.PegPayId;
+                result.ThirdPartyID = cbResult.ThirdPartyId;
+            }
+            catch (Exception ex)
+            {
+                result.StatusCode = Globals.FAILURE_STATUS_CODE;
+                result.StatusDesc = $"EXCEPTION: {ex.Message}";
+
+            }
+            return result;
+        }
+
         internal Result SaveStudentPayment(StudentFee payment)
         {
             Result result = new Result();
@@ -141,22 +180,34 @@ namespace SchoolOSWebPortalBgService
             }
         }
 
-        internal void SavePaymentLog(string TranID, string FeeID, string StudentID, string Status, string Reason, string ModifiedBy)
+        internal Result SavePaymentLog(StudentFee payment, Result result)
         {
+            Result saveResult = new Result();
             try
             {
-                int rowsAffected = schoolsAPI.ExecuteNonQuery("SavePaymentLog", new object[] {  TranID,  FeeID,  StudentID,  Status,  Reason,  ModifiedBy });
+                string status = result.StatusDesc == Globals.SUCCESS_STATUS_TEXT ? Globals.SUCCESS_STATUS_TEXT : "FAILED";
+                int rowsAffected = schoolsAPI.ExecuteNonQuery("SavePaymentLog", new object[] { payment.TranID, payment.FeeID, payment.StudentID, status, result.StatusDesc, payment.ModifiedBy, payment.SchoolCode, payment.Amount });
+                if (rowsAffected == 0)
+                {
+                    saveResult.StatusCode = Globals.FAILURE_STATUS_CODE;
+                    saveResult.StatusDesc = "NO ROWS AFFECTED";
+                    return saveResult;
+                }
+
+                saveResult.StatusCode = Globals.SUCCESS_STATUS_CODE;
+                saveResult.StatusDesc = Globals.SUCCESS_STATUS_TEXT;
             }
             catch (Exception ex)
             {
             }
+            return saveResult;
         }
 
-        internal void LogFileUploadStatus(string fileID,string status,string Reason,string ModifiedBy,string rowId="N/A")
+        internal void LogFileUploadStatus(string fileID, string status, string Reason, string ModifiedBy, string schoolCode, string rowId)
         {
             try
             {
-                int rowsAffected = schoolsAPI.ExecuteNonQuery("LogFileUploadStatus", new object[] { fileID,rowId,status,Reason,ModifiedBy });
+                int rowsAffected = schoolsAPI.ExecuteNonQuery("LogFileUploadStatus", new object[] { fileID, rowId, status, Reason, ModifiedBy ,schoolCode});
             }
             catch (Exception ex)
             {
@@ -400,8 +451,9 @@ namespace SchoolOSWebPortalBgService
             all.Add(fee);
         }
 
-        internal void SendResultsToTheUploader(string toEmail, List<StudentFee> successfullPayments, List<StudentFee> failedPayments)
+        internal Result SendResultsToTheUploader(string toEmail, List<object> successfullPayments, List<object> failedPayments)
         {
+            Result sendResult = new Result();
             string msg = string.Format("Hi {0} <br/>" +
                         "File Uploaded had {1} Records. <br/>" +
                         "SuccessFully Processed Payments = {2} <br/>" +
@@ -410,7 +462,8 @@ namespace SchoolOSWebPortalBgService
                         "Thank you. <br/>" +
                         "Flexi-Schools Team", toEmail, "" + (successfullPayments.Count + failedPayments.Count), "" + successfullPayments.Count, "" + failedPayments.Count);
 
-            SendResultsToUser(msg, toEmail);
+            sendResult = SendResultsToUser(msg, toEmail);
+            return sendResult;
         }
 
         public Result SendResultsToUser(string msg, string contact)

@@ -145,4 +145,9 @@ public partial class CustomUserControls_ListSubjectResults : System.Web.UI.UserC
     {
 
     }
+
+    protected void ddClasses_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
 }
