@@ -1,2 +1,2 @@
 # SchoolOS
-Pegasus School Management System
+School Management System
